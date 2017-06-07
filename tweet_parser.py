@@ -8,9 +8,9 @@ except ImportError:
 
 from cached_property import cached_property
 from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
-from tweet_methods import  tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links
+from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links
 
-class tweet(): #(dict), TBD
+class tweet(dict):
     """
     tweet class 
     """
@@ -36,10 +36,8 @@ class tweet(): #(dict), TBD
         # get the format of the Tweet data--we'll want this for pretty much everything later
         self.original_format, self.activity_streams = tweet_checking.check_tweet(_tweet_dict)
 
-        ## TBD
-        ## make sure that this obj has all of the keys that our dict had
-        ##self.update(_tweet_dict)
-        self.tweet_dict = _tweet_dict
+        # make sure that this obj has all of the keys that our dict had
+        self.update(_tweet_dict)
     
     @cached_property
     def id(self):
@@ -47,9 +45,9 @@ class tweet(): #(dict), TBD
         return the Tweet id as a string
         """
         if self.original_format:
-            return self.tweet_dict["id_str"]
+            return self["id_str"]
         else:
-            return self.tweet_dict["id"].split(":")[-1]
+            return self["id"].split(":")[-1]
 
     @cached_property
     def created_at_seconds(self):
@@ -77,35 +75,35 @@ class tweet(): #(dict), TBD
         """
         get the user id, as a string
         """
-        return tweet_user.get_user_id(self.tweet_dict, self.original_format)
+        return tweet_user.get_user_id(self)
 
     @cached_property
     def screen_name(self):
         """
         get the user screen name (@ handle)
         """
-        return tweet_user.get_screen_name(self.tweet_dict, self.original_format)
+        return tweet_user.get_screen_name(self)
 
     @cached_property
     def name(self):
         """
         get the user's display name
         """
-        return tweet_user.get_name(self.tweet_dict, self.original_format)
+        return tweet_user.get_name(self)
 
     @cached_property
     def text(self):
         """
         literally the contents of 'text' or 'body'
         """
-        return tweet_text.get_text(self.tweet_dict, self.original_format)      
+        return tweet_text.get_text(self)      
 
     @cached_property
     def tweet_type(self):
         """
         3 options: tweet, quote, and retweet
         """
-        return tweet_text.get_tweet_type(self.tweet_dict, self.original_format)
+        return tweet_text.get_tweet_type(self)
 
     @cached_property
     def user_entered_text(self):
@@ -117,34 +115,30 @@ class tweet(): #(dict), TBD
         """
         if self.tweet_type == "retweet":
             return ""
-        return tweet_text.get_full_text(self.tweet_dict, self.original_format)
+        return tweet_text.get_full_text(self)
 
     @cached_property
     def poll_options(self):
         """
         text in the options of a poll, as a list
         """
-        return tweet_text.get_poll_options(self.tweet_dict, self.original_format)
+        return tweet_text.get_poll_options(self)
 
     @cached_property
     def quote_or_rt_text(self):
         """
         the text of a quote tweet or a retweet
         """
-        return tweet_text.get_quote_or_rt_text(self.tweet_dict, self.original_format)        
+        return tweet_text.get_quote_or_rt_text(self)        
 
     @cached_property
     def all_text(self):
         """
         all of the text of the tweet
-        Includes @ mentions, long links, 
-        quote-tweet contents (separated by a newline) & RT contents
-        & poll options
+        Includes @ mentions, long links, quote-tweet contents
+        (separated by a newline), RT contents & poll options
         """
-        if self.original_format:
-            return "\n".join(filter(None, [self.user_entered_text,self.quote_or_rt_text,"\n".join(self.poll_options)]))
-        else:
-            return "\n".join(filter(None, [self.user_entered_text,self.quote_or_rt_text]))
+        return tweet_text.get_all_text(self)
 
     @cached_property
     def user_entered_text_without_links(self):
@@ -166,7 +160,7 @@ class tweet(): #(dict), TBD
         return the geo coordinates, if they are included in the payload
         else raise 'unavailable field' error
         """
-        return tweet_geo.get_geo_coordinates(self.tweet_dict)
+        return tweet_geo.get_geo_coordinates(self)
 
     @cached_property
     def profile_location_enrichment(self):
@@ -182,7 +176,7 @@ class tweet(): #(dict), TBD
         if unrolled urls are not availble, return whatever link is availble in entities
         if there are no links, return an empty list
         """
-        return tweet_links.get_tweet_links(self.tweet_dict, self.original_format)
+        return tweet_links.get_tweet_links(self)
 
     @cached_property
     def most_unrolled_urls(self):
@@ -191,11 +185,6 @@ class tweet(): #(dict), TBD
         """
         return tweet_links.get_most_unrolled_url(self.normalized_url_info)     
 
-    #@cached_property
-    #def      
-
-
-### make an importable tweet tokenizer module
 
 
 

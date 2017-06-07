@@ -1,26 +1,26 @@
-def get_user_id(tweet_dict, is_original_format):
+def get_user_id(tweet):
     """
     get the user id, as a string
     """
-    if is_original_format:
-        return tweet_dict["user"]["id_str"]
+    if tweet.original_format:
+        return tweet["user"]["id_str"]
     else:
-        return tweet_dict["actor"]["id"].split(":")[-1]
+        return tweet["actor"]["id"].split(":")[-1]
 
-def get_screen_name(tweet_dict, is_original_format):
+def get_screen_name(tweet):
     """
     get the user screen name (@ handle)
     """
-    if is_original_format:
-        return tweet_dict["user"]["screen_name"]
+    if tweet.original_format:
+        return tweet["user"]["screen_name"]
     else:
-        return tweet_dict["actor"]["preferredUsername"]
+        return tweet["actor"]["preferredUsername"]
 
-def get_name(tweet_dict, is_original_format):
+def get_name(tweet):
     """
     get the user's display name
     """
-    if is_original_format:
-        return tweet_dict["user"]["name"]
+    if tweet.original_format:
+        return tweet["user"]["name"]
     else:
-        return tweet_dict["actor"]["displayName"]
+        return tweet["actor"]["displayName"]

@@ -1,8 +1,8 @@
-def get_tweet_links(tweet_dict, is_original_format):
-    if is_original_format:
+def get_tweet_links(tweet):
+    if tweet.original_format:
         # check if there are urls at all
         try:
-            urls = tweet_dict["entities"]["urls"]
+            urls = tweet["entities"]["urls"]
         except KeyError:
             return {}
         all_url_info_normalized = {}
@@ -23,12 +23,12 @@ def get_tweet_links(tweet_dict, is_original_format):
     else:
         # get urls from the gnip enrichment, if it exists
         try:
-            gnip_urls = {x["url"]: x for x in tweet_dict["gnip"]["urls"]}
+            gnip_urls = {x["url"]: x for x in tweet["gnip"]["urls"]}
         except KeyError:
             gnip_urls = {}
         # get urls from the twitter entities piece
         try:
-            twitter_urls = {x["url"]: x for x in tweet_dict["twitter_entities"]["urls"]}
+            twitter_urls = {x["url"]: x for x in tweet["twitter_entities"]["urls"]}
         except KeyError:
             twitter_urls = {}
         # if there aren't urls, don't do anything else
