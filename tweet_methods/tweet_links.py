@@ -1,5 +1,7 @@
+from tweet_methods.tweet_checking import is_original_format
+
 def get_tweet_links(tweet):
-    if tweet.original_format:
+    if is_original_format(tweet):
         # check if there are urls at all
         try:
             urls = tweet["entities"]["urls"]

@@ -8,7 +8,7 @@ except ImportError:
 
 from cached_property import cached_property
 from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
-from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links
+from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities
 
 class tweet(dict):
     """
@@ -34,7 +34,7 @@ class tweet(dict):
             raise(NotATweetError("You didn't even pass me anything."))
 
         # get the format of the Tweet data--we'll want this for pretty much everything later
-        self.original_format, self.activity_streams = tweet_checking.check_tweet(_tweet_dict)
+        self.original_format = tweet_checking.check_tweet(_tweet_dict)
 
         # make sure that this obj has all of the keys that our dict had
         self.update(_tweet_dict)
@@ -44,7 +44,7 @@ class tweet(dict):
         """
         return the Tweet id as a string
         """
-        if self.original_format:
+        if tweet_checking.is_original_format(self):
             return self["id_str"]
         else:
             return self["id"].split(":")[-1]
@@ -185,6 +185,42 @@ class tweet(dict):
         """
         return tweet_links.get_most_unrolled_url(self.normalized_url_info)     
 
+    @cached_property
+    def user_mentions(self):
+        """
+        get a list of @ mention dicts from the tweet
+        """
+        return tweet_entities.get_user_mentions(self)
+
+    @cached_property
+    def user_mentions_ids(self):
+        """
+        get a list of @ mentions user ids from the tweet
+        """
+        return [x["id_str"] for x in tweet.user_mentions]
+
+    @cached_property
+    def mentions_screen_names(self):
+        """
+        get a list of @ mentions screen names from the tweet
+        """
+        return [x["screen_name"] for x in tweet.user_mentions]
+
+    @cached_property
+    def quoted_user(self):
+        """
+        quoted users don't get included in the @ mentions 
+        which doesn't seem that intuitive, so I'm adding a getter to add them
+        """ 
+        return tweet_entities.get_quoted_user(self)
+
+    @cached_property
+    def quoted_mentions(self):
+        """
+        users mentioned in the quoted Tweet don't get included 
+        which doesn't seem that intuitive, so I'm adding a getter to add them
+        """ 
+        return tweet_entities.get_quoted_mentions(self)
 
 
 

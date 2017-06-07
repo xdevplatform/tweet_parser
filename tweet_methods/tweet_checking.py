@@ -1,15 +1,20 @@
 from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
 
+def is_original_format(tweet):
+    if hasattr(tweet, "original_format"):
+        return tweet.original_format
+    else:
+        if "created_at" in tweet:
+            original_format = True
+        elif "postedTime" in tweet:
+            original_format = False
+        else:
+            raise(NotATweetError("This text has neither 'created_at' or 'postedTime' as keys, it's not a Tweet"))
+    return original_format
+
 def check_tweet(tweet):
     # get the format of the Tweet & make sure it's probably a Tweet
-    if "created_at" in tweet:
-        original_format = True
-        activity_streams = False
-    elif "postedTime" in tweet:
-        original_format = False
-        activity_streams = True
-    else:
-        raise(NotATweetError("This text has neither 'created_at' or 'postedTime' as keys, it's probably not a Tweet"))
+    original_format = is_original_format(tweet)
     # make sure, to the best of our knowledge, that the Tweet is a Tweet
     if "id" not in tweet:
         raise(NotATweetError("This text has no 'id' key, it's probably not a Tweet"))
@@ -23,4 +28,4 @@ def check_tweet(tweet):
             raise(NotATweetError("This text has no 'actor' key, it's probably not a Tweet"))
         if "body" not in tweet:
             raise(NotATweetError("This text has no 'body' key, it's probably not a Tweet"))
-    return (original_format, activity_streams)
+    return original_format
