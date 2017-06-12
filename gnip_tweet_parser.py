@@ -240,14 +240,15 @@ if __name__ == "__main__":
     import argparse
     import fileinput
     import sys
+    list_of_attrs = sorted([x for x in list(set(dir(tweet)) - set(dir(dict))) if x[0] != "_"])
     parser = argparse.ArgumentParser(
-            description="Parse seqeunce of JSON formated activities.")
+            description="Parse seqeunce of JSON formated activities.", formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("-f","--file", dest="data_files"
         , default="-"
         , help="Name of the file to read from, defaults to stdin")
     parser.add_argument("-c","--csv", dest="func_list"
         , default="id"
-        , help="comma separated list of attibutes to get")
+        , help="comma separated list of attibutes to get \n possible functions include: \n -> {}".format(" \n -> ".join(list_of_attrs)))
     parser.add_argument("-d","--delim", dest="delim"
         , default="|"
         , help="delimiter for the output csv, defaults to pipe")
