@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
-setup(name='tweet_parser',
+setup(name='gnip-tweet-parser',
         packages=find_packages(),
-        scripts=[],
-        version='0.1',
+        scripts=["gnip_tweet_parser.py"],
+        version='1.0.0.dev1',
         license='MIT',
         author='Fiona Pigott',
         author_email='fpigott@twitter.com',

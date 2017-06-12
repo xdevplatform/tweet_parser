@@ -36,3 +36,16 @@ def get_quoted_mentions(tweet):
     else:
         return []
 
+def get_hashtags(tweet):
+    """
+    get a list of hashtags 
+    """
+    if is_original_format(tweet):
+        entities = "entities"
+    else:
+        entities = "twitter_entities"
+    return [x["text"] for x in tweet[entities]["hashtags"]]
+
+
+
+

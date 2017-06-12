@@ -1,10 +1,14 @@
 import datetime
+import sys
 try:
     import ujson as json
     json_decode_error = ValueError
 except ImportError:
     import json
-    json_decode_error = json.JSONDecodeError
+    if sys.version_info[0] == 3:
+        json_decode_error = json.JSONDecodeError
+    else:
+        json_decode_error = ValueError
 
 from cached_property import cached_property
 from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
@@ -34,6 +38,7 @@ class tweet(dict):
             raise(NotATweetError("You didn't even pass me anything."))
 
         # get the format of the Tweet data--we'll want this for pretty much everything later
+        # also, this throws an error if it's not a tweet
         self.original_format = tweet_checking.check_tweet(_tweet_dict)
 
         # make sure that this obj has all of the keys that our dict had
@@ -68,7 +73,7 @@ class tweet(dict):
         """
         return a date string, formatted as: YYYY-MM-ddTHH:MM:SS.000Z
         """
-        return self.created_at_datetime.strftime("YYYY-MM-ddTHH:MM:SS.000Z")
+        return self.created_at_datetime.strftime("%Y-%M-%dT%H:%M:%S.000Z")
 
     @cached_property
     def user_id(self):
@@ -221,6 +226,56 @@ class tweet(dict):
         which doesn't seem that intuitive, so I'm adding a getter to add them
         """ 
         return tweet_entities.get_quoted_mentions(self)
+
+    @cached_property
+    def hashtags(self):
+        """
+        get a list of hashtags
+        """
+        return tweet_entities.get_hashtags(self)
+
+
+if __name__ == "__main__":
+    # parse arguements
+    import argparse
+    import fileinput
+    import sys
+    parser = argparse.ArgumentParser(
+            description="Parse seqeunce of JSON formated activities.")
+    parser.add_argument("-f","--file", dest="data_files"
+        , default="-"
+        , help="Name of the file to read from, defaults to stdin")
+    parser.add_argument("-c","--csv", dest="func_list"
+        , default="id"
+        , help="comma separated list of attibutes to get")
+    parser.add_argument("-d","--delim", dest="delim"
+        , default="|"
+        , help="delimiter for the output csv, defaults to pipe")
+    parser.add_argument("-z","--compressed", action="store_true", dest="compressed"
+        , default=False
+        , help="use this flag if data is compressed")
+    options = parser.parse_args()
+
+    # get the functions that we need to use:
+    functions = options.func_list.split(",")
+
+    # get the compression
+    if options.compressed:
+        openhook = fileinput.hook_compressed
+    else:
+        openhook = None
+
+    # parse some tweets
+    for line in fileinput.FileInput(options.data_files, openhook=openhook):
+        csv = []
+        tweet_obj = tweet(line)
+        for func in functions:
+            attribute = getattr(tweet_obj,func)
+            if type(attribute)==str:
+                attribute = attribute.replace(options.delim," ").replace("\n", " ").replace("\r", " ")
+            csv.append(str(attribute))
+        sys.stdout.write(options.delim.join(csv) + "\n")
+
 
 
 
