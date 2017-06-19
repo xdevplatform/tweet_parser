@@ -12,7 +12,7 @@ except ImportError:
 
 from cached_property import cached_property
 from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
-from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities
+from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities, tweet_embeds
 
 class tweet(dict):
     """
@@ -234,6 +234,27 @@ class tweet(dict):
         """
         return tweet_entities.get_hashtags(self)
 
+    @cached_property
+    def quote_tweet(self):
+        """
+        get the quote tweet and returna  tweet obj of the quote tweet
+        """
+        return tweet(tweet_dict = tweet_embeds.get_quote_tweet(self))
+
+    @cached_property
+    def retweet(self):
+        """
+        get the retweet and return a tweet obj of the retweet 
+        """
+        return tweet(tweet_dict = tweet_embeds.get_retweet(self))
+
+    @cached_property
+    def embedded_tweet(self):
+        """
+        get the quote tweet or the retweet and return a tweet object of it
+        """
+        return tweet(tweet_dict = tweet_embeds.get_embedded_tweet(self))
+
 
 if __name__ == "__main__":
     # parse arguements
@@ -269,7 +290,10 @@ if __name__ == "__main__":
     # parse some tweets
     for line in fileinput.FileInput(options.data_files, openhook=openhook):
         csv = []
-        tweet_obj = tweet(line)
+        try:
+            tweet_obj = tweet(line)
+        except (NotATweetError,JSONDecodeError):
+            pass
         for func in functions:
             attribute = getattr(tweet_obj,func)
             if type(attribute)==str:
