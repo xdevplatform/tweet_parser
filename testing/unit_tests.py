@@ -12,11 +12,11 @@ class TestTweetMethods(unittest.TestCase):
         tweet_payloads["original_format"] = {}
         tweet_ids = []
         for line in fileinput.FileInput("tweet_payload_examples/activity_streams_examples.json"):
-            tweet = gtp.Tweet(line)
+            tweet = gtp.Tweet(json.loads(line))
             tweet_ids.append(tweet.id)
             tweet_payloads["activity_streams"][tweet.id] = tweet
         for line in fileinput.FileInput("tweet_payload_examples/original_format_examples.json"):
-            tweet = gtp.Tweet(line)
+            tweet = gtp.Tweet(json.loads(line))
             tweet_ids.append(tweet.id)
             tweet_payloads["original_format"][tweet.id] = tweet
         self.tweet_payloads = tweet_payloads
@@ -54,7 +54,6 @@ class TestTweetMethods(unittest.TestCase):
         for tweet_id in self.tweet_ids:
             for format in ["original_format","activity_streams"]:
                 for attr in self.list_of_attrs:
-                    #print(attr)
                     # get the attribute of the tweets that we have loaded
                     try:
                         value = getattr(self.tweet_payloads[format][tweet_id],attr)
@@ -72,7 +71,7 @@ class TestTweetMethods(unittest.TestCase):
                         if type(value) == dict or type(value) == list:
                             answer = json.loads(answer)
                         elif type(value) == gtp.Tweet:
-                            answer = gtp.Tweet(answer)
+                            answer = gtp.Tweet(json.loads(answer))
                     except FileNotFoundError:
                         raise FileNotFoundError(
                             "No test case created for this attibute/tweet: {}/{}".format(attr,tweet_id))

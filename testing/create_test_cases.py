@@ -15,10 +15,10 @@ def make_a_string(data):
 # create one file per Tweet
 tweet_payloads = {}
 for line in fileinput.FileInput("tweet_payload_examples/activity_streams_examples.json"):
-    tweet = gtp.Tweet(line)
+    tweet = gtp.Tweet(json.loads(line))
     tweet_payloads[tweet.id + "_activity_streams"] = tweet
 for line in fileinput.FileInput("tweet_payload_examples/original_format_examples.json"):
-    tweet = gtp.Tweet(line)
+    tweet = gtp.Tweet(json.loads(line))
     tweet_payloads[tweet.id + "_original_format"] = tweet
 
 
