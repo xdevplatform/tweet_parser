@@ -14,7 +14,7 @@ from cached_property import cached_property
 from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
 from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities, tweet_embeds
 
-class tweet(dict):
+class Tweet(dict):
     """
     tweet class 
     """
@@ -167,15 +167,15 @@ class tweet(dict):
         """
         return tweet_geo.get_geo_coordinates(self)
 
-    @cached_property
-    def profile_location_enrichment(self):
-        """
-        return location data from the profile location profile location enrichment 
-        """
-        raise NotImplementedError("Sorry!") 
+    #@cached_property
+    #def profile_location_enrichment(self):
+    #    """
+    #    return location data from the profile location profile location enrichment 
+    #    """
+    #    raise NotImplementedError("Sorry!") 
 
     @cached_property
-    def normalized_url_info(self):
+    def tweet_links(self):
         """
         if unrolled urls are availble, return unrolled urls
         if unrolled urls are not availble, return whatever link is availble in entities
@@ -188,7 +188,7 @@ class tweet(dict):
         """
         return the most unrolled url present
         """
-        return tweet_links.get_most_unrolled_url(self.normalized_url_info)     
+        return tweet_links.get_most_unrolled_urls(self)     
 
     @cached_property
     def user_mentions(self):
@@ -202,14 +202,14 @@ class tweet(dict):
         """
         get a list of @ mentions user ids from the tweet
         """
-        return [x["id_str"] for x in tweet.user_mentions]
+        return [x["id_str"] for x in self.user_mentions]
 
     @cached_property
     def mentions_screen_names(self):
         """
         get a list of @ mentions screen names from the tweet
         """
-        return [x["screen_name"] for x in tweet.user_mentions]
+        return [x["screen_name"] for x in self.user_mentions]
 
     @cached_property
     def quoted_user(self):
@@ -239,29 +239,37 @@ class tweet(dict):
         """
         get the quote tweet and returna  tweet obj of the quote tweet
         """
-        return tweet(tweet_dict = tweet_embeds.get_quote_tweet(self))
+        try:
+            return Tweet(tweet_dict = tweet_embeds.get_quote_tweet(self))
+        except(NotATweetError):
+            return None
 
     @cached_property
     def retweet(self):
         """
         get the retweet and return a tweet obj of the retweet 
         """
-        return tweet(tweet_dict = tweet_embeds.get_retweet(self))
+        try:
+            return Tweet(tweet_dict = tweet_embeds.get_retweet(self))
+        except(NotATweetError):
+            return None
 
     @cached_property
     def embedded_tweet(self):
         """
         get the quote tweet or the retweet and return a tweet object of it
         """
-        return tweet(tweet_dict = tweet_embeds.get_embedded_tweet(self))
-
+        try:
+            return Tweet(tweet_dict = tweet_embeds.get_embedded_tweet(self))
+        except(NotATweetError):
+            return None
 
 if __name__ == "__main__":
     # parse arguements
     import argparse
     import fileinput
     import sys
-    list_of_attrs = sorted([x for x in list(set(dir(tweet)) - set(dir(dict))) if x[0] != "_"])
+    list_of_attrs = sorted([x for x in list(set(dir(Tweet)) - set(dir(dict))) if x[0] != "_"])
     parser = argparse.ArgumentParser(
             description="Parse seqeunce of JSON formated activities.", formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("-f","--file", dest="data_files"
@@ -291,7 +299,7 @@ if __name__ == "__main__":
     for line in fileinput.FileInput(options.data_files, openhook=openhook):
         csv = []
         try:
-            tweet_obj = tweet(line)
+            tweet_obj = Tweet(line)
         except (NotATweetError,JSONDecodeError):
             pass
         for func in functions:

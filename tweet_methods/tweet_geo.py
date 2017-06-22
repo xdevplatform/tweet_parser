@@ -1,3 +1,5 @@
+from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
+
 def get_geo_coordinates(tweet):
     """ 
     return the geo coordinates, if they are included in the payload

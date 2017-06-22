@@ -1,0 +1,3 @@
+Also, if you're on a Unix machine, try using "xxd" to see what your text is stored as. Copy-paste:
+$ echo "🙄" | xxd
+$ echo "🙄" | xxd -b

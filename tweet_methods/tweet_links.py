@@ -2,72 +2,60 @@ from tweet_methods.tweet_checking import is_original_format
 
 def get_tweet_links(tweet):
     if is_original_format(tweet):
-        # check if there are urls at all
+        # get the urls from the Tweet
         try:
-            urls = tweet["entities"]["urls"]
+            tweet_urls = tweet["entities"]["urls"]
         except KeyError:
-            return {}
-        all_url_info_normalized = {}
-        for url in urls:
-            all_url_info_normalized[url["url"]] = {}
-            if "unwound" in url:
-                all_url_info_normalized[url["url"]]["expanded_url"] = url["unwound"]["url"]
-                all_url_info_normalized[url["url"]]["expanded_url_title"] = url["unwound"]["title"]
-                all_url_info_normalized[url["url"]]["expanded_url_description"] = url["unwound"]["description"]
-                all_url_info_normalized[url["url"]]["is_twitter_dot_com"] = "twitter.com" in url["unwound"]["url"] 
-            else:
-                try:
-                    all_url_info_normalized[url["url"]]["expanded_url"] = url["expanded_url"]
-                    all_url_info_normalized[url["url"]]["is_twitter_dot_com"] = "twitter.com" in url["expanded_url"]
-                except KeyError:
-                    pass
-        return all_url_info_normalized           
+            tweet_urls = []
+        # get the urls from the quote-tweet
+        if tweet.quote_tweet is not None:
+            tweet_urls += tweet.quote_tweet.tweet_links
+        # get the urls from the retweet
+        if tweet.retweet is not None:
+            tweet_urls += tweet.retweet.tweet_links
+        return tweet_urls
     else:
-        # get urls from the gnip enrichment, if it exists
+        # try to get normal urls
         try:
-            gnip_urls = {x["url"]: x for x in tweet["gnip"]["urls"]}
+            tweet_urls = tweet["twitter_entities"]["urls"]
         except KeyError:
-            gnip_urls = {}
-        # get urls from the twitter entities piece
+            tweet_urls = []
+        # get the urls from the quote-tweet
+        if tweet.quote_tweet is not None:
+            tweet_urls += tweet.quote_tweet.tweet_links
+        # get the urls from the retweet
+        if tweet.retweet is not None:
+            tweet_urls += tweet.retweet.tweet_links
+        # otherwise, we're now going to combine the urls to try to 
+        # to get the same format as the og format urls, try to get enriched urls
         try:
-            twitter_urls = {x["url"]: x for x in tweet["twitter_entities"]["urls"]}
+            gnip_tweet_urls = {x["url"]:x for x in tweet["gnip"]["urls"]}
+            gnip_tweet_exp_urls = {x["expanded_url"]:x for x in tweet["gnip"]["urls"]}
         except KeyError:
-            twitter_urls = {}
-        # if there aren't urls, don't do anything else
-        all_url_info = {}
-        for url in list(gnip_urls.keys()) + list(twitter_urls.keys()):
-            all_url_info[url] = {"gnip": gnip_urls.get(url, {}), "twitter": twitter_urls.get(url, {})}
-        all_url_info_normalized = {}
-        for u in all_url_info:
-            url = all_url_info[u]
-            all_url_info_normalized[u] = {}
-            if url["gnip"]:
-                if "expanded_url" in url["gnip"]:
-                    all_url_info[u]["url"] = u
-                    all_url_info_normalized[u]["expanded_url"] = url["gnip"]["expanded_url"]
-                    all_url_info_normalized[u]["expanded_url_title"] = url["gnip"]["expanded_url_title"]
-                    all_url_info_normalized[u]["expanded_url_description"] = url["gnip"]["expanded_url_description"]
-                    all_url_info_normalized[u]["is_twitter_dot_com"] = "twitter.com" in url["gnip"]["expanded_url"]   
-                elif "expanded_url" in url["twitter"]:
-                    all_url_info_normalized[u]["url"] = u
-                    all_url_info_normalized[u]["expanded_url"] = url["twitter"]["expanded_url"]
-                    all_url_info_normalized[u]["is_twitter_dot_com"] = "twitter.com" in url["twitter"]["expanded_url"]                    
-            else:
-                if "expanded_url" in url["twitter"]:
-                    all_url_info_normalized[u]["url"] = u
-                    all_url_info_normalized[u]["expanded_url"] = url["twitter"]["expanded_url"]
-                    all_url_info_normalized[u]["is_twitter_dot_com"] = "twitter.com" in url["twitter"]["expanded_url"]
+            return tweet_urls
+        key_mappings = {"expanded_url":"url","expanded_status":"status",
+            "expanded_url_title":"title","expanded_url_description":"description"}
+        tweet_urls_expanded = []
+        for url in tweet_urls:
+            expanded_url = url
+            if url["url"] in gnip_tweet_urls:
+                expanded_url["unwound"] = {key_mappings[key]: value for key,value in gnip_tweet_urls[url["url"]].items() if key != "url"}
+            elif url.get("expanded_url","UNAVAILABLE") in gnip_tweet_exp_urls:
+                expanded_url["unwound"] = {key_mappings[key]: value for key,value in gnip_tweet_urls[url["expanded_url"]].items() if key != "url"}
+            tweet_urls_expanded.append(expanded_url)
+        return tweet_urls_expanded
 
-        return all_url_info_normalized
-
-def get_most_unrolled_url(url_info):
+def get_most_unrolled_urls(tweet):
     """
     return the most unrolled url present
     """
     unrolled_urls = []
-    for url in url_info:
-        if "expanded_url" in url_info[url]:
-            unrolled_urls.append(url_info[url]["expanded_url"])
+    for url in tweet.tweet_links:
+        if "unwound" in url:
+            unrolled_urls.append(url["unwound"]["url"])
+        elif "expanded_url" in url:
+            unrolled_urls.append(url["expanded_url"])
         else:
-            unrolled_urls.append(url_info[url]["url"])
-    return unrolled_urls 
+            unrolled_urls.append(url["url"])
+    return unrolled_urls
+

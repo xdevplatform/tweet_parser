@@ -8,7 +8,10 @@ def get_user_mentions(tweet):
         entities = "entities"
     else:
         entities = "twitter_entities"
-    return [x for x in tweet[entities]["user_mentions"]]
+    if tweet[entities]["user_mentions"] is not None:
+        return tweet[entities]["user_mentions"]
+    else:
+        return []
 
 def get_quoted_user(tweet):
     """
@@ -44,7 +47,10 @@ def get_hashtags(tweet):
         entities = "entities"
     else:
         entities = "twitter_entities"
-    return [x["text"] for x in tweet[entities]["hashtags"]]
+    if tweet[entities]["user_mentions"] is not None:
+        return [x["text"] for x in tweet[entities]["hashtags"]]
+    else:
+        return []
 
 
 
