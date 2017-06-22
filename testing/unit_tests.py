@@ -4,7 +4,7 @@ import fileinput
 from create_test_cases import make_a_string
 import json
 
-class TestStringMethods(unittest.TestCase):
+class TestTweetMethods(unittest.TestCase):
 
     def setUp(self):
         tweet_payloads = {}
