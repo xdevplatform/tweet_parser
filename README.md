@@ -16,7 +16,7 @@ import fileinput
 
 for line in fileinput.FileInput("gnip_tweet_data.json"):
     try:
-        tweet = gtp.tweet(line)
+        tweet = gtp.Tweet(line)
     except (gtp.InvalidJSONError,gtp.NotATweetError):
         pass
     print(tweet.created_at_string, tweet.all_text)
