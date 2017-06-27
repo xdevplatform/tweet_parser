@@ -290,14 +290,14 @@ if __name__ == "__main__":
             tweet_dict = json.loads(line)
         except JSONDecodeError:
             if not options.pass_bad_json:
-                print("Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(line))
+                sys.stderr("Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(line))
             continue 
         # load a Tweet   
         try:
             tweet_obj = Tweet(tweet_dict)
         except NotATweetError:
             if not options.pass_bad_json:
-                print("Use the flag '-t' to pass silently next time.\nNon Tweet payload: {}".format(line))
+                sys.stderr("Use the flag '-t' to pass silently next time.\nNon Tweet payload: {}".format(line))
             continue 
         # get the relevant fields
         for func in functions:
