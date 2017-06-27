@@ -142,12 +142,12 @@ class Tweet(dict):
         """
         return tweet_geo.get_geo_coordinates(self)
 
-    #@cached_property
-    #def profile_location_enrichment(self):
-    #    """
-    #    return location data from the profile location profile location enrichment 
-    #    """
-    #    raise NotImplementedError("Sorry!") 
+    @cached_property
+    def profile_location(self):
+        """
+        return location data from the profile location profile location enrichment 
+        """
+        raise tweet_geo.get_profile_location(self) 
 
     @cached_property
     def tweet_links(self):
