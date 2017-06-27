@@ -5,7 +5,7 @@ Authors: Fiona Pigott, Jeff Kolb
 Allow reliable parsing of Tweets delivered by the Gnip platform, in both activity-streams and original formats. 
 
 ## Status:
-This package is not yet available on pypi, but soon it should be. For now, recommended usage would be to clone the repository and `pip install -e .`
+This package is not yet available on pypi, but soon it should be. For now, recommended usage would be to clone the repository and `pip install -e .` Only Python 3 is supported.
 
 ## Usage:
 This package is intended to be used as a Python module inside your other Tweet-related code. An example Python program (after pip installing the package) would be:
