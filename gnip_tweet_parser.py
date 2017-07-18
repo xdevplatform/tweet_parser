@@ -147,7 +147,7 @@ class Tweet(dict):
         """
         return location data from the profile location profile location enrichment 
         """
-        raise tweet_geo.get_profile_location(self) 
+        return tweet_geo.get_profile_location(self) 
 
     @cached_property
     def tweet_links(self):
@@ -274,10 +274,13 @@ if __name__ == "__main__":
     parser.add_argument("-z","--compressed", action="store_true", dest="compressed"
         , default=False
         , help="use this flag if data is compressed")
-    parser.add_argument("-j","--bad_json", action="store_true", dest="pass_bad_json"
+    parser.add_argument("-j","--pass_bad_json", action="store_true", dest="pass_bad_json"
         , default=False
         , help="use this flag to silently pass bad JSON payloads")
-    parser.add_argument("-t","--bad_tweet", action="store_true", dest="pass_non_tweet"
+    parser.add_argument("-t","--pass_non_tweet", action="store_true", dest="pass_non_tweet"
+        , default=False
+        , help="use this flag to silently pass on non-tweet payloads")
+    parser.add_argument("-a","--pass_not_available", action="store_true", dest="pass_not_available"
         , default=False
         , help="use this flag to silently pass on non-tweet payloads")
     parser.add_argument("--do_format_checking", action="store_true", dest="do_format_checking"
@@ -312,10 +315,15 @@ if __name__ == "__main__":
             continue 
         # get the relevant fields
         for func in functions:
-            attribute = getattr(tweet_obj,func)
-            if type(attribute)==str:
-                attribute = attribute.replace(options.delim," ").replace("\n", " ").replace("\r", " ")
-            csv.append(str(attribute))
+            try:
+                attribute = getattr(tweet_obj,func)
+                if type(attribute)==str:
+                    attribute = attribute.replace(options.delim," ").replace("\n", " ").replace("\r", " ")
+                csv.append(str(attribute))
+            except NotAvailableError as nae:
+                if not options.pass_not_available:
+                    sys.stderr.write("{}. Use the flag -a to pass silently next time.\nAttribute Unavailable: {}".format(nae, line))
+                csv.append("NOT_AVAILABLE")
         sys.stdout.write(options.delim.join(csv) + "\n")
 
 

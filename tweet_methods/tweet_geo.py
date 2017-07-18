@@ -28,12 +28,20 @@ def get_profile_location(tweet):
         try:
             location = tweet["gnip"]["profileLocations"][0]
             reconstructed_original_format = {}
-            reconstructed_original_format["country"] = location["address"].get("country",None)
-            reconstructed_original_format["country_code"] = location["address"].get("countryCode",None)
-            reconstructed_original_format["locality"] = location["address"].get("locality",None)
-            reconstructed_original_format["region"] = location["address"].get("region",None)
-            reconstructed_original_format["sub_region"] = location["address"].get("subRegion",None)
-            reconstructed_original_format["full_name"] = location.get("displayName",None)
+            if location["address"].get("country",None) is not None:
+                reconstructed_original_format["country"] = location["address"]["country"]
+            if location["address"].get("countryCode",None) is not None:
+                reconstructed_original_format["country_code"] = location["address"]["countryCode"]
+            if location["address"].get("locality",None) is not None:
+                reconstructed_original_format["locality"] = location["address"]["locality"]
+            if location["address"].get("region",None) is not None:
+                reconstructed_original_format["region"] = location["address"]["region"]
+            if location["address"].get("subRegion",None) is not None:
+                reconstructed_original_format["sub_region"] = location["address"]["subRegion"]
+            if location.get("displayName",None) is not None:
+                reconstructed_original_format["full_name"] = location["displayName"]
+            if location.get("geo",None) is not None:
+                reconstructed_original_format["geo"] = location["geo"]
             return reconstructed_original_format
         except KeyError:
             raise(NotAvailableError("Profile Locations is not included in this Tweet"))
