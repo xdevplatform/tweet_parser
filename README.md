@@ -29,3 +29,9 @@ I've also added simple command-line utility:
 ```
 python gnip_tweet_parser.py -f"gnip_tweet_data.json" -c"created_at_string,all_text"
 ```
+## Testing:
+A Python `unit_tests.py` package exists in `testing/`. 
+
+The most important thing that it tests is the equivalence of outputs when comparing both activity-streams input and original-format input. Any new getter will be tested by running `testing$ python unit_tests.py`, as the test checks every method attached to the Tweet object, for every test tweet stored in `tweet_payload_examples`. For any cases where it is expected that the outputs are different (e.g., outputs that depend on poll options), conditional statements should be added to this test.
+
+An option also exists for run-time checking of Tweet payload formats. This compares the set of all Tweet field keys to a superset of all possible keys, as well as a minimum set of all required keys, to make sure that each newly loaded Tweet fits those parameters. This shouldn't be run every time you load Tweets (for one, it's slow), but is implemented to use as a periodic check against Tweet format changes. This option is enabled with `--do_format_checking` on the command line, and by setting the keyword argument `do_format_checking` to `True` when initializing a `Tweet` object.
