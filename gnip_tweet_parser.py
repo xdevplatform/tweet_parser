@@ -1,20 +1,20 @@
 import datetime
 import sys
 from cached_property import cached_property
-from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
+from tweet_methods.tweet_parser_errors import NotATweetError, NotAvailableError
 from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities, tweet_embeds
 
 class Tweet(dict):
     """
     tweet class 
     """
-    def __init__(self, tweet_dict):
+    def __init__(self, tweet_dict, do_format_checking = False):
         """
-        take the tweet dictiaoary and turn it into a Tweet
+        take the tweet dictionary and turn it into a Tweet
         """
         # get the format of the Tweet data--we'll want this for pretty much everything later
         # also, this throws an error if it's not a tweet
-        self.original_format = tweet_checking.check_tweet(tweet_dict)
+        self.original_format = tweet_checking.check_tweet(tweet_dict, do_format_checking)
 
         # make sure that this obj has all of the keys that our dict had
         self.update(tweet_dict)
@@ -216,7 +216,10 @@ class Tweet(dict):
         """
         quote_tweet = tweet_embeds.get_quote_tweet(self)
         if quote_tweet is not None:
-            return Tweet(quote_tweet)
+            try:
+                return Tweet(quote_tweet)
+            except NotATweetError as nate:
+                raise(NotATweetError("The quote-tweet payload appears malformed. Failed with '{}'".format(nate)))
 
     @cached_property
     def retweet(self):
@@ -225,7 +228,11 @@ class Tweet(dict):
         """
         retweet = tweet_embeds.get_retweet(self)
         if retweet is not None:
-            return Tweet(retweet)
+            try:
+                return Tweet(retweet)
+            except NotATweetError as nate:
+                raise(NotATweetError("The retweet payload appears malformed. Failed with '{}'".format(nate)))
+
 
     @cached_property
     def embedded_tweet(self):
@@ -234,7 +241,10 @@ class Tweet(dict):
         """
         embedded_tweet = tweet_embeds.get_embedded_tweet(self)
         if embedded_tweet is not None:
-            return Tweet(embedded_tweet)
+            try:
+                return Tweet(embedded_tweet)
+            except NotATweetError as nate:
+                raise(NotATweetError("The embedded tweet payload appears malformed. Failed with '{}'".format(embedded_tweet)))
 
 if __name__ == "__main__":
     # parse arguements
@@ -243,13 +253,11 @@ if __name__ == "__main__":
     import sys
     try:
         import ujson as json
-        json_decode_error = ValueError
+        JSONDecodeError = ValueError
     except ImportError:
         import json
-        if sys.version_info[0] == 3:
-            json_decode_error = json.JSONDecodeError
-        else:
-            json_decode_error = ValueError
+        JSONDecodeError = json.JSONDecodeError
+
 
     list_of_attrs = sorted([x for x in list(set(dir(Tweet)) - set(dir(dict))) if x[0] != "_"])
     parser = argparse.ArgumentParser(
@@ -272,6 +280,9 @@ if __name__ == "__main__":
     parser.add_argument("-t","--bad_tweet", action="store_true", dest="pass_non_tweet"
         , default=False
         , help="use this flag to silently pass on non-tweet payloads")
+    parser.add_argument("--do_format_checking", action="store_true", dest="do_format_checking"
+        , default=False
+        , help="debug formatting")
     options = parser.parse_args()
 
     # get the functions that we need to use:
@@ -288,16 +299,16 @@ if __name__ == "__main__":
         # load the JSON
         try:
             tweet_dict = json.loads(line)
-        except JSONDecodeError:
+        except JSONDecodeError as json_error:
             if not options.pass_bad_json:
-                sys.stderr("Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(line))
+                sys.stderr.write("{}. Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(json_error,line))
             continue 
         # load a Tweet   
         try:
-            tweet_obj = Tweet(tweet_dict)
-        except NotATweetError:
-            if not options.pass_bad_json:
-                sys.stderr("Use the flag '-t' to pass silently next time.\nNon Tweet payload: {}".format(line))
+            tweet_obj = Tweet(tweet_dict, do_format_checking = options.do_format_checking)
+        except NotATweetError as nate:
+            if not options.pass_non_tweet:
+                sys.stderr.write("{}. Use the flag '-t' to pass silently next time.\nNon Tweet payload: {}".format(nate, line))
             continue 
         # get the relevant fields
         for func in functions:

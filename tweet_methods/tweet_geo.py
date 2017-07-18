@@ -1,4 +1,4 @@
-from tweet_methods.tweet_parser_errors import InvalidJSONError, NotATweetError, NotAvailableError
+from tweet_methods.tweet_parser_errors import NotATweetError, NotAvailableError
 from tweet_methods.tweet_checking import is_original_format
 
 def get_geo_coordinates(tweet):
