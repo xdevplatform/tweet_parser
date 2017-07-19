@@ -1,10 +1,17 @@
 import unittest
 import gnip_tweet_parser as gtp
 import fileinput
-from create_test_cases import make_a_string
 import json
 from tweet_methods import tweet_checking 
 from tweet_methods.tweet_parser_errors import NotATweetError, NotAvailableError, UnexpectedFormatError
+
+def make_a_string(data):
+    if type(data) == str:
+        return data
+    elif type(data) == set:
+        return "{" + ",".join(sorted(list(data))) + "}"
+    else:
+        return data.__repr__()
 
 
 class TestTweetMethods(unittest.TestCase):
