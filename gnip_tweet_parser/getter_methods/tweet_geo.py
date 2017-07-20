@@ -1,5 +1,5 @@
-from tweet_methods.tweet_parser_errors import NotAvailableError
-from tweet_methods.tweet_checking import is_original_format
+from gnip_tweet_parser.tweet_checking import is_original_format
+from gnip_tweet_parser.tweet_parser_errors import NotAvailableError
 
 
 def get_geo_coordinates(tweet):

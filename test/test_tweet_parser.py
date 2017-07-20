@@ -1,9 +1,9 @@
 import unittest
-import gnip_tweet_parser as gtp
 import fileinput
 import json
-from tweet_methods import tweet_checking
-from tweet_methods.tweet_parser_errors import NotATweetError, NotAvailableError, UnexpectedFormatError
+from gnip_tweet_parser import tweet_checking
+import gnip_tweet_parser.gnip_tweet_parser as gtp
+from gnip_tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError, UnexpectedFormatError
 
 
 def make_a_string(data):

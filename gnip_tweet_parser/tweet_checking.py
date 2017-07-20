@@ -1,5 +1,5 @@
-from tweet_methods.tweet_parser_errors import NotATweetError, UnexpectedFormatError
-from tweet_methods.tweet_keys import original_format_minimum_set_keys, original_format_superset_keys, activity_streams_minimum_set_keys, activity_streams_superset_keys
+from gnip_tweet_parser.tweet_parser_errors import NotATweetError, UnexpectedFormatError
+from gnip_tweet_parser.tweet_keys import original_format_minimum_set_keys, original_format_superset_keys, activity_streams_minimum_set_keys, activity_streams_superset_keys
 
 
 def is_original_format(tweet):

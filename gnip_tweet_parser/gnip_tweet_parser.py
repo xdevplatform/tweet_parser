@@ -1,7 +1,8 @@
 import datetime
 from gnip_tweet_parser.cached_property import cached_property
 from gnip_tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError
-from gnip_tweet_parser.getter_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities, tweet_embeds
+from gnip_tweet_parser import tweet_checking
+from gnip_tweet_parser.getter_methods import tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities, tweet_embeds
 
 
 class Tweet(dict):
@@ -302,28 +303,24 @@ if __name__ == "__main__":
             tweet_dict = json.loads(line)
         except JSONDecodeError as json_error:
             if not options.pass_bad_json:
-                sys.stderr.write("{}. Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(json_error,line))
-            continue 
-        # load a Tweet   
+                sys.stderr.write("{}. Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(json_error, line))
+            continue
+        # load a Tweet
         try:
-            tweet_obj = Tweet(tweet_dict, do_format_checking = options.do_format_checking)
+            tweet_obj = Tweet(tweet_dict, do_format_checking=options.do_format_checking)
         except NotATweetError as nate:
             if not options.pass_non_tweet:
                 sys.stderr.write("{}. Use the flag '-t' to pass silently next time.\nNon Tweet payload: {}".format(nate, line))
-            continue 
+            continue
         # get the relevant fields
         for func in functions:
             try:
-                attribute = getattr(tweet_obj,func)
-                if type(attribute)==str:
-                    attribute = attribute.replace(options.delim," ").replace("\n", " ").replace("\r", " ")
+                attribute = getattr(tweet_obj, func)
+                if type(attribute) == str:
+                    attribute = attribute.replace(options.delim, " ").replace("\n", " ").replace("\r", " ")
                 csv.append(str(attribute))
             except NotAvailableError as nae:
                 if not options.pass_not_available:
                     sys.stderr.write("{}. Use the flag -a to pass silently next time.\nAttribute Unavailable: {}".format(nae, line))
                 csv.append("NOT_AVAILABLE")
         sys.stdout.write(options.delim.join(csv) + "\n")
-
-
-
-

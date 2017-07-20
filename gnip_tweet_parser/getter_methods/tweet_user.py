@@ -1,4 +1,4 @@
-from tweet_methods.tweet_checking import is_original_format
+from gnip_tweet_parser.tweet_checking import is_original_format
 
 
 def get_user_id(tweet):
