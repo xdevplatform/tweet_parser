@@ -1,5 +1,6 @@
-from tweet_methods.tweet_parser_errors import NotATweetError, NotAvailableError, UnexpectedFormatError
+from tweet_methods.tweet_parser_errors import NotATweetError, UnexpectedFormatError
 from tweet_methods.tweet_keys import original_format_minimum_set_keys, original_format_superset_keys, activity_streams_minimum_set_keys, activity_streams_superset_keys
+
 
 def is_original_format(tweet):
     """
@@ -16,7 +17,8 @@ def is_original_format(tweet):
             raise(NotATweetError("This text has neither 'created_at' or 'postedTime' as keys, it's not a Tweet"))
     return original_format
 
-def get_all_keys(tweet, parent_key = ''):
+
+def get_all_keys(tweet, parent_key=''):
     """
     helper function to get all of the keys in a Tweet dictionary
     """
@@ -24,10 +26,11 @@ def get_all_keys(tweet, parent_key = ''):
     for k, v in tweet.items():
         new_key = parent_key + " " + k
         if isinstance(v, dict):
-            items.extend(get_all_keys(v, parent_key = new_key))
+            items.extend(get_all_keys(v, parent_key=new_key))
         else:
             items.append(new_key.strip(" "))
     return items
+
 
 def check_format(tweet_keys_list, superset_keys, minset_keys):
     """
@@ -45,7 +48,8 @@ def check_format(tweet_keys_list, superset_keys, minset_keys):
         raise(UnexpectedFormatError("Some unexpected keys ({}) are in your Tweet".format(unexpected_keys)))
     return 0
 
-def check_tweet(tweet, do_format_checking = False):
+
+def check_tweet(tweet, do_format_checking=False):
     # get the format of the Tweet & make sure it's probably a Tweet
     original_format = is_original_format(tweet)
     # make sure, to the best of our knowledge, that the Tweet is a Tweet
@@ -59,7 +63,7 @@ def check_tweet(tweet, do_format_checking = False):
             raise(NotATweetError("This text has no 'text' key, it's probably not a Tweet"))
         # check for changing keys
         if do_format_checking:
-            _ = check_format(get_all_keys(tweet),original_format_superset_keys,original_format_minimum_set_keys)
+            check_format(get_all_keys(tweet), original_format_superset_keys, original_format_minimum_set_keys)
     else:
         # check to see if it's not a Tweet at all
         if "actor" not in tweet:
@@ -68,7 +72,5 @@ def check_tweet(tweet, do_format_checking = False):
             raise(NotATweetError("This text has no 'body' key, it's probably not a Tweet"))
         #check for changing keys
         if do_format_checking:
-            check_format(get_all_keys(tweet),activity_streams_superset_keys,activity_streams_minimum_set_keys)
+            check_format(get_all_keys(tweet), activity_streams_superset_keys, activity_streams_minimum_set_keys)
     return original_format
-
-

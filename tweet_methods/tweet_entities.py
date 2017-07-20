@@ -1,5 +1,6 @@
 from tweet_methods.tweet_checking import is_original_format
 
+
 def get_user_mentions(tweet):
     """
     get a list of @ mention dicts from the tweet
@@ -13,11 +14,12 @@ def get_user_mentions(tweet):
     else:
         return []
 
+
 def get_quoted_user(tweet):
     """
-    quoted users don't get included in the @ mentions 
+    quoted users don't get included in the @ mentions
     which doesn't seem that intuitive, so I'm adding a getter to add them
-    """ 
+    """
     if tweet.tweet_type == "quote":
         quoted_status_loc = "quoted_status"
         if not is_original_format(tweet):
@@ -26,11 +28,12 @@ def get_quoted_user(tweet):
     else:
         return []
 
+
 def get_quoted_mentions(tweet):
     """
-    users mentioned in the quoted Tweet don't get included 
+    users mentioned in the quoted Tweet don't get included
     which doesn't seem that intuitive, so I'm adding a getter to add them
-    """ 
+    """
     if tweet.tweet_type == "quote":
         quoted_status_loc = "quoted_status"
         if not is_original_format(tweet):
@@ -39,9 +42,10 @@ def get_quoted_mentions(tweet):
     else:
         return []
 
+
 def get_hashtags(tweet):
     """
-    get a list of hashtags 
+    get a list of hashtags
     """
     if is_original_format(tweet):
         entities = "entities"
@@ -51,7 +55,3 @@ def get_hashtags(tweet):
         return [x["text"] for x in tweet[entities]["hashtags"]]
     else:
         return []
-
-
-
-

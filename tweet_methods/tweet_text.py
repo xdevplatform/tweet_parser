@@ -1,10 +1,11 @@
 from tweet_methods.tweet_checking import is_original_format
-from tweet_methods.tweet_parser_errors import NotATweetError, NotAvailableError
+from tweet_methods.tweet_parser_errors import NotAvailableError
 import re
+
 
 def get_full_text(tweet):
     """
-    get the full text of a tweet dict or of the sub-dict in a quote/RT 
+    get the full text of a tweet dict or of the sub-dict in a quote/RT
     """
     if is_original_format(tweet):
         if tweet["truncated"]:
@@ -17,6 +18,7 @@ def get_full_text(tweet):
         else:
             return tweet["body"]
 
+
 def get_text(tweet):
     """
     literally the contents of 'text' or 'body'
@@ -24,7 +26,8 @@ def get_text(tweet):
     if is_original_format(tweet):
         return tweet["text"]
     else:
-        return tweet["body"]        
+        return tweet["body"]
+
 
 def get_tweet_type(tweet):
     """
@@ -60,9 +63,10 @@ def get_poll_options(tweet):
             return poll_options_text
         except KeyError:
             return []
-            
+
     else:
         raise NotAvailableError("Gnip activity-streams format does not return poll options")
+
 
 def get_quote_or_rt_text(tweet):
     """
@@ -80,19 +84,21 @@ def get_quote_or_rt_text(tweet):
         if is_original_format(tweet):
             return get_full_text(tweet["retweeted_status"])
         else:
-            return get_full_text(tweet["object"])   
+            return get_full_text(tweet["object"])
+
 
 def get_all_text(tweet):
     """
     all of the text of the tweet
-    Includes @ mentions, long links, 
+    Includes @ mentions, long links,
     quote-tweet contents (separated by a newline) & RT contents
     & poll options
     """
     if is_original_format(tweet):
-        return "\n".join(filter(None, [tweet.user_entered_text,tweet.quote_or_rt_text,"\n".join(tweet.poll_options)]))
+        return "\n".join(filter(None, [tweet.user_entered_text, tweet.quote_or_rt_text, "\n".join(tweet.poll_options)]))
     else:
-        return "\n".join(filter(None, [tweet.user_entered_text,tweet.quote_or_rt_text]))
+        return "\n".join(filter(None, [tweet.user_entered_text, tweet.quote_or_rt_text]))
+
 
 def remove_links(text):
     """
@@ -102,4 +108,3 @@ def remove_links(text):
     generic_link_regex = re.compile("\<http.+?\>", re.DOTALL)
     new_text = re.sub(tco_link_regex, " ", text)
     return re.sub(generic_link_regex, " ", new_text)
-

@@ -1,5 +1,6 @@
 from tweet_methods.tweet_checking import is_original_format
 
+
 def get_quote_tweet(tweet):
     """
     get the quote Tweet and return the dict
@@ -13,6 +14,7 @@ def get_quote_tweet(tweet):
     else:
         return None
 
+
 def get_retweet(tweet):
     """
     get the retweet and return the dict
@@ -24,6 +26,7 @@ def get_retweet(tweet):
             return tweet["object"]
     else:
         return None
+
 
 def get_embedded_tweet(tweet):
     """

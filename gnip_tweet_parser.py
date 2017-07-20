@@ -1,14 +1,14 @@
 import datetime
-import sys
 from cached_property import cached_property
 from tweet_methods.tweet_parser_errors import NotATweetError, NotAvailableError
 from tweet_methods import tweet_checking, tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities, tweet_embeds
 
+
 class Tweet(dict):
     """
-    tweet class 
+    tweet class
     """
-    def __init__(self, tweet_dict, do_format_checking = False):
+    def __init__(self, tweet_dict, do_format_checking=False):
         """
         take the tweet dictionary and turn it into a Tweet
         """
@@ -18,7 +18,7 @@ class Tweet(dict):
 
         # make sure that this obj has all of the keys that our dict had
         self.update(tweet_dict)
-    
+
     @cached_property
     def id(self):
         """
@@ -76,7 +76,7 @@ class Tweet(dict):
         """
         literally the contents of 'text' or 'body'
         """
-        return tweet_text.get_text(self)      
+        return tweet_text.get_text(self)
 
     @cached_property
     def tweet_type(self):
@@ -88,9 +88,9 @@ class Tweet(dict):
     @cached_property
     def user_entered_text(self):
         """
-        text that the actor actually entered 
+        text that the actor actually entered
         not the text of a quote-tweet or the text of a retweet
-        all of the text 
+        all of the text
         (not truncated, includes @ mention relpies and long links)
         """
         if self.tweet_type == "retweet":
@@ -109,7 +109,7 @@ class Tweet(dict):
         """
         the text of a quote tweet or a retweet
         """
-        return tweet_text.get_quote_or_rt_text(self)        
+        return tweet_text.get_quote_or_rt_text(self)
 
     @cached_property
     def all_text(self):
@@ -136,7 +136,7 @@ class Tweet(dict):
 
     @cached_property
     def geo_coordinates(self):
-        """ 
+        """
         return the geo coordinates, if they are included in the payload
         else raise 'unavailable field' error
         """
@@ -145,9 +145,9 @@ class Tweet(dict):
     @cached_property
     def profile_location(self):
         """
-        return location data from the profile location profile location enrichment 
+        return location data from the profile location profile location enrichment
         """
-        return tweet_geo.get_profile_location(self) 
+        return tweet_geo.get_profile_location(self)
 
     @cached_property
     def tweet_links(self):
@@ -163,7 +163,7 @@ class Tweet(dict):
         """
         return the most unrolled url present
         """
-        return tweet_links.get_most_unrolled_urls(self)     
+        return tweet_links.get_most_unrolled_urls(self)
 
     @cached_property
     def user_mentions(self):
@@ -189,17 +189,17 @@ class Tweet(dict):
     @cached_property
     def quoted_user(self):
         """
-        quoted users don't get included in the @ mentions 
+        quoted users don't get included in the @ mentions
         which doesn't seem that intuitive, so I'm adding a getter to add them
-        """ 
+        """
         return tweet_entities.get_quoted_user(self)
 
     @cached_property
     def quoted_mentions(self):
         """
-        users mentioned in the quoted Tweet don't get included 
+        users mentioned in the quoted Tweet don't get included
         which doesn't seem that intuitive, so I'm adding a getter to add them
-        """ 
+        """
         return tweet_entities.get_quoted_mentions(self)
 
     @cached_property
@@ -224,7 +224,7 @@ class Tweet(dict):
     @cached_property
     def retweet(self):
         """
-        get the retweet and return a tweet obj of the retweet 
+        get the retweet and return a tweet obj of the retweet
         """
         retweet = tweet_embeds.get_retweet(self)
         if retweet is not None:
@@ -232,7 +232,6 @@ class Tweet(dict):
                 return Tweet(retweet)
             except NotATweetError as nate:
                 raise(NotATweetError("The retweet payload appears malformed. Failed with '{}'".format(nate)))
-
 
     @cached_property
     def embedded_tweet(self):
@@ -244,7 +243,7 @@ class Tweet(dict):
             try:
                 return Tweet(embedded_tweet)
             except NotATweetError as nate:
-                raise(NotATweetError("The embedded tweet payload appears malformed. Failed with '{}'".format(embedded_tweet)))
+                raise(NotATweetError("The embedded tweet payload {} appears malformed. \nFailed with '{}'".format(embedded_tweet, nate)))
 
 if __name__ == "__main__":
     # parse arguements
@@ -258,34 +257,33 @@ if __name__ == "__main__":
         import json
         JSONDecodeError = json.JSONDecodeError
 
-
     list_of_attrs = sorted([x for x in list(set(dir(Tweet)) - set(dir(dict))) if x[0] != "_"])
     parser = argparse.ArgumentParser(
-            description="Parse seqeunce of JSON formated activities.", formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument("-f","--file", dest="data_files"
-        , default="-"
-        , help="Name of the file to read from, defaults to stdin")
-    parser.add_argument("-c","--csv", dest="func_list"
-        , default="id"
-        , help="comma separated list of attibutes to get \n possible functions include: \n -> {}".format(" \n -> ".join(list_of_attrs)))
-    parser.add_argument("-d","--delim", dest="delim"
-        , default="|"
-        , help="delimiter for the output csv, defaults to pipe")
-    parser.add_argument("-z","--compressed", action="store_true", dest="compressed"
-        , default=False
-        , help="use this flag if data is compressed")
-    parser.add_argument("-j","--pass_bad_json", action="store_true", dest="pass_bad_json"
-        , default=False
-        , help="use this flag to silently pass bad JSON payloads")
-    parser.add_argument("-t","--pass_non_tweet", action="store_true", dest="pass_non_tweet"
-        , default=False
-        , help="use this flag to silently pass on non-tweet payloads")
-    parser.add_argument("-a","--pass_not_available", action="store_true", dest="pass_not_available"
-        , default=False
-        , help="use this flag to silently pass on non-tweet payloads")
-    parser.add_argument("--do_format_checking", action="store_true", dest="do_format_checking"
-        , default=False
-        , help="debug formatting")
+        description="Parse seqeunce of JSON formated activities.", formatter_class=argparse.RawTextHelpFormatter)
+    parser.add_argument("-f", "--file", dest="data_files",
+                        default="-",
+                        help="Name of the file to read from, defaults to stdin")
+    parser.add_argument("-c", "--csv", dest="func_list",
+                        default="id",
+                        help="comma separated list of attibutes to get \n possible functions include: \n -> {}".format(" \n -> ".join(list_of_attrs)))
+    parser.add_argument("-d", "--delim", dest="delim",
+                        default="|",
+                        help="delimiter for the output csv, defaults to pipe")
+    parser.add_argument("-z", "--compressed", action="store_true", dest="compressed",
+                        default=False,
+                        help="use this flag if data is compressed")
+    parser.add_argument("-j", "--pass_bad_json", action="store_true", dest="pass_bad_json",
+                        default=False,
+                        help="use this flag to silently pass bad JSON payloads")
+    parser.add_argument("-t", "--pass_non_tweet", action="store_true", dest="pass_non_tweet",
+                        default=False,
+                        help="use this flag to silently pass on non-tweet payloads")
+    parser.add_argument("-a", "--pass_not_available", action="store_true", dest="pass_not_available",
+                        default=False,
+                        help="use this flag to silently pass on non-tweet payloads")
+    parser.add_argument("--do_format_checking", action="store_true", dest="do_format_checking",
+                        default=False,
+                        help="debug formatting")
     options = parser.parse_args()
 
     # get the functions that we need to use:

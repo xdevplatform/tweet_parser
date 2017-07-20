@@ -1,5 +1,6 @@
 from tweet_methods.tweet_checking import is_original_format
 
+
 def get_user_id(tweet):
     """
     get the user id, as a string
@@ -9,6 +10,7 @@ def get_user_id(tweet):
     else:
         return tweet["actor"]["id"].split(":")[-1]
 
+
 def get_screen_name(tweet):
     """
     get the user screen name (@ handle)
@@ -17,6 +19,7 @@ def get_screen_name(tweet):
         return tweet["user"]["screen_name"]
     else:
         return tweet["actor"]["preferredUsername"]
+
 
 def get_name(tweet):
     """
