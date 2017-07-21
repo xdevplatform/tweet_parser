@@ -1,11 +1,11 @@
 # gnip-tweet-parser
-Authors: Fiona Pigott, Jeff Kolb
+Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
 
 ## Goal:
 Allow reliable parsing of Tweets delivered by the Gnip platform, in both activity-streams and original formats. 
 
 ## Status:
-This package is not yet available on pypi, but soon it should be. For now, recommended usage would be to clone the repository and `pip install -e .` Only Python 3 is supported.
+This package can be installed by cloning the repo and using `pip install -e .`, or by using `pip install tweet_parser`. Current version is 1.0.2.dev1, which is the first probably-bug-free release. No promises.
 
 ## Usage:
 This package is intended to be used as a Python module inside your other Tweet-related code. An example Python program (after pip installing the package) would be:
