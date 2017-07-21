@@ -20,7 +20,7 @@ import json
 
 for line in fileinput.FileInput("gnip_tweet_data.json"):
     try:
-        tweet_dict = ujson.loads(line)
+        tweet_dict = json.loads(line)
         tweet = Tweet(tweet_dict)
     except (json.JSONDecodeError,NotATweetError):
         pass
