@@ -1,4 +1,4 @@
-from gnip_tweet_parser.tweet_checking import is_original_format
+from tweet_parser.tweet_checking import is_original_format
 
 
 def get_quote_tweet(tweet):

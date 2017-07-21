@@ -1,9 +1,9 @@
 import unittest
 import fileinput
 import json
-from gnip_tweet_parser import tweet_checking
-import gnip_tweet_parser.gnip_tweet_parser as gtp
-from gnip_tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError, UnexpectedFormatError
+from tweet_parser.tweet import Tweet
+from tweet_parser import tweet_checking
+from tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError, UnexpectedFormatError
 
 
 def make_a_string(data):
@@ -23,34 +23,34 @@ class TestTweetMethods(unittest.TestCase):
         tweet_payloads["original_format"] = {}
         tweet_ids = []
         for line in fileinput.FileInput("tweet_payload_examples/activity_streams_examples.json"):
-            tweet = gtp.Tweet(json.loads(line))
+            tweet = Tweet(json.loads(line))
             tweet_ids.append(tweet.id)
             tweet_payloads["activity_streams"][tweet.id] = tweet
         for line in fileinput.FileInput("tweet_payload_examples/original_format_examples.json"):
-            tweet = gtp.Tweet(json.loads(line))
+            tweet = Tweet(json.loads(line))
             tweet_ids.append(tweet.id)
             tweet_payloads["original_format"][tweet.id] = tweet
         self.tweet_payloads = tweet_payloads
         self.tweet_ids = list(set(tweet_ids))
 
     def test_equivalent_formats(self):
-        list_of_attrs = sorted([x for x in list(set(dir(gtp.Tweet)) - set(dir(dict))) if x[0] != "_"])
+        list_of_attrs = sorted([x for x in list(set(dir(Tweet)) - set(dir(dict))) if x[0] != "_"])
         for tweet_id in self.tweet_ids:
             # we know that we can't get polls in activity streams
             if self.tweet_payloads["original_format"][tweet_id].poll_options == []:
                 for attr in list_of_attrs:
                     try:
                         orig = getattr(self.tweet_payloads["original_format"][tweet_id], attr)
-                        if type(orig) == gtp.Tweet:
+                        if type(orig) == Tweet:
                             orig = orig.id
-                    except gtp.NotAvailableError as e:
+                    except NotAvailableError as e:
                         orig = e.__repr__()
                     try:
                         acti = getattr(self.tweet_payloads["activity_streams"][tweet_id], attr)
-                        if type(acti) == gtp.Tweet:
+                        if type(acti) == Tweet:
                             acti = acti.id
                         acti = acti
-                    except gtp.NotAvailableError as e:
+                    except NotAvailableError as e:
                         acti = e.__repr__()
                     # for some reason the ["body"]/["text"] truncations are different in as vs og
                     if attr == "text":
@@ -65,31 +65,31 @@ class TestTweetMethods(unittest.TestCase):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/original_format_missing_user.json", "r")
             tweet = json.load(f)
             f.close()
-            gtp.Tweet(tweet)
+            Tweet(tweet)
         # missing a different required field, raises "UnexpectedFormatError"
         with self.assertRaises(UnexpectedFormatError):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/original_format_missing_field.json", "r")
             tweet = json.load(f)
             f.close()
-            gtp.Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_checking=True)
         # missing a different required field, raises "UnexpectedFormatError"
         with self.assertRaises(UnexpectedFormatError):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/activity_streams_missing_field.json", "r")
             tweet = json.load(f)
             f.close()
-            gtp.Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_checking=True)
         # added a new field, raises "UnexpectedFormatError"
         with self.assertRaises(UnexpectedFormatError):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/activity_streams_additional_field.json", "r")
             tweet = json.load(f)
             f.close()
-            gtp.Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_checking=True)
         # added a new field, raises "UnexpectedFormatError"
         with self.assertRaises(UnexpectedFormatError):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/original_format_additional_field.json", "r")
             tweet = json.load(f)
             f.close()
-            gtp.Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_checking=True)
         # note: these tests aren't going to cover some kinds of malformed payloads (i.e., "quote tweet" section is missing fields)
 
     def test_check_format(self):
