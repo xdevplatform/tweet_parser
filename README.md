@@ -1,4 +1,4 @@
-# gnip-tweet-parser
+# tweet_parser
 Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
 
 ## Goal:
@@ -14,13 +14,13 @@ This package is intended to be used as a Python module inside your other Tweet-r
 from tweeet_parser.tweet import Tweet
 from tweet_parser.tweet_parser_errors import NotATweetError
 import fileinput
-import ujson
+import json
 
 for line in fileinput.FileInput("gnip_tweet_data.json"):
     try:
         tweet_dict = ujson.loads(line)
         tweet = Tweet(tweet_dict)
-    except (ValueError,NotATweetError):
+    except (json.JSONDecodeError,NotATweetError):
         pass
     print(tweet.created_at_string, tweet.all_text)
 ```
