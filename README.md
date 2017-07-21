@@ -7,6 +7,8 @@ Allow reliable parsing of Tweets delivered by the Gnip platform, in both activit
 ## Status:
 This package can be installed by cloning the repo and using `pip install -e .`, or by using `pip install tweet_parser`. Current version is 1.0.2.dev1, which is the first probably-bug-free release. No promises.
 
+Currently, this parser does not explicitly support Public API Twitter data.
+
 ## Usage:
 This package is intended to be used as a Python module inside your other Tweet-related code. An example Python program (after pip installing the package) would be:
 
