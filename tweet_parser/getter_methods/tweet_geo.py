@@ -1,5 +1,4 @@
 from tweet_parser.tweet_checking import is_original_format
-from tweet_parser.tweet_parser_errors import NotAvailableError
 
 
 def get_geo_coordinates(tweet):
@@ -12,7 +11,7 @@ def get_geo_coordinates(tweet):
             if "coordinates" in tweet["geo"]:
                 [lat, lon] = tweet["geo"]["coordinates"]
                 return {"latitude": lat, "longitude": lon}
-    raise(NotAvailableError("Geo coordinates are not included in this Tweet"))
+    return None
 
 
 def get_profile_location(tweet):
@@ -25,7 +24,7 @@ def get_profile_location(tweet):
         try:
             return tweet["user"]["derived"]["locations"][0]
         except KeyError:
-            raise(NotAvailableError("Profile Locations is not included in this Tweet"))
+            return None
     else:
         try:
             location = tweet["gnip"]["profileLocations"][0]
@@ -46,4 +45,4 @@ def get_profile_location(tweet):
                 reconstructed_original_format["geo"] = location["geo"]
             return reconstructed_original_format
         except KeyError:
-            raise(NotAvailableError("Profile Locations is not included in this Tweet"))
+            return None
