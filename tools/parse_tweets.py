@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 from tweet_parser.tweet import Tweet
 from tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError
 import argparse
