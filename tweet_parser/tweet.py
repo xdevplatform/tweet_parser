@@ -73,6 +73,41 @@ class Tweet(dict):
         return tweet_user.get_name(self)
 
     @cached_property
+    def klout_score(self):
+        """
+        Return the user's Klout score (an int), if it exists. 
+        """
+        return tweet_user.get_klout_score(self)
+
+    @cached_property
+    def klout_profile(self):
+        """
+        Return the user's Klout profile URL (an str), if it exists. 
+        """
+        return tweet_user.get_klout_profile(self)
+
+    @cached_property
+    def klout_id(self):
+        """
+        Return the user's Klout id (a str), if it exists. 
+        """
+        return tweet_user.get_klout_id(self)
+
+    @cached_property
+    def klout_influence_topics(self):
+        """
+        Return the user's Klout influence topics (a list of dicts), if it exists. 
+        """
+        return tweet_user.get_klout_topics(self, topic_type='influence')
+
+    @cached_property
+    def klout_interest_topics(self):
+        """
+        Return the user's Klout interest topics (a list of dicts), if it exists. 
+        """
+        return tweet_user.get_klout_topics(self, topic_type='interest')
+
+    @cached_property
     def text(self):
         """
         literally the contents of 'text' or 'body'
