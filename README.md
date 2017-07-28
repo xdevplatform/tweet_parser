@@ -44,7 +44,7 @@ An option also exists for run-time checking of Tweet payload formats. This compa
 
 Submit bug reports or feature requests through GitHub Issues, with self-contained minimum working examples where appropriate.   
 
-To contribute code, the guidelines specified in the [`pandas` documentation](http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code) are a great reference. Fork this repo, create your own local feature branch, and create an isolated virtual environment (there are currently no external dependencies for this library). 
+To contribute code, the guidelines specified in the [`pandas` documentation](http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code) are a great reference. Fork this repo, create your own local feature branch, and create an isolated virtual environment (there are currently no external dependencies for this library). Using a Python linter is recommened. 
 
 Test your new feature by reinstalling the library in your virtual environment and running the test script as shown below. Fix any issues until all tests pass. 
 
@@ -59,4 +59,5 @@ Furthermore, if contributing a new accessor or getter method for payload element
 (env) [tweet_parser]$ pip install -e . 
 (env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c <your new field> 
 ``` 
- 
+
+Change the version number. For most minor, non-breaking changes (fix a bug, add a getter, package naming/structure remains the same), simply update the last number (Z of X.Y.Z) in `setup.py`.
