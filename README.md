@@ -5,7 +5,7 @@ Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
 Allow reliable parsing of Tweets delivered by the Gnip platform, in both activity-streams and original formats. 
 
 ## Status:
-This package can be installed by cloning the repo and using `pip install -e .`, or by using `pip install tweet_parser`. Current version is 1.0.2.dev1, which is the first probably-bug-free release. No promises.
+This package can be installed by cloning the repo and using `pip install -e .`, or by using `pip install tweet_parser`. First probably-bug-free release is 1.0.3 (current as of 8/7/2017). No promises.
 
 Currently, this parser does not explicitly support Public API Twitter data.
 
