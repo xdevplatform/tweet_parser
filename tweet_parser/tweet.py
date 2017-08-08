@@ -1,9 +1,11 @@
 import datetime
 
-from tweet_parser.cached_property import lazy_property
-from tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError
+from tweet_parser.lazy_property import lazy_property
+from tweet_parser.tweet_parser_errors import NotATweetError
 from tweet_parser import tweet_checking
-from tweet_parser.getter_methods import tweet_date, tweet_user, tweet_text, tweet_geo, tweet_links, tweet_entities, tweet_embeds
+from tweet_parser.getter_methods import tweet_date, tweet_user
+from tweet_parser.getter_methods import tweet_text, tweet_geo, tweet_links
+from tweet_parser.getter_methods import tweet_entities, tweet_embeds
 
 
 class Tweet(dict):
