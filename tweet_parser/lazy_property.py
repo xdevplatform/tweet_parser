@@ -1,3 +1,9 @@
+"""Module to define a lazy property decorator that allows
+attributes to be generated dynamically and cached after creation.
+Original idea found via
+http://stevenloria.com/lazy-evaluated-properties-in-python/
+and lightly modified to preserve underlying docstrings.
+"""
 from functools import wraps
 
 def lazy_property(fn):
