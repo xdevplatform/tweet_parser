@@ -11,7 +11,10 @@ try:
     JSONDecodeError = ValueError
 except ImportError:
     import json
-    JSONDecodeError = json.JSONDecodeError
+    if (sys.version_info[1] >= 5) and (sys.version_info[0] == 3):
+        JSONDecodeError = json.JSONDecodeError
+    else:
+        JSONDecodeError = ValueError
 
 parser = argparse.ArgumentParser(
     description="Parse seqeunce of JSON formated activities.", formatter_class=argparse.RawTextHelpFormatter)
@@ -55,7 +58,7 @@ for line in fileinput.FileInput(options.data_files, openhook=openhook):
     csv = []
     # load the JSON
     try:
-        tweet_dict = json.loads(line)
+        tweet_dict = json.loads(line)            
     except JSONDecodeError as json_error:
         if not options.pass_bad_json:
             sys.stderr.write("{}. Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(json_error, line))
