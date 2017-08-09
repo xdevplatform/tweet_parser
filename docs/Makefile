@@ -8,7 +8,7 @@ SPHINXPROJ    = TweetParser
 SOURCEDIR     = .
 BUILDDIR      = _build
 
-GH_PAGES_SOURCES = docs docs/Makefile
+GH_PAGES_SOURCES = docs docs/Makefile tweet_parser
 
 
 # Put it first so that "make" without argument is like "make help".
