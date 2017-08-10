@@ -58,7 +58,7 @@ for line in fileinput.FileInput(options.data_files, openhook=openhook):
     csv = []
     # load the JSON
     try:
-        tweet_dict = json.loads(line)            
+        tweet_dict = json.loads(line)
     except JSONDecodeError as json_error:
         if not options.pass_bad_json:
             sys.stderr.write("{}. Use the flag '-j' to pass silently next time.\nBad JSON payload: {}".format(json_error, line))
