@@ -103,8 +103,8 @@ todo_include_todos = False
 html_static_path = []
 
 
-html_theme = 'bootstrap'
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_theme = 'alabaster'
+# html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # -- Options for HTMLHelp output ------------------------------------------
 
