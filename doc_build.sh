@@ -25,7 +25,9 @@ mv docs/* .
 make html
 mv -fv build/html/* ./
 rm -r tweet_parser docs build Makefile source
-echo "please review these changes and then run the following:"
+echo "--------------------------------------------------------"
+echo "docs built; please review these changes and then run the following:"
+echo "--------------------------------------------------------"
 echo git add -A
 echo git commit -m "Generated gh-pages for `git log $BRANCH_NAME -1 --pretty=short --abbrev-commit`"
 echo git push origin gh-pages
