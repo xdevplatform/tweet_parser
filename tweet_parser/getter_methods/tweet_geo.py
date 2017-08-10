@@ -3,8 +3,24 @@ from tweet_parser.tweet_checking import is_original_format
 
 def get_geo_coordinates(tweet):
     """
-    return the geo coordinates, if they are included in the payload
-    else raise 'unavailable field' error
+    Get the user's geo coordinates, if they are included in the payload
+    (otherwise return None)
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        dict: dictionary with the keys "latitude" and "longitude"
+              or, if unavaiable, None
+
+    Example:
+        >>> tweet_geo = {"geo": {"coordinates": [1,-1]}}
+        >>> get_geo_coordinates(tweet_geo)
+        {"latitude": 1, "longitude": -1}
+
+        >>> tweet_no_geo = {"geo": {}}
+        get_geo_coordinates(tweet_no_geo)
+        None
     """
     if "geo" in tweet:
         if tweet["geo"] is not None:
@@ -16,9 +32,37 @@ def get_geo_coordinates(tweet):
 
 def get_profile_location(tweet):
     """
-    return location data from the profile location profile location enrichment
-    only provide the first element of the locations list (because idk what the other one means)
-    return NotAvailableError if there is no field or the enrichment is not included in the tweet
+    Get user's derived location data from the profile location enrichment
+    If unavailable, returns None.
+
+    Args:
+        tweet (Tweet or dict): Tweet object or dictionary
+
+    Returns:
+        dict: {"country":     Two letter ISO-3166 country code
+                              that corresponds to the country location
+                              where the user that created the Tweet is from
+
+               "locality":    The locality location (generally city) for
+                              where the user that created the Tweet is from
+
+               "region":      The region location (generally state/province)
+                              where the user that created the Tweet is from
+
+               "sub_region":  The sub-region location (generally county) for
+                              where the user that created the Tweet is from
+
+               "full_name":   The full name (excluding sub-region) for
+                              where the user that created the Tweet is from
+
+               "geo":         An array that includes a lat/long value for a
+                              coordinate that corresponds to the lowest
+                              granularity location for where the user that
+                              created the Tweet is from
+               }
+
+    Caveats:
+        This only returns the first element of the 'locations' list
     """
     if is_original_format(tweet):
         try:
