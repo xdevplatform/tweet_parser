@@ -1,16 +1,20 @@
-# tweet_parser Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
+# tweet_parser 
+Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
 
-## Goal: Allow reliable parsing of Tweets delivered by the Gnip platform, in
-both activity-streams and original formats. 
+## Goal: 
+Allow reliable parsing of Tweets delivered by the Gnip platform, in both
+activity-streams and original formats. 
 
-## Status: This package can be installed by cloning the repo and using `pip
-install -e .`, or by using `pip install tweet_parser`. First probably-bug-free
-release is 1.0.3 (current as of 8/7/2017). No promises.
+## Status: 
+This package can be installed by cloning the repo and using `pip install -e .`,
+or by using `pip install tweet_parser`. First probably-bug-free release is
+1.0.3 (current as of 8/7/2017). No promises.
 
 Currently, this parser does not explicitly support Public API Twitter data.
 
-## Usage: This package is intended to be used as a Python module inside your
-other Tweet-related code. An example Python program (after pip installing the
+## Usage: 
+This package is intended to be used as a Python module inside your other
+Tweet-related code. An example Python program (after pip installing the
 package) would be:
 
 ```
@@ -34,7 +38,8 @@ I've also added simple command-line utility:
 python tools/parse_tweets.py -f"gnip_tweet_data.json" -c"created_at_string,all_text"
 ```
 
-## Testing: A Python `test_tweet_parser.py` package exists in `test/`. 
+## Testing: 
+A Python `test_tweet_parser.py` package exists in `test/`. 
 
 The most important thing that it tests is the equivalence of outputs when
 comparing both activity-streams input and original-format input. Any new getter
@@ -68,8 +73,10 @@ Test your new feature by reinstalling the library in your virtual environment
 and running the test script as shown below. Fix any issues until all tests
 pass. 
 
-```bash (env) [tweet_parser]$ pip install -e .  (env) [tweet_parser]$ cd test/;
-python test_tweet_parser.py; cd - ``` 
+```bash 
+(env) [tweet_parser]$ pip install -e .  
+(env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd - 
+``` 
 
 Furthermore, if contributing a new accessor or getter method for payload
 elements, verify the code works as you intended by running the
@@ -81,4 +88,6 @@ input types produce the intended output.
 (env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c <your new field> 
 ``` 
 
-Change the version number. For most minor, non-breaking changes (fix a bug, add a getter, package naming/structure remains the same), simply update the last number (Z of X.Y.Z) in `setup.py`.
+Change the version number. For most minor, non-breaking changes (fix a bug, add
+a getter, package naming/structure remains the same), simply update the last
+number (Z of X.Y.Z) in `setup.py`.
