@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>README &#8212; Tweet Parser 1 documentation</title>
+    <title>tweet_parser &#8212; Tweet Parser 1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,6 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tweet_parser package" href="tweet_parser.html" />
-    <link rel="prev" title="Tweet Parser" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,9 +41,130 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="readme">
-<h1>README<a class="headerlink" href="#readme" title="Permalink to this headline">¶</a></h1>
-<p>Here is some text</p>
+  <div class="section" id="tweet-parser">
+<h1>tweet_parser<a class="headerlink" href="#tweet-parser" title="Permalink to this headline">¶</a></h1>
+<p>Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales</p>
+<div class="section" id="goal">
+<h2>Goal:<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
+<p>Allow reliable parsing of Tweets delivered by the Gnip platform, in both
+activity-streams and original formats.</p>
+</div>
+<div class="section" id="status">
+<h2>Status:<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<p>This package can be installed by cloning the repo and using
+<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>. First
+probably-bug-free release is 1.0.3 (current as of 8/7/2017). No
+promises.</p>
+<p>Currently, this parser does not explicitly support Public API Twitter
+data.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage:<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>This package is intended to be used as a Python module inside your other
+Tweet-related code. An example Python program (after pip installing the
+package) would be:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tweeet_parser.tweet</span> <span class="k">import</span> <span class="n">Tweet</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_parser_errors</span> <span class="k">import</span> <span class="n">NotATweetError</span>
+<span class="kn">import</span> <span class="nn">fileinput</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileinput</span><span class="o">.</span><span class="n">FileInput</span><span class="p">(</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tweet_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">tweet</span> <span class="o">=</span> <span class="n">Tweet</span><span class="p">(</span><span class="n">tweet_dict</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span><span class="n">NotATweetError</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">created_at_string</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">all_text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>I&#8217;ve also added simple command-line utility:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">tweet_parser</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing:<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>A Python <code class="docutils literal"><span class="pre">test_tweet_parser.py</span></code> package exists in <code class="docutils literal"><span class="pre">test/</span></code>.</p>
+<p>The most important thing that it tests is the equivalence of outputs
+when comparing both activity-streams input and original-format input.
+Any new getter will be tested by running
+<code class="docutils literal"><span class="pre">test$</span> <span class="pre">python</span> <span class="pre">test_tweet_parser.py</span></code>, as the test checks every method
+attached to the Tweet object, for every test tweet stored in
+<code class="docutils literal"><span class="pre">test/tweet_payload_examples</span></code>. For any cases where it is expected that
+the outputs are different (e.g., outputs that depend on poll options),
+conditional statements should be added to this test.</p>
+<p>An option also exists for run-time checking of Tweet payload formats.
+This compares the set of all Tweet field keys to a superset of all
+possible keys, as well as a minimum set of all required keys, to make
+sure that each newly loaded Tweet fits those parameters. This shouldn&#8217;t
+be run every time you load Tweets (for one, it&#8217;s slow), but is
+implemented to use as a periodic check against Tweet format changes.
+This option is enabled with <code class="docutils literal"><span class="pre">--do_format_checking</span></code> on the command
+line, and by setting the keyword argument <code class="docutils literal"><span class="pre">do_format_checking</span></code> to
+<code class="docutils literal"><span class="pre">True</span></code> when initializing a <code class="docutils literal"><span class="pre">Tweet</span></code> object.</p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>We are using Sphinx with Google-style docstrings to build our
+documentation. If you don&#8217;t have sphinx installed, it&#8217;s a quick
+<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code>. To build the docs locally, follow:</p>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx_bootstrap_theme</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build">
+<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">tweet_parser</span><span class="o">/</span><span class="n">docs</span>
+<span class="n">make</span> <span class="n">clean</span>
+<span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deploying-to-github-pages">
+<h3>Deploying to github pages<a class="headerlink" href="#deploying-to-github-pages" title="Permalink to this headline">¶</a></h3>
+<p>From the root of the repo run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">doc_build</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">BRANCH_NAME</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">&lt;BRANCH_NAME&gt;</span></code> is the name of the branch you&#8217;ll be building
+from, most likely master. The script will change to the <code class="docutils literal"><span class="pre">gh-pages</span></code>
+branch, clean out the olds docs, pull your changes from the relevant
+branch, build them, and give you instructions for review and commands
+for deployment.</p>
+</div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>Submit bug reports or feature requests through GitHub Issues, with
+self-contained minimum working examples where appropriate.</p>
+<p>To contribute code, the guidelines specified in the <code class="docutils literal"><span class="pre">`pandas</span></code>
+documentation &lt;<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code">http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code</a>&gt;`__
+are a great reference. Fork this repo, create your own local feature
+branch, and create an isolated virtual environment (there are currently
+no external dependencies for this library). Using a Python linter is
+recommened.</p>
+<p>Test your new feature by reinstalling the library in your virtual
+environment and running the test script as shown below. Fix any issues
+until all tests pass.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(env) [tweet_parser]$ pip install -e .
+(env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd -
+</pre></div>
+</div>
+<p>Furthermore, if contributing a new accessor or getter method for payload
+elements, verify the code works as you intended by running the
+<code class="docutils literal"><span class="pre">parse_tweets.py</span></code> script with your new field, as shown below. Check
+that both input types produce the intended output.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(env) [tweet_parser]$ pip install -e .
+(env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c &lt;your new field&gt;
+</pre></div>
+</div>
+<p>Change the version number. For most minor, non-breaking changes (fix a
+bug, add a getter, package naming/structure remains the same), simply
+update the last number (Z of X.Y.Z) in <code class="docutils literal"><span class="pre">setup.py</span></code>.</p>
+</div>
 </div>
 
 
@@ -53,19 +172,35 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tweet_parser</a><ul>
+<li><a class="reference internal" href="#goal">Goal:</a></li>
+<li><a class="reference internal" href="#status">Status:</a></li>
+<li><a class="reference internal" href="#usage">Usage:</a></li>
+<li><a class="reference internal" href="#testing">Testing:</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a><ul>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#build">Build</a></li>
+<li><a class="reference internal" href="#deploying-to-github-pages">Deploying to github pages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Tweet Parser</a></li>
-      <li>Next: <a href="tweet_parser.html" title="next chapter">tweet_parser package</a></li>
   </ul></li>
 </ul>
 </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/readme.md.txt"
+      <li><a href="_sources/README.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -91,7 +226,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
-      <a href="_sources/readme.md.txt"
+      <a href="_sources/README.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
