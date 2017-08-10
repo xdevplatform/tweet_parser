@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ $# -ne 1 ];
-  then echo "Please provide a branch name from which documentation will be built";
+if [ $# -ne 1 ]; then
+  echo "Error: Please provide a branch name from which documentation will be built";
   exit 1
 fi
 
