@@ -14,11 +14,46 @@ class Tweet(dict):
     """
     def __init__(self, tweet_dict, do_format_checking=False):
         """
-        take the tweet dictionary and turn it into a Tweet
+        Initialize a Tweet object from a dict representing a Tweet payload
+
+        Args:
+            tweet_dict (dict): A dictionary representing a Tweet payload
+            do_format_checking (bool): If "True", compare the keys in this
+                dict to a supeset of expected keys and to a minimum set of
+                expected keys (as defined in tweet_parser.tweet_keys).
+                Will cause the parser to fail if unexpected keys are present
+                or if expected keys are missing.
+                Intended to allow run-time format testing, allowing the user
+                to surface unexpected format changes.
+
+        Returns:
+            Tweet: Class "Tweet", inherits from dict, provides properties to
+                   get various data values from the Tweet.
+
+        Example:
+        >>> # python dict representing a Tweet
+        >>> tweet_dict = {"id": 867474613139156993,
+                          "id_str": "867474613139156993",
+                          "created_at": "Wed May 24 20:17:19 +0000 2017",
+                          "text": "Some Tweet text",
+                          "user": {
+                              "screen_name": "RobotPrincessFi",
+                              "id_str": "815279070241955840"
+                              }
+                         }
+        >>> # create a Tweet object
+        >>> tweet = Tweet(tweet_dict)
+        >>> # use the Tweet obj to access data elements
+        >>> tweet.id
+        "867474613139156993"
+        >>> tweet.created_at_seconds
+        1495657039
         """
-        # get the format of the Tweet data--we'll want this for pretty much everything later
+
+        # get the format of the Tweet data
         # also, this throws an error if it's not a tweet
-        self.original_format = tweet_checking.check_tweet(tweet_dict, do_format_checking)
+        self.original_format = tweet_checking.check_tweet(tweet_dict, 
+                                                          do_format_checking)
 
         # make sure that this obj has all of the keys that our dict had
         self.update(tweet_dict)
@@ -26,84 +61,156 @@ class Tweet(dict):
     @lazy_property
     def id(self):
         """
-        return the Tweet id as a string
+        Tweet snowflake id as a string
+
+        Returns:
+            str: Twitter snowflake id, numeric only (no other text)
+
+        Example:
+        >>> original_format_dict = {"created_at": "Wed May 24 20:17:19 +0000 2017",
+                                    "id": 867474613139156993,
+                                    "id_str": "867474613139156993",
+                                    "user": {"user_keys":"user_data"},
+                                    "text": "some tweet text"
+                                    }
+        >>> Tweet(original_format_dict).id
+        "867474613139156993"
+
+        >>> activity_streams_dict = {"postedTime": "2017-05-24T20:17:19.000Z",
+                                     "id": "tag:search.twitter.com,2005:867474613139156993",
+                                     "actor": {"user_keys":"user_data"},
+                                     "body": "some tweet text"
+                                     }
+        >>> Tweet(activity_streams_dict).id
+        "867474613139156993"
+
         """
-        return self["id_str"] if self.original_format else self["id"].split(":")[-1]
+        if self.original_format:
+            return self["id_str"]
+        else:
+            return self["id"].split(":")[-1]
 
     @lazy_property
     def created_at_seconds(self):
         """
-        return seconds since the unix epoch of the Tweet create
+        Time that a Tweet was posted in seconds since the Unix epoch
+
+        Returns:
+            int: seconds since the unix epoch
+                 (determined by converting Tweet.id
+                 into a timestamp using tweet_date.snowflake2utc)
         """
         return tweet_date.snowflake2utc(self.id)
 
     @lazy_property
     def created_at_datetime(self):
         """
-        return a python datetime obj of the Tweet create
+        Time that a Tweet was posted as a Python datetime object
+
+        Returns:
+            datetime.datetime: the value of tweet.created_at_seconds
+                               converted into a datetime object
         """
         return datetime.datetime.utcfromtimestamp(self.created_at_seconds)
 
     @lazy_property
     def created_at_string(self):
         """
-        return a date string, formatted as: YYYY-MM-ddTHH:MM:SS.000Z
+        Time that a Tweet was posted as a string with the format:
+        'YYYY-MM-ddTHH:MM:SS.000Z'
+
+        Returns:
+            str: the value of tweet.created_at_seconds
+                 converted into a string ('YYYY-MM-ddTHH:MM:SS.000Z')
         """
         return self.created_at_datetime.strftime("%Y-%M-%dT%H:%M:%S.000Z")
 
     @lazy_property
     def user_id(self):
         """
-        get the user id, as a string
+        The Twitter ID of the user who posted the Tweet
+
+        Returns:
+            str: value returned by calling tweet_user.get_user_id on 'self'
         """
         return tweet_user.get_user_id(self)
 
     @lazy_property
     def screen_name(self):
         """
-        get the user screen name (@ handle)
+        The screen name (@ handle) of the user who posted the Tweet
+
+        Returns:
+            str: value returned by calling tweet_user.get_screen_name on 'self'
         """
         return tweet_user.get_screen_name(self)
 
     @lazy_property
     def name(self):
         """
-        get the user's display name
+        The display name of the user who posted the Tweet
+
+        Returns:
+            str: value returned by calling tweet_user.get_name on 'self'
         """
         return tweet_user.get_name(self)
 
     @lazy_property
     def klout_score(self):
         """
-        Return the user's Klout score (an int), if it exists.
+        The Klout score (int) (if it exists) of the user who posted the Tweet
+
+        Returns:
+            int: value returned by calling tweet_user.get_klout_score on 'self'
+                 (if no Klout is present, this returns a None)
         """
         return tweet_user.get_klout_score(self)
 
     @lazy_property
     def klout_profile(self):
         """
-        Return the user's Klout profile URL (an str), if it exists.
+        The Klout profile URL of the user (str) (if it exists)
+
+        Returns:
+            str: value returned by calling tweet_user.get_klout_profile on 'self'
+                 (if no Klout is present, this returns a None)
         """
         return tweet_user.get_klout_profile(self)
 
     @lazy_property
     def klout_id(self):
         """
-        Return the user's Klout id (a str), if it exists.
+        The Klout ID of the user (str) (if it exists)
+
+        Returns:
+            str: value returned by calling tweet_user.get_klout_id on 'self'
+                 (if no Klout is present, this returns a None)
         """
         return tweet_user.get_klout_id(self)
 
     @lazy_property
     def klout_influence_topics(self):
         """
-        Return the user's Klout influence topics (a list of dicts), if it exists.
+        Get the user's Klout influence topics (a list of dicts), if it exists.
+        Topic dicts will have these keys: url, id, name, score
+
+        Returns:
+            list: value returned by calling
+                  tweet_user.get_klout_topics(self, topic_type = 'influence')
+                  (if no Klout is present, this returns a None)
         """
         return tweet_user.get_klout_topics(self, topic_type='influence')
 
     @lazy_property
     def klout_interest_topics(self):
         """
-        Return the user's Klout interest topics (a list of dicts), if it exists.
+        Get the user's Klout interest topics (a list of dicts), if it exists.
+        Topic dicts will have these keys: url, id, name, score
+
+        Returns:
+            list: value returned by calling
+                  tweet_user.get_klout_topics(self, topic_type = 'interest')
+                  (if no Klout is present, this returns a None)
         """
         return tweet_user.get_klout_topics(self, topic_type='interest')
 
