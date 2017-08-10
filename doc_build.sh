@@ -18,11 +18,12 @@ fi
 
 pwd
 echo "removing current files"
-rm -r *.html *.js docs/
+rm -r *.html *.js
 touch .nojekyll
 git checkout $BRANCH_NAME docs tweet_parser README.md
+# need to do this step because the readme will be overwritten
+pandoc -i README.md -o docs/source/README.rst
 mv docs/* .
-pandoc -i README.md -o source/README.rst
 make html
 mv -fv build/html/* ./
 rm -r tweet_parser docs build Makefile source README.md
