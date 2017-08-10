@@ -40,27 +40,34 @@ The most important thing that it tests is the equivalence of outputs when compar
 
 An option also exists for run-time checking of Tweet payload formats. This compares the set of all Tweet field keys to a superset of all possible keys, as well as a minimum set of all required keys, to make sure that each newly loaded Tweet fits those parameters. This shouldn't be run every time you load Tweets (for one, it's slow), but is implemented to use as a periodic check against Tweet format changes. This option is enabled with `--do_format_checking` on the command line, and by setting the keyword argument `do_format_checking` to `True` when initializing a `Tweet` object.
 
-
 ## Documentation
 We are using Sphinx with Google-style docstrings to build our documentation. If
 you don't have sphinx installed, it's a quick `pip install sphinx`. 
 To build the docs locally, follow:
 
+### Setup
+
+```.bash
+pip install sphinx
+pip install sphinx_bootstrap_theme
+```
+
+### Build
+
 ```.bash
 cd tweet_parser/docs
-
 make clean
 make html
 ```
 
-For deploying the docs to our github pages site, from the root of the repo run
+### Deploying to github pages
+From the root of the repo run:
 
 ```.bash
 bash doc_build.sh <BRANCH_NAME>
 ```
 
 where `<BRANCH_NAME>` is the name of the branch you'll be building from, most likely master. The script will change to the `gh-pages` branch, clean out the olds docs, pull your changes from the relevant branch, build them, and give you instructions for review and commands for deployment.
-
 
 
 ## Contributing
