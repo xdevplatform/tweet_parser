@@ -1,9 +1,8 @@
-# Minimal makefile for Sphinx documentation
-#
-echo $#
+#!/bin/bash
 
 if [ $# -ne 1 ];
-  then echo "please provide a branch name from which documentation will be built";
+  then echo "Please provide a branch name from which documentation will be built";
+  exit 1
 fi
 
 BRANCH_NAME=$1
