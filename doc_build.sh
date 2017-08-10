@@ -20,7 +20,7 @@ mv docs/* .
 make html
 mv -fv build/html/* ./
 rm -r tweet_parser docs build Makefile source
-git add -A
-git commit -m "Generated gh-pages for `git log $BRANCH_NAME -1 --pretty=short --abbrev-commit`"
+# git add -A
+# git commit -m "Generated gh-pages for `git log $BRANCH_NAME -1 --pretty=short --abbrev-commit`"
 # git push origin gh-pages
 # git checkout $BRANCH_NAME
