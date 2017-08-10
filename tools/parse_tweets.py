@@ -11,7 +11,10 @@ try:
     JSONDecodeError = ValueError
 except ImportError:
     import json
-    JSONDecodeError = json.JSONDecodeError
+    if (sys.version_info[1] >= 5) and (sys.version_info[0] == 3):
+        JSONDecodeError = json.JSONDecodeError
+    else:
+        JSONDecodeError = ValueError
 
 parser = argparse.ArgumentParser(
     description="Parse seqeunce of JSON formated activities.", formatter_class=argparse.RawTextHelpFormatter)
