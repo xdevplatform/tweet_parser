@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Validation and checking methodss for Tweets.
+"""Validation and checking methods for Tweets.
 
 Methods here are primarily used by other methods within this module but can be
 used for other validation code as well.
@@ -22,11 +22,11 @@ def is_original_format(tweet):
         Bool
 
     Example:
-        >>> tweet = {"created_at": 124125125125, "text": "just setting up my twttr",
-                     "nested_field": {"nested_1": "field",
-                                      "nested_2": "field2"}
-                    }
-        >>> is_original_format(tweet)
+        >>> import tweet_parser.tweet_checking as tc
+        >>> tweet = {"created_at": 124125125125,
+        ...          "text": "just setting up my twttr",
+        ...          "nested_field": {"nested_1": "field", "nested_2": "field2"}}
+        >>> tc.is_original_format(tweet)
         True
     """
     # deleted due to excess checking; it's a key lookup and does not need any
@@ -53,12 +53,11 @@ def get_all_keys(tweet, parent_key=''):
         list of all keys in nested dicts.
 
     Example:
+        >>> import tweet_parser.tweet_checking as tc
         >>> tweet = {"created_at": 124125125125, "text": "just setting up my twttr",
-                     "nested_field": {"nested_1": "field",
-                                      "nested_2": "field2"}
-                    }
-        >>> get_all_keys(tweet)
-        ["created_at", "text", "nested_field", "nested_1", "nested_2"]
+        ...          "nested_field": {"nested_1": "field", "nested_2": "field2"}}
+        >>> tc.get_all_keys(tweet)
+        ['created_at', 'text', 'nested_field nested_1', 'nested_field nested_2']
 
     TODO:
         check for ordering?
