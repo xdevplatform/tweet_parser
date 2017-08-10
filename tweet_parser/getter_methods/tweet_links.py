@@ -2,6 +2,13 @@ from tweet_parser.tweet_checking import is_original_format
 
 
 def get_tweet_links(tweet):
+    """
+    Get the links that are included in the Tweet as "urls"
+
+    Args:
+
+    Returns:
+    """
     if is_original_format(tweet):
         # get the urls from the Tweet
         try:
@@ -34,8 +41,10 @@ def get_tweet_links(tweet):
             gnip_tweet_exp_urls = {x["expanded_url"]: x for x in tweet["gnip"]["urls"]}
         except KeyError:
             return tweet_urls
-        key_mappings = {"expanded_url": "url", "expanded_status": "status",
-                        "expanded_url_title": "title", "expanded_url_description": "description"}
+        key_mappings = {"expanded_url": "url", 
+                        "expanded_status": "status",
+                        "expanded_url_title": "title", 
+                        "expanded_url_description": "description"}
         tweet_urls_expanded = []
         for url in tweet_urls:
             expanded_url = url
@@ -49,7 +58,12 @@ def get_tweet_links(tweet):
 
 def get_most_unrolled_urls(tweet):
     """
-    return the most unrolled url present
+    For each url included in the Tweet "urls", get the most unrolled
+    version available.
+
+    Args:
+
+    Returns:
     """
     unrolled_urls = []
     for url in tweet.tweet_links:

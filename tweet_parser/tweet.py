@@ -52,7 +52,7 @@ class Tweet(dict):
 
         # get the format of the Tweet data
         # also, this throws an error if it's not a tweet
-        self.original_format = tweet_checking.check_tweet(tweet_dict, 
+        self.original_format = tweet_checking.check_tweet(tweet_dict,
                                                           do_format_checking)
 
         # make sure that this obj has all of the keys that our dict had
@@ -67,20 +67,22 @@ class Tweet(dict):
             str: Twitter snowflake id, numeric only (no other text)
 
         Example:
-        >>> original_format_dict = {"created_at": "Wed May 24 20:17:19 +0000 2017",
-                                    "id": 867474613139156993,
-                                    "id_str": "867474613139156993",
-                                    "user": {"user_keys":"user_data"},
-                                    "text": "some tweet text"
-                                    }
+        >>> original_format_dict = {
+                "created_at": "Wed May 24 20:17:19 +0000 2017",
+                "id": 867474613139156993,
+                "id_str": "867474613139156993",
+                "user": {"user_keys":"user_data"},
+                "text": "some tweet text"
+                }
         >>> Tweet(original_format_dict).id
         "867474613139156993"
 
-        >>> activity_streams_dict = {"postedTime": "2017-05-24T20:17:19.000Z",
-                                     "id": "tag:search.twitter.com,2005:867474613139156993",
-                                     "actor": {"user_keys":"user_data"},
-                                     "body": "some tweet text"
-                                     }
+        >>> activity_streams_dict = {
+                "postedTime": "2017-05-24T20:17:19.000Z",
+                "id": "tag:search.twitter.com,2005:867474613139156993",
+                "actor": {"user_keys":"user_data"},
+                "body": "some tweet text"
+                }
         >>> Tweet(activity_streams_dict).id
         "867474613139156993"
 
