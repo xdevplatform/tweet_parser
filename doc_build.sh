@@ -22,7 +22,7 @@ rm -r *.html *.js docs/
 touch .nojekyll
 git checkout $BRANCH_NAME docs tweet_parser README.md
 mv docs/* .
-pandoc -i README.md source/README.rst
+pandoc -i README.md -o source/README.rst
 make html
 mv -fv build/html/* ./
 rm -r tweet_parser docs build Makefile source README.md
