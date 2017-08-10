@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tweet_parser.getter_methods package &#8212; Tweet Parser 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="tweet_parser package" href="tweet_parser.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tweet-parser-getter-methods-package">
+<h1>tweet_parser.getter_methods package<a class="headerlink" href="#tweet-parser-getter-methods-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_date">
+<span id="tweet-parser-getter-methods-tweet-date-module"></span><h2>tweet_parser.getter_methods.tweet_date module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_date" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_date.snowflake2utc">
+<code class="descclassname">tweet_parser.getter_methods.tweet_date.</code><code class="descname">snowflake2utc</code><span class="sig-paren">(</span><em>sf</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_date.snowflake2utc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_embeds">
+<span id="tweet-parser-getter-methods-tweet-embeds-module"></span><h2>tweet_parser.getter_methods.tweet_embeds module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_embeds" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_embeds.get_embedded_tweet">
+<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_embedded_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_embedded_tweet" title="Permalink to this definition">¶</a></dt>
+<dd><p>get any embedded Tweet and return the dict</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_embeds.get_quote_tweet">
+<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_quote_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_quote_tweet" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the quote Tweet and return the dict</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_embeds.get_retweet">
+<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_retweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_retweet" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the retweet and return the dict</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_entities">
+<span id="tweet-parser-getter-methods-tweet-entities-module"></span><h2>tweet_parser.getter_methods.tweet_entities module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_entities" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_entities.get_hashtags">
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_hashtags</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_hashtags" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a list of hashtags</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_entities.get_quoted_mentions">
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_quoted_mentions</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_quoted_mentions" title="Permalink to this definition">¶</a></dt>
+<dd><p>users mentioned in the quoted Tweet don&#8217;t get included
+which doesn&#8217;t seem that intuitive, so I&#8217;m adding a getter to add them</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_entities.get_quoted_user">
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_quoted_user</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_quoted_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>quoted users don&#8217;t get included in the &#64; mentions
+which doesn&#8217;t seem that intuitive, so I&#8217;m adding a getter to add them</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_entities.get_user_mentions">
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_user_mentions</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_user_mentions" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a list of &#64; mention dicts from the tweet</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_geo">
+<span id="tweet-parser-getter-methods-tweet-geo-module"></span><h2>tweet_parser.getter_methods.tweet_geo module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_geo" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_geo.get_geo_coordinates">
+<code class="descclassname">tweet_parser.getter_methods.tweet_geo.</code><code class="descname">get_geo_coordinates</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_geo.get_geo_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the geo coordinates, if they are included in the payload
+else raise &#8216;unavailable field&#8217; error</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_geo.get_profile_location">
+<code class="descclassname">tweet_parser.getter_methods.tweet_geo.</code><code class="descname">get_profile_location</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_geo.get_profile_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>return location data from the profile location profile location enrichment
+only provide the first element of the locations list (because idk what the other one means)
+return NotAvailableError if there is no field or the enrichment is not included in the tweet</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_links">
+<span id="tweet-parser-getter-methods-tweet-links-module"></span><h2>tweet_parser.getter_methods.tweet_links module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_links" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_links.get_most_unrolled_urls">
+<code class="descclassname">tweet_parser.getter_methods.tweet_links.</code><code class="descname">get_most_unrolled_urls</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_links.get_most_unrolled_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the most unrolled url present</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_links.get_tweet_links">
+<code class="descclassname">tweet_parser.getter_methods.tweet_links.</code><code class="descname">get_tweet_links</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_links.get_tweet_links" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_text">
+<span id="tweet-parser-getter-methods-tweet-text-module"></span><h2>tweet_parser.getter_methods.tweet_text module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_text" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_text.get_all_text">
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_all_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_all_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>all of the text of the tweet
+Includes &#64; mentions, long links,
+quote-tweet contents (separated by a newline) &amp; RT contents
+&amp; poll options</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_text.get_full_text">
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_full_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_full_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the full text of a tweet dict or of the sub-dict in a quote/RT</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_text.get_poll_options">
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_poll_options</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_poll_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>text in the options of a poll, as a list</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_text.get_quote_or_rt_text">
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_quote_or_rt_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_quote_or_rt_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>the text of a quote tweet or a retweet</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_text.get_text">
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>literally the contents of &#8216;text&#8217; or &#8216;body&#8217;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_text.get_tweet_type">
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_tweet_type</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_tweet_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>3 options: tweet, quote, and retweet</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_text.remove_links">
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">remove_links</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.remove_links" title="Permalink to this definition">¶</a></dt>
+<dd><p>take some text, remove the links</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_user">
+<span id="tweet-parser-getter-methods-tweet-user-module"></span><h2>tweet_parser.getter_methods.tweet_user module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_user" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_klout_id">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the user&#8217;s Klout id (an str), if it exists.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_klout_profile">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_profile</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the user&#8217;s Klout profile URL (an str), if it exists.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_klout_score">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_score</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the user&#8217;s Klout score (an int), if it exists.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_klout_topics">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_topics</code><span class="sig-paren">(</span><em>tweet</em>, <em>topic_type='influence'</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_topics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the user&#8217;s chosen Klout topics (a list of dicts), if it exists.</p>
+<dl class="docutils">
+<dt>Regardless of the format or topic type, the topic dicts will have the same keys:</dt>
+<dd>url, id, name, score</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_name">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the user&#8217;s display name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_screen_name">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_screen_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_screen_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the user screen name (&#64; handle)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_user_id">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_user_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the user id, as a string</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tweet_parser.getter_methods" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tweet_parser.getter_methods package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_date">tweet_parser.getter_methods.tweet_date module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_embeds">tweet_parser.getter_methods.tweet_embeds module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_entities">tweet_parser.getter_methods.tweet_entities module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_geo">tweet_parser.getter_methods.tweet_geo module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_links">tweet_parser.getter_methods.tweet_links module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_text">tweet_parser.getter_methods.tweet_text module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_user">tweet_parser.getter_methods.tweet_user module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="tweet_parser.html">tweet_parser package</a><ul>
+      <li>Previous: <a href="tweet_parser.html" title="previous chapter">tweet_parser package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tweet_parser.getter_methods.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Twitter DDIS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/tweet_parser.getter_methods.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
