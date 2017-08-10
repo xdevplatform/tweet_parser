@@ -47,14 +47,14 @@ To build the docs locally, follow:
 
 ### Setup
 
-```.bash
+```
 pip install sphinx
 pip install sphinx_bootstrap_theme
 ```
 
 ### Build
 
-```.bash
+```
 cd tweet_parser/docs
 make clean
 make html
@@ -63,7 +63,7 @@ make html
 ### Deploying to github pages
 From the root of the repo run:
 
-```.bash
+```
 bash doc_build.sh <BRANCH_NAME>
 ```
 
@@ -78,16 +78,16 @@ To contribute code, the guidelines specified in the [`pandas` documentation](htt
 
 Test your new feature by reinstalling the library in your virtual environment and running the test script as shown below. Fix any issues until all tests pass. 
 
-```bash
+```
 (env) [tweet_parser]$ pip install -e . 
 (env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd - 
 ``` 
 
 Furthermore, if contributing a new accessor or getter method for payload elements, verify the code works as you intended by running the `parse_tweets.py` script with your new field, as shown below. Check that both input types produce the intended output. 
 
-```bash
+```
 (env) [tweet_parser]$ pip install -e . 
 (env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c <your new field> 
-``` 
+```
 
 Change the version number. For most minor, non-breaking changes (fix a bug, add a getter, package naming/structure remains the same), simply update the last number (Z of X.Y.Z) in `setup.py`.
