@@ -47,7 +47,8 @@ def get_all_keys(tweet, parent_key=''):
 
     Args:
         tweet (Tweet): the tweet dict
-        parent_key (str): ???
+        parent_key (str): key from which this process will start, e.g., you can
+                          get keys only under some key that is not the top-level key.
 
     Returns:
         list of all keys in nested dicts.
@@ -58,9 +59,6 @@ def get_all_keys(tweet, parent_key=''):
         ...          "nested_field": {"nested_1": "field", "nested_2": "field2"}}
         >>> tc.get_all_keys(tweet)
         ['created_at', 'text', 'nested_field nested_1', 'nested_field nested_2']
-
-    TODO:
-        check for ordering?
     """
     items = []
     for k, v in tweet.items():
