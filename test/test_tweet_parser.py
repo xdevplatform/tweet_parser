@@ -99,10 +99,10 @@ class TestTweetMethods(unittest.TestCase):
         too_few_keys = {2, 4, 6, 8}
         just_right = {1, 2, 4, 6, 8, 10}
         with self.assertRaises(UnexpectedFormatError) as exception:
-            tweet_checking.check_format(too_many_keys, superset, minset)
+            tweet_checking.key_validation_check(too_many_keys, superset, minset)
         with self.assertRaises(UnexpectedFormatError) as exception:
-            tweet_checking.check_format(too_few_keys, superset, minset)
-        self.assertEqual(0, tweet_checking.check_format(just_right, superset, minset))
+            tweet_checking.key_validation_check(too_few_keys, superset, minset)
+        self.assertEqual(0, tweet_checking.key_validation_check(just_right, superset, minset))
 
     def test_get_all_keys(self):
         # define a test nested dict:
