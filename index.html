@@ -79,7 +79,7 @@ package) would be:</p>
 </pre></div>
 </div>
 <p>I&#8217;ve also added simple command-line utility:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">tweet_parser</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">parse_tweets</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -103,39 +103,6 @@ implemented to use as a periodic check against Tweet format changes.
 This option is enabled with <code class="docutils literal"><span class="pre">--do_format_checking</span></code> on the command
 line, and by setting the keyword argument <code class="docutils literal"><span class="pre">do_format_checking</span></code> to
 <code class="docutils literal"><span class="pre">True</span></code> when initializing a <code class="docutils literal"><span class="pre">Tweet</span></code> object.</p>
-</div>
-<div class="section" id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
-<p>We are using Sphinx with Google-style docstrings to build our
-documentation. If you don&#8217;t have sphinx installed, it&#8217;s a quick
-<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code>. To build the docs locally, follow:</p>
-<div class="section" id="setup">
-<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx_bootstrap_theme</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="build">
-<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">tweet_parser</span><span class="o">/</span><span class="n">docs</span>
-<span class="n">make</span> <span class="n">clean</span>
-<span class="n">make</span> <span class="n">html</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="deploying-to-github-pages">
-<h3>Deploying to github pages<a class="headerlink" href="#deploying-to-github-pages" title="Permalink to this headline">¶</a></h3>
-<p>From the root of the repo run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">doc_build</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">BRANCH_NAME</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal"><span class="pre">&lt;BRANCH_NAME&gt;</span></code> is the name of the branch you&#8217;ll be building
-from, most likely master. The script will change to the <code class="docutils literal"><span class="pre">gh-pages</span></code>
-branch, clean out the olds docs, pull your changes from the relevant
-branch, build them, and give you instructions for review and commands
-for deployment.</p>
-</div>
 </div>
 <div class="section" id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
@@ -209,12 +176,6 @@ update the last number (Z of X.Y.Z) in <code class="docutils literal"><span clas
 <li><a class="reference internal" href="#status">Status:</a></li>
 <li><a class="reference internal" href="#usage">Usage:</a></li>
 <li><a class="reference internal" href="#testing">Testing:</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a><ul>
-<li><a class="reference internal" href="#setup">Setup</a></li>
-<li><a class="reference internal" href="#build">Build</a></li>
-<li><a class="reference internal" href="#deploying-to-github-pages">Deploying to github pages</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#contributing">Contributing</a></li>
 </ul>
 </li>

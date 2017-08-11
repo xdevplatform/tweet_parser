@@ -312,7 +312,7 @@ all of the text
 </div>
 <div class="section" id="module-tweet_parser.tweet_checking">
 <span id="tweet-parser-tweet-checking-module"></span><h2>tweet_parser.tweet_checking module<a class="headerlink" href="#module-tweet_parser.tweet_checking" title="Permalink to this headline">¶</a></h2>
-<p>Validation and checking methodss for Tweets.</p>
+<p>Validation and checking methods for Tweets.</p>
 <p>Methods here are primarily used by other methods within this module but can be
 used for other validation code as well.</p>
 <dl class="function">
@@ -344,8 +344,8 @@ in this level and all nexstted levels of the tweet.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; the tweet dict</li>
-<li><strong>parent_key</strong> (<em>str</em>) &#8211; <p>???</p>
-</li>
+<li><strong>parent_key</strong> (<em>str</em>) &#8211; key from which this process will start, e.g., you can
+get keys only under some key that is not the top-level key.</li>
 </ul>
 </td>
 </tr>
@@ -355,12 +355,11 @@ in this level and all nexstted levels of the tweet.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="mi">124125125125</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;just setting up my twttr&quot;</span><span class="p">,</span>
-<span class="go">             &quot;nested_field&quot;: {&quot;nested_1&quot;: &quot;field&quot;,</span>
-<span class="go">                              &quot;nested_2&quot;: &quot;field2&quot;}</span>
-<span class="go">            }</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_all_keys</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
-<span class="go">[&quot;created_at&quot;, &quot;text&quot;, &quot;nested_field&quot;, &quot;nested_1&quot;, &quot;nested_2&quot;]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tweet_parser.tweet_checking</span> <span class="k">as</span> <span class="nn">tc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="mi">124125125125</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;just setting up my twttr&quot;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s2">&quot;nested_field&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nested_1&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="s2">&quot;nested_2&quot;</span><span class="p">:</span> <span class="s2">&quot;field2&quot;</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">get_all_keys</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+<span class="go">[&#39;created_at&#39;, &#39;text&#39;, &#39;nested_field nested_1&#39;, &#39;nested_field nested_2&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -380,11 +379,11 @@ in this level and all nexstted levels of the tweet.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="mi">124125125125</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;just setting up my twttr&quot;</span><span class="p">,</span>
-<span class="go">             &quot;nested_field&quot;: {&quot;nested_1&quot;: &quot;field&quot;,</span>
-<span class="go">                              &quot;nested_2&quot;: &quot;field2&quot;}</span>
-<span class="go">            }</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tweet_parser.tweet_checking</span> <span class="k">as</span> <span class="nn">tc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="mi">124125125125</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;just setting up my twttr&quot;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s2">&quot;nested_field&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nested_1&quot;</span><span class="p">:</span> <span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="s2">&quot;nested_2&quot;</span><span class="p">:</span> <span class="s2">&quot;field2&quot;</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
