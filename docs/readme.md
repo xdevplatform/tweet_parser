@@ -3,12 +3,18 @@ We are using Sphinx with Google-style docstrings to build our documentation. It'
 
 ### Setup
 
+We obviously require sphinx for this, but (Pandoc)[https://pandoc.org/] is a requirement for the conversion script - it changes the base project readme file (tweet_parser/README.md) to a sphinx-compatible Restructured Text file.
+
+on osx:
+
 ```.bash
+brew install pandoc
 pip install sphinx
-pip install sphinx_bootstrap_theme
 ```
 
 ### Build
+
+This will build the docs locally for testing and future deployment.
 
 ```.bash
 cd tweet_parser/docs
