@@ -41,9 +41,9 @@ def get_tweet_links(tweet):
             gnip_tweet_exp_urls = {x["expanded_url"]: x for x in tweet["gnip"]["urls"]}
         except KeyError:
             return tweet_urls
-        key_mappings = {"expanded_url": "url", 
+        key_mappings = {"expanded_url": "url",
                         "expanded_status": "status",
-                        "expanded_url_title": "title", 
+                        "expanded_url_title": "title",
                         "expanded_url_description": "description"}
         tweet_urls_expanded = []
         for url in tweet_urls:

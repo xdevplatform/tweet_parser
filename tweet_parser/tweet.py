@@ -219,24 +219,37 @@ class Tweet(dict):
     @lazy_property
     def text(self):
         """
-        literally the contents of 'text' or 'body'
+        The contents of "text" (original format) 
+        or "body" (activity streams format)
+
+        Returns:
+            str: value returned by calling tweet_text.get_text on 'self'
         """
         return tweet_text.get_text(self)
 
     @lazy_property
     def tweet_type(self):
         """
-        3 options: tweet, quote, and retweet
+        The type of Tweet this is (3 options: tweet, quote, and retweet
+
+        Returns:
+            str: ("tweet","quote" or "retweet" only)
+                 value returned by calling tweet_text.get_tweet_type on 'self'
         """
         return tweet_text.get_tweet_type(self)
 
     @lazy_property
     def user_entered_text(self):
         """
-        text that the actor actually entered
-        not the text of a quote-tweet or the text of a retweet
-        all of the text
-        (not truncated, includes @ mention relpies and long links)
+        The text that the posting user entered 
+         - tweet: untruncated (includes @-mention replies and long links)
+                  text of an original Tweet
+         - quote tweet: untruncated poster-added content in a quote-tweet
+         - retweet: empty string
+
+        Returns:
+            str: if tweet.tweet_type == "retweet", returns an empty string
+                 else, returns the value of tweet_text.get_full_text(self)
         """
         if self.tweet_type == "retweet":
             return ""
@@ -245,52 +258,73 @@ class Tweet(dict):
     @lazy_property
     def poll_options(self):
         """
-        text in the options of a poll, as a list
+        The text in the options of a poll as a list
+         - If there is no poll in the Tweet, return an empty list
+         - If activity-streams format, raise 'NotAvailableError'
+
+        Returns:
+            list (list of strings): value returned by calling
+                                    tweet_text.get_poll_options on 'self'
         """
         return tweet_text.get_poll_options(self)
 
     @lazy_property
     def quote_or_rt_text(self):
         """
-        the text of a quote tweet or a retweet
+        The quoted or retweeted text in a Tweet
+        (this is not the text entered by the posting user)
+         - tweet: empty string (there is no quoted or retweeted text)
+         - quote: only the text of the quoted Tweet
+         - retweet: the text of the retweet
+
+        Returns:
+            str: value returned by calling
+                 tweet_text.get_quote_or_rt_text on 'self'
         """
         return tweet_text.get_quote_or_rt_text(self)
 
     @lazy_property
     def all_text(self):
         """
-        all of the text of the tweet
-        Includes @ mentions, long links, quote-tweet contents
-        (separated by a newline), RT contents & poll options
+        All of the text of the tweet. This includes @ mentions, long links,
+        quote-tweet contents (separated by a newline), RT contents
+        & poll options
+
+        Returns:
+            str: value returned by calling tweet_text.get_all_text on 'self'
         """
         return tweet_text.get_all_text(self)
 
     @lazy_property
-    def user_entered_text_without_links(self):
-        """
-        same as user_entered_text, but links are removed
-        """
-        return tweet_text.remove_links(self.user_entered_text)
-
-    @lazy_property
-    def all_text_without_links(self):
-        """
-        same as all_text, but links are removed
-        """
-        return tweet_text.remove_links(self.all_text)
-
-    @lazy_property
     def geo_coordinates(self):
         """
-        return the geo coordinates, if they are included in the payload
-        else raise 'unavailable field' error
+        The user's geo coordinates, if they are included in the payload
+        (otherwise return None)
+
+        Returns:
+            dict: dictionary with the keys "latitude" and "longitude" or None
+            value returned by calling tweet_geo.get_geo_coordinates on 'self'
         """
         return tweet_geo.get_geo_coordinates(self)
 
     @lazy_property
     def profile_location(self):
         """
-        return location data from the profile location profile location enrichment
+        User's derived location data from the profile location enrichment
+        If unavailable, returns None.
+
+        Returns:
+            dict: {"country":     Two letter ISO-3166 country code
+                   "locality":    The locality location (~ city)
+                   "region":      The region location (~ state/province)
+                   "sub_region":  The sub-region location (~ county)
+                   "full_name":   The full name (excluding sub-region)
+                   "geo":         An array that includes a lat/long value
+                                  coordinate that corresponds to the lowest
+                                  granularity location for where the user that
+                                  created the Tweet is from
+                   }
+            value returned by calling tweet_geo.get_profile_location on 'self'
         """
         return tweet_geo.get_profile_location(self)
 

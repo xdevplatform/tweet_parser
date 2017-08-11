@@ -62,7 +62,9 @@ def get_profile_location(tweet):
                }
 
     Caveats:
-        This only returns the first element of the 'locations' list
+        This only returns the first element of the 'locations' list.
+        I'm honestly not sure what circumstances would result in a list that
+        is more than one element long.
     """
     if is_original_format(tweet):
         try:

@@ -5,7 +5,8 @@ import re
 
 def get_full_text(tweet):
     """
-    Get the full text of a tweet dict
+    Get the full text of a tweet dict.
+    Includes @-mention replies and long links.
 
     Args:
         tweet (Tweet or dict): A Tweet object or dictionary
@@ -113,7 +114,7 @@ def get_tweet_type(tweet):
     Caveats: When a quote-tweet (tweet A) is quote-tweeted (tweet B),
              the innermost quoted tweet (A) in the payload (for B)
              no longer has the key "quoted_status" or "twitter_quoted_status",
-             and that tweet (A) would be labeled as a "tweet" (not a "quote")
+             and that tweet (A) would be labeled as a "tweet" (not a "quote").
     """
     if is_original_format(tweet):
         if "retweeted_status" in tweet:
@@ -134,12 +135,33 @@ def get_tweet_type(tweet):
 
 def get_poll_options(tweet):
     """
-    Get the text in the options of a poll, as a list.
-    If there is no poll in the Tweet, return an empty list.
+    Get the text in the options of a poll as a list
+     - If there is no poll in the Tweet, return an empty list
+     - If the Tweet is in activity-streams format, raise 'NotAvailableError'
 
     Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
 
     Returns:
+        list: list of strings, or, in the case where there is no poll,
+              an empty list
+
+    Example:
+        >>> original = {
+                        "created_at": "Wed May 24 20:17:19 +0000 2017",
+                        "entities": {"polls": [{"options": [{"text":"a"},
+                                                            {"text":"b"},
+                                                            {"text":"c"}]
+                                        }]},
+                       }
+        >>> get_poll_options(original)
+        ["a", "b", "c"]
+
+        >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
+                        "body": "some tweet text"
+                       }
+        >>> get_poll_options(activity)
+        NotAvailableError: "Gnip activity-streams format does not return poll options"
     """
     if is_original_format(tweet):
         try:
@@ -152,14 +174,41 @@ def get_poll_options(tweet):
             return []
 
     else:
-        raise NotAvailableError("Gnip activity-streams format does not return poll options")
+        raise NotAvailableError("Gnip activity-streams format does not" +
+                                " return poll options")
 
 
 def get_quote_or_rt_text(tweet):
     """
-    Get the text of a quote tweet or a retweet
+    Get the quoted or retweeted text in a Tweet
+    (this is not the text entered by the posting user)
+     - tweet: empty string (there is no quoted or retweeted text)
+     - quote: only the text of the quoted Tweet
+     - retweet: the text of the retweet
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        str: text of the retweeted-tweet or the quoted-tweet
+             (empty string if this is an original Tweet)
+
+    Example:
+        >>> # a quote tweet
+        >>> quote = {"created_at": "Wed May 24 20:17:19 +0000 2017",
+                     "text": "adding my own commentary",
+                     "truncated": False,
+                     "quoted_status": {
+                            "created_at": "Mon May 01 05:00:05 +0000 2017",
+                            "truncated": False,
+                            "text": "an interesting Tweet"
+                           }
+                    }
+
+        >>> get_quote_or_rt_text(quote)
+        "an interesting Tweet"
     """
-    tweet_type = tweet.tweet_type
+    tweet_type = get_tweet_type(tweet)
     if tweet_type == "tweet":
         return ""
     if tweet_type == "quote":
@@ -197,7 +246,7 @@ def get_all_text(tweet):
 
 def remove_links(text):
     """
-    Remove the links from the input text
+    Helper function to remove the links from the input text
 
     Args:
         text (str): A string
@@ -212,6 +261,7 @@ def remove_links(text):
         "lorem ipsum dolor  "
     """
     tco_link_regex = re.compile("https?://t.co/[A-z0-9].*")
-    generic_link_regex = re.compile("\<http.+?\>", re.DOTALL)
-    new_text = re.sub(tco_link_regex, " ", text)
-    return re.sub(generic_link_regex, " ", new_text)
+    generic_link_regex = re.compile("(https?://)?(\w*[.]\w+)+([/?=&]+\w+)*")
+    remove_tco = re.sub(tco_link_regex, " ", text)
+    remove_generic = re.sub(generic_link_regex, " ", remove_tco)
+    return remove_generic
