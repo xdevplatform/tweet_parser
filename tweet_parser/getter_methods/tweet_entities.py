@@ -22,6 +22,8 @@ def get_user_mentions(tweet):
                 "name": "Fiona", #display name of @ mentioned user
                 "id": 2382763597 #id of @ mentioned user as an int
               }
+            Note that the fields here aren't enforced by the parser, they are
+            simply the fields as they appear in a Tweet data payload.
 
     Example:
         >>> original = {"created_at": "Wed May 24 20:17:19 +0000 2017",

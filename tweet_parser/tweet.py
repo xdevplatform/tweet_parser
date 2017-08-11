@@ -241,7 +241,7 @@ class Tweet(dict):
     @lazy_property
     def user_entered_text(self):
         """
-        The text that the posting user entered 
+        The text that the posting user entered
          - tweet: untruncated (includes @-mention replies and long links)
                   text of an original Tweet
          - quote tweet: untruncated poster-added content in a quote-tweet
@@ -374,13 +374,13 @@ class Tweet(dict):
     @lazy_property
     def user_mentions(self):
         """
-        The @-mentions in the Tweet as dictionaries.    
+        The @-mentions in the Tweet as dictionaries.
         Note that in the case of a quote-tweet, this does not return the users
-        mentioned in the quoted status. The recommended way to get that list 
+        mentioned in the quoted status. The recommended way to get that list
         would be to use 'tweet.quoted_tweet.user_mentions'.
-        Also note that in the caes of a quote-tweet, the list of @-mentioned 
+        Also note that in the caes of a quote-tweet, the list of @-mentioned
         users does not include the user who authored the original (quoted) Tweet,
-        you can get the author of the quoted tweet using 
+        you can get the author of the quoted tweet using
         'tweet.quoted_tweet.user_id'
 
         Returns:
