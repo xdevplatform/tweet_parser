@@ -219,7 +219,7 @@ class Tweet(dict):
     @lazy_property
     def text(self):
         """
-        The contents of "text" (original format) 
+        The contents of "text" (original format)
         or "body" (activity streams format)
 
         Returns:
@@ -374,7 +374,14 @@ class Tweet(dict):
     @lazy_property
     def user_mentions(self):
         """
-        The @-mentions in the Tweet as dictionaries.
+        The @-mentions in the Tweet as dictionaries.    
+        Note that in the case of a quote-tweet, this does not return the users
+        mentioned in the quoted status. The recommended way to get that list 
+        would be to use 'tweet.quoted_tweet.user_mentions'.
+        Also note that in the caes of a quote-tweet, the list of @-mentioned 
+        users does not include the user who authored the original (quoted) Tweet,
+        you can get the author of the quoted tweet using 
+        'tweet.quoted_tweet.user_id'
 
         Returns:
             list (list of dicts): 1 item per @ mention, each item has the fields:
@@ -390,25 +397,12 @@ class Tweet(dict):
         return tweet_entities.get_user_mentions(self)
 
     @lazy_property
-    def quoted_user(self):
-        """
-        quoted users don't get included in the @ mentions
-        which doesn't seem that intuitive, so I'm adding a getter to add them
-        """
-        return tweet_entities.get_quoted_user(self)
-
-    @lazy_property
-    def quoted_mentions(self):
-        """
-        users mentioned in the quoted Tweet don't get included
-        which doesn't seem that intuitive, so I'm adding a getter to add them
-        """
-        return tweet_entities.get_quoted_mentions(self)
-
-    @lazy_property
     def hashtags(self):
         """
         A list of hashtags in the Tweet
+        Note that in the case of a quote-tweet, this does not return the
+        hashtags in the quoted status. The recommended way to get that list
+        would be to use 'tweet.quoted_tweet.hashtags'
 
         Returns:
             list (a list of strings): list of all of the hashtags in the Tweet
@@ -417,37 +411,67 @@ class Tweet(dict):
         return tweet_entities.get_hashtags(self)
 
     @lazy_property
-    def quote_tweet(self):
+    def quoted_tweet(self):
         """
-        get the quote tweet and return a tweet obj of the quote tweet
+        The quoted Tweet as a Tweet object
+        If the Tweet is not a quote Tweet, return None
+        If the quoted Tweet payload cannot be loaded as a Tweet, this will
+        raise a "NotATweetError"
+
+        Returns:
+            Tweet: A Tweet representing the quoted status
+                   or None if there is no quoted status.
+            (see tweet_embeds.get_quote_tweet, this is that value as a Tweet)
         """
-        quote_tweet = tweet_embeds.get_quote_tweet(self)
+        quote_tweet = tweet_embeds.get_quoted_tweet(self)
         if quote_tweet is not None:
             try:
                 return Tweet(quote_tweet)
             except NotATweetError as nate:
-                raise(NotATweetError("The quote-tweet payload appears malformed. Failed with '{}'".format(nate)))
+                raise(NotATweetError("The quote-tweet payload appears malformed." +
+                                     " Failed with '{}'".format(nate)))
+        else:
+            return None
 
     @lazy_property
-    def retweet(self):
+    def retweeted_tweet(self):
         """
-        get the retweet and return a tweet obj of the retweet
+        The retweeted Tweet as a Tweet object
+        If the Tweet is not a Retweet, return None
+        If the Retweet payload cannot be loaded as a Tweet, this will
+        raise a "NotATweetError"
+
+        Returns:
+            Tweet: A Tweet representing the retweeted status
+                   or None if there is no retweeted status.
+            (see tweet_embeds.get_retweet, this is that value as a Tweet)
         """
         retweet = tweet_embeds.get_retweet(self)
         if retweet is not None:
             try:
                 return Tweet(retweet)
             except NotATweetError as nate:
-                raise(NotATweetError("The retweet payload appears malformed. Failed with '{}'".format(nate)))
+                raise(NotATweetError("The retweet payload appears malformed." +
+                                     " Failed with '{}'".format(nate)))
+        else:
+            return None
 
     @lazy_property
     def embedded_tweet(self):
         """
-        get the quote tweet or the retweet and return a tweet object of it
+        Get the retweeted Tweet OR the quoted Tweet and return it as a dictionary
+
+        Returns:
+            Tweet (or None, if the Tweet is neither a quote tweet or a Retweet):
+                a Tweet representing the quote Tweet or the Retweet
+            (see tweet_embeds.get_embedded_tweet, this is that value as a Tweet)
         """
         embedded_tweet = tweet_embeds.get_embedded_tweet(self)
         if embedded_tweet is not None:
             try:
                 return Tweet(embedded_tweet)
             except NotATweetError as nate:
-                raise(NotATweetError("The embedded tweet payload {} appears malformed. \nFailed with '{}'".format(embedded_tweet, nate)))
+                raise(NotATweetError("The embedded tweet payload {} appears malformed." +
+                                     " Failed with '{}'".format(embedded_tweet, nate)))
+        else:
+            return None
