@@ -58,6 +58,7 @@ Tweet format changes. This option is enabled with `--do_format_checking` on the
 command line, and by setting the keyword argument `do_format_checking` to
 `True` when initializing a `Tweet` object.
 
+
 ## Contributing
 
 Submit bug reports or feature requests through GitHub Issues, with
@@ -73,20 +74,20 @@ Test your new feature by reinstalling the library in your virtual environment
 and running the test script as shown below. Fix any issues until all tests
 pass. 
 
-```bash 
-(env) [tweet_parser]$ pip install -e .  
-(env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd - 
-``` 
+```
+(env) [tweet_parser]$ pip install -e .
+(env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd -
+```
 
 Furthermore, if contributing a new accessor or getter method for payload
 elements, verify the code works as you intended by running the
 `parse_tweets.py` script with your new field, as shown below. Check that both
 input types produce the intended output. 
 
-```bash
-(env) [tweet_parser]$ pip install -e . 
-(env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c <your new field> 
-``` 
+```
+(env) [tweet_parser]$ pip install -e .
+(env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c <your new field>
+```
 
 Change the version number. For most minor, non-breaking changes (fix a bug, add
 a getter, package naming/structure remains the same), simply update the last
