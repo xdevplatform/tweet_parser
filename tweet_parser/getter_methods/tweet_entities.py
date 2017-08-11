@@ -3,7 +3,20 @@ from tweet_parser.tweet_checking import is_original_format
 
 def get_user_mentions(tweet):
     """
-    get a list of @ mention dicts from the tweet
+    Get the @-mentions in the Tweet as dictionaries.
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        list (list of dicts): 1 item per @ mention, each item has the fields:
+             {
+                "indices": [14,26], #characters where the @ mention appears
+                "id_str": "2382763597", #id of @ mentioned user as a string
+                "screen_name": "notFromShrek", #screen_name of @ mentioned user
+                "name": "Fiona", #display name of @ mentioned user
+                "id": 2382763597 #id of @ mentioned user as an int
+              }
     """
     if is_original_format(tweet):
         entities = "entities"
@@ -14,6 +27,27 @@ def get_user_mentions(tweet):
     else:
         return []
 
+
+def get_hashtags(tweet):
+    """
+    Get a list of hashtags in the Tweet
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        list (a list of strings): list of all of the hashtags in the Tweet
+    """
+    if is_original_format(tweet):
+        entities = "entities"
+    else:
+        entities = "twitter_entities"
+    if tweet[entities]["hashtags"] is not None:
+        return [x["text"] for x in tweet[entities]["hashtags"]]
+    else:
+        return []
+
+# do hashtags in the quoted Tweet get included?
 
 def get_quoted_user(tweet):
     """
@@ -43,15 +77,3 @@ def get_quoted_mentions(tweet):
         return []
 
 
-def get_hashtags(tweet):
-    """
-    get a list of hashtags
-    """
-    if is_original_format(tweet):
-        entities = "entities"
-    else:
-        entities = "twitter_entities"
-    if tweet[entities]["user_mentions"] is not None:
-        return [x["text"] for x in tweet[entities]["hashtags"]]
-    else:
-        return []

@@ -4,10 +4,27 @@ from tweet_parser.tweet_checking import is_original_format
 def get_tweet_links(tweet):
     """
     Get the links that are included in the Tweet as "urls"
+    (if there are no links in the Tweet, this returns an empty list)
+    This includes links that are included in quoted or retweeted Tweets
+    Returns unrolled or expanded_url information if it is available
 
     Args:
+        tweet (Tweet): A Tweet object (must be a Tweet obj, not a dict)
 
     Returns:
+        list (list of dicts): A list of dictionaries containing information
+        about urls. Each dictionary entity can have these keys; without
+        unwound url or expanded url Twitter data enrichments many of these
+        fields will be missing.
+            {'display_url': the url that shows up in the tweet, possibly truncated,
+             'expanded_url': long (expanded) url,
+             'indices': [55, 78], # characters where the display link is
+             'unwound': {
+                'description': description from the linked webpage
+                'status': 200,
+                'title': title of the webpage,
+                'url': long (expanded) url},
+             'url': url the tweet directs to, often t.co}
     """
     if is_original_format(tweet):
         # get the urls from the Tweet
@@ -59,11 +76,18 @@ def get_tweet_links(tweet):
 def get_most_unrolled_urls(tweet):
     """
     For each url included in the Tweet "urls", get the most unrolled
-    version available.
+    version available. Only return 1 url string per url in tweet.tweet_links
+    In order of preference for "most unrolled":
+    Keys from the dict returned by get_tweet_links (tweet.tweet_links):
+        1. "unwound"/"url"
+        2. "expanded_url"
+        3. "url"
 
     Args:
+        tweet (Tweet): A Tweet object (cannot simply be a dict)
 
     Returns:
+        list (list of strings): a list of the most unrolled url available
     """
     unrolled_urls = []
     for url in tweet.tweet_links:

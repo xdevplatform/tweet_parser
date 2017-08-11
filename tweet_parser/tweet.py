@@ -331,39 +331,63 @@ class Tweet(dict):
     @lazy_property
     def tweet_links(self):
         """
-        if unrolled urls are availble, return unrolled urls
-        if unrolled urls are not availble, return whatever link is availble in entities
-        if there are no links, return an empty list
+        The links that are included in the Tweet as "urls"
+        (if there are no links, this is an empty list)
+        This includes links that are included in quoted or retweeted Tweets
+        Returns unrolled or expanded_url information if it is available
+
+        Returns:
+            list (list of dicts): A list of dictionaries containing information
+            about urls. Each dictionary entity can have these keys; without
+            unwound url or expanded url Twitter data enrichments many of these
+            fields will be missing.
+                {'display_url': the url that shows up in the tweet text
+                 'expanded_url': long (expanded) url,
+                 'indices': [55, 78], # characters where the display link is
+                 'unwound': {
+                    'description': description from the linked webpage
+                    'status': 200,
+                    'title': title of the webpage,
+                    'url': long (expanded) url},
+                 'url': url the tweet directs to, often t.co}
+            value returned by calling tweet_links.get_tweet_links on 'self'
         """
         return tweet_links.get_tweet_links(self)
 
     @lazy_property
     def most_unrolled_urls(self):
         """
-        return the most unrolled url present
+        For each url included in the Tweet "urls", get the most unrolled
+        version available. Only return 1 url string per url in tweet.tweet_links
+        In order of preference for "most unrolled":
+          Keys from the dict at tweet.tweet_links:
+            1. "unwound"/"url"
+            2. "expanded_url"
+            3. "url"
+
+        Returns:
+            list (a list of strings): list of urls
+            value returned by calling tweet_links.get_most_unrolled_urls on 'self'
         """
         return tweet_links.get_most_unrolled_urls(self)
 
     @lazy_property
     def user_mentions(self):
         """
-        get a list of @ mention dicts from the tweet
+        The @-mentions in the Tweet as dictionaries.
+
+        Returns:
+            list (list of dicts): 1 item per @ mention, each item has the fields:
+                 {
+                    "indices": [14,26], #characters where the @ mention appears
+                    "id_str": "2382763597", #id of @ mentioned user as a string
+                    "screen_name": "notFromShrek", #screen_name of @ mentioned user
+                    "name": "Fiona", #display name of @ mentioned user
+                    "id": 2382763597 #id of @ mentioned user as an int
+                  }
+            value returned by calling tweet_entities.get_user_mentions on 'self'
         """
         return tweet_entities.get_user_mentions(self)
-
-    @lazy_property
-    def user_mentions_ids(self):
-        """
-        get a list of @ mentions user ids from the tweet
-        """
-        return [x["id_str"] for x in self.user_mentions]
-
-    @lazy_property
-    def mentions_screen_names(self):
-        """
-        get a list of @ mentions screen names from the tweet
-        """
-        return [x["screen_name"] for x in self.user_mentions]
 
     @lazy_property
     def quoted_user(self):
@@ -384,7 +408,11 @@ class Tweet(dict):
     @lazy_property
     def hashtags(self):
         """
-        get a list of hashtags
+        A list of hashtags in the Tweet
+
+        Returns:
+            list (a list of strings): list of all of the hashtags in the Tweet
+            value returned by calling tweet_entities.get_hashtags on 'self'
         """
         return tweet_entities.get_hashtags(self)
 
