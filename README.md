@@ -54,8 +54,8 @@ compares the set of all Tweet field keys to a superset of all possible keys, as
 well as a minimum set of all required keys, to make sure that each newly loaded
 Tweet fits those parameters. This shouldn't be run every time you load Tweets
 (for one, it's slow), but is implemented to use as a periodic check against
-Tweet format changes. This option is enabled with `--do_format_checking` on the
-command line, and by setting the keyword argument `do_format_checking` to
+Tweet format changes. This option is enabled with `--do_format_validation` on the
+command line, and by setting the keyword argument `do_format_validation` to
 `True` when initializing a `Tweet` object.
 
 
