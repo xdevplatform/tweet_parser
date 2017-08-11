@@ -10,48 +10,48 @@ from tweet_parser.getter_methods import tweet_entities, tweet_embeds
 
 class Tweet(dict):
     """
-    tweet class
+    Tweet object created from a dictionary representing a Tweet paylaod
+
+    Args:
+        tweet_dict (dict): A dictionary representing a Tweet payload
+        do_format_checking (bool): If "True", compare the keys in this
+            dict to a supeset of expected keys and to a minimum set of
+            expected keys (as defined in tweet_parser.tweet_keys).
+            Will cause the parser to fail if unexpected keys are present
+            or if expected keys are missing.
+            Intended to allow run-time format testing, allowing the user
+            to surface unexpected format changes.
+
+    Returns:
+        Tweet: Class "Tweet", inherits from dict, provides properties to
+               get various data values from the Tweet.
+
+    Raises:
+        NotATweetError if the Tweet dict is malformed,
+        see tweet_checking.check_tweet for details
+
+    Example:
+    >>> # python dict representing a Tweet
+    >>> tweet_dict = {"id": 867474613139156993,
+                      "id_str": "867474613139156993",
+                      "created_at": "Wed May 24 20:17:19 +0000 2017",
+                      "text": "Some Tweet text",
+                      "user": {
+                          "screen_name": "RobotPrincessFi",
+                          "id_str": "815279070241955840"
+                          }
+                     }
+    >>> # create a Tweet object
+    >>> tweet = Tweet(tweet_dict)
+    >>> # use the Tweet obj to access data elements
+    >>> tweet.id
+    "867474613139156993"
+    >>> tweet.created_at_seconds
+    1495657039
     """
     def __init__(self, tweet_dict, do_format_validation=False):
         """
         Initialize a Tweet object from a dict representing a Tweet payload
-
-        Args:
-            tweet_dict (dict): A dictionary representing a Tweet payload
-            do_format_checking (bool): If "True", compare the keys in this
-                dict to a supeset of expected keys and to a minimum set of
-                expected keys (as defined in tweet_parser.tweet_keys).
-                Will cause the parser to fail if unexpected keys are present
-                or if expected keys are missing.
-                Intended to allow run-time format testing, allowing the user
-                to surface unexpected format changes.
-
-        Returns:
-            Tweet: Class "Tweet", inherits from dict, provides properties to
-                   get various data values from the Tweet.
-
-        Raises:
-            NotATweetError if the Tweet dict is malformed,
-            see tweet_checking.check_tweet for details
-
-        Example:
-        >>> # python dict representing a Tweet
-        >>> tweet_dict = {"id": 867474613139156993,
-                          "id_str": "867474613139156993",
-                          "created_at": "Wed May 24 20:17:19 +0000 2017",
-                          "text": "Some Tweet text",
-                          "user": {
-                              "screen_name": "RobotPrincessFi",
-                              "id_str": "815279070241955840"
-                              }
-                         }
-        >>> # create a Tweet object
-        >>> tweet = Tweet(tweet_dict)
-        >>> # use the Tweet obj to access data elements
-        >>> tweet.id
-        "867474613139156993"
-        >>> tweet.created_at_seconds
-        1495657039
         """
 
         # get the format of the Tweet data
