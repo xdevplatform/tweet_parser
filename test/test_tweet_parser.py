@@ -71,25 +71,25 @@ class TestTweetMethods(unittest.TestCase):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/original_format_missing_field.json", "r")
             tweet = json.load(f)
             f.close()
-            Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_validation=True)
         # missing a different required field, raises "UnexpectedFormatError"
         with self.assertRaises(UnexpectedFormatError):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/activity_streams_missing_field.json", "r")
             tweet = json.load(f)
             f.close()
-            Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_validation=True)
         # added a new field, raises "UnexpectedFormatError"
         with self.assertRaises(UnexpectedFormatError):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/activity_streams_additional_field.json", "r")
             tweet = json.load(f)
             f.close()
-            Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_validation=True)
         # added a new field, raises "UnexpectedFormatError"
         with self.assertRaises(UnexpectedFormatError):
             f = open("tweet_payload_examples/broken_and_unsupported_payloads/original_format_additional_field.json", "r")
             tweet = json.load(f)
             f.close()
-            Tweet(tweet, do_format_checking=True)
+            Tweet(tweet, do_format_validation=True)
         # note: these tests aren't going to cover some kinds of malformed payloads (i.e., "quote tweet" section is missing fields)
 
     def test_check_format(self):

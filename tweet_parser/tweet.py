@@ -12,7 +12,7 @@ class Tweet(dict):
     """
     tweet class
     """
-    def __init__(self, tweet_dict, do_format_checking=False):
+    def __init__(self, tweet_dict, do_format_validation=False):
         """
         Initialize a Tweet object from a dict representing a Tweet payload
 
@@ -53,7 +53,7 @@ class Tweet(dict):
         # get the format of the Tweet data
         # also, this throws an error if it's not a tweet
         self.original_format = tweet_checking.check_tweet(tweet_dict,
-                                                          do_format_checking)
+                                                          do_format_validation)
 
         # make sure that this obj has all of the keys that our dict had
         self.update(tweet_dict)
