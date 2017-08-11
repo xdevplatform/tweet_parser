@@ -30,6 +30,10 @@ class Tweet(dict):
             Tweet: Class "Tweet", inherits from dict, provides properties to
                    get various data values from the Tweet.
 
+        Raises:
+            NotATweetError if the Tweet dict is malformed,
+            see tweet_checking.check_tweet for details
+
         Example:
         >>> # python dict representing a Tweet
         >>> tweet_dict = {"id": 867474613139156993,
@@ -422,6 +426,9 @@ class Tweet(dict):
             Tweet: A Tweet representing the quoted status
                    or None if there is no quoted status.
             (see tweet_embeds.get_quote_tweet, this is that value as a Tweet)
+
+        Raises:
+            NotATweetError if quoted tweet is malformed
         """
         quote_tweet = tweet_embeds.get_quoted_tweet(self)
         if quote_tweet is not None:
@@ -445,6 +452,9 @@ class Tweet(dict):
             Tweet: A Tweet representing the retweeted status
                    or None if there is no retweeted status.
             (see tweet_embeds.get_retweet, this is that value as a Tweet)
+
+        Raises:
+            NotATweetError if retweeted tweet is malformed
         """
         retweet = tweet_embeds.get_retweet(self)
         if retweet is not None:
@@ -465,6 +475,9 @@ class Tweet(dict):
             Tweet (or None, if the Tweet is neither a quote tweet or a Retweet):
                 a Tweet representing the quote Tweet or the Retweet
             (see tweet_embeds.get_embedded_tweet, this is that value as a Tweet)
+
+        Raises:
+            NotATweetError if embedded tweet is malformed
         """
         embedded_tweet = tweet_embeds.get_embedded_tweet(self)
         if embedded_tweet is not None:

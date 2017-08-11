@@ -146,6 +146,9 @@ def get_poll_options(tweet):
         list: list of strings, or, in the case where there is no poll,
               an empty list
 
+    Raises:
+        NotAvailableError for activity-streams format
+
     Example:
         >>> original = {
                         "created_at": "Wed May 24 20:17:19 +0000 2017",
