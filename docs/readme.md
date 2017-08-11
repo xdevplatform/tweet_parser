@@ -10,6 +10,7 @@ on osx:
 ```.bash
 brew install pandoc
 pip install sphinx
+pip install recommonmark
 ```
 
 ### Build
