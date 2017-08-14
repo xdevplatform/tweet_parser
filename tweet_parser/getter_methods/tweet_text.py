@@ -16,6 +16,7 @@ def get_full_text(tweet):
         (finds extended text if available)
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_text import get_full_text
         >>> # getting the text of a Tweet that is not truncated
         >>> original_untruncated = {
         ...                 "created_at": "Wed May 24 20:17:19 +0000 2017",
@@ -23,13 +24,13 @@ def get_full_text(tweet):
         ...                 "text": "some tweet text"
         ...                }
         >>> get_full_text(original_untruncated)
-        "some tweet text"
+        'some tweet text'
 
         >>> activity_untruncated = {"postedTime": "2017-05-24T20:17:19.000Z",
         ...                         "body": "some tweet text"
         ...                        }
         >>> get_full_text(activity_untruncated)
-        "some tweet text"
+        'some tweet text'
 
         >>> # getting the text of a truncated Tweet (has over 140 chars)
         >>> original_truncated = {
@@ -41,7 +42,7 @@ def get_full_text(tweet):
         ...                   "some tweet text, lorem ipsum dolor sit amet"}
         ...               }
         >>> get_full_text(original_truncated)
-        "some tweet text, lorem ipsum dolor sit amet"
+        'some tweet text, lorem ipsum dolor sit amet'
 
         >>> activity_truncated = {
         ...               "postedTime": "2017-05-24T20:17:19.000Z",
@@ -51,7 +52,7 @@ def get_full_text(tweet):
         ...                   "some tweet text, lorem ipsum dolor sit amet"}
         ...              }
         >>> get_full_text(activity_truncated)
-        "some tweet text, lorem ipsum dolor sit amet"
+        'some tweet text, lorem ipsum dolor sit amet'
     """
     if is_original_format(tweet):
         if tweet["truncated"]:
@@ -78,16 +79,17 @@ def get_text(tweet):
         or "body" key (activity streams format)
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_text import get_text
         >>> original = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "text": "some tweet text"}
         >>> get_text(original)
-        "some tweet text"
+        'some tweet text'
 
         >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
         ...             "body": "some tweet text"}
         >>> get_text(activity)
-        "some tweet text"
+        'some tweet text'
     """
     if is_original_format(tweet):
         return tweet["text"]
@@ -148,6 +150,7 @@ def get_poll_options(tweet):
         NotAvailableError for activity-streams format
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_text import get_poll_options
         >>> original = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "entities": {"polls": [{"options": [{"text":"a"},
@@ -156,12 +159,14 @@ def get_poll_options(tweet):
         ...                             }]},
         ...            }
         >>> get_poll_options(original)
-        ["a", "b", "c"]
+        ['a', 'b', 'c']
 
         >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
         ...             "body": "some tweet text"}
         >>> get_poll_options(activity)
-        NotAvailableError: "Gnip activity-streams format does not return poll options"
+        Traceback (most recent call last):
+        ...
+        NotAvailableError: Gnip activity-streams format does not return poll options
     """
     if is_original_format(tweet):
         try:
@@ -194,6 +199,7 @@ def get_quote_or_rt_text(tweet):
         (empty string if this is an original Tweet)
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_text import get_quote_or_rt_text
         >>> # a quote tweet
         >>> quote = {"created_at": "Wed May 24 20:17:19 +0000 2017",
         ...          "text": "adding my own commentary",
@@ -206,7 +212,7 @@ def get_quote_or_rt_text(tweet):
         ...         }
 
         >>> get_quote_or_rt_text(quote)
-        "an interesting Tweet"
+        'an interesting Tweet'
     """
     tweet_type = get_tweet_type(tweet)
     if tweet_type == "tweet":
@@ -256,9 +262,10 @@ def remove_links(text):
         for a link removed and replaced with a space
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_text import remove_links
         >>> text = "lorem ipsum dolor https://twitter.com/RobotPrincessFi"
         >>> remove_links(text)
-        "lorem ipsum dolor  "
+        'lorem ipsum dolor  '
     """
     tco_link_regex = re.compile("https?://t.co/[A-z0-9].*")
     generic_link_regex = re.compile("(https?://)?(\w*[.]\w+)+([/?=&]+\w+)*")

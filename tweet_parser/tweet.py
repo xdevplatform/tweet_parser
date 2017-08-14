@@ -31,6 +31,7 @@ class Tweet(dict):
         see `tweet_checking.check_tweet` for details
 
     Example:
+        >>> from tweet_parser.tweet import Tweet
         >>> # python dict representing a Tweet
         >>> tweet_dict = {"id": 867474613139156993,
         ...               "id_str": "867474613139156993",
@@ -45,7 +46,7 @@ class Tweet(dict):
         >>> tweet = Tweet(tweet_dict)
         >>> # use the Tweet obj to access data elements
         >>> tweet.id
-        "867474613139156993"
+        '867474613139156993'
         >>> tweet.created_at_seconds
         1495657039
     """
@@ -71,6 +72,7 @@ class Tweet(dict):
             str: Twitter snowflake id, numeric only (no other text)
 
         Example:
+            >>> from tweet_parser.tweet import Tweet
             >>> original_format_dict = {
             ...     "created_at": "Wed May 24 20:17:19 +0000 2017",
             ...     "id": 867474613139156993,
@@ -79,7 +81,7 @@ class Tweet(dict):
             ...     "text": "some tweet text"
             ...     }
             >>> Tweet(original_format_dict).id
-            "867474613139156993"
+            '867474613139156993'
 
             >>> activity_streams_dict = {
             ...     "postedTime": "2017-05-24T20:17:19.000Z",
@@ -88,7 +90,7 @@ class Tweet(dict):
             ...     "body": "some tweet text"
             ...     }
             >>> Tweet(activity_streams_dict).id
-            "867474613139156993"
+            '867474613139156993'
         """
         if self.original_format:
             return self["id_str"]
@@ -320,15 +322,15 @@ class Tweet(dict):
             dict: value returned by calling tweet_geo.get_profile_location on `self`
 
         Example:
-            >>>  {"country": "US",         # Two letter ISO-3166 country code
-            ...   "locality": "Boulder",   # The locality location (~ city)
-            ...   "region": "Colorado",    # The region location (~ state/province)
-            ...   "sub_region": "Boulder", # The sub-region location (~ county)
-            ...   "full_name": "Boulder, Colorado, US" # The full name (excluding sub-region)
-            ...   "geo":  [40,-105]        # lat/long value that coordinate that corresponds to
-            ...                            # the lowest granularity location for where the user
-            ...                            # who created the Tweet is from
-            ...  }
+            >>> result = {"country": "US",         # Two letter ISO-3166 country code
+            ...           "locality": "Boulder",   # The locality location (~ city)
+            ...           "region": "Colorado",    # The region location (~ state/province)
+            ...           "sub_region": "Boulder", # The sub-region location (~ county)
+            ...           "full_name": "Boulder, Colorado, US", # The full name (excluding sub-region)
+            ...           "geo":  [40,-105]        # lat/long value that coordinate that corresponds to
+            ...                                     # the lowest granularity location for where the user
+            ...                                     # who created the Tweet is from
+            ... }
         """
         return tweet_geo.get_profile_location(self)
 
@@ -348,7 +350,8 @@ class Tweet(dict):
             (value returned by calling tweet_links.get_tweet_links on `self`)
 
         Example:
-            >>> [{
+            >>> result = [
+            ...   {
             ...   # url that shows up in the tweet text
             ...   'display_url': "https://twitter.com/RobotPrinc...",
             ...   # long (expanded) url
@@ -362,7 +365,7 @@ class Tweet(dict):
             ...      # title of the webpage
             ...      'title': "the Twitter profile of RobotPrincessFi",
             ...      # long (expanded) url}
-            ...      'url': "https://twitter.com/RobotPrincessFi",
+            ...      'url': "https://twitter.com/RobotPrincessFi"},
             ...   # the url that tweet directs to, often t.co
             ...   'url': "t.co/1234"}]
         """
@@ -402,7 +405,7 @@ class Tweet(dict):
             value returned by calling `tweet_entities.get_user_mentions` on `self`
 
         Example:
-            >>> {
+            >>> result = {
             ...   #characters where the @ mention appears
             ...   "indices": [14,26],
             ...   #id of @ mentioned user as a string

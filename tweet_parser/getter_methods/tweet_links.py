@@ -21,7 +21,8 @@ def get_tweet_links(tweet):
         http://support.gnip.com/enrichments/enhanced_urls.html
 
     Example:
-        >>> [{
+        >>> result = [
+        ...   {
         ...   # url that shows up in the tweet text
         ...   'display_url': "https://twitter.com/RobotPrinc...",
         ...   # long (expanded) url
@@ -35,7 +36,7 @@ def get_tweet_links(tweet):
         ...      # title of the webpage
         ...      'title': "the Twitter profile of RobotPrincessFi",
         ...      # long (expanded) url}
-        ...      'url': "https://twitter.com/RobotPrincessFi",
+        ...      'url': "https://twitter.com/RobotPrincessFi"},
         ...   # the url that tweet directs to, often t.co
         ...   'url': "t.co/1234"}]
     """
