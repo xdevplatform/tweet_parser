@@ -46,11 +46,11 @@ def get_tweet_links(tweet):
         except KeyError:
             tweet_urls = []
         # get the urls from the quote-tweet
-        if tweet.quote_tweet is not None:
-            tweet_urls += tweet.quote_tweet.tweet_links
+        if tweet.quoted_tweet is not None:
+            tweet_urls += tweet.quoted_tweet.tweet_links
         # get the urls from the retweet
-        if tweet.retweet is not None:
-            tweet_urls += tweet.retweet.tweet_links
+        if tweet.retweeted_tweet is not None:
+            tweet_urls += tweet.retweeted_tweet.tweet_links
         return tweet_urls
     else:
         # try to get normal urls
@@ -59,11 +59,11 @@ def get_tweet_links(tweet):
         except KeyError:
             tweet_urls = []
         # get the urls from the quote-tweet
-        if tweet.quote_tweet is not None:
-            tweet_urls += tweet.quote_tweet.tweet_links
+        if tweet.quoted_tweet is not None:
+            tweet_urls += tweet.quoted_tweet.tweet_links
         # get the urls from the retweet
-        if tweet.retweet is not None:
-            tweet_urls += tweet.retweet.tweet_links
+        if tweet.retweeted_tweet is not None:
+            tweet_urls += tweet.retweeted_tweet.tweet_links
         # otherwise, we're now going to combine the urls to try to
         # to get the same format as the og format urls, try to get enriched urls
         try:

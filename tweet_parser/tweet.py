@@ -472,7 +472,7 @@ class Tweet(dict):
         Raises:
             NotATweetError: if retweeted tweet is malformed
         """
-        retweet = tweet_embeds.get_retweet(self)
+        retweet = tweet_embeds.get_retweeted_tweet(self)
         if retweet is not None:
             try:
                 return Tweet(retweet)

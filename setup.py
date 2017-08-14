@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(name='tweet_parser',
       packages=find_packages(),
       scripts=["tools/parse_tweets.py"],
-      version='1.0.3',
+      version='1.0.4',
       license='MIT',
       author='Fiona Pigott',
       author_email='fpigott@twitter.com',
