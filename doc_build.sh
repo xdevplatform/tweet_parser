@@ -32,6 +32,6 @@ echo "--------------------------------------------------------"
 echo "docs built; please review these changes and then run the following:"
 echo "--------------------------------------------------------"
 echo git add -A
-echo git commit -m \"Generated gh-pages for `git log $BRANCH_NAME -1 --pretty=short --abbrev-commit`\"
+echo git commit -m \"Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit | grep commit`\"
 echo git push origin gh-pages
 echo git checkout $BRANCH_NAME
