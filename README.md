@@ -1,4 +1,4 @@
-# tweet_parser 
+# Tweet Parser 
 Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
 
 ## Goal: 
@@ -8,7 +8,7 @@ activity-streams and original formats.
 ## Status: 
 This package can be installed by cloning the repo and using `pip install -e .`,
 or by using `pip install tweet_parser`. First probably-bug-free release is
-1.0.3 (current as of 8/7/2017). No promises.
+1.0.3. Current release (As of 8/14/2017) is 1.0.4.
 
 Currently, this parser does not explicitly support Public API Twitter data.
 
