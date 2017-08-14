@@ -5,7 +5,53 @@ import re
 
 def get_full_text(tweet):
     """
-    get the full text of a tweet dict or of the sub-dict in a quote/RT
+    Get the full text of a tweet dict.
+    Includes @-mention replies and long links.
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        str: the untruncated text of a Tweet
+        (finds extended text if available)
+
+    Example:
+        >>> # getting the text of a Tweet that is not truncated
+        >>> original_untruncated = {
+        ...                 "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...                 "truncated": False,
+        ...                 "text": "some tweet text"
+        ...                }
+        >>> get_full_text(original_untruncated)
+        "some tweet text"
+
+        >>> activity_untruncated = {"postedTime": "2017-05-24T20:17:19.000Z",
+        ...                         "body": "some tweet text"
+        ...                        }
+        >>> get_full_text(activity_untruncated)
+        "some tweet text"
+
+        >>> # getting the text of a truncated Tweet (has over 140 chars)
+        >>> original_truncated = {
+        ...               "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...               "text": "some tweet text, lorem ip...",
+        ...               "truncated": True,
+        ...               "extended_tweet":
+        ...                 {"full_text":
+        ...                   "some tweet text, lorem ipsum dolor sit amet"}
+        ...               }
+        >>> get_full_text(original_truncated)
+        "some tweet text, lorem ipsum dolor sit amet"
+
+        >>> activity_truncated = {
+        ...               "postedTime": "2017-05-24T20:17:19.000Z",
+        ...               "body": "some tweet text, lorem ip...",
+        ...               "long_object":
+        ...                 {"body":
+        ...                   "some tweet text, lorem ipsum dolor sit amet"}
+        ...              }
+        >>> get_full_text(activity_truncated)
+        "some tweet text, lorem ipsum dolor sit amet"
     """
     if is_original_format(tweet):
         if tweet["truncated"]:
@@ -21,7 +67,27 @@ def get_full_text(tweet):
 
 def get_text(tweet):
     """
-    literally the contents of 'text' or 'body'
+    Get the contents of "text" (original format)
+    or "body" (activity streams format)
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        str: the contents of "text" key (original format)
+        or "body" key (activity streams format)
+
+    Example:
+        >>> original = {
+        ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...             "text": "some tweet text"}
+        >>> get_text(original)
+        "some tweet text"
+
+        >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
+        ...             "body": "some tweet text"}
+        >>> get_text(activity)
+        "some tweet text"
     """
     if is_original_format(tweet):
         return tweet["text"]
@@ -31,7 +97,22 @@ def get_text(tweet):
 
 def get_tweet_type(tweet):
     """
-    3 options: tweet, quote, and retweet
+    Get the type of Tweet this is (3 options: tweet, quote, and retweet)
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        str: (one of 3 strings)
+        "tweet": an original Tweet
+        "retweet": a native retweet (created with the retweet button)
+        "quote": a native quote tweet (etweet button + adding quote text)
+
+    Caveats:
+        When a quote-tweet (tweet A) is quote-tweeted (tweet B),
+        the innermost quoted tweet (A) in the payload (for B)
+        no longer has the key "quoted_status" or "twitter_quoted_status",
+        and that tweet (A) would be labeled as a "tweet" (not a "quote").
     """
     if is_original_format(tweet):
         if "retweeted_status" in tweet:
@@ -52,7 +133,35 @@ def get_tweet_type(tweet):
 
 def get_poll_options(tweet):
     """
-    text in the options of a poll, as a list
+    Get the text in the options of a poll as a list
+    - If there is no poll in the Tweet, return an empty list
+    - If the Tweet is in activity-streams format, raise 'NotAvailableError'
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        list: list of strings, or, in the case where there is no poll,
+        an empty list
+
+    Raises:
+        NotAvailableError for activity-streams format
+
+    Example:
+        >>> original = {
+        ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...             "entities": {"polls": [{"options": [{"text":"a"},
+        ...                                                 {"text":"b"},
+        ...                                                 {"text":"c"}]
+        ...                             }]},
+        ...            }
+        >>> get_poll_options(original)
+        ["a", "b", "c"]
+
+        >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
+        ...             "body": "some tweet text"}
+        >>> get_poll_options(activity)
+        NotAvailableError: "Gnip activity-streams format does not return poll options"
     """
     if is_original_format(tweet):
         try:
@@ -65,14 +174,41 @@ def get_poll_options(tweet):
             return []
 
     else:
-        raise NotAvailableError("Gnip activity-streams format does not return poll options")
+        raise NotAvailableError("Gnip activity-streams format does not" +
+                                " return poll options")
 
 
 def get_quote_or_rt_text(tweet):
     """
-    the text of a quote tweet or a retweet
+    Get the quoted or retweeted text in a Tweet
+    (this is not the text entered by the posting user)
+    - tweet: empty string (there is no quoted or retweeted text)
+    - quote: only the text of the quoted Tweet
+    - retweet: the text of the retweet
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        str: text of the retweeted-tweet or the quoted-tweet
+        (empty string if this is an original Tweet)
+
+    Example:
+        >>> # a quote tweet
+        >>> quote = {"created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...          "text": "adding my own commentary",
+        ...          "truncated": False,
+        ...          "quoted_status": {
+        ...                 "created_at": "Mon May 01 05:00:05 +0000 2017",
+        ...                 "truncated": False,
+        ...                 "text": "an interesting Tweet"
+        ...                }
+        ...         }
+
+        >>> get_quote_or_rt_text(quote)
+        "an interesting Tweet"
     """
-    tweet_type = tweet.tweet_type
+    tweet_type = get_tweet_type(tweet)
     if tweet_type == "tweet":
         return ""
     if tweet_type == "quote":
@@ -89,22 +225,43 @@ def get_quote_or_rt_text(tweet):
 
 def get_all_text(tweet):
     """
-    all of the text of the tweet
-    Includes @ mentions, long links,
-    quote-tweet contents (separated by a newline) & RT contents
-    & poll options
+    Get all of the text of the tweet. This includes @ mentions, long links,
+    quote-tweet contents (separated by a newline), RT contents & poll options
+
+    Args:
+        tweet (Tweet): A Tweet object (must be a Tweet object)
+
+    Returns:
+        str: text from tweet.user_entered_text, tweet.quote_or_rt_text and
+        tweet.poll_options (if in original format), separated by newlines
     """
     if is_original_format(tweet):
-        return "\n".join(filter(None, [tweet.user_entered_text, tweet.quote_or_rt_text, "\n".join(tweet.poll_options)]))
+        return "\n".join(filter(None, [tweet.user_entered_text,
+                                       tweet.quote_or_rt_text,
+                                       "\n".join(tweet.poll_options)]))
     else:
-        return "\n".join(filter(None, [tweet.user_entered_text, tweet.quote_or_rt_text]))
+        return "\n".join(filter(None, [tweet.user_entered_text,
+                                       tweet.quote_or_rt_text]))
 
 
 def remove_links(text):
     """
-    take some text, remove the links
+    Helper function to remove the links from the input text
+
+    Args:
+        text (str): A string
+
+    Returns:
+        str: the same text, but with any substring that matches the regex
+        for a link removed and replaced with a space
+
+    Example:
+        >>> text = "lorem ipsum dolor https://twitter.com/RobotPrincessFi"
+        >>> remove_links(text)
+        "lorem ipsum dolor  "
     """
     tco_link_regex = re.compile("https?://t.co/[A-z0-9].*")
-    generic_link_regex = re.compile("\<http.+?\>", re.DOTALL)
-    new_text = re.sub(tco_link_regex, " ", text)
-    return re.sub(generic_link_regex, " ", new_text)
+    generic_link_regex = re.compile("(https?://)?(\w*[.]\w+)+([/?=&]+\w+)*")
+    remove_tco = re.sub(tco_link_regex, " ", text)
+    remove_generic = re.sub(generic_link_regex, " ", remove_tco)
+    return remove_generic
