@@ -39,27 +39,19 @@ def get_profile_location(tweet):
         tweet (Tweet or dict): Tweet object or dictionary
 
     Returns:
-        dict: {"country":     Two letter ISO-3166 country code
-                              that corresponds to the country location
-                              where the user that created the Tweet is from
+        dict: more information on the profile locations enrichment here:
+        http://support.gnip.com/enrichments/profile_geo.html
 
-               "locality":    The locality location (generally city) for
-                              where the user that created the Tweet is from
-
-               "region":      The region location (generally state/province)
-                              where the user that created the Tweet is from
-
-               "sub_region":  The sub-region location (generally county) for
-                              where the user that created the Tweet is from
-
-               "full_name":   The full name (excluding sub-region) for
-                              where the user that created the Tweet is from
-
-               "geo":         An array that includes a lat/long value for a
-                              coordinate that corresponds to the lowest
-                              granularity location for where the user that
-                              created the Tweet is from
-               }
+    Example:
+        >>>  {"country": "US",         # Two letter ISO-3166 country code
+        ...   "locality": "Boulder",   # The locality location (~ city)
+        ...   "region": "Colorado",    # The region location (~ state/province)
+        ...   "sub_region": "Boulder", # The sub-region location (~ county)
+        ...   "full_name": "Boulder, Colorado, US" # The full name (excluding sub-region)
+        ...   "geo":  [40,-105]        # lat/long value that coordinate that corresponds to
+        ...                            # the lowest granularity location for where the user
+        ...                            # who created the Tweet is from
+        ...  }
 
     Caveats:
         This only returns the first element of the 'locations' list.

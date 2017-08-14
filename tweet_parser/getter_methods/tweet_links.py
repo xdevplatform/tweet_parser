@@ -15,16 +15,29 @@ def get_tweet_links(tweet):
         list (list of dicts): A list of dictionaries containing information
         about urls. Each dictionary entity can have these keys; without
         unwound url or expanded url Twitter data enrichments many of these
-        fields will be missing.
-            {'display_url': the url that shows up in the tweet, possibly truncated,
-             'expanded_url': long (expanded) url,
-             'indices': [55, 78], # characters where the display link is
-             'unwound': {
-                'description': description from the linked webpage
-                'status': 200,
-                'title': title of the webpage,
-                'url': long (expanded) url},
-             'url': url the tweet directs to, often t.co}
+        fields will be missing. \n
+        More information about the Twitter url enrichments at:
+        http://support.gnip.com/enrichments/expanded_urls.html and
+        http://support.gnip.com/enrichments/enhanced_urls.html
+
+    Example:
+        >>> [{
+        ...   # url that shows up in the tweet text
+        ...   'display_url': "https://twitter.com/RobotPrinc...",
+        ...   # long (expanded) url
+        ...   'expanded_url': "https://twitter.com/RobotPrincessFi",
+        ...   # characters where the display link is
+        ...   'indices': [55, 88],
+        ...   'unwound': {
+        ...      # description from the linked webpage
+        ...      'description': "the Twitter profile of RobotPrincessFi",
+        ...      'status': 200,
+        ...      # title of the webpage
+        ...      'title': "the Twitter profile of RobotPrincessFi",
+        ...      # long (expanded) url}
+        ...      'url': "https://twitter.com/RobotPrincessFi",
+        ...   # the url that tweet directs to, often t.co
+        ...   'url': "t.co/1234"}]
     """
     if is_original_format(tweet):
         # get the urls from the Tweet
@@ -77,11 +90,11 @@ def get_most_unrolled_urls(tweet):
     """
     For each url included in the Tweet "urls", get the most unrolled
     version available. Only return 1 url string per url in tweet.tweet_links
-    In order of preference for "most unrolled":
-    Keys from the dict returned by get_tweet_links (tweet.tweet_links):
-        1. "unwound"/"url"
-        2. "expanded_url"
-        3. "url"
+    In order of preference for "most unrolled"
+    (keys from the dict at tweet.tweet_links): \n
+    1. `unwound`/`url` \n
+    2. `expanded_url` \n
+    3. `url`
 
     Args:
         tweet (Tweet): A Tweet object (cannot simply be a dict)

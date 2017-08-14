@@ -105,7 +105,15 @@ html_static_path = []
 
 html_theme = 'alabaster'
 # html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
-
+html_sidebars = {
+            '**': [
+                    'about.html',
+                    'navigation.html',
+                    'relations.html',
+                    'searchbox.html',
+#                    'donate.html',
+                  ]
+            }
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
@@ -121,7 +129,7 @@ latex_elements = {
 
     # The font size ('10pt', '11pt' or '12pt').
     #
-    # 'pointsize': '10pt',
+    # 'pointsize': '11pt',
 
     # Additional stuff for the LaTeX preamble.
     #

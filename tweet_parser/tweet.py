@@ -14,40 +14,40 @@ class Tweet(dict):
 
     Args:
         tweet_dict (dict): A dictionary representing a Tweet payload
-        do_format_checking (bool): If "True", compare the keys in this
-            dict to a supeset of expected keys and to a minimum set of
-            expected keys (as defined in tweet_parser.tweet_keys).
-            Will cause the parser to fail if unexpected keys are present
-            or if expected keys are missing.
-            Intended to allow run-time format testing, allowing the user
-            to surface unexpected format changes.
+        do_format_checking (bool): If "True", compare the keys in this \
+        dict to a supeset of expected keys and to a minimum set of expected \
+        keys (as defined in tweet_parser.tweet_keys). \
+        Will cause the parser to fail if unexpected keys are present \
+        or if expected keys are missing. \
+        Intended to allow run-time format testing, allowing the user \
+        to surface unexpected format changes.
 
     Returns:
         Tweet: Class "Tweet", inherits from dict, provides properties to
-               get various data values from the Tweet.
+        get various data values from the Tweet.
 
     Raises:
-        NotATweetError if the Tweet dict is malformed,
-        see tweet_checking.check_tweet for details
+        NotATweetError: the Tweet dict is malformed, \
+        see `tweet_checking.check_tweet` for details
 
     Example:
-    >>> # python dict representing a Tweet
-    >>> tweet_dict = {"id": 867474613139156993,
-                      "id_str": "867474613139156993",
-                      "created_at": "Wed May 24 20:17:19 +0000 2017",
-                      "text": "Some Tweet text",
-                      "user": {
-                          "screen_name": "RobotPrincessFi",
-                          "id_str": "815279070241955840"
-                          }
-                     }
-    >>> # create a Tweet object
-    >>> tweet = Tweet(tweet_dict)
-    >>> # use the Tweet obj to access data elements
-    >>> tweet.id
-    "867474613139156993"
-    >>> tweet.created_at_seconds
-    1495657039
+        >>> # python dict representing a Tweet
+        >>> tweet_dict = {"id": 867474613139156993,
+        ...               "id_str": "867474613139156993",
+        ...               "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...               "text": "Some Tweet text",
+        ...               "user": {
+        ...                   "screen_name": "RobotPrincessFi",
+        ...                   "id_str": "815279070241955840"
+        ...                   }
+        ...              }
+        >>> # create a Tweet object
+        >>> tweet = Tweet(tweet_dict)
+        >>> # use the Tweet obj to access data elements
+        >>> tweet.id
+        "867474613139156993"
+        >>> tweet.created_at_seconds
+        1495657039
     """
     def __init__(self, tweet_dict, do_format_validation=False):
         """
@@ -71,25 +71,24 @@ class Tweet(dict):
             str: Twitter snowflake id, numeric only (no other text)
 
         Example:
-        >>> original_format_dict = {
-                "created_at": "Wed May 24 20:17:19 +0000 2017",
-                "id": 867474613139156993,
-                "id_str": "867474613139156993",
-                "user": {"user_keys":"user_data"},
-                "text": "some tweet text"
-                }
-        >>> Tweet(original_format_dict).id
-        "867474613139156993"
+            >>> original_format_dict = {
+            ...     "created_at": "Wed May 24 20:17:19 +0000 2017",
+            ...     "id": 867474613139156993,
+            ...     "id_str": "867474613139156993",
+            ...     "user": {"user_keys":"user_data"},
+            ...     "text": "some tweet text"
+            ...     }
+            >>> Tweet(original_format_dict).id
+            "867474613139156993"
 
-        >>> activity_streams_dict = {
-                "postedTime": "2017-05-24T20:17:19.000Z",
-                "id": "tag:search.twitter.com,2005:867474613139156993",
-                "actor": {"user_keys":"user_data"},
-                "body": "some tweet text"
-                }
-        >>> Tweet(activity_streams_dict).id
-        "867474613139156993"
-
+            >>> activity_streams_dict = {
+            ...     "postedTime": "2017-05-24T20:17:19.000Z",
+            ...     "id": "tag:search.twitter.com,2005:867474613139156993",
+            ...     "actor": {"user_keys":"user_data"},
+            ...     "body": "some tweet text"
+            ...     }
+            >>> Tweet(activity_streams_dict).id
+            "867474613139156993"
         """
         if self.original_format:
             return self["id_str"]
@@ -103,8 +102,8 @@ class Tweet(dict):
 
         Returns:
             int: seconds since the unix epoch
-                 (determined by converting Tweet.id
-                 into a timestamp using tweet_date.snowflake2utc)
+            (determined by converting Tweet.id
+            into a timestamp using `tweet_date.snowflake2utc`)
         """
         return tweet_date.snowflake2utc(self.id)
 
@@ -114,20 +113,20 @@ class Tweet(dict):
         Time that a Tweet was posted as a Python datetime object
 
         Returns:
-            datetime.datetime: the value of tweet.created_at_seconds
-                               converted into a datetime object
+            datetime.datetime: the value of `tweet.created_at_seconds`
+            converted into a datetime object
         """
         return datetime.datetime.utcfromtimestamp(self.created_at_seconds)
 
     @lazy_property
     def created_at_string(self):
         """
-        Time that a Tweet was posted as a string with the format:
-        'YYYY-MM-ddTHH:MM:SS.000Z'
+        Time that a Tweet was posted as a string with the format
+        YYYY-MM-ddTHH:MM:SS.000Z
 
         Returns:
-            str: the value of tweet.created_at_seconds
-                 converted into a string ('YYYY-MM-ddTHH:MM:SS.000Z')
+            str: the value of `tweet.created_at_seconds`
+            converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)
         """
         return self.created_at_datetime.strftime("%Y-%M-%dT%H:%M:%S.000Z")
 
@@ -137,7 +136,7 @@ class Tweet(dict):
         The Twitter ID of the user who posted the Tweet
 
         Returns:
-            str: value returned by calling tweet_user.get_user_id on 'self'
+            str: value returned by calling `tweet_user.get_user_id` on `self`
         """
         return tweet_user.get_user_id(self)
 
@@ -147,7 +146,7 @@ class Tweet(dict):
         The screen name (@ handle) of the user who posted the Tweet
 
         Returns:
-            str: value returned by calling tweet_user.get_screen_name on 'self'
+            str: value returned by calling `tweet_user.get_screen_name` on `self`
         """
         return tweet_user.get_screen_name(self)
 
@@ -157,7 +156,7 @@ class Tweet(dict):
         The display name of the user who posted the Tweet
 
         Returns:
-            str: value returned by calling tweet_user.get_name on 'self'
+            str: value returned by calling `tweet_user.get_name` on `self`
         """
         return tweet_user.get_name(self)
 
@@ -167,30 +166,30 @@ class Tweet(dict):
         The Klout score (int) (if it exists) of the user who posted the Tweet
 
         Returns:
-            int: value returned by calling tweet_user.get_klout_score on 'self'
-                 (if no Klout is present, this returns a None)
+            int: value returned by calling `tweet_user.get_klout_score` on `self`
+            (if no Klout is present, this returns a None)
         """
         return tweet_user.get_klout_score(self)
 
     @lazy_property
     def klout_profile(self):
         """
-        The Klout profile URL of the user (str) (if it exists)
+        The Klout profile URL of the user (`str`) (if it exists)
 
         Returns:
-            str: value returned by calling tweet_user.get_klout_profile on 'self'
-                 (if no Klout is present, this returns a None)
+            str: value returned by calling `tweet_user.get_klout_profile` on `self`
+            (if no Klout is present, this returns a `None`)
         """
         return tweet_user.get_klout_profile(self)
 
     @lazy_property
     def klout_id(self):
         """
-        The Klout ID of the user (str) (if it exists)
+        The Klout ID of the user (`str`) (if it exists)
 
         Returns:
-            str: value returned by calling tweet_user.get_klout_id on 'self'
-                 (if no Klout is present, this returns a None)
+            str: value returned by calling `tweet_user.get_klout_id` on `self`
+            (if no Klout is present, this returns a `None`)
         """
         return tweet_user.get_klout_id(self)
 
@@ -198,12 +197,12 @@ class Tweet(dict):
     def klout_influence_topics(self):
         """
         Get the user's Klout influence topics (a list of dicts), if it exists.
-        Topic dicts will have these keys: url, id, name, score
+        Topic dicts will have these keys: `url`, `id`, `name`, `score`
 
         Returns:
             list: value returned by calling
-                  tweet_user.get_klout_topics(self, topic_type = 'influence')
-                  (if no Klout is present, this returns a None)
+            `tweet_user.get_klout_topics(self, topic_type = 'influence')`
+            (if no Klout is present, this returns a `None`)
         """
         return tweet_user.get_klout_topics(self, topic_type='influence')
 
@@ -211,12 +210,12 @@ class Tweet(dict):
     def klout_interest_topics(self):
         """
         Get the user's Klout interest topics (a list of dicts), if it exists.
-        Topic dicts will have these keys: url, id, name, score
+        Topic dicts will have these keys: `url`, `id`, `name`, `score`
 
         Returns:
             list: value returned by calling
-                  tweet_user.get_klout_topics(self, topic_type = 'interest')
-                  (if no Klout is present, this returns a None)
+            `tweet_user.get_klout_topics(self, topic_type = 'interest')`
+            (if no Klout is present, this returns a `None`)
         """
         return tweet_user.get_klout_topics(self, topic_type='interest')
 
@@ -227,33 +226,33 @@ class Tweet(dict):
         or "body" (activity streams format)
 
         Returns:
-            str: value returned by calling tweet_text.get_text on 'self'
+            str: value returned by calling `tweet_text.get_text` on `self`
         """
         return tweet_text.get_text(self)
 
     @lazy_property
     def tweet_type(self):
         """
-        The type of Tweet this is (3 options: tweet, quote, and retweet
+        The type of Tweet this is (3 options: tweet, quote, and retweet)
 
         Returns:
             str: ("tweet","quote" or "retweet" only)
-                 value returned by calling tweet_text.get_tweet_type on 'self'
+            value returned by calling `tweet_text.get_tweet_type` on `self`
         """
         return tweet_text.get_tweet_type(self)
 
     @lazy_property
     def user_entered_text(self):
         """
-        The text that the posting user entered
-         - tweet: untruncated (includes @-mention replies and long links)
-                  text of an original Tweet
-         - quote tweet: untruncated poster-added content in a quote-tweet
-         - retweet: empty string
+        The text that the posting user entered \n
+        *tweet*: untruncated (includes @-mention replies and long links)
+        text of an original Tweet \n
+        *quote tweet*: untruncated poster-added content in a quote-tweet \n
+        *retweet*: empty string
 
         Returns:
-            str: if tweet.tweet_type == "retweet", returns an empty string
-                 else, returns the value of tweet_text.get_full_text(self)
+            str: if `tweet.tweet_type == "retweet"`, returns an empty string
+            else, returns the value of `tweet_text.get_full_text(self)`
         """
         if self.tweet_type == "retweet":
             return ""
@@ -262,13 +261,13 @@ class Tweet(dict):
     @lazy_property
     def poll_options(self):
         """
-        The text in the options of a poll as a list
-         - If there is no poll in the Tweet, return an empty list
-         - If activity-streams format, raise 'NotAvailableError'
+        The text in the options of a poll as a list. \
+        If there is no poll in the Tweet, return an empty list. \
+        If activity-streams format, raise `NotAvailableError`
 
         Returns:
             list (list of strings): value returned by calling
-                                    tweet_text.get_poll_options on 'self'
+            `tweet_text.get_poll_options` on `self`
         """
         return tweet_text.get_poll_options(self)
 
@@ -276,14 +275,14 @@ class Tweet(dict):
     def quote_or_rt_text(self):
         """
         The quoted or retweeted text in a Tweet
-        (this is not the text entered by the posting user)
-         - tweet: empty string (there is no quoted or retweeted text)
-         - quote: only the text of the quoted Tweet
-         - retweet: the text of the retweet
+        (this is not the text entered by the posting user) \n
+        - tweet: empty string (there is no quoted or retweeted text) \n
+        - quote: only the text of the quoted Tweet \n
+        - retweet: the text of the retweet
 
         Returns:
             str: value returned by calling
-                 tweet_text.get_quote_or_rt_text on 'self'
+            tweet_text.get_quote_or_rt_text on `self`
         """
         return tweet_text.get_quote_or_rt_text(self)
 
@@ -295,7 +294,7 @@ class Tweet(dict):
         & poll options
 
         Returns:
-            str: value returned by calling tweet_text.get_all_text on 'self'
+            str: value returned by calling `tweet_text.get_all_text` on `self`
         """
         return tweet_text.get_all_text(self)
 
@@ -303,11 +302,11 @@ class Tweet(dict):
     def geo_coordinates(self):
         """
         The user's geo coordinates, if they are included in the payload
-        (otherwise return None)
+        (otherwise return `None`).
+        Dictionary with the keys "latitude" and "longitude" or `None`
 
         Returns:
-            dict: dictionary with the keys "latitude" and "longitude" or None
-            value returned by calling tweet_geo.get_geo_coordinates on 'self'
+            dict: value returned by calling `tweet_geo.get_geo_coordinates` on `self`
         """
         return tweet_geo.get_geo_coordinates(self)
 
@@ -315,20 +314,21 @@ class Tweet(dict):
     def profile_location(self):
         """
         User's derived location data from the profile location enrichment
-        If unavailable, returns None.
+        If unavailable, returns `None`.
 
         Returns:
-            dict: {"country":     Two letter ISO-3166 country code
-                   "locality":    The locality location (~ city)
-                   "region":      The region location (~ state/province)
-                   "sub_region":  The sub-region location (~ county)
-                   "full_name":   The full name (excluding sub-region)
-                   "geo":         An array that includes a lat/long value
-                                  coordinate that corresponds to the lowest
-                                  granularity location for where the user that
-                                  created the Tweet is from
-                   }
-            value returned by calling tweet_geo.get_profile_location on 'self'
+            dict: value returned by calling tweet_geo.get_profile_location on `self`
+
+        Example:
+            >>>  {"country": "US",         # Two letter ISO-3166 country code
+            ...   "locality": "Boulder",   # The locality location (~ city)
+            ...   "region": "Colorado",    # The region location (~ state/province)
+            ...   "sub_region": "Boulder", # The sub-region location (~ county)
+            ...   "full_name": "Boulder, Colorado, US" # The full name (excluding sub-region)
+            ...   "geo":  [40,-105]        # lat/long value that coordinate that corresponds to
+            ...                            # the lowest granularity location for where the user
+            ...                            # who created the Tweet is from
+            ...  }
         """
         return tweet_geo.get_profile_location(self)
 
@@ -345,16 +345,26 @@ class Tweet(dict):
             about urls. Each dictionary entity can have these keys; without
             unwound url or expanded url Twitter data enrichments many of these
             fields will be missing.
-                {'display_url': the url that shows up in the tweet text
-                 'expanded_url': long (expanded) url,
-                 'indices': [55, 78], # characters where the display link is
-                 'unwound': {
-                    'description': description from the linked webpage
-                    'status': 200,
-                    'title': title of the webpage,
-                    'url': long (expanded) url},
-                 'url': url the tweet directs to, often t.co}
-            value returned by calling tweet_links.get_tweet_links on 'self'
+            (value returned by calling tweet_links.get_tweet_links on `self`)
+
+        Example:
+            >>> [{
+            ...   # url that shows up in the tweet text
+            ...   'display_url': "https://twitter.com/RobotPrinc...",
+            ...   # long (expanded) url
+            ...   'expanded_url': "https://twitter.com/RobotPrincessFi",
+            ...   # characters where the display link is
+            ...   'indices': [55, 88],
+            ...   'unwound': {
+            ...      # description from the linked webpage
+            ...      'description': "the Twitter profile of RobotPrincessFi",
+            ...      'status': 200,
+            ...      # title of the webpage
+            ...      'title': "the Twitter profile of RobotPrincessFi",
+            ...      # long (expanded) url}
+            ...      'url': "https://twitter.com/RobotPrincessFi",
+            ...   # the url that tweet directs to, often t.co
+            ...   'url': "t.co/1234"}]
         """
         return tweet_links.get_tweet_links(self)
 
@@ -363,15 +373,15 @@ class Tweet(dict):
         """
         For each url included in the Tweet "urls", get the most unrolled
         version available. Only return 1 url string per url in tweet.tweet_links
-        In order of preference for "most unrolled":
-          Keys from the dict at tweet.tweet_links:
-            1. "unwound"/"url"
-            2. "expanded_url"
-            3. "url"
+        In order of preference for "most unrolled"
+        (keys from the dict at tweet.tweet_links): \n
+        1. `unwound`/`url` \n
+        2. `expanded_url` \n
+        3. `url`
 
         Returns:
             list (a list of strings): list of urls
-            value returned by calling tweet_links.get_most_unrolled_urls on 'self'
+            value returned by calling tweet_links.get_most_unrolled_urls on `self`
         """
         return tweet_links.get_most_unrolled_urls(self)
 
@@ -385,32 +395,40 @@ class Tweet(dict):
         Also note that in the caes of a quote-tweet, the list of @-mentioned
         users does not include the user who authored the original (quoted) Tweet,
         you can get the author of the quoted tweet using
-        'tweet.quoted_tweet.user_id'
+        `tweet.quoted_tweet.user_id`
 
         Returns:
-            list (list of dicts): 1 item per @ mention, each item has the fields:
-                 {
-                    "indices": [14,26], #characters where the @ mention appears
-                    "id_str": "2382763597", #id of @ mentioned user as a string
-                    "screen_name": "notFromShrek", #screen_name of @ mentioned user
-                    "name": "Fiona", #display name of @ mentioned user
-                    "id": 2382763597 #id of @ mentioned user as an int
-                  }
-            value returned by calling tweet_entities.get_user_mentions on 'self'
+            list (list of dicts): 1 item per @ mention,
+            value returned by calling `tweet_entities.get_user_mentions` on `self`
+
+        Example:
+            >>> {
+            ...   #characters where the @ mention appears
+            ...   "indices": [14,26],
+            ...   #id of @ mentioned user as a string
+            ...   "id_str": "2382763597",
+            ...   #screen_name of @ mentioned user
+            ...   "screen_name": "notFromShrek",
+            ...   #display name of @ mentioned user
+            ...   "name": "Fiona",
+            ...   #id of @ mentioned user as an int
+            ...   "id": 2382763597
+            ... }
+
         """
         return tweet_entities.get_user_mentions(self)
 
     @lazy_property
     def hashtags(self):
         """
-        A list of hashtags in the Tweet
+        A list of hashtags in the Tweet.
         Note that in the case of a quote-tweet, this does not return the
         hashtags in the quoted status. The recommended way to get that list
-        would be to use 'tweet.quoted_tweet.hashtags'
+        would be to use `tweet.quoted_tweet.hashtags`
 
         Returns:
             list (a list of strings): list of all of the hashtags in the Tweet
-            value returned by calling tweet_entities.get_hashtags on 'self'
+            value returned by calling `tweet_entities.get_hashtags` on `self`
         """
         return tweet_entities.get_hashtags(self)
 
@@ -423,12 +441,11 @@ class Tweet(dict):
         raise a "NotATweetError"
 
         Returns:
-            Tweet: A Tweet representing the quoted status
-                   or None if there is no quoted status.
+            Tweet: A Tweet representing the quoted status (or None)
             (see tweet_embeds.get_quote_tweet, this is that value as a Tweet)
 
         Raises:
-            NotATweetError if quoted tweet is malformed
+            NotATweetError: if quoted tweet is malformed
         """
         quote_tweet = tweet_embeds.get_quoted_tweet(self)
         if quote_tweet is not None:
@@ -446,15 +463,14 @@ class Tweet(dict):
         The retweeted Tweet as a Tweet object
         If the Tweet is not a Retweet, return None
         If the Retweet payload cannot be loaded as a Tweet, this will
-        raise a "NotATweetError"
+        raise a `NotATweetError`
 
         Returns:
-            Tweet: A Tweet representing the retweeted status
-                   or None if there is no retweeted status.
+            Tweet: A Tweet representing the retweeted status (or None)
             (see tweet_embeds.get_retweet, this is that value as a Tweet)
 
         Raises:
-            NotATweetError if retweeted tweet is malformed
+            NotATweetError: if retweeted tweet is malformed
         """
         retweet = tweet_embeds.get_retweet(self)
         if retweet is not None:
@@ -469,15 +485,15 @@ class Tweet(dict):
     @lazy_property
     def embedded_tweet(self):
         """
-        Get the retweeted Tweet OR the quoted Tweet and return it as a dictionary
+        Get the retweeted Tweet OR the quoted Tweet and return it as a Tweet object
 
         Returns:
             Tweet (or None, if the Tweet is neither a quote tweet or a Retweet):
-                a Tweet representing the quote Tweet or the Retweet
+            a Tweet representing the quote Tweet or the Retweet
             (see tweet_embeds.get_embedded_tweet, this is that value as a Tweet)
 
         Raises:
-            NotATweetError if embedded tweet is malformed
+            NotATweetError: if embedded tweet is malformed
         """
         embedded_tweet = tweet_embeds.get_embedded_tweet(self)
         if embedded_tweet is not None:
