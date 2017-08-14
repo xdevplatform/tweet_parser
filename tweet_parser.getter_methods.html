@@ -156,10 +156,11 @@ hashtags in the quoted status.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_entities</span> <span class="k">import</span> <span class="n">get_hashtags</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;hashtags&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;1hashtag&quot;</span><span class="p">}]}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_hashtags</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
-<span class="go">[&quot;1hashtag&quot;]</span>
+<span class="go">[&#39;1hashtag&#39;]</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
@@ -167,7 +168,7 @@ hashtags in the quoted status.</p>
 <span class="gp">... </span>                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;1hashtag&quot;</span><span class="p">},</span>
 <span class="gp">... </span>                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;moreHashtags&quot;</span><span class="p">}]}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_hashtags</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
-<span class="go">[&quot;1hashtag&quot;, &quot;moreHashtags&quot;]</span>
+<span class="go">[&#39;1hashtag&#39;, &#39;moreHashtags&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -197,7 +198,8 @@ appear in a Tweet data payload.</td>
 </table>
 <p>Example:</p>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_entities</span> <span class="k">import</span> <span class="n">get_user_mentions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;user_mentions&quot;</span><span class="p">:</span> <span class="p">[{</span>
 <span class="gp">... </span>                             <span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">26</span><span class="p">],</span> <span class="c1">#characters where the @ mention appears</span>
 <span class="gp">... </span>                             <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span><span class="p">,</span> <span class="c1">#id of @ mentioned user as a string</span>
@@ -208,7 +210,7 @@ appear in a Tweet data payload.</td>
 <span class="gp">... </span>                         <span class="p">}</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_user_mentions</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
-<span class="gp">... </span><span class="p">{</span><span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">26</span><span class="p">],</span><span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span><span class="p">,</span><span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fiona&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2382763597</span><span class="p">}</span>
+<span class="go">[{&#39;indices&#39;: [14, 26], &#39;id_str&#39;: &#39;2382763597&#39;, &#39;screen_name&#39;: &#39;notFromShrek&#39;, &#39;name&#39;: &#39;Fiona&#39;, &#39;id&#39;: 2382763597}]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -238,14 +240,14 @@ appear in a Tweet data payload.</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tweet_geo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;geo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]}}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_geo</span> <span class="k">import</span> <span class="n">get_geo_coordinates</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet_geo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;geo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_geo_coordinates</span><span class="p">(</span><span class="n">tweet_geo</span><span class="p">)</span>
-<span class="go">{&quot;latitude&quot;: 1, &quot;longitude&quot;: -1}</span>
+<span class="go">{&#39;latitude&#39;: 1, &#39;longitude&#39;: -1}</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tweet_no_geo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;geo&quot;</span><span class="p">:</span> <span class="p">{}}</span>
-<span class="go">get_geo_coordinates(tweet_no_geo)</span>
-<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_geo_coordinates</span><span class="p">(</span><span class="n">tweet_no_geo</span><span class="p">)</span> <span class="c1">#returns None</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -269,12 +271,12 @@ If unavailable, returns None.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>         <span class="c1"># Two letter ISO-3166 country code</span>
-<span class="gp">... </span>  <span class="s2">&quot;locality&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span>   <span class="c1"># The locality location (~ city)</span>
-<span class="gp">... </span>  <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;Colorado&quot;</span><span class="p">,</span>    <span class="c1"># The region location (~ state/province)</span>
-<span class="gp">... </span>  <span class="s2">&quot;sub_region&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span> <span class="c1"># The sub-region location (~ county)</span>
-<span class="gp">... </span>  <span class="s2">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder, Colorado, US&quot;</span> <span class="c1"># The full name (excluding sub-region)</span>
-<span class="gp">... </span>  <span class="s2">&quot;geo&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="o">-</span><span class="mi">105</span><span class="p">]</span>        <span class="c1"># lat/long value that coordinate that corresponds to</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>         <span class="c1"># Two letter ISO-3166 country code</span>
+<span class="gp">... </span>          <span class="s2">&quot;locality&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span>   <span class="c1"># The locality location (~ city)</span>
+<span class="gp">... </span>          <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;Colorado&quot;</span><span class="p">,</span>    <span class="c1"># The region location (~ state/province)</span>
+<span class="gp">... </span>          <span class="s2">&quot;sub_region&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span> <span class="c1"># The sub-region location (~ county)</span>
+<span class="gp">... </span>          <span class="s2">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder, Colorado, US&quot;</span><span class="p">,</span> <span class="c1"># The full name (excluding sub-region)</span>
+<span class="gp">... </span>          <span class="s2">&quot;geo&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="o">-</span><span class="mi">105</span><span class="p">]</span>        <span class="c1"># lat/long value that coordinate that corresponds to</span>
 <span class="gp">... </span>                           <span class="c1"># the lowest granularity location for where the user</span>
 <span class="gp">... </span>                           <span class="c1"># who created the Tweet is from</span>
 <span class="gp">... </span> <span class="p">}</span>
@@ -343,7 +345,8 @@ fields will be missing.<p>More information about the Twitter url enrichments at:
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>  <span class="p">{</span>
 <span class="gp">... </span>  <span class="c1"># url that shows up in the tweet text</span>
 <span class="gp">... </span>  <span class="s1">&#39;display_url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrinc...&quot;</span><span class="p">,</span>
 <span class="gp">... </span>  <span class="c1"># long (expanded) url</span>
@@ -357,7 +360,7 @@ fields will be missing.<p>More information about the Twitter url enrichments at:
 <span class="gp">... </span>     <span class="c1"># title of the webpage</span>
 <span class="gp">... </span>     <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;the Twitter profile of RobotPrincessFi&quot;</span><span class="p">,</span>
 <span class="gp">... </span>     <span class="c1"># long (expanded) url}</span>
-<span class="gp">... </span>     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrincessFi&quot;</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrincessFi&quot;</span><span class="p">},</span>
 <span class="gp">... </span>  <span class="c1"># the url that tweet directs to, often t.co</span>
 <span class="gp">... </span>  <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;t.co/1234&quot;</span><span class="p">}]</span>
 </pre></div>
@@ -406,21 +409,22 @@ Includes &#64;-mention replies and long links.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># getting the text of a Tweet that is not truncated</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_text</span> <span class="k">import</span> <span class="n">get_full_text</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># getting the text of a Tweet that is not truncated</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">original_untruncated</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>                <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="s2">&quot;truncated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span>
 <span class="gp">... </span>               <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_full_text</span><span class="p">(</span><span class="n">original_untruncated</span><span class="p">)</span>
-<span class="go">&quot;some tweet text&quot;</span>
+<span class="go">&#39;some tweet text&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_untruncated</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span>
 <span class="gp">... </span>                       <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_full_text</span><span class="p">(</span><span class="n">activity_untruncated</span><span class="p">)</span>
-<span class="go">&quot;some tweet text&quot;</span>
+<span class="go">&#39;some tweet text&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># getting the text of a truncated Tweet (has over 140 chars)</span>
@@ -433,7 +437,7 @@ Includes &#64;-mention replies and long links.</p>
 <span class="gp">... </span>                  <span class="s2">&quot;some tweet text, lorem ipsum dolor sit amet&quot;</span><span class="p">}</span>
 <span class="gp">... </span>              <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_full_text</span><span class="p">(</span><span class="n">original_truncated</span><span class="p">)</span>
-<span class="go">&quot;some tweet text, lorem ipsum dolor sit amet&quot;</span>
+<span class="go">&#39;some tweet text, lorem ipsum dolor sit amet&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_truncated</span> <span class="o">=</span> <span class="p">{</span>
@@ -444,7 +448,7 @@ Includes &#64;-mention replies and long links.</p>
 <span class="gp">... </span>                  <span class="s2">&quot;some tweet text, lorem ipsum dolor sit amet&quot;</span><span class="p">}</span>
 <span class="gp">... </span>             <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_full_text</span><span class="p">(</span><span class="n">activity_truncated</span><span class="p">)</span>
-<span class="go">&quot;some tweet text, lorem ipsum dolor sit amet&quot;</span>
+<span class="go">&#39;some tweet text, lorem ipsum dolor sit amet&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -471,7 +475,8 @@ an empty list</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_text</span> <span class="k">import</span> <span class="n">get_poll_options</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;polls&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;a&quot;</span><span class="p">},</span>
 <span class="gp">... </span>                                                <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;b&quot;</span><span class="p">},</span>
@@ -479,13 +484,15 @@ an empty list</td>
 <span class="gp">... </span>                            <span class="p">}]},</span>
 <span class="gp">... </span>           <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_poll_options</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
-<span class="go">[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span>
+<span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_poll_options</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
-<span class="go">NotAvailableError: &quot;Gnip activity-streams format does not return poll options&quot;</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">NotAvailableError</span>: <span class="n">Gnip activity-streams format does not return poll options</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -512,7 +519,8 @@ an empty list</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># a quote tweet</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_text</span> <span class="k">import</span> <span class="n">get_quote_or_rt_text</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># a quote tweet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">quote</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;adding my own commentary&quot;</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="s2">&quot;truncated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
@@ -525,7 +533,7 @@ an empty list</td>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_quote_or_rt_text</span><span class="p">(</span><span class="n">quote</span><span class="p">)</span>
-<span class="go">&quot;an interesting Tweet&quot;</span>
+<span class="go">&#39;an interesting Tweet&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -549,17 +557,18 @@ or “body” key (activity streams format)</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_text</span> <span class="k">import</span> <span class="n">get_text</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_text</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
-<span class="go">&quot;some tweet text&quot;</span>
+<span class="go">&#39;some tweet text&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_text</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
-<span class="go">&quot;some tweet text&quot;</span>
+<span class="go">&#39;some tweet text&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -610,9 +619,10 @@ for a link removed and replaced with a space</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;lorem ipsum dolor https://twitter.com/RobotPrincessFi&quot;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_text</span> <span class="k">import</span> <span class="n">remove_links</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;lorem ipsum dolor https://twitter.com/RobotPrincessFi&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">remove_links</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="go">&quot;lorem ipsum dolor  &quot;</span>
+<span class="go">&#39;lorem ipsum dolor  &#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -637,14 +647,15 @@ for a link removed and replaced with a space</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_klout_id</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;user&quot;</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="p">{</span><span class="s2">&quot;derived&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;klout&quot;</span><span class="p">:</span>
 <span class="gp">... </span>            <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span><span class="s2">&quot;1234567890&quot;</span><span class="p">}}}</span>
 <span class="gp">... </span>    <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_klout_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&quot;1234567890&quot;</span>
+<span class="go">&#39;1234567890&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -654,7 +665,7 @@ for a link removed and replaced with a space</td>
 <span class="gp">... </span>        <span class="s2">&quot;klout_user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567890&quot;</span><span class="p">}</span>
 <span class="gp">... </span>    <span class="p">}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_klout_id</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&quot;1234567890&quot;</span>
+<span class="go">&#39;1234567890&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -676,7 +687,8 @@ for a link removed and replaced with a space</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_klout_profile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span><span class="s2">&quot;user&quot;</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="p">{</span><span class="s2">&quot;derived&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;klout&quot;</span><span class="p">:</span>
@@ -684,7 +696,7 @@ for a link removed and replaced with a space</td>
 <span class="gp">... </span>            <span class="s2">&quot;http://klout.com/topic/id/10000000000000016635&quot;</span><span class="p">}}}</span>
 <span class="gp">... </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_klout_profile</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&quot;http://klout.com/topic/id/10000000000000016635&quot;</span>
+<span class="go">&#39;http://klout.com/topic/id/10000000000000016635&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -695,7 +707,7 @@ for a link removed and replaced with a space</td>
 <span class="gp">... </span>    <span class="p">}</span>
 <span class="gp">... </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_klout_profile</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&quot;http://klout.com/topic/id/10000000000000016635&quot;</span>
+<span class="go">&#39;http://klout.com/topic/id/10000000000000016635&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -721,20 +733,21 @@ for a link removed and replaced with a space</td>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_klout_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;user&quot;</span><span class="p">:</span>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;derived&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;klout&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">}}}</span>
 <span class="gp">... </span>           <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_klout_score</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&quot;12345&quot;</span>
+<span class="go">12345</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;gnip&quot;</span><span class="p">:{</span><span class="s2">&quot;klout_score&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_klout_score</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&quot;12345&quot;</span>
+<span class="go">12345</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -766,7 +779,7 @@ the “score” value.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="p">[{</span>
 <span class="gp">... </span>    <span class="c1"># the user&#39;s score for that topic</span>
 <span class="gp">... </span>    <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.54</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="c1"># the Klout topic ID</span>
@@ -803,13 +816,14 @@ the “score” value.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;user&quot;</span><span class="p">:</span>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;jk no&quot;</span><span class="p">}</span>
 <span class="gp">... </span>           <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_name</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&quot;jk no&quot;</span>
+<span class="go">&#39;jk no&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -818,7 +832,7 @@ the “score” value.</p>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;jk no&quot;</span><span class="p">}</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_name</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&quot;jk no&quot;</span>
+<span class="go">&#39;jk no&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -840,13 +854,14 @@ the “score” value.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_screen_name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;user&quot;</span><span class="p">:</span>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;RobotPrincessFi&quot;</span><span class="p">}</span>
 <span class="gp">... </span>           <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_screen_name</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&quot;RobotPrincessFi&quot;</span>
+<span class="go">&#39;RobotPrincessFi&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -855,7 +870,7 @@ the “score” value.</p>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;preferredUsername&quot;</span><span class="p">:</span> <span class="s2">&quot;RobotPrincessFi&quot;</span><span class="p">}</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_screen_name</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&quot;RobotPrincessFi&quot;</span>
+<span class="go">&#39;RobotPrincessFi&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -877,13 +892,14 @@ the “score” value.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_user_id</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;user&quot;</span><span class="p">:</span>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;815279070241955840&quot;</span><span class="p">}</span>
 <span class="gp">... </span>           <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_user_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&quot;815279070241955840&quot;</span>
+<span class="go">&#39;815279070241955840&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -892,7 +908,7 @@ the “score” value.</p>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;id:twitter.com:815279070241955840&quot;</span><span class="p">}</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_user_id</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&quot;815279070241955840&quot;</span>
+<span class="go">&#39;815279070241955840&#39;</span>
 </pre></div>
 </div>
 </dd></dl>

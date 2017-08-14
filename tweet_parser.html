@@ -119,7 +119,8 @@ get various data values from the Tweet.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># python dict representing a Tweet</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.tweet</span> <span class="k">import</span> <span class="n">Tweet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># python dict representing a Tweet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tweet_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">867474613139156993</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;867474613139156993&quot;</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
@@ -133,7 +134,7 @@ get various data values from the Tweet.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="n">Tweet</span><span class="p">(</span><span class="n">tweet_dict</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># use the Tweet obj to access data elements</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span><span class="o">.</span><span class="n">id</span>
-<span class="go">&quot;867474613139156993&quot;</span>
+<span class="go">&#39;867474613139156993&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span><span class="o">.</span><span class="n">created_at_seconds</span>
 <span class="go">1495657039</span>
 </pre></div>
@@ -281,7 +282,8 @@ value returned by calling <cite>tweet_entities.get_hashtags</cite> on <cite>self
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.tweet</span> <span class="k">import</span> <span class="n">Tweet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">867474613139156993</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;867474613139156993&quot;</span><span class="p">,</span>
@@ -289,7 +291,7 @@ value returned by calling <cite>tweet_entities.get_hashtags</cite> on <cite>self
 <span class="gp">... </span>    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span>
 <span class="gp">... </span>    <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Tweet</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span><span class="o">.</span><span class="n">id</span>
-<span class="go">&quot;867474613139156993&quot;</span>
+<span class="go">&#39;867474613139156993&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -299,7 +301,7 @@ value returned by calling <cite>tweet_entities.get_hashtags</cite> on <cite>self
 <span class="gp">... </span>    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span>
 <span class="gp">... </span>    <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Tweet</span><span class="p">(</span><span class="n">activity_streams_dict</span><span class="p">)</span><span class="o">.</span><span class="n">id</span>
-<span class="go">&quot;867474613139156993&quot;</span>
+<span class="go">&#39;867474613139156993&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -467,15 +469,15 @@ If unavailable, returns <cite>None</cite>.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>         <span class="c1"># Two letter ISO-3166 country code</span>
-<span class="gp">... </span>  <span class="s2">&quot;locality&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span>   <span class="c1"># The locality location (~ city)</span>
-<span class="gp">... </span>  <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;Colorado&quot;</span><span class="p">,</span>    <span class="c1"># The region location (~ state/province)</span>
-<span class="gp">... </span>  <span class="s2">&quot;sub_region&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span> <span class="c1"># The sub-region location (~ county)</span>
-<span class="gp">... </span>  <span class="s2">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder, Colorado, US&quot;</span> <span class="c1"># The full name (excluding sub-region)</span>
-<span class="gp">... </span>  <span class="s2">&quot;geo&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="o">-</span><span class="mi">105</span><span class="p">]</span>        <span class="c1"># lat/long value that coordinate that corresponds to</span>
-<span class="gp">... </span>                           <span class="c1"># the lowest granularity location for where the user</span>
-<span class="gp">... </span>                           <span class="c1"># who created the Tweet is from</span>
-<span class="gp">... </span> <span class="p">}</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>         <span class="c1"># Two letter ISO-3166 country code</span>
+<span class="gp">... </span>          <span class="s2">&quot;locality&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span>   <span class="c1"># The locality location (~ city)</span>
+<span class="gp">... </span>          <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;Colorado&quot;</span><span class="p">,</span>    <span class="c1"># The region location (~ state/province)</span>
+<span class="gp">... </span>          <span class="s2">&quot;sub_region&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span> <span class="c1"># The sub-region location (~ county)</span>
+<span class="gp">... </span>          <span class="s2">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder, Colorado, US&quot;</span><span class="p">,</span> <span class="c1"># The full name (excluding sub-region)</span>
+<span class="gp">... </span>          <span class="s2">&quot;geo&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="o">-</span><span class="mi">105</span><span class="p">]</span>        <span class="c1"># lat/long value that coordinate that corresponds to</span>
+<span class="gp">... </span>                                    <span class="c1"># the lowest granularity location for where the user</span>
+<span class="gp">... </span>                                    <span class="c1"># who created the Tweet is from</span>
+<span class="gp">... </span><span class="p">}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -602,7 +604,8 @@ fields will be missing.
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>  <span class="p">{</span>
 <span class="gp">... </span>  <span class="c1"># url that shows up in the tweet text</span>
 <span class="gp">... </span>  <span class="s1">&#39;display_url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrinc...&quot;</span><span class="p">,</span>
 <span class="gp">... </span>  <span class="c1"># long (expanded) url</span>
@@ -616,7 +619,7 @@ fields will be missing.
 <span class="gp">... </span>     <span class="c1"># title of the webpage</span>
 <span class="gp">... </span>     <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;the Twitter profile of RobotPrincessFi&quot;</span><span class="p">,</span>
 <span class="gp">... </span>     <span class="c1"># long (expanded) url}</span>
-<span class="gp">... </span>     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrincessFi&quot;</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrincessFi&quot;</span><span class="p">},</span>
 <span class="gp">... </span>  <span class="c1"># the url that tweet directs to, often t.co</span>
 <span class="gp">... </span>  <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;t.co/1234&quot;</span><span class="p">}]</span>
 </pre></div>
@@ -700,7 +703,7 @@ value returned by calling <cite>tweet_entities.get_user_mentions</cite> on <cite
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>  <span class="c1">#characters where the @ mention appears</span>
 <span class="gp">... </span>  <span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">26</span><span class="p">],</span>
 <span class="gp">... </span>  <span class="c1">#id of @ mentioned user as a string</span>
