@@ -74,9 +74,13 @@ for line in fileinput.FileInput(options.data_files, openhook=openhook):
     for func in functions:
         try:
             attribute = getattr(tweet_obj, func)
-            if type(attribute) == str:
-                attribute = attribute.replace(options.delim, " ").replace("\n", " ").replace("\r", " ")
-            csv.append(str(attribute))
+            if sys.version_info[0] == 3:
+                csv.append(str(attribute))
+            else:
+                if isinstance(attribute, str) or isinstance(attribute, unicode):
+                    csv.append(attribute.encode("utf-8"))
+                else:
+                    csv.append(str(attribute))
         except NotAvailableError as nae:
             if not options.pass_not_available:
                 sys.stderr.write("{}. Use the flag -a to pass silently next time.\nAttribute Unavailable: {}".format(nae, line))
