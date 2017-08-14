@@ -8,7 +8,9 @@ activity-streams and original formats.
 ## Status: 
 This package can be installed by cloning the repo and using `pip install -e .`,
 or by using `pip install tweet_parser`. First probably-bug-free release is
-1.0.3. Current release (As of 8/14/2017) is 1.0.4.
+1.0.3. Current release (As of 8/14/2017) is 1.0.5. As of version 1.0.5, the
+package works with Python 2 and 3, and the API should be relatively stable.
+Recommended to use the more recent release.
 
 Currently, this parser does not explicitly support Public API Twitter data.
 
