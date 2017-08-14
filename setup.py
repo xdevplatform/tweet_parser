@@ -10,7 +10,6 @@ setup(name='tweet_parser',
       description="Tools for Tweet parsing",
       url='https://github.com/fionapigott/tweet_parser',
       install_requires=[],
-      python_requires='>=3',
       package_data={
           'tweet_parser': ['test/tweet_payload_examples/activity_streams_examples.json',
                            'test/tweet_payload_examples/original_format_examples.json',
