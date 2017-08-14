@@ -1,11 +1,22 @@
 from tweet_parser.tweet_checking import is_original_format
+from tweet_parser.getter_methods.tweet_text import get_tweet_type
 
 
-def get_quote_tweet(tweet):
+def get_quoted_tweet(tweet):
     """
-    get the quote Tweet and return the dict
+    Get the quoted Tweet and return it as a dictionary
+    If the Tweet is not a quote Tweet, return None
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or a dictionary
+
+    Returns:
+        dict: A dictionary representing the quoted status
+        or None if there is no quoted status. \n
+        - For original format, this is the value of "quoted_status" \n
+        - For activity streams, this is the value of "twitter_quoted_status"
     """
-    if tweet.tweet_type == "quote":
+    if get_tweet_type(tweet) == "quote":
         if is_original_format(tweet):
             return tweet["quoted_status"]
         else:
@@ -15,11 +26,21 @@ def get_quote_tweet(tweet):
         return None
 
 
-def get_retweet(tweet):
+def get_retweeted_tweet(tweet):
     """
-    get the retweet and return the dict
+    Get the retweeted Tweet and return it as a dictionary
+    If the Tweet is not a Retweet, return None
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or a dictionary
+
+    Returns:
+        dict: A dictionary representing the retweeted status
+        or None if there is no quoted status. \n
+        - For original format, this is the value of "retweeted_status" \n
+        - For activity streams, If the Tweet is a Retweet this is the value of the key "object"
     """
-    if tweet.tweet_type == "retweet":
+    if get_tweet_type(tweet) == "retweet":
         if is_original_format(tweet):
             return tweet["retweeted_status"]
         else:
@@ -30,11 +51,18 @@ def get_retweet(tweet):
 
 def get_embedded_tweet(tweet):
     """
-    get any embedded Tweet and return the dict
+    Get the retweeted Tweet OR the quoted Tweet and return it as a dictionary
+
+    Args:
+        tweet (Tweet): A Tweet object (not simply a dict)
+
+    Returns:
+        dict (or None, if the Tweet is neither a quote tweet or a Retweet):
+        a dictionary representing the quote Tweet or the Retweet
     """
-    if tweet.retweet is not None:
-        return tweet.retweet
-    elif tweet.quote_tweet is not None:
-        return tweet.quote_tweet
+    if tweet.retweeted_tweet is not None:
+        return tweet.retweeted_tweet
+    elif tweet.quoted_tweet is not None:
+        return tweet.quoted_tweet
     else:
         return None

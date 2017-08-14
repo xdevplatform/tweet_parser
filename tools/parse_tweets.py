@@ -40,7 +40,7 @@ parser.add_argument("-t", "--pass_non_tweet", action="store_true", dest="pass_no
 parser.add_argument("-a", "--pass_not_available", action="store_true", dest="pass_not_available",
                     default=False,
                     help="use this flag to silently pass on non-tweet payloads")
-parser.add_argument("--do_format_checking", action="store_true", dest="do_format_checking",
+parser.add_argument("--do_format_validation", action="store_true", dest="do_format_validation",
                     default=False,
                     help="debug formatting")
 options = parser.parse_args()
@@ -65,7 +65,7 @@ for line in fileinput.FileInput(options.data_files, openhook=openhook):
         continue
     # load a Tweet
     try:
-        tweet_obj = Tweet(tweet_dict, do_format_checking=options.do_format_checking)
+        tweet_obj = Tweet(tweet_dict, do_format_validation=options.do_format_validation)
     except NotATweetError as nate:
         if not options.pass_non_tweet:
             sys.stderr.write("{}. Use the flag '-t' to pass silently next time.\nNon Tweet payload: {}".format(nate, line))
@@ -74,9 +74,13 @@ for line in fileinput.FileInput(options.data_files, openhook=openhook):
     for func in functions:
         try:
             attribute = getattr(tweet_obj, func)
-            if type(attribute) == str:
-                attribute = attribute.replace(options.delim, " ").replace("\n", " ").replace("\r", " ")
-            csv.append(str(attribute))
+            if sys.version_info[0] == 3:
+                csv.append(str(attribute))
+            else:
+                if isinstance(attribute, str) or isinstance(attribute, unicode):
+                    csv.append(attribute.encode("utf-8"))
+                else:
+                    csv.append(str(attribute))
         except NotAvailableError as nae:
             if not options.pass_not_available:
                 sys.stderr.write("{}. Use the flag -a to pass silently next time.\nAttribute Unavailable: {}".format(nae, line))

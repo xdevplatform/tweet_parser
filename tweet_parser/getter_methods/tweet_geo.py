@@ -3,8 +3,24 @@ from tweet_parser.tweet_checking import is_original_format
 
 def get_geo_coordinates(tweet):
     """
-    return the geo coordinates, if they are included in the payload
-    else raise 'unavailable field' error
+    Get the user's geo coordinates, if they are included in the payload
+    (otherwise return None)
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        dict: dictionary with the keys "latitude" and "longitude"
+              or, if unavaiable, None
+
+    Example:
+        >>> tweet_geo = {"geo": {"coordinates": [1,-1]}}
+        >>> get_geo_coordinates(tweet_geo)
+        {"latitude": 1, "longitude": -1}
+
+        >>> tweet_no_geo = {"geo": {}}
+        get_geo_coordinates(tweet_no_geo)
+        None
     """
     if "geo" in tweet:
         if tweet["geo"] is not None:
@@ -16,9 +32,31 @@ def get_geo_coordinates(tweet):
 
 def get_profile_location(tweet):
     """
-    return location data from the profile location profile location enrichment
-    only provide the first element of the locations list (because idk what the other one means)
-    return NotAvailableError if there is no field or the enrichment is not included in the tweet
+    Get user's derived location data from the profile location enrichment
+    If unavailable, returns None.
+
+    Args:
+        tweet (Tweet or dict): Tweet object or dictionary
+
+    Returns:
+        dict: more information on the profile locations enrichment here:
+        http://support.gnip.com/enrichments/profile_geo.html
+
+    Example:
+        >>>  {"country": "US",         # Two letter ISO-3166 country code
+        ...   "locality": "Boulder",   # The locality location (~ city)
+        ...   "region": "Colorado",    # The region location (~ state/province)
+        ...   "sub_region": "Boulder", # The sub-region location (~ county)
+        ...   "full_name": "Boulder, Colorado, US" # The full name (excluding sub-region)
+        ...   "geo":  [40,-105]        # lat/long value that coordinate that corresponds to
+        ...                            # the lowest granularity location for where the user
+        ...                            # who created the Tweet is from
+        ...  }
+
+    Caveats:
+        This only returns the first element of the 'locations' list.
+        I'm honestly not sure what circumstances would result in a list that
+        is more than one element long.
     """
     if is_original_format(tweet):
         try:
