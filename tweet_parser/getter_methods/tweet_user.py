@@ -12,13 +12,14 @@ def get_user_id(tweet):
         str: the Twitter ID of the user who posted the Tweet
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_user_id
         >>> original_format_dict = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "user":
         ...              {"id_str": "815279070241955840"}
         ...            }
         >>> get_user_id(original_format_dict)
-        "815279070241955840"
+        '815279070241955840'
 
         >>> activity_streams_format_dict = {
         ...             "postedTime": "2017-05-24T20:17:19.000Z",
@@ -26,7 +27,7 @@ def get_user_id(tweet):
         ...              {"id": "id:twitter.com:815279070241955840"}
         ...             }
         >>> get_user_id(activity_streams_format_dict)
-        "815279070241955840"
+        '815279070241955840'
     """
 
     if is_original_format(tweet):
@@ -46,13 +47,14 @@ def get_screen_name(tweet):
         str: the @ handle of the user who posted the Tweet
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_screen_name
         >>> original_format_dict = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "user":
         ...              {"screen_name": "RobotPrincessFi"}
         ...            }
         >>> get_screen_name(original_format_dict)
-        "RobotPrincessFi"
+        'RobotPrincessFi'
 
         >>> activity_streams_format_dict = {
         ...             "postedTime": "2017-05-24T20:17:19.000Z",
@@ -60,7 +62,7 @@ def get_screen_name(tweet):
         ...              {"preferredUsername": "RobotPrincessFi"}
         ...             }
         >>> get_screen_name(activity_streams_format_dict)
-        "RobotPrincessFi"
+        'RobotPrincessFi'
     """
 
     if is_original_format(tweet):
@@ -80,13 +82,14 @@ def get_name(tweet):
         str: the @ handle of the user who posted the Tweet
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_name
         >>> original_format_dict = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "user":
         ...              {"name": "jk no"}
         ...            }
         >>> get_name(original_format_dict)
-        "jk no"
+        'jk no'
 
         >>> activity_streams_format_dict = {
         ...             "postedTime": "2017-05-24T20:17:19.000Z",
@@ -94,7 +97,7 @@ def get_name(tweet):
         ...              {"displayName": "jk no"}
         ...             }
         >>> get_name(activity_streams_format_dict)
-        "jk no"
+        'jk no'
     """
 
     if is_original_format(tweet):
@@ -115,19 +118,20 @@ def get_klout_score(tweet):
             else return None
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_klout_score
         >>> original_format_dict = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "user":
         ...              {"derived": {"klout": {"score": 12345}}}
         ...            }
         >>> get_klout_score(original_format_dict)
-        "12345"
+        12345
 
         >>> activity_streams_format_dict = {
         ...             "postedTime": "2017-05-24T20:17:19.000Z",
         ...             "gnip":{"klout_score": 12345}}
         >>> get_klout_score(activity_streams_format_dict)
-        "12345"
+        12345
     """
 
     try:
@@ -151,6 +155,7 @@ def get_klout_profile(tweet):
         str: the user's Klout profile URL (if it exists), else return None
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_klout_profile
         >>> original_format_dict = {
         ... "created_at": "Wed May 24 20:17:19 +0000 2017",
         ... "user":
@@ -159,7 +164,7 @@ def get_klout_profile(tweet):
         ...             "http://klout.com/topic/id/10000000000000016635"}}}
         ... }
         >>> get_klout_profile(original_format_dict)
-        "http://klout.com/topic/id/10000000000000016635"
+        'http://klout.com/topic/id/10000000000000016635'
 
         >>> activity_streams_format_dict = {
         ... "postedTime": "2017-05-24T20:17:19.000Z",
@@ -169,7 +174,7 @@ def get_klout_profile(tweet):
         ...     }
         ... }
         >>> get_klout_profile(activity_streams_format_dict)
-        "http://klout.com/topic/id/10000000000000016635"
+        'http://klout.com/topic/id/10000000000000016635'
     """
 
     try:
@@ -193,6 +198,7 @@ def get_klout_id(tweet):
         str: the user's Klout ID (if it exists), else return None
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_klout_id
         >>> original_format_dict = {
         ... "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...     "user":
@@ -200,7 +206,7 @@ def get_klout_id(tweet):
         ...             {"user_id":"1234567890"}}}
         ...     }
         >>> get_klout_id(original_format_dict)
-        "1234567890"
+        '1234567890'
 
         >>> activity_streams_format_dict = {
         ... "postedTime": "2017-05-24T20:17:19.000Z",
@@ -209,7 +215,7 @@ def get_klout_id(tweet):
         ...         "klout_user_id": "1234567890"}
         ...     }}
         >>> get_klout_id(activity_streams_format_dict)
-        "1234567890"
+        '1234567890'
     """
 
     try:
@@ -239,7 +245,7 @@ def get_klout_topics(tweet, topic_type='influence'):
         the "score" value.
 
     Example:
-        >>> [{
+        >>> result = [{
         ...     # the user's score for that topic
         ...     "score": 0.54,
         ...     # the Klout topic ID

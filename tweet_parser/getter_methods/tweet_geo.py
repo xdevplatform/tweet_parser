@@ -14,13 +14,13 @@ def get_geo_coordinates(tweet):
               or, if unavaiable, None
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_geo import get_geo_coordinates
         >>> tweet_geo = {"geo": {"coordinates": [1,-1]}}
         >>> get_geo_coordinates(tweet_geo)
-        {"latitude": 1, "longitude": -1}
+        {'latitude': 1, 'longitude': -1}
 
         >>> tweet_no_geo = {"geo": {}}
-        get_geo_coordinates(tweet_no_geo)
-        None
+        >>> get_geo_coordinates(tweet_no_geo) #returns None
     """
     if "geo" in tweet:
         if tweet["geo"] is not None:
@@ -43,12 +43,12 @@ def get_profile_location(tweet):
         http://support.gnip.com/enrichments/profile_geo.html
 
     Example:
-        >>>  {"country": "US",         # Two letter ISO-3166 country code
-        ...   "locality": "Boulder",   # The locality location (~ city)
-        ...   "region": "Colorado",    # The region location (~ state/province)
-        ...   "sub_region": "Boulder", # The sub-region location (~ county)
-        ...   "full_name": "Boulder, Colorado, US" # The full name (excluding sub-region)
-        ...   "geo":  [40,-105]        # lat/long value that coordinate that corresponds to
+        >>> result = {"country": "US",         # Two letter ISO-3166 country code
+        ...           "locality": "Boulder",   # The locality location (~ city)
+        ...           "region": "Colorado",    # The region location (~ state/province)
+        ...           "sub_region": "Boulder", # The sub-region location (~ county)
+        ...           "full_name": "Boulder, Colorado, US", # The full name (excluding sub-region)
+        ...           "geo":  [40,-105]        # lat/long value that coordinate that corresponds to
         ...                            # the lowest granularity location for where the user
         ...                            # who created the Tweet is from
         ...  }

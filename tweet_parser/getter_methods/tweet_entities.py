@@ -22,6 +22,7 @@ def get_user_mentions(tweet):
 
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_entities import get_user_mentions
         >>> original = {"created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "entities": {"user_mentions": [{
         ...                              "indices": [14,26], #characters where the @ mention appears
@@ -33,7 +34,7 @@ def get_user_mentions(tweet):
         ...                          }
         ...             }
         >>> get_user_mentions(original)
-        ... {"indices": [14,26],"id_str": "2382763597","screen_name": "notFromShrek","name": "Fiona","id": 2382763597}
+        [{'indices': [14, 26], 'id_str': '2382763597', 'screen_name': 'notFromShrek', 'name': 'Fiona', 'id': 2382763597}]
     """
     if is_original_format(tweet):
         entities = "entities"
@@ -58,17 +59,18 @@ def get_hashtags(tweet):
         list (a list of strings): list of all of the hashtags in the Tweet
 
     Example:
+        >>> from tweet_parser.getter_methods.tweet_entities import get_hashtags
         >>> original = {"created_at": "Wed May 24 20:17:19 +0000 2017",
         ...            "entities": {"hashtags": [{"text":"1hashtag"}]}}
         >>> get_hashtags(original)
-        ["1hashtag"]
+        ['1hashtag']
 
         >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
         ...             "twitter_entities": {"hashtags": [
         ...                     {"text":"1hashtag"},
         ...                     {"text": "moreHashtags"}]}}
         >>> get_hashtags(activity)
-        ["1hashtag", "moreHashtags"]
+        ['1hashtag', 'moreHashtags']
     """
     if is_original_format(tweet):
         entities = "entities"
