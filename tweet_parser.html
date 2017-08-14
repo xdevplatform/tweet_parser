@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>tweet_parser package &#8212; Tweet Parser 1 documentation</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -27,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="tweet_parser.getter_methods package" href="tweet_parser.getter_methods.html" />
-    <link rel="prev" title="tweet_parser" href="index.html" />
+    <link rel="prev" title="Tweet Parser" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -83,7 +80,7 @@ docstrings.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> (<em>function</em>) &#8211; the property in question</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> (<em>function</em>) – the property in question</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">evaluated version of the property.</td>
 </tr>
@@ -96,215 +93,627 @@ docstrings.</p>
 <span id="tweet-parser-tweet-module"></span><h2>tweet_parser.tweet module<a class="headerlink" href="#module-tweet_parser.tweet" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="tweet_parser.tweet.Tweet">
-<em class="property">class </em><code class="descclassname">tweet_parser.tweet.</code><code class="descname">Tweet</code><span class="sig-paren">(</span><em>tweet_dict</em>, <em>do_format_checking=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.tweet.Tweet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">tweet_parser.tweet.</code><code class="descname">Tweet</code><span class="sig-paren">(</span><em>tweet_dict</em>, <em>do_format_validation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.tweet.Tweet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
-<p>tweet class</p>
+<p>Tweet object created from a dictionary representing a Tweet paylaod</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tweet_dict</strong> (<em>dict</em>) – A dictionary representing a Tweet payload</li>
+<li><strong>do_format_checking</strong> (<em>bool</em>) – If “True”, compare the keys in this         dict to a supeset of expected keys and to a minimum set of expected         keys (as defined in tweet_parser.tweet_keys).         Will cause the parser to fail if unexpected keys are present         or if expected keys are missing.         Intended to allow run-time format testing, allowing the user         to surface unexpected format changes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Class “Tweet”, inherits from dict, provides properties to
+get various data values from the Tweet.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – the Tweet dict is malformed,         see <cite>tweet_checking.check_tweet</cite> for details</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># python dict representing a Tweet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">867474613139156993</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;867474613139156993&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Some Tweet text&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                  <span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;RobotPrincessFi&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;815279070241955840&quot;</span>
+<span class="gp">... </span>                  <span class="p">}</span>
+<span class="gp">... </span>             <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># create a Tweet object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="n">Tweet</span><span class="p">(</span><span class="n">tweet_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># use the Tweet obj to access data elements</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&quot;867474613139156993&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span><span class="o">.</span><span class="n">created_at_seconds</span>
+<span class="go">1495657039</span>
+</pre></div>
+</div>
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.all_text">
 <code class="descname">all_text</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.all_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>all of the text of the tweet
-Includes &#64; mentions, long links, quote-tweet contents
-(separated by a newline), RT contents &amp; poll options</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.all_text_without_links">
-<code class="descname">all_text_without_links</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.all_text_without_links" title="Permalink to this definition">¶</a></dt>
-<dd><p>same as all_text, but links are removed</p>
+<dd><p>All of the text of the tweet. This includes &#64; mentions, long links,
+quote-tweet contents (separated by a newline), RT contents
+&amp; poll options</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_text.get_all_text</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.created_at_datetime">
 <code class="descname">created_at_datetime</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.created_at_datetime" title="Permalink to this definition">¶</a></dt>
-<dd><p>return a python datetime obj of the Tweet create</p>
+<dd><p>Time that a Tweet was posted as a Python datetime object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the value of <cite>tweet.created_at_seconds</cite>
+converted into a datetime object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">datetime.datetime</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.created_at_seconds">
 <code class="descname">created_at_seconds</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.created_at_seconds" title="Permalink to this definition">¶</a></dt>
-<dd><p>return seconds since the unix epoch of the Tweet create</p>
+<dd><p>Time that a Tweet was posted in seconds since the Unix epoch</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">seconds since the unix epoch
+(determined by converting Tweet.id
+into a timestamp using <cite>tweet_date.snowflake2utc</cite>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.created_at_string">
 <code class="descname">created_at_string</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.created_at_string" title="Permalink to this definition">¶</a></dt>
-<dd><p><a href="#id1"><span class="problematic" id="id2">**</span></a>return a date string, formatted as* &#8211; YYYY-MM-ddTHH* &#8211; MM:SS.000Z</p>
+<dd><p>Time that a Tweet was posted as a string with the format
+YYYY-MM-ddTHH:MM:SS.000Z</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the value of <cite>tweet.created_at_seconds</cite>
+converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.embedded_tweet">
 <code class="descname">embedded_tweet</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.embedded_tweet" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the quote tweet or the retweet and return a tweet object of it</p>
+<dd><p>Get the retweeted Tweet OR the quoted Tweet and return it as a Tweet object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a Tweet representing the quote Tweet or the Retweet
+(see tweet_embeds.get_embedded_tweet, this is that value as a Tweet)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a> (or None, if the Tweet is neither a quote tweet or a Retweet)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – if embedded tweet is malformed</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.geo_coordinates">
 <code class="descname">geo_coordinates</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.geo_coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p>return the geo coordinates, if they are included in the payload
-else raise &#8216;unavailable field&#8217; error</p>
+<dd><p>The user’s geo coordinates, if they are included in the payload
+(otherwise return <cite>None</cite>).
+Dictionary with the keys “latitude” and “longitude” or <cite>None</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_geo.get_geo_coordinates</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.hashtags">
 <code class="descname">hashtags</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.hashtags" title="Permalink to this definition">¶</a></dt>
-<dd><p>get a list of hashtags</p>
+<dd><p>A list of hashtags in the Tweet.
+Note that in the case of a quote-tweet, this does not return the
+hashtags in the quoted status. The recommended way to get that list
+would be to use <cite>tweet.quoted_tweet.hashtags</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of all of the hashtags in the Tweet
+value returned by calling <cite>tweet_entities.get_hashtags</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list (a list of strings)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.id">
 <code class="descname">id</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.id" title="Permalink to this definition">¶</a></dt>
-<dd><p>return the Tweet id as a string</p>
+<dd><p>Tweet snowflake id as a string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Twitter snowflake id, numeric only (no other text)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">867474613139156993</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;867474613139156993&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;user_keys&quot;</span><span class="p">:</span><span class="s2">&quot;user_data&quot;</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tweet</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&quot;867474613139156993&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;tag:search.twitter.com,2005:867474613139156993&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">&quot;actor&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;user_keys&quot;</span><span class="p">:</span><span class="s2">&quot;user_data&quot;</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;some tweet text&quot;</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tweet</span><span class="p">(</span><span class="n">activity_streams_dict</span><span class="p">)</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&quot;867474613139156993&quot;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_id">
 <code class="descname">klout_id</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the user&#8217;s Klout id (a str), if it exists.</p>
+<dd><p>The Klout ID of the user (<cite>str</cite>) (if it exists)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_user.get_klout_id</cite> on <cite>self</cite>
+(if no Klout is present, this returns a <cite>None</cite>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_influence_topics">
 <code class="descname">klout_influence_topics</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_influence_topics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the user&#8217;s Klout influence topics (a list of dicts), if it exists.</p>
+<dd><p>Get the user’s Klout influence topics (a list of dicts), if it exists.
+Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name</cite>, <cite>score</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling
+<cite>tweet_user.get_klout_topics(self, topic_type = ‘influence’)</cite>
+(if no Klout is present, this returns a <cite>None</cite>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_interest_topics">
 <code class="descname">klout_interest_topics</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_interest_topics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the user&#8217;s Klout interest topics (a list of dicts), if it exists.</p>
+<dd><p>Get the user’s Klout interest topics (a list of dicts), if it exists.
+Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name</cite>, <cite>score</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling
+<cite>tweet_user.get_klout_topics(self, topic_type = ‘interest’)</cite>
+(if no Klout is present, this returns a <cite>None</cite>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_profile">
 <code class="descname">klout_profile</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the user&#8217;s Klout profile URL (an str), if it exists.</p>
+<dd><p>The Klout profile URL of the user (<cite>str</cite>) (if it exists)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_user.get_klout_profile</cite> on <cite>self</cite>
+(if no Klout is present, this returns a <cite>None</cite>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_score">
 <code class="descname">klout_score</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_score" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the user&#8217;s Klout score (an int), if it exists.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.mentions_screen_names">
-<code class="descname">mentions_screen_names</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.mentions_screen_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>get a list of &#64; mentions screen names from the tweet</p>
+<dd><p>The Klout score (int) (if it exists) of the user who posted the Tweet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_user.get_klout_score</cite> on <cite>self</cite>
+(if no Klout is present, this returns a None)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.most_unrolled_urls">
 <code class="descname">most_unrolled_urls</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.most_unrolled_urls" title="Permalink to this definition">¶</a></dt>
-<dd><p>return the most unrolled url present</p>
+<dd><p>For each url included in the Tweet “urls”, get the most unrolled
+version available. Only return 1 url string per url in tweet.tweet_links
+In order of preference for “most unrolled”
+(keys from the dict at tweet.tweet_links):</p>
+<ol class="arabic simple">
+<li><cite>unwound</cite>/<cite>url</cite></li>
+<li><cite>expanded_url</cite></li>
+<li><cite>url</cite></li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of urls
+value returned by calling tweet_links.get_most_unrolled_urls on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list (a list of strings)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.name">
 <code class="descname">name</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the user&#8217;s display name</p>
+<dd><p>The display name of the user who posted the Tweet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_user.get_name</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.poll_options">
 <code class="descname">poll_options</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.poll_options" title="Permalink to this definition">¶</a></dt>
-<dd><p>text in the options of a poll, as a list</p>
+<dd><p>The text in the options of a poll as a list.         If there is no poll in the Tweet, return an empty list.         If activity-streams format, raise <cite>NotAvailableError</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling
+<cite>tweet_text.get_poll_options</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list (list of strings)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.profile_location">
 <code class="descname">profile_location</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.profile_location" title="Permalink to this definition">¶</a></dt>
-<dd><p>return location data from the profile location profile location enrichment</p>
+<dd><p>User’s derived location data from the profile location enrichment
+If unavailable, returns <cite>None</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling tweet_geo.get_profile_location on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="p">{</span><span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>         <span class="c1"># Two letter ISO-3166 country code</span>
+<span class="gp">... </span>  <span class="s2">&quot;locality&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span>   <span class="c1"># The locality location (~ city)</span>
+<span class="gp">... </span>  <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;Colorado&quot;</span><span class="p">,</span>    <span class="c1"># The region location (~ state/province)</span>
+<span class="gp">... </span>  <span class="s2">&quot;sub_region&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder&quot;</span><span class="p">,</span> <span class="c1"># The sub-region location (~ county)</span>
+<span class="gp">... </span>  <span class="s2">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Boulder, Colorado, US&quot;</span> <span class="c1"># The full name (excluding sub-region)</span>
+<span class="gp">... </span>  <span class="s2">&quot;geo&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="o">-</span><span class="mi">105</span><span class="p">]</span>        <span class="c1"># lat/long value that coordinate that corresponds to</span>
+<span class="gp">... </span>                           <span class="c1"># the lowest granularity location for where the user</span>
+<span class="gp">... </span>                           <span class="c1"># who created the Tweet is from</span>
+<span class="gp">... </span> <span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.quote_or_rt_text">
 <code class="descname">quote_or_rt_text</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.quote_or_rt_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>the text of a quote tweet or a retweet</p>
+<dd><p>The quoted or retweeted text in a Tweet
+(this is not the text entered by the posting user)</p>
+<ul class="simple">
+<li>tweet: empty string (there is no quoted or retweeted text)</li>
+<li>quote: only the text of the quoted Tweet</li>
+<li>retweet: the text of the retweet</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling
+tweet_text.get_quote_or_rt_text on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.quote_tweet">
-<code class="descname">quote_tweet</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.quote_tweet" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the quote tweet and return a tweet obj of the quote tweet</p>
+<dt id="tweet_parser.tweet.Tweet.quoted_tweet">
+<code class="descname">quoted_tweet</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.quoted_tweet" title="Permalink to this definition">¶</a></dt>
+<dd><p>The quoted Tweet as a Tweet object
+If the Tweet is not a quote Tweet, return None
+If the quoted Tweet payload cannot be loaded as a Tweet, this will
+raise a “NotATweetError”</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A Tweet representing the quoted status (or None)
+(see tweet_embeds.get_quote_tweet, this is that value as a Tweet)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – if quoted tweet is malformed</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.quoted_mentions">
-<code class="descname">quoted_mentions</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.quoted_mentions" title="Permalink to this definition">¶</a></dt>
-<dd><p>users mentioned in the quoted Tweet don&#8217;t get included
-which doesn&#8217;t seem that intuitive, so I&#8217;m adding a getter to add them</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.quoted_user">
-<code class="descname">quoted_user</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.quoted_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>quoted users don&#8217;t get included in the &#64; mentions
-which doesn&#8217;t seem that intuitive, so I&#8217;m adding a getter to add them</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.retweet">
-<code class="descname">retweet</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.retweet" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the retweet and return a tweet obj of the retweet</p>
+<dt id="tweet_parser.tweet.Tweet.retweeted_tweet">
+<code class="descname">retweeted_tweet</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.retweeted_tweet" title="Permalink to this definition">¶</a></dt>
+<dd><p>The retweeted Tweet as a Tweet object
+If the Tweet is not a Retweet, return None
+If the Retweet payload cannot be loaded as a Tweet, this will
+raise a <cite>NotATweetError</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A Tweet representing the retweeted status (or None)
+(see tweet_embeds.get_retweet, this is that value as a Tweet)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – if retweeted tweet is malformed</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.screen_name">
 <code class="descname">screen_name</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.screen_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the user screen name (&#64; handle)</p>
+<dd><p>The screen name (&#64; handle) of the user who posted the Tweet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_user.get_screen_name</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.text">
 <code class="descname">text</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.text" title="Permalink to this definition">¶</a></dt>
-<dd><p>literally the contents of &#8216;text&#8217; or &#8216;body&#8217;</p>
+<dd><p>The contents of “text” (original format)
+or “body” (activity streams format)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_text.get_text</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.tweet_links">
 <code class="descname">tweet_links</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.tweet_links" title="Permalink to this definition">¶</a></dt>
-<dd><p>if unrolled urls are availble, return unrolled urls
-if unrolled urls are not availble, return whatever link is availble in entities
-if there are no links, return an empty list</p>
+<dd><p>The links that are included in the Tweet as “urls”
+(if there are no links, this is an empty list)
+This includes links that are included in quoted or retweeted Tweets
+Returns unrolled or expanded_url information if it is available</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of dictionaries containing information
+about urls. Each dictionary entity can have these keys; without
+unwound url or expanded url Twitter data enrichments many of these
+fields will be missing.
+(value returned by calling tweet_links.get_tweet_links on <cite>self</cite>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list (list of dicts)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[{</span>
+<span class="gp">... </span>  <span class="c1"># url that shows up in the tweet text</span>
+<span class="gp">... </span>  <span class="s1">&#39;display_url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrinc...&quot;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="c1"># long (expanded) url</span>
+<span class="gp">... </span>  <span class="s1">&#39;expanded_url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrincessFi&quot;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="c1"># characters where the display link is</span>
+<span class="gp">... </span>  <span class="s1">&#39;indices&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">88</span><span class="p">],</span>
+<span class="gp">... </span>  <span class="s1">&#39;unwound&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>     <span class="c1"># description from the linked webpage</span>
+<span class="gp">... </span>     <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;the Twitter profile of RobotPrincessFi&quot;</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="c1"># title of the webpage</span>
+<span class="gp">... </span>     <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;the Twitter profile of RobotPrincessFi&quot;</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="c1"># long (expanded) url}</span>
+<span class="gp">... </span>     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;https://twitter.com/RobotPrincessFi&quot;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="c1"># the url that tweet directs to, often t.co</span>
+<span class="gp">... </span>  <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s2">&quot;t.co/1234&quot;</span><span class="p">}]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.tweet_type">
 <code class="descname">tweet_type</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.tweet_type" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>3 options</em> &#8211; tweet, quote, and retweet</p>
+<dd><p><em>The type of Tweet this is (3 options</em> – tweet, quote, and retweet)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(“tweet”,”quote” or “retweet” only)
+value returned by calling <cite>tweet_text.get_tweet_type</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.user_entered_text">
 <code class="descname">user_entered_text</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.user_entered_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>text that the actor actually entered
-not the text of a quote-tweet or the text of a retweet
-all of the text
-(not truncated, includes &#64; mention relpies and long links)</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.user_entered_text_without_links">
-<code class="descname">user_entered_text_without_links</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.user_entered_text_without_links" title="Permalink to this definition">¶</a></dt>
-<dd><p>same as user_entered_text, but links are removed</p>
+<dd><p>The text that the posting user entered</p>
+<p><em>tweet</em>: untruncated (includes &#64;-mention replies and long links)
+text of an original Tweet</p>
+<p><em>quote tweet</em>: untruncated poster-added content in a quote-tweet</p>
+<p><em>retweet</em>: empty string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if <cite>tweet.tweet_type == “retweet”</cite>, returns an empty string
+else, returns the value of <cite>tweet_text.get_full_text(self)</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.user_id">
 <code class="descname">user_id</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.user_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the user id, as a string</p>
+<dd><p>The Twitter ID of the user who posted the Tweet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling <cite>tweet_user.get_user_id</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.user_mentions">
 <code class="descname">user_mentions</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.user_mentions" title="Permalink to this definition">¶</a></dt>
-<dd><p>get a list of &#64; mention dicts from the tweet</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tweet_parser.tweet.Tweet.user_mentions_ids">
-<code class="descname">user_mentions_ids</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.user_mentions_ids" title="Permalink to this definition">¶</a></dt>
-<dd><p>get a list of &#64; mentions user ids from the tweet</p>
+<dd><p>The &#64;-mentions in the Tweet as dictionaries.
+Note that in the case of a quote-tweet, this does not return the users
+mentioned in the quoted status. The recommended way to get that list
+would be to use ‘tweet.quoted_tweet.user_mentions’.
+Also note that in the caes of a quote-tweet, the list of &#64;-mentioned
+users does not include the user who authored the original (quoted) Tweet,
+you can get the author of the quoted tweet using
+<cite>tweet.quoted_tweet.user_id</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">1 item per &#64; mention,
+value returned by calling <cite>tweet_entities.get_user_mentions</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list (list of dicts)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span>
+<span class="gp">... </span>  <span class="c1">#characters where the @ mention appears</span>
+<span class="gp">... </span>  <span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">26</span><span class="p">],</span>
+<span class="gp">... </span>  <span class="c1">#id of @ mentioned user as a string</span>
+<span class="gp">... </span>  <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="c1">#screen_name of @ mentioned user</span>
+<span class="gp">... </span>  <span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="c1">#display name of @ mentioned user</span>
+<span class="gp">... </span>  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fiona&quot;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="c1">#id of @ mentioned user as an int</span>
+<span class="gp">... </span>  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2382763597</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -324,8 +733,8 @@ used for other validation code as well.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>tweet</strong> (<em>dict/Tweet</em>) &#8211; the tweet payload</li>
-<li><strong>validation_checking</strong> (<em>bool</em>) &#8211; check for valid key structure in a tweet.</li>
+<li><strong>tweet</strong> (<em>dict/Tweet</em>) – the tweet payload</li>
+<li><strong>validation_checking</strong> (<em>bool</em>) – check for valid key structure in a tweet.</li>
 </ul>
 </td>
 </tr>
@@ -343,8 +752,8 @@ in this level and all nexstted levels of the tweet.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; the tweet dict</li>
-<li><strong>parent_key</strong> (<em>str</em>) &#8211; key from which this process will start, e.g., you can
+<li><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – the tweet dict</li>
+<li><strong>parent_key</strong> (<em>str</em>) – key from which this process will start, e.g., you can
 get keys only under some key that is not the top-level key.</li>
 </ul>
 </td>
@@ -372,7 +781,7 @@ get keys only under some key that is not the top-level key.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; tweet in qustion</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – tweet in qustion</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Bool</td>
 </tr>
@@ -398,9 +807,9 @@ get keys only under some key that is not the top-level key.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tweet_keys_list</strong> (<em>list</em>) &#8211; the keys present in a tweet</li>
-<li><strong>superset_keys</strong> (<em>set</em>) &#8211; the set of all possible keys for a tweet</li>
-<li><strong>minset_keys</strong> (<em>set</em>) &#8211; the set of minimal keys expected in a tweet.</li>
+<li><strong>tweet_keys_list</strong> (<em>list</em>) – the keys present in a tweet</li>
+<li><strong>superset_keys</strong> (<em>set</em>) – the set of all possible keys for a tweet</li>
+<li><strong>minset_keys</strong> (<em>set</em>) – the set of minimal keys expected in a tweet.</li>
 </ul>
 </td>
 </tr>
@@ -450,36 +859,44 @@ get keys only under some key that is not the top-level key.</li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">tweet_parser package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
-<li><a class="reference internal" href="#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
-<li><a class="reference internal" href="#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
-<li><a class="reference internal" href="#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
-<li><a class="reference internal" href="#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
-<li><a class="reference internal" href="#module-tweet_parser">Module contents</a></li>
+<h1 class="logo"><a href="index.html">Tweet Parser</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Tweet Parser</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tweet_parser.getter_methods.html">tweet_parser.getter_methods package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tweet_parser">Module contents</a></li>
 </ul>
 </li>
 </ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">tweet_parser</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Tweet Parser</a></li>
       <li>Next: <a href="tweet_parser.getter_methods.html" title="next chapter">tweet_parser.getter_methods package</a></li>
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/tweet_parser.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -498,7 +915,7 @@ get keys only under some key that is not the top-level key.</li>
       &copy;2017, Twitter DDIS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

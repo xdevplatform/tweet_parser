@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>tweet_parser &#8212; Tweet Parser 1 documentation</title>
-    
+    <title>Tweet Parser &#8212; Tweet Parser 1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -34,7 +31,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -43,7 +40,7 @@
           <div class="body" role="main">
             
   <div class="section" id="tweet-parser">
-<h1>tweet_parser<a class="headerlink" href="#tweet-parser" title="Permalink to this headline">¶</a></h1>
+<h1>Tweet Parser<a class="headerlink" href="#tweet-parser" title="Permalink to this headline">¶</a></h1>
 <p>Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales</p>
 <div class="section" id="goal">
 <h2>Goal:<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
@@ -54,8 +51,10 @@ activity-streams and original formats.</p>
 <h2>Status:<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <p>This package can be installed by cloning the repo and using
 <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>. First
-probably-bug-free release is 1.0.3 (current as of 8/7/2017). No
-promises.</p>
+probably-bug-free release is 1.0.3. Current release (As of 8/14/2017) is
+1.0.5. As of version 1.0.5, the package works with Python 2 and 3, and
+the API should be relatively stable. Recommended to use the more recent
+release.</p>
 <p>Currently, this parser does not explicitly support Public API Twitter
 data.</p>
 </div>
@@ -78,7 +77,7 @@ package) would be:</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">created_at_string</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">all_text</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>I&#8217;ve also added simple command-line utility:</p>
+<p>I’ve also added simple command-line utility:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">parse_tweets</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
 </pre></div>
 </div>
@@ -97,11 +96,11 @@ conditional statements should be added to this test.</p>
 <p>An option also exists for run-time checking of Tweet payload formats.
 This compares the set of all Tweet field keys to a superset of all
 possible keys, as well as a minimum set of all required keys, to make
-sure that each newly loaded Tweet fits those parameters. This shouldn&#8217;t
-be run every time you load Tweets (for one, it&#8217;s slow), but is
+sure that each newly loaded Tweet fits those parameters. This shouldn’t
+be run every time you load Tweets (for one, it’s slow), but is
 implemented to use as a periodic check against Tweet format changes.
-This option is enabled with <code class="docutils literal"><span class="pre">--do_format_checking</span></code> on the command
-line, and by setting the keyword argument <code class="docutils literal"><span class="pre">do_format_checking</span></code> to
+This option is enabled with <code class="docutils literal"><span class="pre">--do_format_validation</span></code> on the command
+line, and by setting the keyword argument <code class="docutils literal"><span class="pre">do_format_validation</span></code> to
 <code class="docutils literal"><span class="pre">True</span></code> when initializing a <code class="docutils literal"><span class="pre">Tweet</span></code> object.</p>
 </div>
 <div class="section" id="contributing">
@@ -135,7 +134,7 @@ update the last number (Z of X.Y.Z) in <code class="docutils literal"><span clas
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">tweet_parser</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tweet Parser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tweet_parser.html">tweet_parser package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tweet_parser.getter_methods.html">tweet_parser.getter_methods package</a></li>
@@ -169,18 +168,22 @@ update the last number (Z of X.Y.Z) in <code class="docutils literal"><span clas
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">tweet_parser</a><ul>
-<li><a class="reference internal" href="#goal">Goal:</a></li>
-<li><a class="reference internal" href="#status">Status:</a></li>
-<li><a class="reference internal" href="#usage">Usage:</a></li>
-<li><a class="reference internal" href="#testing">Testing:</a></li>
-<li><a class="reference internal" href="#contributing">Contributing</a></li>
+<h1 class="logo"><a href="#">Tweet Parser</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tweet_parser.html">tweet_parser package</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
@@ -189,13 +192,6 @@ update the last number (Z of X.Y.Z) in <code class="docutils literal"><span clas
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/index.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -214,7 +210,7 @@ update the last number (Z of X.Y.Z) in <code class="docutils literal"><span clas
       &copy;2017, Twitter DDIS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
