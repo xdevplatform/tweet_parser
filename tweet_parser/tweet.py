@@ -511,5 +511,12 @@ class Tweet(dict):
 
     @lazy_property
     def gnip_matching_rules(self):
-        return gnip_fields.get_matching_rules(self)
+        """
+        Get the Gnip tagged rules that this tweet matched.
 
+        Returns:
+            List of potential tags with the matching rule or None if no rules
+            are defined.
+
+        """
+        return gnip_fields.get_matching_rules(self)
