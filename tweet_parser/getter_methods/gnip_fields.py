@@ -6,7 +6,7 @@ def get_matching_rules(tweet):
         tweet (Tweet): the tweet
 
     Returns:
-        list of potential [{"tag": "rule"}] pairs from standard rulesets or
+        list: potential ``[{"tag": "rule"}]`` pairs from standard rulesets or
         None if no rules or no field gnip is found.
 
     """
