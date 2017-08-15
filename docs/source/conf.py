@@ -114,6 +114,8 @@ html_sidebars = {
 #                    'donate.html',
                   ]
             }
+html_theme_options = {'page_width':'1140px',
+                      'sidebar_width':'280px'}
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
