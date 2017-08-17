@@ -6,6 +6,7 @@ from tweet_parser import tweet_checking
 from tweet_parser.getter_methods import tweet_date, tweet_user
 from tweet_parser.getter_methods import tweet_text, tweet_geo, tweet_links
 from tweet_parser.getter_methods import tweet_entities, tweet_embeds
+from tweet_parser.getter_methods import gnip_fields
 
 
 class Tweet(dict):
@@ -507,3 +508,15 @@ class Tweet(dict):
                                      " Failed with '{}'".format(embedded_tweet, nate)))
         else:
             return None
+
+    @lazy_property
+    def gnip_matching_rules(self):
+        """
+        Get the Gnip tagged rules that this tweet matched.
+
+        Returns:
+            List of potential tags with the matching rule or None if no rules
+            are defined.
+
+        """
+        return gnip_fields.get_matching_rules(self)
