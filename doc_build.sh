@@ -18,6 +18,7 @@ fi
 
 pwd
 echo "removing current files"
+rm -rf *.egg-info
 git pull origin gh-pages
 rm -r *.html *.js
 touch .nojekyll
