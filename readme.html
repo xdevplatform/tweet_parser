@@ -1,13 +1,16 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>Tweet Parser &#8212; Tweet Parser 1 documentation</title>
+    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -30,7 +33,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body>
+  <body role="document">
   
 
     <div class="document">
@@ -51,7 +54,7 @@ activity-streams and original formats.</p>
 <p>This package can be installed by cloning the repo and using
 <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>. First
 probably-bug-free release is 1.0.3. Current release (As of 8/14/2017) is
-1.0.5. As of version 1.0.5, the package works with Python 2 and 3, and
+1.0.5. As of version 1.0.6, the package works with Python 2 and 3, and
 the API should be relatively stable. Recommended to use the more recent
 release.</p>
 <p>Currently, this parser does not explicitly support Public API Twitter
@@ -76,7 +79,7 @@ package) would be:</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">created_at_string</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">all_text</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>I’ve also added simple command-line utility:</p>
+<p>I&#8217;ve also added simple command-line utility:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">parse_tweets</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
 </pre></div>
 </div>
@@ -95,8 +98,8 @@ conditional statements should be added to this test.</p>
 <p>An option also exists for run-time checking of Tweet payload formats.
 This compares the set of all Tweet field keys to a superset of all
 possible keys, as well as a minimum set of all required keys, to make
-sure that each newly loaded Tweet fits those parameters. This shouldn’t
-be run every time you load Tweets (for one, it’s slow), but is
+sure that each newly loaded Tweet fits those parameters. This shouldn&#8217;t
+be run every time you load Tweets (for one, it&#8217;s slow), but is
 implemented to use as a periodic check against Tweet format changes.
 This option is enabled with <code class="docutils literal"><span class="pre">--do_format_validation</span></code> on the command
 line, and by setting the keyword argument <code class="docutils literal"><span class="pre">do_format_validation</span></code> to
@@ -180,7 +183,7 @@ update the last number (Z of X.Y.Z) in <code class="docutils literal"><span clas
       &copy;2017, Twitter DDIS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
