@@ -10,6 +10,7 @@ setup(name='tweet_parser',
       description="Tools for Tweet parsing",
       url='https://github.com/tw-ddis/tweet_parser',
       install_requires=[],
+      include_package_data=True,
       package_data={
           'tweet_parser': ['test/tweet_payload_examples/activity_streams_examples.json',
                            'test/tweet_payload_examples/original_format_examples.json',

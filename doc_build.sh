@@ -18,6 +18,7 @@ fi
 
 pwd
 echo "removing current files"
+rm -rf *.egg-info
 git pull origin gh-pages
 rm -r *.html *.js
 touch .nojekyll
@@ -27,10 +28,10 @@ pandoc -i README.md -o docs/source/README.rst
 mv docs/* .
 make html
 mv -fv build/html/* ./
-rm -r tweet_parser docs build Makefile source README.md
-echo "--------------------------------------------------------"
-echo "docs built; please review these changes and then run the following:"
-echo "--------------------------------------------------------"
+rm -r tweet_parser docs build Makefile source README.md __pycache__/
+echo "--------------------------------------------------------------------"
+echo " docs built; please review these changes and then run the following:"
+echo "--------------------------------------------------------------------"
 echo git add -A
 echo git commit -m \"Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit | grep commit`\"
 echo git push origin gh-pages
