@@ -133,6 +133,38 @@ def get_tweet_type(tweet):
                 return "tweet"
 
 
+def get_lang(tweet):
+    """
+    Get the language that the Tweet is written in.
+
+    Args:
+        tweet (Tweet or dict): A Tweet object or dictionary
+
+    Returns:
+        str: 2-letter BCP 47 language code (or None if undefined)
+
+    Example:
+        >>> from tweet_parser.getter_methods.tweet_text import get_lang
+        >>> original = {"created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...             "lang": "en"}
+        >>> get_lang(original)
+        'en'
+
+        >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
+        ...             "twitter_lang": "en"}
+        >>> get_lang(activity)
+        'en'
+    """
+    if is_original_format(tweet):
+        lang_field = "lang"
+    else:
+        lang_field = "twitter_lang"
+    if tweet[lang_field] is not None and tweet[lang_field] != "und":
+            return tweet[lang_field]
+    else:
+        return None
+
+
 def get_poll_options(tweet):
     """
     Get the text in the options of a poll as a list

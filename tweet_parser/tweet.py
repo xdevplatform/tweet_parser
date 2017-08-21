@@ -262,6 +262,17 @@ class Tweet(dict):
         return tweet_text.get_full_text(self)
 
     @lazy_property
+    def lang(self):
+        """
+        The language that the Tweet is written in.
+
+        Returns:
+            str: 2-letter BCP 47 language code (or None if undefined)
+            Value returned by calling `tweet_text.get_lang` on `self`
+        """
+        return tweet_text.get_lang(self)
+
+    @lazy_property
     def poll_options(self):
         """
         The text in the options of a poll as a list. \
