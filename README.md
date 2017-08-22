@@ -84,7 +84,8 @@ module. A getter for some property should:
 - have a corresponding method named `get_<property>(tweet)` in the `getter_methods` module 
 that implements the logic, nested uner the appropriate submodule (a text property 
 probably lives under the `getter_methods.tweet_text` submodule)
-- provide the exact same output for original format and activity-streams format Tweet input
+- provide the exact same output for original format and activity-streams format Tweet input,
+except in the case where certain information is unavailable (see `get_poll_options`).
 
 In general, prefer that the `get_<property>` work on a simple Tweet dictionary as well as a
 Tweet object (this makes unit testing easier). This means that you might use 
