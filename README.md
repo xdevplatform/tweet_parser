@@ -1,5 +1,6 @@
 # Tweet Parser 
-Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
+Authors: [Fiona Pigott](https://github.com/fionapigott), [Jeff Kolb](https://github.com/jeffakolb),
+[Josh Montague](https://github.com/jrmontag), [Aaron Gonzales](https://github.com/binaryaaron)
 
 ## Goal: 
 Allow reliable parsing of Tweets delivered by the Gnip platform, in both
