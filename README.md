@@ -1,5 +1,6 @@
 # Tweet Parser 
-Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales
+Authors: [Fiona Pigott](https://github.com/fionapigott), [Jeff Kolb](https://github.com/jeffakolb),
+[Josh Montague](https://github.com/jrmontag), [Aaron Gonzales](https://github.com/binaryaaron)
 
 ## Goal: 
 Allow reliable parsing of Tweets delivered by the Gnip platform, in both
@@ -66,11 +67,47 @@ command line, and by setting the keyword argument `do_format_validation` to
 Submit bug reports or feature requests through GitHub Issues, with
 self-contained minimum working examples where appropriate.   
 
-To contribute code, the guidelines specified in the [`pandas`
-documentation](http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code)
-are a great reference. Fork this repo, create your own local feature branch,
-and create an isolated virtual environment (there are currently no external
-dependencies for this library). Using a Python linter is recommened. 
+To contribute code, fork this repo, create your own local feature branch, make
+your changes, test them, and submit a pull request to the master branch.
+The contribution guidelines specified in the [`pandas` documentation](
+http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code)
+are a great reference.
+
+When you submit a change, change the version number. 
+For most minor, non-breaking changes (fix a bug, add a getter, 
+package naming/structure remains the same), increment the last
+number (X.Y.Z -> X.Y.Z+1) in `setup.py`.
+
+### Guidelines for new getters
+A _getter_ is a method in the Tweet class and the accompanying code in the `getter_methods` 
+module. A getter for some property should:
+- be named `<property>`, a method in `Tweet` decorated with `@lazy_property`
+- have a corresponding method named `get_<property>(tweet)` in the `getter_methods` module 
+that implements the logic, nested uner the appropriate submodule (a text property 
+probably lives under the `getter_methods.tweet_text` submodule)
+- provide the exact same output for original format and activity-streams format Tweet input,
+except in the case where certain information is unavailable (see `get_poll_options`).
+
+In general, prefer that the `get_<property>` work on a simple Tweet dictionary as well as a
+Tweet object (this makes unit testing easier). This means that you might use 
+`is_original_format(tweet)` rather than `tweet.is_original_format` to check format inside of a getter.
+
+Adding unit tests for your getter in the docstrings in the "Example" section is helpful.
+See existing getters for examples.
+
+In general, make detailed docstrings with examples in `get_<property>`, and more concise
+dosctrings in `Tweet`, with a reference for where to find the `get_<property>` getter that
+implements the logic.
+
+### Style
+Adhere to the PEP8 style. Using a Python linter (like flake8) is reccomended.
+
+For documentation style, use [Google-style docstrings](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html).
+Refer to the [Python docstest documentation](https://docs.python.org/3/library/doctest.html) for doctest guidelines.
+
+### Testing
+Create an isolated virtual environment for testing (there are currently no external
+dependencies for this library).
 
 Test your new feature by reinstalling the library in your virtual environment
 and running the test script as shown below. Fix any issues until all tests
@@ -91,6 +128,5 @@ input types produce the intended output.
 (env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c <your new field>
 ```
 
-Change the version number. For most minor, non-breaking changes (fix a bug, add
-a getter, package naming/structure remains the same), simply update the last
-number (Z of X.Y.Z) in `setup.py`.
+And lastly, if you've added new docstrings and doctests, from the `docs` directory,
+run `make html` (to check docstring formatting) and `make doctest` to run the doctests.
