@@ -99,6 +99,7 @@ Guidelines for new getters
 
 A *getter* is a method in the Tweet class and the accompanying code in
 the ``getter_methods`` module. A getter for some property should:
+
 - be named ``<property>``, a method in ``Tweet`` decorated with
   ``@lazy_property``
 - have a corresponding method named
