@@ -85,8 +85,8 @@ self-contained minimum working examples where appropriate.
 
 To contribute code, fork this repo, create your own local feature
 branch, make your changes, test them, and submit a pull request to the
-master branch. The contribution guidelines specified in the ```pandas``
-documentation <http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code>`__
+master branch. The contribution guidelines specified in the ``pandas``
+`documentation <http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code>`__
 are a great reference.
 
 When you submit a change, change the version number. For most minor,
