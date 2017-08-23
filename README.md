@@ -75,8 +75,8 @@ are a great reference.
 
 When you submit a change, change the version number. 
 For most minor, non-breaking changes (fix a bug, add a getter, 
-package naming/structure remains the same), simply update the last
-number (Z of X.Y.Z) in `setup.py`.
+package naming/structure remains the same), increment the last
+number (X.Y.Z -> X.Y.Z+1) in `setup.py`.
 
 ### Guidelines for new getters
 A _getter_ is a method in the Tweet class and the accompanying code in the `getter_methods` 
@@ -91,8 +91,6 @@ except in the case where certain information is unavailable (see `get_poll_optio
 In general, prefer that the `get_<property>` work on a simple Tweet dictionary as well as a
 Tweet object (this makes unit testing easier). This means that you might use 
 `is_original_format(tweet)` rather than `tweet.is_original_format` to check format inside of a getter.
-In situations where it doesn't make sense to _not_ use `Tweet` properties inside of a getter,
-it's okay to use them.
 
 Adding unit tests for your getter in the docstrings in the "Example" section is helpful.
 See existing getters for examples.
@@ -102,7 +100,7 @@ dosctrings in `Tweet`, with a reference for where to find the `get_<property>` g
 implements the logic.
 
 ### Style
-Adhere to the PEP8 style. Using a Python linter is reccomended.
+Adhere to the PEP8 style. Using a Python linter (like flake8) is reccomended.
 
 For documentation style, use [Google-style docstrings](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html).
 Refer to the [Python docstest documentation](https://docs.python.org/3/library/doctest.html) for doctest guidelines.
