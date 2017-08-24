@@ -85,8 +85,8 @@ self-contained minimum working examples where appropriate.
 
 To contribute code, fork this repo, create your own local feature
 branch, make your changes, test them, and submit a pull request to the
-master branch. The contribution guidelines specified in the ```pandas``
-documentation <http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code>`__
+master branch. The contribution guidelines specified in the ``pandas``
+`documentation <http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code>`__
 are a great reference.
 
 When you submit a change, change the version number. For most minor,
@@ -98,15 +98,18 @@ Guidelines for new getters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A *getter* is a method in the Tweet class and the accompanying code in
-the ``getter_methods`` module. A getter for some property should: - be
-named ``<property>``, a method in ``Tweet`` decorated with
-``@lazy_property`` - have a corresponding method named
-``get_<property>(tweet)`` in the ``getter_methods`` module that
-implements the logic, nested uner the appropriate submodule (a text
-property probably lives under the ``getter_methods.tweet_text``
-submodule) - provide the exact same output for original format and
-activity-streams format Tweet input, except in the case where certain
-information is unavailable (see ``get_poll_options``).
+the ``getter_methods`` module. A getter for some property should:
+
+- be named ``<property>``, a method in ``Tweet`` decorated with
+  ``@lazy_property``
+- have a corresponding method named
+  ``get_<property>(tweet)`` in the ``getter_methods`` module that
+  implements the logic, nested uner the appropriate submodule (a text
+  property probably lives under the ``getter_methods.tweet_text``
+  submodule) 
+- provide the exact same output for original format and
+  activity-streams format Tweet input, except in the case where certain
+  information is unavailable (see ``get_poll_options``).
 
 In general, prefer that the ``get_<property>`` work on a simple Tweet
 dictionary as well as a Tweet object (this makes unit testing easier).
