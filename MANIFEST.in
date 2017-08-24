@@ -1,3 +1,0 @@
-include test/tweet_payload_examples/activity_streams_examples.json
-include test/tweet_payload_examples/original_format_examples.json
-include test/tweet_payload_examples/broken_and_unsupported_payloads/*.json
