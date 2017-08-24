@@ -1,19 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(name='tweet_parser',
-      packages=find_packages(),
-      scripts=["tools/parse_tweets.py"],
-      version='1.0.6',
-      license='MIT',
-      author='Fiona Pigott',
-      author_email='fpigott@twitter.com',
       description="Tools for Tweet parsing",
       url='https://github.com/tw-ddis/tweet_parser',
+      author='Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales',
+      long_description=open('README.rst', 'r').read(),
+      author_email='fpigott@twitter.com',
+      license='MIT',
+      version='1.0.6',
+      packages=find_packages(),
+      scripts=["tools/parse_tweets.py"],
       install_requires=[],
-      include_package_data=True,
-      package_data={
-          'tweet_parser': ['test/tweet_payload_examples/activity_streams_examples.json',
-                           'test/tweet_payload_examples/original_format_examples.json',
-                           'test/tweet_payload_examples/broken_and_unsupported_payloads/*.json'],
-          },
       )
