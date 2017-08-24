@@ -20,7 +20,7 @@ This package can be installed by cloning the repo and using
 probably-bug-free release is 1.0.3. As of version 1.0.5, the package
 works with Python 2 and 3, and the API should be relatively stable.
 Recommended to use the more recent release. Current release (As of
-8/14/2017) is 1.0.6.
+8/24/2017) is 1.0.7.
 
 Currently, this parser does not explicitly support Public API Twitter
 data.
