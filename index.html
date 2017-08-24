@@ -41,7 +41,10 @@
             
   <div class="section" id="tweet-parser">
 <h1>Tweet Parser<a class="headerlink" href="#tweet-parser" title="Permalink to this headline">¶</a></h1>
-<p>Authors: Fiona Pigott, Jeff Kolb, Josh Montague, Aaron Gonzales</p>
+<p>Authors: <a class="reference external" href="https://github.com/fionapigott">Fiona Pigott</a>, <a class="reference external" href="https://github.com/jeffakolb">Jeff
+Kolb</a>, <a class="reference external" href="https://github.com/jrmontag">Josh
+Montague</a>, <a class="reference external" href="https://github.com/binaryaaron">Aaron
+Gonzales</a></p>
 <div class="section" id="goal">
 <h2>Goal:<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
 <p>Allow reliable parsing of Tweets delivered by the Gnip platform, in both
@@ -107,12 +110,56 @@ line, and by setting the keyword argument <code class="docutils literal"><span c
 <h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
 <p>Submit bug reports or feature requests through GitHub Issues, with
 self-contained minimum working examples where appropriate.</p>
-<p>To contribute code, the guidelines specified in the <code class="docutils literal"><span class="pre">`pandas</span></code>
-documentation &lt;<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code">http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code</a>&gt;`__
-are a great reference. Fork this repo, create your own local feature
-branch, and create an isolated virtual environment (there are currently
-no external dependencies for this library). Using a Python linter is
-recommened.</p>
+<p>To contribute code, fork this repo, create your own local feature
+branch, make your changes, test them, and submit a pull request to the
+master branch. The contribution guidelines specified in the <code class="docutils literal"><span class="pre">pandas</span></code>
+<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code">documentation</a>
+are a great reference.</p>
+<p>When you submit a change, change the version number. For most minor,
+non-breaking changes (fix a bug, add a getter, package naming/structure
+remains the same), increment the last number (X.Y.Z -&gt; X.Y.Z+1) in
+<code class="docutils literal"><span class="pre">setup.py</span></code>.</p>
+<div class="section" id="guidelines-for-new-getters">
+<h3>Guidelines for new getters<a class="headerlink" href="#guidelines-for-new-getters" title="Permalink to this headline">¶</a></h3>
+<p>A <em>getter</em> is a method in the Tweet class and the accompanying code in
+the <code class="docutils literal"><span class="pre">getter_methods</span></code> module. A getter for some property should:</p>
+<ul class="simple">
+<li>be named <code class="docutils literal"><span class="pre">&lt;property&gt;</span></code>, a method in <code class="docutils literal"><span class="pre">Tweet</span></code> decorated with
+<code class="docutils literal"><span class="pre">&#64;lazy_property</span></code></li>
+<li>have a corresponding method named
+<code class="docutils literal"><span class="pre">get_&lt;property&gt;(tweet)</span></code> in the <code class="docutils literal"><span class="pre">getter_methods</span></code> module that
+implements the logic, nested uner the appropriate submodule (a text
+property probably lives under the <code class="docutils literal"><span class="pre">getter_methods.tweet_text</span></code>
+submodule)</li>
+<li>provide the exact same output for original format and
+activity-streams format Tweet input, except in the case where certain
+information is unavailable (see <code class="docutils literal"><span class="pre">get_poll_options</span></code>).</li>
+</ul>
+<p>In general, prefer that the <code class="docutils literal"><span class="pre">get_&lt;property&gt;</span></code> work on a simple Tweet
+dictionary as well as a Tweet object (this makes unit testing easier).
+This means that you might use <code class="docutils literal"><span class="pre">is_original_format(tweet)</span></code> rather than
+<code class="docutils literal"><span class="pre">tweet.is_original_format</span></code> to check format inside of a getter.</p>
+<p>Adding unit tests for your getter in the docstrings in the “Example”
+section is helpful. See existing getters for examples.</p>
+<p>In general, make detailed docstrings with examples in
+<code class="docutils literal"><span class="pre">get_&lt;property&gt;</span></code>, and more concise dosctrings in <code class="docutils literal"><span class="pre">Tweet</span></code>, with a
+reference for where to find the <code class="docutils literal"><span class="pre">get_&lt;property&gt;</span></code> getter that
+implements the logic.</p>
+</div>
+<div class="section" id="style">
+<h3>Style<a class="headerlink" href="#style" title="Permalink to this headline">¶</a></h3>
+<p>Adhere to the PEP8 style. Using a Python linter (like flake8) is
+reccomended.</p>
+<p>For documentation style, use <a class="reference external" href="http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google-style
+docstrings</a>.
+Refer to the <a class="reference external" href="https://docs.python.org/3/library/doctest.html">Python docstest
+documentation</a> for
+doctest guidelines.</p>
+</div>
+<div class="section" id="id1">
+<h3>Testing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Create an isolated virtual environment for testing (there are currently
+no external dependencies for this library).</p>
 <p>Test your new feature by reinstalling the library in your virtual
 environment and running the test script as shown below. Fix any issues
 until all tests pass.</p>
@@ -128,9 +175,9 @@ that both input types produce the intended output.</p>
 (env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c &lt;your new field&gt;
 </pre></div>
 </div>
-<p>Change the version number. For most minor, non-breaking changes (fix a
-bug, add a getter, package naming/structure remains the same), simply
-update the last number (Z of X.Y.Z) in <code class="docutils literal"><span class="pre">setup.py</span></code>.</p>
+<p>And lastly, if you’ve added new docstrings and doctests, from the
+<code class="docutils literal"><span class="pre">docs</span></code> directory, run <code class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></code> (to check docstring formatting)
+and <code class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></code> to run the doctests.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
@@ -150,6 +197,7 @@ update the last number (Z of X.Y.Z) in <code class="docutils literal"><span clas
 </ul>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
