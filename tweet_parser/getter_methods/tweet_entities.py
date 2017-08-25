@@ -45,7 +45,7 @@ def get_media_entities(tweet):
 
     Returns:
         list or None: the list of dicts containing each media's metadata in the
-        tweeet.
+        tweet.
 
     Example:
         >>> from tweet_parser.getter_methods.tweet_entities import get_media_entities
@@ -165,9 +165,6 @@ def get_user_mentions(tweet):
         list (list of dicts): 1 item per @ mention. Note that the fields here
         aren't enforced by the parser, they are simply the fields as they
         appear in a Tweet data payload.
-
-    Example:
-
 
     Example:
         >>> from tweet_parser.getter_methods.tweet_entities import get_user_mentions
