@@ -28,7 +28,7 @@ def get_entities(tweet):
         """
 
     entity_key = "entities" if is_original_format(tweet) else "twitter_entities"
-    return tweet.get(entity_key)
+    return tweet.get(entity_key, [])
 
 
 def get_media_entities(tweet):
@@ -88,9 +88,7 @@ def get_media_entities(tweet):
 
     ext_ents_key = "extended_entities" if is_original_format(tweet) else "twitter_extended_entities"
     ext_ents = tweet.get(ext_ents_key)
-    if ext_ents is None:
-        return None
-    media = ext_ents.get("media")
+    media = ext_ents.get("media", []) if ext_ents else []
     return media
 
 
@@ -102,7 +100,7 @@ def get_media_urls(tweet):
         tweet (Tweet or dict): tweet
 
     Returns:
-        list or None: list of urls
+        list: list of urls. Will be an empty list if there are no urls present.
 
     Example:
         >>> from tweet_parser.getter_methods.tweet_entities import get_media_urls
@@ -144,7 +142,7 @@ def get_media_urls(tweet):
     """
 
     media = get_media_entities(tweet)
-    urls = [m.get("media_url_https") for m in media] if media else None
+    urls = [m.get("media_url_https") for m in media] if media else []
     return urls
 
 
