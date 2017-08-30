@@ -448,6 +448,18 @@ class Tweet(dict):
         return tweet_entities.get_hashtags(self)
 
     @lazy_property
+    def media_urls(self):
+        """
+        A list of all media (https) urls in the tweet, useful for grabbing
+        photo/video urls for other purposes.
+
+        Returns:
+            list (a list of strings): list of all of the media urls in the Tweet
+            value returned by calling `tweet_entities.get_media_urls` on `self`
+        """
+        return tweet_entities.get_media_urls(self)
+
+    @lazy_property
     def quoted_tweet(self):
         """
         The quoted Tweet as a Tweet object
