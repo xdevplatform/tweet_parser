@@ -1,13 +1,16 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>tweet_parser package &#8212; Tweet Parser 1 documentation</title>
+    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -32,7 +35,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body>
+  <body role="document">
   
 
     <div class="document">
@@ -81,7 +84,7 @@ docstrings.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> (<em>function</em>) – the property in question</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fn</strong> (<em>function</em>) &#8211; the property in question</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">evaluated version of the property.</td>
 </tr>
@@ -102,19 +105,19 @@ docstrings.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tweet_dict</strong> (<em>dict</em>) – A dictionary representing a Tweet payload</li>
-<li><strong>do_format_checking</strong> (<em>bool</em>) – If “True”, compare the keys in this         dict to a supeset of expected keys and to a minimum set of expected         keys (as defined in tweet_parser.tweet_keys).         Will cause the parser to fail if unexpected keys are present         or if expected keys are missing.         Intended to allow run-time format testing, allowing the user         to surface unexpected format changes.</li>
+<li><strong>tweet_dict</strong> (<em>dict</em>) &#8211; A dictionary representing a Tweet payload</li>
+<li><strong>do_format_checking</strong> (<em>bool</em>) &#8211; If &#8220;True&#8221;, compare the keys in this         dict to a supeset of expected keys and to a minimum set of expected         keys (as defined in tweet_parser.tweet_keys).         Will cause the parser to fail if unexpected keys are present         or if expected keys are missing.         Intended to allow run-time format testing, allowing the user         to surface unexpected format changes.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Class “Tweet”, inherits from dict, provides properties to
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Class &#8220;Tweet&#8221;, inherits from dict, provides properties to
 get various data values from the Tweet.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – the Tweet dict is malformed,         see <cite>tweet_checking.check_tweet</cite> for details</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> &#8211; the Tweet dict is malformed,         see <cite>tweet_checking.check_tweet</cite> for details</p>
 </td>
 </tr>
 </tbody>
@@ -224,7 +227,7 @@ converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a> (or None, if the Tweet is neither a quote tweet or a Retweet)</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – if embedded tweet is malformed</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> &#8211; if embedded tweet is malformed</td>
 </tr>
 </tbody>
 </table>
@@ -233,9 +236,9 @@ converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)</td>
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.geo_coordinates">
 <code class="descname">geo_coordinates</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.geo_coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p>The user’s geo coordinates, if they are included in the payload
+<dd><p>The user&#8217;s geo coordinates, if they are included in the payload
 (otherwise return <cite>None</cite>).
-Dictionary with the keys “latitude” and “longitude” or <cite>None</cite></p>
+Dictionary with the keys &#8220;latitude&#8221; and &#8220;longitude&#8221; or <cite>None</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -342,14 +345,14 @@ value returned by calling <cite>tweet_entities.get_hashtags</cite> on <cite>self
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_influence_topics">
 <code class="descname">klout_influence_topics</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_influence_topics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the user’s Klout influence topics (a list of dicts), if it exists.
+<dd><p>Get the user&#8217;s Klout influence topics (a list of dicts), if it exists.
 Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name</cite>, <cite>score</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling
-<cite>tweet_user.get_klout_topics(self, topic_type = ‘influence’)</cite>
+<cite>tweet_user.get_klout_topics(self, topic_type = &#8216;influence&#8217;)</cite>
 (if no Klout is present, this returns a <cite>None</cite>)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
@@ -361,14 +364,14 @@ Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name<
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_interest_topics">
 <code class="descname">klout_interest_topics</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_interest_topics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the user’s Klout interest topics (a list of dicts), if it exists.
+<dd><p>Get the user&#8217;s Klout interest topics (a list of dicts), if it exists.
 Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name</cite>, <cite>score</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">value returned by calling
-<cite>tweet_user.get_klout_topics(self, topic_type = ‘interest’)</cite>
+<cite>tweet_user.get_klout_topics(self, topic_type = &#8216;interest&#8217;)</cite>
 (if no Klout is present, this returns a <cite>None</cite>)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
@@ -429,11 +432,29 @@ Value returned by calling <cite>tweet_text.get_lang</cite> on <cite>self</cite><
 </dd></dl>
 
 <dl class="attribute">
+<dt id="tweet_parser.tweet.Tweet.media_urls">
+<code class="descname">media_urls</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.media_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all media (https) urls in the tweet, useful for grabbing
+photo/video urls for other purposes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of all of the media urls in the Tweet
+value returned by calling <cite>tweet_entities.get_media_urls</cite> on <cite>self</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list (a list of strings)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.most_unrolled_urls">
 <code class="descname">most_unrolled_urls</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.most_unrolled_urls" title="Permalink to this definition">¶</a></dt>
-<dd><p>For each url included in the Tweet “urls”, get the most unrolled
+<dd><p>For each url included in the Tweet &#8220;urls&#8221;, get the most unrolled
 version available. Only return 1 url string per url in tweet.tweet_links
-In order of preference for “most unrolled”
+In order of preference for &#8220;most unrolled&#8221;
 (keys from the dict at tweet.tweet_links):</p>
 <ol class="arabic simple">
 <li><cite>unwound</cite>/<cite>url</cite></li>
@@ -489,7 +510,7 @@ value returned by calling tweet_links.get_most_unrolled_urls on <cite>self</cite
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.profile_location">
 <code class="descname">profile_location</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.profile_location" title="Permalink to this definition">¶</a></dt>
-<dd><p>User’s derived location data from the profile location enrichment
+<dd><p>User&#8217;s derived location data from the profile location enrichment
 If unavailable, returns <cite>None</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -544,7 +565,7 @@ tweet_text.get_quote_or_rt_text on <cite>self</cite></td>
 <dd><p>The quoted Tweet as a Tweet object
 If the Tweet is not a quote Tweet, return None
 If the quoted Tweet payload cannot be loaded as a Tweet, this will
-raise a “NotATweetError”</p>
+raise a &#8220;NotATweetError&#8221;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -554,7 +575,7 @@ raise a “NotATweetError”</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – if quoted tweet is malformed</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> &#8211; if quoted tweet is malformed</td>
 </tr>
 </tbody>
 </table>
@@ -576,7 +597,7 @@ raise a <cite>NotATweetError</cite></p>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> – if retweeted tweet is malformed</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotATweetError</span></code> &#8211; if retweeted tweet is malformed</td>
 </tr>
 </tbody>
 </table>
@@ -601,8 +622,8 @@ raise a <cite>NotATweetError</cite></p>
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.text">
 <code class="descname">text</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.text" title="Permalink to this definition">¶</a></dt>
-<dd><p>The contents of “text” (original format)
-or “body” (activity streams format)</p>
+<dd><p>The contents of &#8220;text&#8221; (original format)
+or &#8220;body&#8221; (activity streams format)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -618,7 +639,7 @@ or “body” (activity streams format)</p>
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.tweet_links">
 <code class="descname">tweet_links</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.tweet_links" title="Permalink to this definition">¶</a></dt>
-<dd><p>The links that are included in the Tweet as “urls”
+<dd><p>The links that are included in the Tweet as &#8220;urls&#8221;
 (if there are no links, this is an empty list)
 This includes links that are included in quoted or retweeted Tweets
 Returns unrolled or expanded_url information if it is available</p>
@@ -662,12 +683,12 @@ fields will be missing.
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.tweet_type">
 <code class="descname">tweet_type</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.tweet_type" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>The type of Tweet this is (3 options</em> – tweet, quote, and retweet)</p>
+<dd><p><em>The type of Tweet this is (3 options</em> &#8211; tweet, quote, and retweet)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(“tweet”,”quote” or “retweet” only)
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(&#8220;tweet&#8221;,&#8221;quote&#8221; or &#8220;retweet&#8221; only)
 value returned by calling <cite>tweet_text.get_tweet_type</cite> on <cite>self</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
@@ -688,7 +709,7 @@ text of an original Tweet</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if <cite>tweet.tweet_type == “retweet”</cite>, returns an empty string
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">if <cite>tweet.tweet_type == &#8220;retweet&#8221;</cite>, returns an empty string
 else, returns the value of <cite>tweet_text.get_full_text(self)</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
@@ -719,7 +740,7 @@ else, returns the value of <cite>tweet_text.get_full_text(self)</cite></td>
 <dd><p>The &#64;-mentions in the Tweet as dictionaries.
 Note that in the case of a quote-tweet, this does not return the users
 mentioned in the quoted status. The recommended way to get that list
-would be to use ‘tweet.quoted_tweet.user_mentions’.
+would be to use &#8216;tweet.quoted_tweet.user_mentions&#8217;.
 Also note that in the caes of a quote-tweet, the list of &#64;-mentioned
 users does not include the user who authored the original (quoted) Tweet,
 you can get the author of the quoted tweet using
@@ -769,8 +790,8 @@ used for other validation code as well.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>tweet</strong> (<em>dict/Tweet</em>) – the tweet payload</li>
-<li><strong>validation_checking</strong> (<em>bool</em>) – check for valid key structure in a tweet.</li>
+<li><strong>tweet</strong> (<em>dict/Tweet</em>) &#8211; the tweet payload</li>
+<li><strong>validation_checking</strong> (<em>bool</em>) &#8211; check for valid key structure in a tweet.</li>
 </ul>
 </td>
 </tr>
@@ -788,8 +809,8 @@ in this level and all nexstted levels of the tweet.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – the tweet dict</li>
-<li><strong>parent_key</strong> (<em>str</em>) – key from which this process will start, e.g., you can
+<li><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; the tweet dict</li>
+<li><strong>parent_key</strong> (<em>str</em>) &#8211; key from which this process will start, e.g., you can
 get keys only under some key that is not the top-level key.</li>
 </ul>
 </td>
@@ -817,7 +838,7 @@ get keys only under some key that is not the top-level key.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – tweet in qustion</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; tweet in qustion</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Bool</td>
 </tr>
@@ -843,9 +864,9 @@ get keys only under some key that is not the top-level key.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tweet_keys_list</strong> (<em>list</em>) – the keys present in a tweet</li>
-<li><strong>superset_keys</strong> (<em>set</em>) – the set of all possible keys for a tweet</li>
-<li><strong>minset_keys</strong> (<em>set</em>) – the set of minimal keys expected in a tweet.</li>
+<li><strong>tweet_keys_list</strong> (<em>list</em>) &#8211; the keys present in a tweet</li>
+<li><strong>superset_keys</strong> (<em>set</em>) &#8211; the set of all possible keys for a tweet</li>
+<li><strong>minset_keys</strong> (<em>set</em>) &#8211; the set of minimal keys expected in a tweet.</li>
 </ul>
 </td>
 </tr>
@@ -951,7 +972,7 @@ get keys only under some key that is not the top-level key.</li>
       &copy;2017, Twitter DDIS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
