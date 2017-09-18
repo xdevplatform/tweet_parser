@@ -138,11 +138,10 @@ def get_bio(tweet):
         'Niche millenial content aggregator'
     """
 
-    try:
-        if is_original_format(tweet):
-            return tweet["user"].get("description","")
-        else:
-            return tweet["actor"].get("summary","")
+    if is_original_format(tweet):
+        return tweet["user"].get("description","")
+    else:
+        return tweet["actor"].get("summary","")
 
 
 def get_klout_score(tweet):
