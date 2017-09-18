@@ -120,7 +120,7 @@ def get_bio(tweet):
         string if no bio is available).
 
     Example:
-        >>> from tweet_parser.getter_methods.tweet_user import get_name
+        >>> from tweet_parser.getter_methods.tweet_user import get_bio
         >>> original_format_dict = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
         ...             "user":
@@ -140,15 +140,9 @@ def get_bio(tweet):
 
     try:
         if is_original_format(tweet):
-            bio = tweet["user"]["description"]
+            return tweet["user"].get("description","")
         else:
-            bio = tweet["actor"]["summary"]
-        if bio is None:
-            return ""
-        else:
-            return bio
-    except KeyError:
-        return ""
+            return tweet["actor"].get("summary","")
 
 
 def get_klout_score(tweet):
