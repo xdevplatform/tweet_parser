@@ -1165,6 +1165,65 @@ matching_rules field is found.<p>More information on this value at:
 </dd></dl>
 
 </div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_generator">
+<span id="tweet-parser-getter-methods-tweet-generator-module"></span><h2>tweet_parser.getter_methods.tweet_generator module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_generator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser">
+<em class="property">class </em><code class="descclassname">tweet_parser.getter_methods.tweet_generator.</code><code class="descname">GeneratorHTMLParser</code><span class="sig-paren">(</span><em>*</em>, <em>convert_charrefs=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">html.parser.HTMLParser</span></code></p>
+<p>HTML parser class to handle HTML tags in the original format source field</p>
+<dl class="method">
+<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_data">
+<code class="descname">handle_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_starttag">
+<code class="descname">handle_starttag</code><span class="sig-paren">(</span><em>tag</em>, <em>attrs</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_starttag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_generator.get_generator">
+<code class="descclassname">tweet_parser.getter_methods.tweet_generator.</code><code class="descname">get_generator</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.get_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about the application that generated the Tweet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">keys are ‘link’ and ‘name’, the web link and the name
+of the application</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_generator</span> <span class="k">import</span> <span class="n">get_generator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a href=&quot;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">twitter</span><span class="o">.</span><span class="n">com</span><span class="s2">&quot; rel=&quot;</span><span class="n">nofollow</span><span class="s2">&quot;&gt;Twitter Web Client&lt;/a&gt;&quot;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;generator&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s2">&quot;dispalyName&quot;</span><span class="p">:</span> <span class="s2">&quot;Twitter Web Client&quot;</span><span class="p">}</span>
+<span class="gp">... </span>            <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="module-tweet_parser.getter_methods">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tweet_parser.getter_methods" title="Permalink to this headline">¶</a></h2>
 </div>
