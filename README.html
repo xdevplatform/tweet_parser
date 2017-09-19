@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tweet Parser &#8212; Tweet Parser 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tweet-parser">
+<h1>Tweet Parser<a class="headerlink" href="#tweet-parser" title="Permalink to this headline">¶</a></h1>
+<p>Authors: <a class="reference external" href="https://github.com/fionapigott">Fiona Pigott</a>, <a class="reference external" href="https://github.com/jeffakolb">Jeff
+Kolb</a>, <a class="reference external" href="https://github.com/jrmontag">Josh
+Montague</a>, <a class="reference external" href="https://github.com/binaryaaron">Aaron
+Gonzales</a></p>
+<div class="section" id="goal">
+<h2>Goal:<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
+<p>Allow reliable parsing of Tweets delivered by the Gnip platform, in both
+activity-streams and original formats.</p>
+</div>
+<div class="section" id="status">
+<h2>Status:<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<p>This package can be installed by cloning the repo and using
+<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>. First
+probably-bug-free release is 1.0.3. As of version 1.0.5, the package
+works with Python 2 and 3, and the API should be relatively stable.
+Recommended to use the more recent release. Current release (As of
+9/19/2017) is 1.0.8.</p>
+<p>Currently, this parser does not explicitly support Public API Twitter
+data.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage:<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>This package is intended to be used as a Python module inside your other
+Tweet-related code. An example Python program (after pip installing the
+package) would be:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tweet_parser.tweet</span> <span class="k">import</span> <span class="n">Tweet</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_parser_errors</span> <span class="k">import</span> <span class="n">NotATweetError</span>
+<span class="kn">import</span> <span class="nn">fileinput</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fileinput</span><span class="o">.</span><span class="n">FileInput</span><span class="p">(</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tweet_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">tweet</span> <span class="o">=</span> <span class="n">Tweet</span><span class="p">(</span><span class="n">tweet_dict</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span><span class="n">NotATweetError</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">created_at_string</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">all_text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>I’ve also added simple command-line utility:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">parse_tweets</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing:<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>A Python <code class="docutils literal"><span class="pre">test_tweet_parser.py</span></code> package exists in <code class="docutils literal"><span class="pre">test/</span></code>.</p>
+<p>The most important thing that it tests is the equivalence of outputs
+when comparing both activity-streams input and original-format input.
+Any new getter will be tested by running
+<code class="docutils literal"><span class="pre">test$</span> <span class="pre">python</span> <span class="pre">test_tweet_parser.py</span></code>, as the test checks every method
+attached to the Tweet object, for every test tweet stored in
+<code class="docutils literal"><span class="pre">test/tweet_payload_examples</span></code>. For any cases where it is expected that
+the outputs are different (e.g., outputs that depend on poll options),
+conditional statements should be added to this test.</p>
+<p>An option also exists for run-time checking of Tweet payload formats.
+This compares the set of all Tweet field keys to a superset of all
+possible keys, as well as a minimum set of all required keys, to make
+sure that each newly loaded Tweet fits those parameters. This shouldn’t
+be run every time you load Tweets (for one, it’s slow), but is
+implemented to use as a periodic check against Tweet format changes.
+This option is enabled with <code class="docutils literal"><span class="pre">--do_format_validation</span></code> on the command
+line, and by setting the keyword argument <code class="docutils literal"><span class="pre">do_format_validation</span></code> to
+<code class="docutils literal"><span class="pre">True</span></code> when initializing a <code class="docutils literal"><span class="pre">Tweet</span></code> object.</p>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>Submit bug reports or feature requests through GitHub Issues, with
+self-contained minimum working examples where appropriate.</p>
+<p>To contribute code, fork this repo, create your own local feature
+branch, make your changes, test them, and submit a pull request to the
+master branch. The contribution guidelines specified in the <code class="docutils literal"><span class="pre">pandas</span></code>
+<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code">documentation</a>
+are a great reference.</p>
+<p>When you submit a change, change the version number. For most minor,
+non-breaking changes (fix a bug, add a getter, package naming/structure
+remains the same), increment the last number (X.Y.Z -&gt; X.Y.Z+1) in
+<code class="docutils literal"><span class="pre">setup.py</span></code>.</p>
+<div class="section" id="guidelines-for-new-getters">
+<h3>Guidelines for new getters<a class="headerlink" href="#guidelines-for-new-getters" title="Permalink to this headline">¶</a></h3>
+<p>A <em>getter</em> is a method in the Tweet class and the accompanying code in
+the <code class="docutils literal"><span class="pre">getter_methods</span></code> module. A getter for some property should:</p>
+<ul class="simple">
+<li>be named <code class="docutils literal"><span class="pre">&lt;property&gt;</span></code>, a method in <code class="docutils literal"><span class="pre">Tweet</span></code> decorated with
+<code class="docutils literal"><span class="pre">&#64;lazy_property</span></code></li>
+<li>have a corresponding method named
+<code class="docutils literal"><span class="pre">get_&lt;property&gt;(tweet)</span></code> in the <code class="docutils literal"><span class="pre">getter_methods</span></code> module that
+implements the logic, nested uner the appropriate submodule (a text
+property probably lives under the <code class="docutils literal"><span class="pre">getter_methods.tweet_text</span></code>
+submodule)</li>
+<li>provide the exact same output for original format and
+activity-streams format Tweet input, except in the case where certain
+information is unavailable (see <code class="docutils literal"><span class="pre">get_poll_options</span></code>).</li>
+</ul>
+<p>In general, prefer that the <code class="docutils literal"><span class="pre">get_&lt;property&gt;</span></code> work on a simple Tweet
+dictionary as well as a Tweet object (this makes unit testing easier).
+This means that you might use <code class="docutils literal"><span class="pre">is_original_format(tweet)</span></code> rather than
+<code class="docutils literal"><span class="pre">tweet.is_original_format</span></code> to check format inside of a getter.</p>
+<p>Adding unit tests for your getter in the docstrings in the “Example”
+section is helpful. See existing getters for examples.</p>
+<p>In general, make detailed docstrings with examples in
+<code class="docutils literal"><span class="pre">get_&lt;property&gt;</span></code>, and more concise dosctrings in <code class="docutils literal"><span class="pre">Tweet</span></code>, with a
+reference for where to find the <code class="docutils literal"><span class="pre">get_&lt;property&gt;</span></code> getter that
+implements the logic.</p>
+</div>
+<div class="section" id="style">
+<h3>Style<a class="headerlink" href="#style" title="Permalink to this headline">¶</a></h3>
+<p>Adhere to the PEP8 style. Using a Python linter (like flake8) is
+reccomended.</p>
+<p>For documentation style, use <a class="reference external" href="http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google-style
+docstrings</a>.
+Refer to the <a class="reference external" href="https://docs.python.org/3/library/doctest.html">Python docstest
+documentation</a> for
+doctest guidelines.</p>
+</div>
+<div class="section" id="id1">
+<h3>Testing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Create an isolated virtual environment for testing (there are currently
+no external dependencies for this library).</p>
+<p>Test your new feature by reinstalling the library in your virtual
+environment and running the test script as shown below. Fix any issues
+until all tests pass.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(env) [tweet_parser]$ pip install -e .
+(env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd -
+</pre></div>
+</div>
+<p>Furthermore, if contributing a new accessor or getter method for payload
+elements, verify the code works as you intended by running the
+<code class="docutils literal"><span class="pre">parse_tweets.py</span></code> script with your new field, as shown below. Check
+that both input types produce the intended output.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(env) [tweet_parser]$ pip install -e .
+(env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c &lt;your new field&gt;
+</pre></div>
+</div>
+<p>And lastly, if you’ve added new docstrings and doctests, from the
+<code class="docutils literal"><span class="pre">docs</span></code> directory, run <code class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></code> (to check docstring formatting)
+and <code class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></code> to run the doctests.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Tweet Parser</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tweet_parser.html">tweet_parser package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Twitter DDIS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/README.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
