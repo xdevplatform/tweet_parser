@@ -562,6 +562,6 @@ class Tweet(dict):
         Returns:
             dict: keys are 'link' and 'name', the link to and name of the application
             that generated the Tweet.
-            value returned by calling `tweet_entities.get_generator` on `self`
+            value returned by calling `tweet_generator.get_generator` on `self`
         """
         return tweet_generator.get_generator(self)

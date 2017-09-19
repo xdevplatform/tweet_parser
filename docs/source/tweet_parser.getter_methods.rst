@@ -68,7 +68,13 @@ tweet\_parser\.getter\_methods\.gnip\_fields module
     :undoc-members:
     :show-inheritance:
 
+tweet\_parser\.getter\_methods\.tweet\_generator module
+-------------------------------------------------------
 
+.. automodule:: tweet_parser.getter_methods.tweet_generator
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 Module contents
 ---------------
