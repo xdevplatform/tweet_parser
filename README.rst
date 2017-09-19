@@ -34,7 +34,7 @@ package) would be:
 
 ::
 
-    from tweeet_parser.tweet import Tweet
+    from tweet_parser.tweet import Tweet
     from tweet_parser.tweet_parser_errors import NotATweetError
     import fileinput
     import json
