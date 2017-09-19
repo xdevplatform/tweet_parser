@@ -106,6 +106,44 @@ def get_name(tweet):
         return tweet["actor"]["displayName"]
 
 
+def get_bio(tweet):
+    """
+    Get the bio text of the user who posted the Tweet
+
+    Args:
+        tweet (Tweet): A Tweet object (or a dictionary)
+
+    Returns:
+        str: the bio text of the user who posted the Tweet
+        In a payload the abscence of a bio seems to be represented by an
+        empty string or a None, this getter always returns a string (so, empty
+        string if no bio is available).
+
+    Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_bio
+        >>> original_format_dict = {
+        ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...             "user":
+        ...              {"description": "Niche millenial content aggregator"}
+        ...            }
+        >>> get_bio(original_format_dict)
+        'Niche millenial content aggregator'
+
+        >>> activity_streams_format_dict = {
+        ...             "postedTime": "2017-05-24T20:17:19.000Z",
+        ...             "actor":
+        ...              {"summary": "Niche millenial content aggregator"}
+        ...             }
+        >>> get_bio(activity_streams_format_dict)
+        'Niche millenial content aggregator'
+    """
+
+    if is_original_format(tweet):
+        return tweet["user"].get("description","")
+    else:
+        return tweet["actor"].get("summary","")
+
+
 def get_klout_score(tweet):
     """
     Get the Klout score (int) (if it exists) of the user who posted the Tweet

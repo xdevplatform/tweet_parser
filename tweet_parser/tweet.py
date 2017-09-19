@@ -164,6 +164,16 @@ class Tweet(dict):
         return tweet_user.get_name(self)
 
     @lazy_property
+    def bio(self):
+        """
+        The bio text of the user who posted the Tweet
+
+        Returns:
+            str: value returned by calling `tweet_user.get_bio` on `self`
+        """
+        return tweet_user.get_bio(self)
+
+    @lazy_property
     def klout_score(self):
         """
         The Klout score (int) (if it exists) of the user who posted the Tweet
