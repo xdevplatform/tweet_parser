@@ -137,7 +137,7 @@ def get_bio(tweet):
         >>> get_bio(activity_streams_format_dict)
         'Niche millenial content aggregator'
     """
-    
+
     if is_original_format(tweet):
         return tweet["user"].get("description","")
     else:
