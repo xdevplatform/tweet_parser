@@ -6,7 +6,7 @@ from tweet_parser import tweet_checking
 from tweet_parser.getter_methods import tweet_date, tweet_user
 from tweet_parser.getter_methods import tweet_text, tweet_geo, tweet_links
 from tweet_parser.getter_methods import tweet_entities, tweet_embeds
-from tweet_parser.getter_methods import gnip_fields
+from tweet_parser.getter_methods import gnip_fields, tweet_generator
 
 
 class Tweet(dict):
@@ -553,3 +553,15 @@ class Tweet(dict):
 
         """
         return gnip_fields.get_matching_rules(self)
+
+    @lazy_property
+    def generator(self):
+        """
+        Get information about the application that generated the Tweet
+
+        Returns:
+            dict: keys are 'link' and 'name', the link to and name of the application
+            that generated the Tweet.
+            value returned by calling `tweet_entities.get_generator` on `self`
+        """
+        return tweet_generator.get_generator(self)
