@@ -169,9 +169,24 @@ class Tweet(dict):
         The bio text of the user who posted the Tweet
 
         Returns:
-            str: value returned by calling `tweet_user.get_bio` on `self`
+            str: the user's bio text.
+            value returned by calling `tweet_user.get_bio` on `self`
         """
         return tweet_user.get_bio(self)
+
+    @lazy_property
+    def utc_offset(self):
+        """
+        The utc offset (if it's available) of the timezone of the user who
+        posted the Tweet
+
+        Returns:
+            str: a signed integer indicating the number of seconds offset of the
+            user's home timezone from UTC time.
+            value returned by calling `tweet_user.get_utc_offset` on `self`
+
+        """
+        return tweet_user.get_utc_offset(self)
 
     @lazy_property
     def klout_score(self):
