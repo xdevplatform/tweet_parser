@@ -58,7 +58,7 @@ def get_in_reply_to_user_id(tweet):
         >>> from tweet_parser.getter_methods.tweet_reply import *
         >>> original_format_dict = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
-        ...             "in_reply_to_user_id": "2382763597"
+        ...             "in_reply_to_user_id_str": "2382763597"
         ...            }
         >>> get_in_reply_to_user_id(original_format_dict)
         '2382763597'

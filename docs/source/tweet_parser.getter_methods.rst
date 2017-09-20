@@ -76,6 +76,14 @@ tweet\_parser\.getter\_methods\.tweet\_generator module
     :undoc-members:
     :show-inheritance:
 
+tweet\_parser\.getter\_methods\.tweet\_reply module
+---------------------------------------------------
+
+.. automodule:: tweet_parser.getter_methods.tweet_reply
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Module contents
 ---------------
 
