@@ -6,7 +6,7 @@ from tweet_parser import tweet_checking
 from tweet_parser.getter_methods import tweet_date, tweet_user
 from tweet_parser.getter_methods import tweet_text, tweet_geo, tweet_links
 from tweet_parser.getter_methods import tweet_entities, tweet_embeds
-from tweet_parser.getter_methods import gnip_fields, tweet_generator
+from tweet_parser.getter_methods import gnip_fields, tweet_generator, tweet_reply
 
 
 class Tweet(dict):
@@ -169,9 +169,24 @@ class Tweet(dict):
         The bio text of the user who posted the Tweet
 
         Returns:
-            str: value returned by calling `tweet_user.get_bio` on `self`
+            str: the user's bio text.
+            value returned by calling `tweet_user.get_bio` on `self`
         """
         return tweet_user.get_bio(self)
+
+    @lazy_property
+    def utc_offset(self):
+        """
+        The utc offset (if it's available) of the timezone of the user who
+        posted the Tweet
+
+        Returns:
+            str: a signed integer indicating the number of seconds offset of the
+            user's home timezone from UTC time.
+            value returned by calling `tweet_user.get_utc_offset` on `self`
+
+        """
+        return tweet_user.get_utc_offset(self)
 
     @lazy_property
     def klout_score(self):
@@ -565,3 +580,34 @@ class Tweet(dict):
             value returned by calling `tweet_generator.get_generator` on `self`
         """
         return tweet_generator.get_generator(self)
+
+    @lazy_property
+    def in_reply_to_screen_name(self):
+        """
+        The screen name of the user being replied to (None if the Tweet isn't a reply)
+
+        Returns:
+            str: value returned by calling `tweet_reply.get_in_reply_to_screen_name` on `self`
+        """
+        return tweet_reply.get_in_reply_to_screen_name(self)
+
+    @lazy_property
+    def in_reply_to_user_id(self):
+        """
+        The user id of the user being replied to (None if the Tweet isn't a reply).
+        This raises a NotAvailableError for activity-streams format
+
+        Returns:
+            str: value returned by calling `tweet_reply.get_in_reply_to_user_id` on `self`
+        """
+        return tweet_reply.get_in_reply_to_user_id(self)
+
+    @lazy_property
+    def in_reply_to_status_id(self):
+        """
+        The status id of the Tweet being replied to (None if the Tweet isn't a reply)
+
+        Returns:
+            str: value returned by calling `tweet_reply.get_in_reply_to_status_id` on `self`
+        """
+        return tweet_reply.get_in_reply_to_status_id(self)
