@@ -1244,7 +1244,7 @@ of the application</td>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_generator</span> <span class="k">import</span> <span class="n">get_generator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a href=&quot;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">twitter</span><span class="o">.</span><span class="n">com</span><span class="s2">&quot; rel=&quot;</span><span class="n">nofollow</span><span class="s2">&quot;&gt;Twitter Web Client&lt;/a&gt;&quot;</span>
+<span class="gp">... </span>            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s1">&#39;&lt;a href=&quot;http://twitter.com&quot; rel=&quot;nofollow&quot;&gt;Twitter Web Client&lt;/a&gt;&#39;</span>
 <span class="gp">... </span>           <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
 <span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
@@ -1254,7 +1254,7 @@ of the application</td>
 <span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;generator&quot;</span><span class="p">:</span>
 <span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com&quot;</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="s2">&quot;dispalyName&quot;</span><span class="p">:</span> <span class="s2">&quot;Twitter Web Client&quot;</span><span class="p">}</span>
+<span class="gp">... </span>              <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Twitter Web Client&quot;</span><span class="p">}</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
 <span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
@@ -1268,7 +1268,7 @@ of the application</td>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name">
 <code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_screen_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the screen name of the uesr whose Tweet is being replied to, None
+<dd><p>Get the screen name of the user whose Tweet is being replied to, None
 if this Tweet is not a reply</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
