@@ -4,7 +4,7 @@ from tweet_parser.tweet_parser_errors import NotAvailableError
 
 def get_in_reply_to_screen_name(tweet):
     """
-    Get the screen name of the uesr whose Tweet is being replied to, None
+    Get the screen name of the user whose Tweet is being replied to, None
     if this Tweet is not a reply
 
     Args:
