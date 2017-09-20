@@ -1139,6 +1139,45 @@ the “score” value.</p>
 </div>
 </dd></dl>
 
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_utc_offset">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_utc_offset</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_utc_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the utc offset (if it’s available) of the user who posted the Tweet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a signed integer indicating the number of seconds offset of the
+user’s home timezone from UTC time</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_utc_offset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;user&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;utc_offset&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">21600</span><span class="p">}</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_utc_offset</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">-21600</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;actor&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;utcOffset&quot;</span><span class="p">:</span> <span class="s2">&quot;-21600&quot;</span><span class="p">}</span>
+<span class="gp">... </span>            <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_utc_offset</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">-21600</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="module-tweet_parser.getter_methods.gnip_fields">
 <span id="tweet-parser-getter-methods-gnip-fields-module"></span><h2>tweet_parser.getter_methods.gnip_fields module<a class="headerlink" href="#module-tweet_parser.getter_methods.gnip_fields" title="Permalink to this headline">¶</a></h2>
@@ -1219,6 +1258,118 @@ of the application</td>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
 <span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_reply">
+<span id="tweet-parser-getter-methods-tweet-reply-module"></span><h2>tweet_parser.getter_methods.tweet_reply module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_reply" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name">
+<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_screen_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the screen name of the uesr whose Tweet is being replied to, None
+if this Tweet is not a reply</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the screen name of the user whose Tweet is being replied to
+(None if not a reply)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_screen_name</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">&#39;notFromShrek&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;inReplyTo&quot;</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;</span><span class="p">}</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_screen_name</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">&#39;notFromShrek&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_status_id">
+<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_status_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_status_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the tweet id of the Tweet being replied to, None
+if this Tweet is not a reply</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the tweet id of the Tweet being replied to
+(None if not a reply)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_status_id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;863566329168711681&quot;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_status_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">&#39;863566329168711681&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;inReplyTo&quot;</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;</span><span class="p">}</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_status_id</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">&#39;863566329168711681&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_user_id">
+<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_user_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user id of the uesr whose Tweet is being replied to, and None
+if this Tweet is not a reply.</p>
+<p>Note that this is unavailable in activity-streams format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the user id of the user whose Tweet is being replied to, None
+(if not a reply), or for activity-streams raise a NotAvailableError</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_user_id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_user_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">&#39;2382763597&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
