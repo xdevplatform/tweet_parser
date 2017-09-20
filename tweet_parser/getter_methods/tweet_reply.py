@@ -35,7 +35,7 @@ def get_in_reply_to_screen_name(tweet):
     if is_original_format(tweet):
         return tweet["in_reply_to_screen_name"]
     else:
-        if tweet["inReplyTo"] is not None:
+        if tweet.get("inReplyTo", None) is not None:
             return tweet["inReplyTo"]["link"].split("/")[-3]
         else:
             return None
@@ -103,7 +103,7 @@ def get_in_reply_to_status_id(tweet):
     if is_original_format(tweet):
         return tweet["in_reply_to_status_id_str"]
     else:
-        if tweet["inReplyTo"] is not None:
+        if tweet.get("inReplyTo", None) is not None:
             return tweet["inReplyTo"]["link"].split("/")[-1]
         else:
             return None
