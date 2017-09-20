@@ -105,9 +105,9 @@ def get_most_unrolled_urls(tweet):
     """
     unrolled_urls = []
     for url in tweet.tweet_links:
-        if "unwound" in url:
+        if url.get("unwound", {"url": None}).get("url", None) is not None:
             unrolled_urls.append(url["unwound"]["url"])
-        elif "expanded_url" in url:
+        elif url.get("expanded_url", None) is not None:
             unrolled_urls.append(url["expanded_url"])
         else:
             unrolled_urls.append(url["url"])
