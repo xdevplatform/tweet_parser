@@ -30,7 +30,7 @@ def get_generator(tweet):
         >>> from tweet_parser.getter_methods.tweet_generator import get_generator
         >>> original_format_dict = {
         ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
-        ...             "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>"
+        ...             "source": '<a href="http://twitter.com" rel="nofollow">Twitter Web Client</a>'
         ...            }
         >>> get_generator(original_format_dict)
         {'link': 'http://twitter.com', 'name': 'Twitter Web Client'}
@@ -39,7 +39,7 @@ def get_generator(tweet):
         ...             "postedTime": "2017-05-24T20:17:19.000Z",
         ...             "generator":
         ...              {"link": "http://twitter.com",
-        ...               "dispalyName": "Twitter Web Client"}
+        ...               "displayName": "Twitter Web Client"}
         ...             }
         >>> get_generator(activity_streams_format_dict)
         {'link': 'http://twitter.com', 'name': 'Twitter Web Client'}
