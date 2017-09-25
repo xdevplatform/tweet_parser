@@ -98,13 +98,13 @@ def get_most_unrolled_urls(tweet):
     3. `url`
 
     Args:
-        tweet (Tweet): A Tweet object (cannot simply be a dict)
+        tweet (Tweet): A Tweet object or dict
 
     Returns:
         list (list of strings): a list of the most unrolled url available
     """
     unrolled_urls = []
-    for url in tweet.tweet_links:
+    for url in get_tweet_links(tweet):
         if url.get("unwound", {"url": None}).get("url", None) is not None:
             unrolled_urls.append(url["unwound"]["url"])
         elif url.get("expanded_url", None) is not None:
