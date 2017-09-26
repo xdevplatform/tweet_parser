@@ -462,7 +462,7 @@ In order of preference for “most unrolled”
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (cannot simply be a dict)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object or dict</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of the most unrolled url available</td>
 </tr>
@@ -852,6 +852,82 @@ string if no bio is available).</td>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_bio</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
 <span class="go">&#39;Niche millenial content aggregator&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_follower_count">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_follower_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_follower_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of followers that the user has</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the number of followers that the user has</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_follower_count</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;user&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;followers_count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_follower_count</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;actor&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;followersCount&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">... </span>            <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_follower_count</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_user.get_following_count">
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_following_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_following_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of accounts that the user is following</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the number of accounts that the user is following</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_user</span> <span class="k">import</span> <span class="n">get_following_count</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;user&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;friends_count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_following_count</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;actor&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;friendsCount&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">... </span>            <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_following_count</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">2</span>
 </pre></div>
 </div>
 </dd></dl>

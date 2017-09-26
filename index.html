@@ -53,11 +53,10 @@ activity-streams and original formats.</p>
 <div class="section" id="status">
 <h2>Status:<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <p>This package can be installed by cloning the repo and using
-<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>. First
-probably-bug-free release is 1.0.3. As of version 1.0.5, the package
-works with Python 2 and 3, and the API should be relatively stable.
-Recommended to use the more recent release. Current release (As of
-9/20/2017) is 1.0.9.</p>
+<code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>.
+As of version 1.0.5, the package works with Python 2 and 3, and the
+API should be relatively stable. Recommended to use the more recent release.
+Current release is 1.11.0.</p>
 <p>Currently, this parser does not explicitly support Public API Twitter
 data.</p>
 </div>
@@ -115,10 +114,12 @@ branch, make your changes, test them, and submit a pull request to the
 master branch. The contribution guidelines specified in the <code class="docutils literal"><span class="pre">pandas</span></code>
 <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code">documentation</a>
 are a great reference.</p>
-<p>When you submit a change, change the version number. For most minor,
-non-breaking changes (fix a bug, add a getter, package naming/structure
+<p>When you submit a change, change the version number. For bug fixes and
+non-breaking changes that do not affect the top-level Tweet object API
+(fixing a bug or changing the internals of a getter while package naming/structure
 remains the same), increment the last number (X.Y.Z -&gt; X.Y.Z+1) in
-<code class="docutils literal"><span class="pre">setup.py</span></code>.</p>
+<code class="docutils literal"><span class="pre">setup.py</span></code>. For changes that do affect the top-level Tweet object API (e.g., adding a
+new getter), increment the middle number (X.Y.Z -&gt; X.Y+1.0).</p>
 <div class="section" id="guidelines-for-new-getters">
 <h3>Guidelines for new getters<a class="headerlink" href="#guidelines-for-new-getters" title="Permalink to this headline">¶</a></h3>
 <p>A <em>getter</em> is a method in the Tweet class and the accompanying code in
