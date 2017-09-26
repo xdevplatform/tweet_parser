@@ -19,8 +19,7 @@ This package can be installed by cloning the repo and using
 ``pip install -e .``, or by using ``pip install tweet_parser``. First
 probably-bug-free release is 1.0.3. As of version 1.0.5, the package
 works with Python 2 and 3, and the API should be relatively stable.
-Recommended to use the more recent release. Current release (As of
-9/20/2017) is 1.0.10.
+Recommended to use the more recent release. Current release is 1.0.11.
 
 Currently, this parser does not explicitly support Public API Twitter
 data.

@@ -183,6 +183,74 @@ def get_utc_offset(tweet):
             return None
 
 
+def get_follower_count(tweet):
+    """
+    Get the number of followers that the user has
+
+    Args:
+        tweet (Tweet): A Tweet object (or a dictionary)
+
+    Returns:
+        int: the number of followers that the user has
+
+    Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_follower_count
+        >>> original_format_dict = {
+        ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...             "user":
+        ...              {"followers_count": 2}
+        ...            }
+        >>> get_follower_count(original_format_dict)
+        2
+
+        >>> activity_streams_format_dict = {
+        ...             "postedTime": "2017-05-24T20:17:19.000Z",
+        ...             "actor":
+        ...              {"followersCount": 2}
+        ...             }
+        >>> get_follower_count(activity_streams_format_dict)
+        2    
+    """
+    if is_original_format(tweet):
+        return tweet["user"]["followers_count"]
+    else:
+        return tweet["actor"]["followersCount"]
+
+
+def get_following_count(tweet):
+    """
+    Get the number of accounts that the user is following
+
+    Args:
+        tweet (Tweet): A Tweet object (or a dictionary)
+
+    Returns:
+        int: the number of accounts that the user is following
+
+    Example:
+        >>> from tweet_parser.getter_methods.tweet_user import get_following_count
+        >>> original_format_dict = {
+        ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...             "user":
+        ...              {"friends_count": 2}
+        ...            }
+        >>> get_following_count(original_format_dict)
+        2
+
+        >>> activity_streams_format_dict = {
+        ...             "postedTime": "2017-05-24T20:17:19.000Z",
+        ...             "actor":
+        ...              {"friendsCount": 2}
+        ...             }
+        >>> get_following_count(activity_streams_format_dict)
+        2    
+    """
+    if is_original_format(tweet):
+        return tweet["user"]["friends_count"]
+    else:
+        return tweet["actor"]["friendsCount"]
+
+
 def get_klout_score(tweet):
     """
     Get the Klout score (int) (if it exists) of the user who posted the Tweet
