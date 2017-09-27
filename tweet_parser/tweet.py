@@ -189,6 +189,28 @@ class Tweet(dict):
         return tweet_user.get_utc_offset(self)
 
     @lazy_property
+    def follower_count(self):
+        """
+        The number of followers that the author of the Tweet has
+
+        Returns:
+            int: the number of followers.
+            value returned by calling `get_follower_count` on `self`
+        """
+        return tweet_user.get_follower_count(self)
+
+    @lazy_property
+    def following_count(self):
+        """
+        The number of accounts that the author of the Tweet is following
+
+        Returns:
+            int: the number of accounts that the author of the Tweet is following,
+            value returned by calling `get_following_count` on `self`
+        """
+        return tweet_user.get_following_count(self)
+
+    @lazy_property
     def klout_score(self):
         """
         The Klout score (int) (if it exists) of the user who posted the Tweet

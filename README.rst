@@ -16,11 +16,10 @@ Status:
 -------
 
 This package can be installed by cloning the repo and using
-``pip install -e .``, or by using ``pip install tweet_parser``. First
-probably-bug-free release is 1.0.3. As of version 1.0.5, the package
-works with Python 2 and 3, and the API should be relatively stable.
-Recommended to use the more recent release. Current release (As of
-9/20/2017) is 1.0.10.
+``pip install -e .``, or by using ``pip install tweet_parser``.
+As of version 1.0.5, the package works with Python 2 and 3, and the 
+API should be relatively stable. Recommended to use the more recent release. 
+Current release is 1.11.0.
 
 Currently, this parser does not explicitly support Public API Twitter
 data.
@@ -89,10 +88,12 @@ master branch. The contribution guidelines specified in the ``pandas``
 `documentation <http://pandas.pydata.org/pandas-docs/stable/contributing.html#working-with-the-code>`__
 are a great reference.
 
-When you submit a change, change the version number. For most minor,
-non-breaking changes (fix a bug, add a getter, package naming/structure
+When you submit a change, change the version number. For bug fixes and
+non-breaking changes that do not affect the top-level Tweet object API 
+(fixing a bug or changing the internals of a getter while package naming/structure
 remains the same), increment the last number (X.Y.Z -> X.Y.Z+1) in
-``setup.py``.
+``setup.py``. For changes that do affect the top-level Tweet object API (e.g., adding a 
+new getter), increment the middle number (X.Y.Z -> X.Y+1.0).
 
 Guidelines for new getters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
