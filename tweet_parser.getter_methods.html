@@ -141,6 +141,13 @@ or None if there is no quoted status.<ul class="simple">
 <dt id="tweet_parser.getter_methods.tweet_entities.get_entities">
 <code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_entities</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function to simply grabbing the entities.</p>
+<p>Caveat: In the case of Retweets, a Retweet is stored as
+“RT &#64;someone: Some awesome status”. In the case where pre-appending
+the string “RT &#64;someone:” causes the Tweet to exceed 140 characters,
+entites (hashtags, mentions, urls) beyond the 140 character mark are
+excluded from the Retweet’s entities. This seems like counterintuitive
+behavior, so we ensure here that the entities of a Retweet are a
+superset of the entities of the Retweeted status.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -198,6 +205,7 @@ hashtags in the quoted status.</p>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;verb&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;twitter_entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;hashtags&quot;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">... </span>                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;1hashtag&quot;</span><span class="p">},</span>
 <span class="gp">... </span>                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;moreHashtags&quot;</span><span class="p">}]}}</span>
@@ -353,17 +361,23 @@ appear in a Tweet data payload.</td>
 <p class="rubric">Example</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_entities</span> <span class="k">import</span> <span class="n">get_user_mentions</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;RT @notFromShrek: Stuff! Words! ...&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;user_mentions&quot;</span><span class="p">:</span> <span class="p">[{</span>
-<span class="gp">... </span>                             <span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">26</span><span class="p">],</span> <span class="c1">#characters where the @ mention appears</span>
+<span class="gp">... </span>                             <span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="c1">#characters where the @ mention appears</span>
 <span class="gp">... </span>                             <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span><span class="p">,</span> <span class="c1">#id of @ mentioned user as a string</span>
-<span class="gp">... </span>                             <span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span><span class="p">,</span> <span class="c1">#screen_name of @ mentioned user</span>
+<span class="gp">... </span>                             <span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span><span class="p">,</span> <span class="c1">#screen_name of @d user</span>
 <span class="gp">... </span>                             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fiona&quot;</span><span class="p">,</span> <span class="c1">#display name of @ mentioned user</span>
 <span class="gp">... </span>                             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2382763597</span> <span class="c1">#id of @ mentioned user as an int</span>
 <span class="gp">... </span>                           <span class="p">}]</span>
-<span class="gp">... </span>                         <span class="p">}</span>
+<span class="gp">... </span>                         <span class="p">},</span>
+<span class="gp">... </span>            <span class="s2">&quot;retweeted_status&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:01:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Stuff! Words! #Tweeting!&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;user_mentions&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="gp">... </span>                <span class="p">}</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_user_mentions</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
-<span class="go">[{&#39;indices&#39;: [14, 26], &#39;id_str&#39;: &#39;2382763597&#39;, &#39;screen_name&#39;: &#39;notFromShrek&#39;, &#39;name&#39;: &#39;Fiona&#39;, &#39;id&#39;: 2382763597}]</span>
+<span class="go">[{&#39;indices&#39;: [2, 12], &#39;id_str&#39;: &#39;2382763597&#39;, &#39;screen_name&#39;: &#39;notFromShrek&#39;, &#39;name&#39;: &#39;Fiona&#39;, &#39;id&#39;: 2382763597}]</span>
 </pre></div>
 </div>
 </dd></dl>
