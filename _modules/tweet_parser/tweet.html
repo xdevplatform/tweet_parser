@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tweet_parser.tweet &#8212; Tweet Parser 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tweet_parser.html">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for tweet_parser.tweet</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">from</span> <span class="nn">tweet_parser.lazy_property</span> <span class="k">import</span> <span class="n">lazy_property</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_parser_errors</span> <span class="k">import</span> <span class="n">NotATweetError</span>
+<span class="kn">from</span> <span class="nn">tweet_parser</span> <span class="k">import</span> <span class="n">tweet_checking</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.getter_methods</span> <span class="k">import</span> <span class="n">tweet_date</span><span class="p">,</span> <span class="n">tweet_user</span><span class="p">,</span> <span class="n">tweet_counts</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.getter_methods</span> <span class="k">import</span> <span class="n">tweet_text</span><span class="p">,</span> <span class="n">tweet_geo</span><span class="p">,</span> <span class="n">tweet_links</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.getter_methods</span> <span class="k">import</span> <span class="n">tweet_entities</span><span class="p">,</span> <span class="n">tweet_embeds</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.getter_methods</span> <span class="k">import</span> <span class="n">gnip_fields</span><span class="p">,</span> <span class="n">tweet_generator</span><span class="p">,</span> <span class="n">tweet_reply</span>
+
+
+<div class="viewcode-block" id="Tweet"><a class="viewcode-back" href="../../tweet_parser.html#tweet_parser.tweet.Tweet">[docs]</a><span class="k">class</span> <span class="nc">Tweet</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tweet object created from a dictionary representing a Tweet paylaod</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet_dict (dict): A dictionary representing a Tweet payload</span>
+<span class="sd">        do_format_checking (bool): If &quot;True&quot;, compare the keys in this \</span>
+<span class="sd">        dict to a supeset of expected keys and to a minimum set of expected \</span>
+<span class="sd">        keys (as defined in tweet_parser.tweet_keys). \</span>
+<span class="sd">        Will cause the parser to fail if unexpected keys are present \</span>
+<span class="sd">        or if expected keys are missing. \</span>
+<span class="sd">        Intended to allow run-time format testing, allowing the user \</span>
+<span class="sd">        to surface unexpected format changes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tweet: Class &quot;Tweet&quot;, inherits from dict, provides properties to</span>
+<span class="sd">        get various data values from the Tweet.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotATweetError: the Tweet dict is malformed, \</span>
+<span class="sd">        see `tweet_checking.check_tweet` for details</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.tweet import Tweet</span>
+<span class="sd">        &gt;&gt;&gt; # python dict representing a Tweet</span>
+<span class="sd">        &gt;&gt;&gt; tweet_dict = {&quot;id&quot;: 867474613139156993,</span>
+<span class="sd">        ...               &quot;id_str&quot;: &quot;867474613139156993&quot;,</span>
+<span class="sd">        ...               &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...               &quot;text&quot;: &quot;Some Tweet text&quot;,</span>
+<span class="sd">        ...               &quot;user&quot;: {</span>
+<span class="sd">        ...                   &quot;screen_name&quot;: &quot;RobotPrincessFi&quot;,</span>
+<span class="sd">        ...                   &quot;id_str&quot;: &quot;815279070241955840&quot;</span>
+<span class="sd">        ...                   }</span>
+<span class="sd">        ...              }</span>
+<span class="sd">        &gt;&gt;&gt; # create a Tweet object</span>
+<span class="sd">        &gt;&gt;&gt; tweet = Tweet(tweet_dict)</span>
+<span class="sd">        &gt;&gt;&gt; # use the Tweet obj to access data elements</span>
+<span class="sd">        &gt;&gt;&gt; tweet.id</span>
+<span class="sd">        &#39;867474613139156993&#39;</span>
+<span class="sd">        &gt;&gt;&gt; tweet.created_at_seconds</span>
+<span class="sd">        1495657039</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tweet_dict</span><span class="p">,</span> <span class="n">do_format_validation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a Tweet object from a dict representing a Tweet payload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># get the format of the Tweet data</span>
+        <span class="c1"># also, this throws an error if it&#39;s not a tweet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original_format</span> <span class="o">=</span> <span class="n">tweet_checking</span><span class="o">.</span><span class="n">check_tweet</span><span class="p">(</span><span class="n">tweet_dict</span><span class="p">,</span>
+                                                          <span class="n">do_format_validation</span><span class="p">)</span>
+
+        <span class="c1"># make sure that this obj has all of the keys that our dict had</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tweet_dict</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tweet snowflake id as a string</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Twitter snowflake id, numeric only (no other text)</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; from tweet_parser.tweet import Tweet</span>
+<span class="sd">            &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">            ...     &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">            ...     &quot;id&quot;: 867474613139156993,</span>
+<span class="sd">            ...     &quot;id_str&quot;: &quot;867474613139156993&quot;,</span>
+<span class="sd">            ...     &quot;user&quot;: {&quot;user_keys&quot;:&quot;user_data&quot;},</span>
+<span class="sd">            ...     &quot;text&quot;: &quot;some tweet text&quot;</span>
+<span class="sd">            ...     }</span>
+<span class="sd">            &gt;&gt;&gt; Tweet(original_format_dict).id</span>
+<span class="sd">            &#39;867474613139156993&#39;</span>
+
+<span class="sd">            &gt;&gt;&gt; activity_streams_dict = {</span>
+<span class="sd">            ...     &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">            ...     &quot;id&quot;: &quot;tag:search.twitter.com,2005:867474613139156993&quot;,</span>
+<span class="sd">            ...     &quot;actor&quot;: {&quot;user_keys&quot;:&quot;user_data&quot;},</span>
+<span class="sd">            ...     &quot;body&quot;: &quot;some tweet text&quot;</span>
+<span class="sd">            ...     }</span>
+<span class="sd">            &gt;&gt;&gt; Tweet(activity_streams_dict).id</span>
+<span class="sd">            &#39;867474613139156993&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_format</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;id_str&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">created_at_seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Time that a Tweet was posted in seconds since the Unix epoch</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: seconds since the unix epoch</span>
+<span class="sd">            (determined by converting Tweet.id</span>
+<span class="sd">            into a timestamp using `tweet_date.snowflake2utc`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_date</span><span class="o">.</span><span class="n">snowflake2utc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">created_at_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Time that a Tweet was posted as a Python datetime object</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            datetime.datetime: the value of `tweet.created_at_seconds`</span>
+<span class="sd">            converted into a datetime object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">created_at_seconds</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">created_at_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Time that a Tweet was posted as a string with the format</span>
+<span class="sd">        YYYY-MM-ddTHH:MM:SS.000Z</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: the value of `tweet.created_at_seconds`</span>
+<span class="sd">            converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_at_datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%M-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.000Z&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Twitter ID of the user who posted the Tweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_user.get_user_id` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">screen_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The screen name (@ handle) of the user who posted the Tweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_user.get_screen_name` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_screen_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The display name of the user who posted the Tweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_user.get_name` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">bio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The bio text of the user who posted the Tweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: the user&#39;s bio text.</span>
+<span class="sd">            value returned by calling `tweet_user.get_bio` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_bio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">utc_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The utc offset (if it&#39;s available) of the timezone of the user who</span>
+<span class="sd">        posted the Tweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: a signed integer indicating the number of seconds offset of the</span>
+<span class="sd">            user&#39;s home timezone from UTC time.</span>
+<span class="sd">            value returned by calling `tweet_user.get_utc_offset` on `self`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_utc_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">follower_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The number of followers that the author of the Tweet has</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: the number of followers.</span>
+<span class="sd">            value returned by calling `get_follower_count` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_follower_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">following_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The number of accounts that the author of the Tweet is following</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: the number of accounts that the author of the Tweet is following,</span>
+<span class="sd">            value returned by calling `get_following_count` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_following_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">klout_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Klout score (int) (if it exists) of the user who posted the Tweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: value returned by calling `tweet_user.get_klout_score` on `self`</span>
+<span class="sd">            (if no Klout is present, this returns a None)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_klout_score</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">klout_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Klout profile URL of the user (`str`) (if it exists)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_user.get_klout_profile` on `self`</span>
+<span class="sd">            (if no Klout is present, this returns a `None`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_klout_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">klout_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Klout ID of the user (`str`) (if it exists)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_user.get_klout_id` on `self`</span>
+<span class="sd">            (if no Klout is present, this returns a `None`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_klout_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">klout_influence_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the user&#39;s Klout influence topics (a list of dicts), if it exists.</span>
+<span class="sd">        Topic dicts will have these keys: `url`, `id`, `name`, `score`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: value returned by calling</span>
+<span class="sd">            `tweet_user.get_klout_topics(self, topic_type = &#39;influence&#39;)`</span>
+<span class="sd">            (if no Klout is present, this returns a `None`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_klout_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_type</span><span class="o">=</span><span class="s1">&#39;influence&#39;</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">klout_interest_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the user&#39;s Klout interest topics (a list of dicts), if it exists.</span>
+<span class="sd">        Topic dicts will have these keys: `url`, `id`, `name`, `score`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: value returned by calling</span>
+<span class="sd">            `tweet_user.get_klout_topics(self, topic_type = &#39;interest&#39;)`</span>
+<span class="sd">            (if no Klout is present, this returns a `None`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_user</span><span class="o">.</span><span class="n">get_klout_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_type</span><span class="o">=</span><span class="s1">&#39;interest&#39;</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The contents of &quot;text&quot; (original format)</span>
+<span class="sd">        or &quot;body&quot; (activity streams format)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_text.get_text` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_text</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">tweet_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The type of Tweet this is (3 options: tweet, quote, and retweet)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: (&quot;tweet&quot;,&quot;quote&quot; or &quot;retweet&quot; only)</span>
+<span class="sd">            value returned by calling `tweet_text.get_tweet_type` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_text</span><span class="o">.</span><span class="n">get_tweet_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">user_entered_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The text that the posting user entered \n</span>
+<span class="sd">        *tweet*: untruncated (includes @-mention replies and long links)</span>
+<span class="sd">        text of an original Tweet \n</span>
+<span class="sd">        *quote tweet*: untruncated poster-added content in a quote-tweet \n</span>
+<span class="sd">        *retweet*: empty string</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: if `tweet.tweet_type == &quot;retweet&quot;`, returns an empty string</span>
+<span class="sd">            else, returns the value of `tweet_text.get_full_text(self)`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tweet_type</span> <span class="o">==</span> <span class="s2">&quot;retweet&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_text</span><span class="o">.</span><span class="n">get_full_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">lang</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The language that the Tweet is written in.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: 2-letter BCP 47 language code (or None if undefined)</span>
+<span class="sd">            Value returned by calling `tweet_text.get_lang` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_text</span><span class="o">.</span><span class="n">get_lang</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">poll_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The text in the options of a poll as a list. \</span>
+<span class="sd">        If there is no poll in the Tweet, return an empty list. \</span>
+<span class="sd">        If activity-streams format, raise `NotAvailableError`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list (list of strings): value returned by calling</span>
+<span class="sd">            `tweet_text.get_poll_options` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_text</span><span class="o">.</span><span class="n">get_poll_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">quote_or_rt_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The quoted or retweeted text in a Tweet</span>
+<span class="sd">        (this is not the text entered by the posting user) \n</span>
+<span class="sd">        - tweet: empty string (there is no quoted or retweeted text) \n</span>
+<span class="sd">        - quote: only the text of the quoted Tweet \n</span>
+<span class="sd">        - retweet: the text of the retweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling</span>
+<span class="sd">            tweet_text.get_quote_or_rt_text on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_text</span><span class="o">.</span><span class="n">get_quote_or_rt_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">all_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All of the text of the tweet. This includes @ mentions, long links,</span>
+<span class="sd">        quote-tweet contents (separated by a newline), RT contents</span>
+<span class="sd">        &amp; poll options</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_text.get_all_text` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_text</span><span class="o">.</span><span class="n">get_all_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">geo_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The user&#39;s geo coordinates, if they are included in the payload</span>
+<span class="sd">        (otherwise return `None`).</span>
+<span class="sd">        Dictionary with the keys &quot;latitude&quot; and &quot;longitude&quot; or `None`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: value returned by calling `tweet_geo.get_geo_coordinates` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_geo</span><span class="o">.</span><span class="n">get_geo_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">profile_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        User&#39;s derived location data from the profile location enrichment</span>
+<span class="sd">        If unavailable, returns `None`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: value returned by calling tweet_geo.get_profile_location on `self`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; result = {&quot;country&quot;: &quot;US&quot;,         # Two letter ISO-3166 country code</span>
+<span class="sd">            ...           &quot;locality&quot;: &quot;Boulder&quot;,   # The locality location (~ city)</span>
+<span class="sd">            ...           &quot;region&quot;: &quot;Colorado&quot;,    # The region location (~ state/province)</span>
+<span class="sd">            ...           &quot;sub_region&quot;: &quot;Boulder&quot;, # The sub-region location (~ county)</span>
+<span class="sd">            ...           &quot;full_name&quot;: &quot;Boulder, Colorado, US&quot;, # The full name (excluding sub-region)</span>
+<span class="sd">            ...           &quot;geo&quot;:  [40,-105]        # lat/long value that coordinate that corresponds to</span>
+<span class="sd">            ...                                     # the lowest granularity location for where the user</span>
+<span class="sd">            ...                                     # who created the Tweet is from</span>
+<span class="sd">            ... }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_geo</span><span class="o">.</span><span class="n">get_profile_location</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">tweet_links</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The links that are included in the Tweet as &quot;urls&quot;</span>
+<span class="sd">        (if there are no links, this is an empty list)</span>
+<span class="sd">        This includes links that are included in quoted or retweeted Tweets</span>
+<span class="sd">        Returns unrolled or expanded_url information if it is available</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list (list of dicts): A list of dictionaries containing information</span>
+<span class="sd">            about urls. Each dictionary entity can have these keys; without</span>
+<span class="sd">            unwound url or expanded url Twitter data enrichments many of these</span>
+<span class="sd">            fields will be missing.</span>
+<span class="sd">            (value returned by calling tweet_links.get_tweet_links on `self`)</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; result = [</span>
+<span class="sd">            ...   {</span>
+<span class="sd">            ...   # url that shows up in the tweet text</span>
+<span class="sd">            ...   &#39;display_url&#39;: &quot;https://twitter.com/RobotPrinc...&quot;,</span>
+<span class="sd">            ...   # long (expanded) url</span>
+<span class="sd">            ...   &#39;expanded_url&#39;: &quot;https://twitter.com/RobotPrincessFi&quot;,</span>
+<span class="sd">            ...   # characters where the display link is</span>
+<span class="sd">            ...   &#39;indices&#39;: [55, 88],</span>
+<span class="sd">            ...   &#39;unwound&#39;: {</span>
+<span class="sd">            ...      # description from the linked webpage</span>
+<span class="sd">            ...      &#39;description&#39;: &quot;the Twitter profile of RobotPrincessFi&quot;,</span>
+<span class="sd">            ...      &#39;status&#39;: 200,</span>
+<span class="sd">            ...      # title of the webpage</span>
+<span class="sd">            ...      &#39;title&#39;: &quot;the Twitter profile of RobotPrincessFi&quot;,</span>
+<span class="sd">            ...      # long (expanded) url}</span>
+<span class="sd">            ...      &#39;url&#39;: &quot;https://twitter.com/RobotPrincessFi&quot;},</span>
+<span class="sd">            ...   # the url that tweet directs to, often t.co</span>
+<span class="sd">            ...   &#39;url&#39;: &quot;t.co/1234&quot;}]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_links</span><span class="o">.</span><span class="n">get_tweet_links</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">most_unrolled_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For each url included in the Tweet &quot;urls&quot;, get the most unrolled</span>
+<span class="sd">        version available. Only return 1 url string per url in tweet.tweet_links</span>
+<span class="sd">        In order of preference for &quot;most unrolled&quot;</span>
+<span class="sd">        (keys from the dict at tweet.tweet_links): \n</span>
+<span class="sd">        1. `unwound`/`url` \n</span>
+<span class="sd">        2. `expanded_url` \n</span>
+<span class="sd">        3. `url`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list (a list of strings): list of urls</span>
+<span class="sd">            value returned by calling tweet_links.get_most_unrolled_urls on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_links</span><span class="o">.</span><span class="n">get_most_unrolled_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">user_mentions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The @-mentions in the Tweet as dictionaries.</span>
+<span class="sd">        Note that in the case of a quote-tweet, this does not return the users</span>
+<span class="sd">        mentioned in the quoted status. The recommended way to get that list</span>
+<span class="sd">        would be to use &#39;tweet.quoted_tweet.user_mentions&#39;.</span>
+<span class="sd">        Also note that in the caes of a quote-tweet, the list of @-mentioned</span>
+<span class="sd">        users does not include the user who authored the original (quoted) Tweet,</span>
+<span class="sd">        you can get the author of the quoted tweet using</span>
+<span class="sd">        `tweet.quoted_tweet.user_id`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list (list of dicts): 1 item per @ mention,</span>
+<span class="sd">            value returned by calling `tweet_entities.get_user_mentions` on `self`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; result = {</span>
+<span class="sd">            ...   #characters where the @ mention appears</span>
+<span class="sd">            ...   &quot;indices&quot;: [14,26],</span>
+<span class="sd">            ...   #id of @ mentioned user as a string</span>
+<span class="sd">            ...   &quot;id_str&quot;: &quot;2382763597&quot;,</span>
+<span class="sd">            ...   #screen_name of @ mentioned user</span>
+<span class="sd">            ...   &quot;screen_name&quot;: &quot;notFromShrek&quot;,</span>
+<span class="sd">            ...   #display name of @ mentioned user</span>
+<span class="sd">            ...   &quot;name&quot;: &quot;Fiona&quot;,</span>
+<span class="sd">            ...   #id of @ mentioned user as an int</span>
+<span class="sd">            ...   &quot;id&quot;: 2382763597</span>
+<span class="sd">            ... }</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_entities</span><span class="o">.</span><span class="n">get_user_mentions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">hashtags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A list of hashtags in the Tweet.</span>
+<span class="sd">        Note that in the case of a quote-tweet, this does not return the</span>
+<span class="sd">        hashtags in the quoted status. The recommended way to get that list</span>
+<span class="sd">        would be to use `tweet.quoted_tweet.hashtags`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list (a list of strings): list of all of the hashtags in the Tweet</span>
+<span class="sd">            value returned by calling `tweet_entities.get_hashtags` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_entities</span><span class="o">.</span><span class="n">get_hashtags</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">media_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A list of all media (https) urls in the tweet, useful for grabbing</span>
+<span class="sd">        photo/video urls for other purposes.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list (a list of strings): list of all of the media urls in the Tweet</span>
+<span class="sd">            value returned by calling `tweet_entities.get_media_urls` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_entities</span><span class="o">.</span><span class="n">get_media_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">quoted_tweet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The quoted Tweet as a Tweet object</span>
+<span class="sd">        If the Tweet is not a quote Tweet, return None</span>
+<span class="sd">        If the quoted Tweet payload cannot be loaded as a Tweet, this will</span>
+<span class="sd">        raise a &quot;NotATweetError&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tweet: A Tweet representing the quoted status (or None)</span>
+<span class="sd">            (see tweet_embeds.get_quote_tweet, this is that value as a Tweet)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotATweetError: if quoted tweet is malformed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">quote_tweet</span> <span class="o">=</span> <span class="n">tweet_embeds</span><span class="o">.</span><span class="n">get_quoted_tweet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">quote_tweet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Tweet</span><span class="p">(</span><span class="n">quote_tweet</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">NotATweetError</span> <span class="k">as</span> <span class="n">nate</span><span class="p">:</span>
+                <span class="k">raise</span><span class="p">(</span><span class="n">NotATweetError</span><span class="p">(</span><span class="s2">&quot;The quote-tweet payload appears malformed.&quot;</span> <span class="o">+</span>
+                                     <span class="s2">&quot; Failed with &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nate</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">retweeted_tweet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The retweeted Tweet as a Tweet object</span>
+<span class="sd">        If the Tweet is not a Retweet, return None</span>
+<span class="sd">        If the Retweet payload cannot be loaded as a Tweet, this will</span>
+<span class="sd">        raise a `NotATweetError`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tweet: A Tweet representing the retweeted status (or None)</span>
+<span class="sd">            (see tweet_embeds.get_retweet, this is that value as a Tweet)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotATweetError: if retweeted tweet is malformed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">retweet</span> <span class="o">=</span> <span class="n">tweet_embeds</span><span class="o">.</span><span class="n">get_retweeted_tweet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">retweet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Tweet</span><span class="p">(</span><span class="n">retweet</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">NotATweetError</span> <span class="k">as</span> <span class="n">nate</span><span class="p">:</span>
+                <span class="k">raise</span><span class="p">(</span><span class="n">NotATweetError</span><span class="p">(</span><span class="s2">&quot;The retweet payload appears malformed.&quot;</span> <span class="o">+</span>
+                                     <span class="s2">&quot; Failed with &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nate</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">embedded_tweet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the retweeted Tweet OR the quoted Tweet and return it as a Tweet object</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tweet (or None, if the Tweet is neither a quote tweet or a Retweet):</span>
+<span class="sd">            a Tweet representing the quote Tweet or the Retweet</span>
+<span class="sd">            (see tweet_embeds.get_embedded_tweet, this is that value as a Tweet)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotATweetError: if embedded tweet is malformed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">embedded_tweet</span> <span class="o">=</span> <span class="n">tweet_embeds</span><span class="o">.</span><span class="n">get_embedded_tweet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">embedded_tweet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Tweet</span><span class="p">(</span><span class="n">embedded_tweet</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">NotATweetError</span> <span class="k">as</span> <span class="n">nate</span><span class="p">:</span>
+                <span class="k">raise</span><span class="p">(</span><span class="n">NotATweetError</span><span class="p">(</span><span class="s2">&quot;The embedded tweet payload </span><span class="si">{}</span><span class="s2"> appears malformed.&quot;</span> <span class="o">+</span>
+                                     <span class="s2">&quot; Failed with &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">embedded_tweet</span><span class="p">,</span> <span class="n">nate</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">gnip_matching_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the Gnip tagged rules that this tweet matched.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of potential tags with the matching rule or None if no rules</span>
+<span class="sd">            are defined.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">gnip_fields</span><span class="o">.</span><span class="n">get_matching_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">generator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get information about the application that generated the Tweet</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: keys are &#39;link&#39; and &#39;name&#39;, the link to and name of the application</span>
+<span class="sd">            that generated the Tweet.</span>
+<span class="sd">            value returned by calling `tweet_generator.get_generator` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_generator</span><span class="o">.</span><span class="n">get_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">in_reply_to_screen_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The screen name of the user being replied to (None if the Tweet isn&#39;t a reply)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_reply.get_in_reply_to_screen_name` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_reply</span><span class="o">.</span><span class="n">get_in_reply_to_screen_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">in_reply_to_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The user id of the user being replied to (None if the Tweet isn&#39;t a reply).</span>
+<span class="sd">        This raises a NotAvailableError for activity-streams format</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_reply.get_in_reply_to_user_id` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_reply</span><span class="o">.</span><span class="n">get_in_reply_to_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">in_reply_to_status_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The status id of the Tweet being replied to (None if the Tweet isn&#39;t a reply)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: value returned by calling `tweet_reply.get_in_reply_to_status_id` on `self`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_reply</span><span class="o">.</span><span class="n">get_in_reply_to_status_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">favorite_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The number of favorites that this tweet has received *at the time of</span>
+<span class="sd">        retrieval*. If a tweet is obtained from a live stream, this will likely</span>
+<span class="sd">        be 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_counts</span><span class="o">.</span><span class="n">get_favorite_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">quote_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The number of tweets that this tweet has been quoted in *at the time of</span>
+<span class="sd">        retrieval*. If a tweet is obtained from a live stream, this will likely</span>
+<span class="sd">        be 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_counts</span><span class="o">.</span><span class="n">get_quote_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@lazy_property</span>
+    <span class="k">def</span> <span class="nf">retweet_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The number of times this tweet has been retweeted *at the time of</span>
+<span class="sd">        retrieval*. If a tweet is obtained from a live stream, this will likely</span>
+<span class="sd">        be 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">tweet_counts</span><span class="o">.</span><span class="n">get_retweet_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

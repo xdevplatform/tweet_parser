@@ -4,6 +4,22 @@ tweet\_parser\.getter\_methods package
 Submodules
 ----------
 
+tweet\_parser\.getter\_methods\.gnip\_fields module
+---------------------------------------------------
+
+.. automodule:: tweet_parser.getter_methods.gnip_fields
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+tweet\_parser\.getter\_methods\.tweet\_counts module
+----------------------------------------------------
+
+.. automodule:: tweet_parser.getter_methods.tweet_counts
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 tweet\_parser\.getter\_methods\.tweet\_date module
 --------------------------------------------------
 
@@ -28,6 +44,14 @@ tweet\_parser\.getter\_methods\.tweet\_entities module
     :undoc-members:
     :show-inheritance:
 
+tweet\_parser\.getter\_methods\.tweet\_generator module
+-------------------------------------------------------
+
+.. automodule:: tweet_parser.getter_methods.tweet_generator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 tweet\_parser\.getter\_methods\.tweet\_geo module
 -------------------------------------------------
 
@@ -40,6 +64,14 @@ tweet\_parser\.getter\_methods\.tweet\_links module
 ---------------------------------------------------
 
 .. automodule:: tweet_parser.getter_methods.tweet_links
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+tweet\_parser\.getter\_methods\.tweet\_reply module
+---------------------------------------------------
+
+.. automodule:: tweet_parser.getter_methods.tweet_reply
     :members:
     :undoc-members:
     :show-inheritance:

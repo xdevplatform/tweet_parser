@@ -1,13 +1,15 @@
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>Tweet Parser &#8212; Tweet Parser 1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -21,24 +23,127 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="tweet_parser package" href="tweet_parser.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
-  
+  <body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
             
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tweet_parser.html">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Tweet Parser</a><ul>
+<li><a class="reference internal" href="#goal">Goal:</a></li>
+<li><a class="reference internal" href="#status">Status:</a></li>
+<li><a class="reference internal" href="#usage">Usage:</a></li>
+<li><a class="reference internal" href="#testing">Testing:</a></li>
+<li><a class="reference internal" href="#contributing">Contributing</a><ul>
+<li><a class="reference internal" href="#guidelines-for-new-getters">Guidelines for new getters</a></li>
+<li><a class="reference internal" href="#style">Style</a></li>
+<li><a class="reference internal" href="#id1">Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="tweet_parser.html" title="Next Chapter: tweet_parser package"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">tweet_parser package &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
   <div class="section" id="tweet-parser">
 <h1>Tweet Parser<a class="headerlink" href="#tweet-parser" title="Permalink to this headline">¶</a></h1>
 <p>Authors: <a class="reference external" href="https://github.com/fionapigott">Fiona Pigott</a>, <a class="reference external" href="https://github.com/jeffakolb">Jeff
@@ -56,7 +161,7 @@ activity-streams and original formats.</p>
 <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>.
 As of version 1.0.5, the package works with Python 2 and 3, and the
 API should be relatively stable. Recommended to use the more recent release.
-Current release is 1.11.1.</p>
+Current release is 1.12.0.</p>
 <p>Currently, this parser does not explicitly support Public API Twitter
 data.</p>
 </div>
@@ -65,7 +170,7 @@ data.</p>
 <p>This package is intended to be used as a Python module inside your other
 Tweet-related code. An example Python program (after pip installing the
 package) would be:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tweet_parser.tweet</span> <span class="k">import</span> <span class="n">Tweet</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tweet_parser.tweet</span> <span class="k">import</span> <span class="n">Tweet</span>
 <span class="kn">from</span> <span class="nn">tweet_parser.tweet_parser_errors</span> <span class="k">import</span> <span class="n">NotATweetError</span>
 <span class="kn">import</span> <span class="nn">fileinput</span>
 <span class="kn">import</span> <span class="nn">json</span>
@@ -79,8 +184,8 @@ package) would be:</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">created_at_string</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">all_text</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>I’ve also added simple command-line utility:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">parse_tweets</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
+<p>I&#8217;ve also added simple command-line utility:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">parse_tweets</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span><span class="s2">&quot;gnip_tweet_data.json&quot;</span> <span class="o">-</span><span class="n">c</span><span class="s2">&quot;created_at_string,all_text&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -98,8 +203,8 @@ conditional statements should be added to this test.</p>
 <p>An option also exists for run-time checking of Tweet payload formats.
 This compares the set of all Tweet field keys to a superset of all
 possible keys, as well as a minimum set of all required keys, to make
-sure that each newly loaded Tweet fits those parameters. This shouldn’t
-be run every time you load Tweets (for one, it’s slow), but is
+sure that each newly loaded Tweet fits those parameters. This shouldn&#8217;t
+be run every time you load Tweets (for one, it&#8217;s slow), but is
 implemented to use as a periodic check against Tweet format changes.
 This option is enabled with <code class="docutils literal"><span class="pre">--do_format_validation</span></code> on the command
 line, and by setting the keyword argument <code class="docutils literal"><span class="pre">do_format_validation</span></code> to
@@ -140,7 +245,7 @@ information is unavailable (see <code class="docutils literal"><span class="pre"
 dictionary as well as a Tweet object (this makes unit testing easier).
 This means that you might use <code class="docutils literal"><span class="pre">is_original_format(tweet)</span></code> rather than
 <code class="docutils literal"><span class="pre">tweet.is_original_format</span></code> to check format inside of a getter.</p>
-<p>Adding unit tests for your getter in the docstrings in the “Example”
+<p>Adding unit tests for your getter in the docstrings in the &#8220;Example&#8221;
 section is helpful. See existing getters for examples.</p>
 <p>In general, make detailed docstrings with examples in
 <code class="docutils literal"><span class="pre">get_&lt;property&gt;</span></code>, and more concise dosctrings in <code class="docutils literal"><span class="pre">Tweet</span></code>, with a
@@ -164,19 +269,19 @@ no external dependencies for this library).</p>
 <p>Test your new feature by reinstalling the library in your virtual
 environment and running the test script as shown below. Fix any issues
 until all tests pass.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>(env) [tweet_parser]$ pip install -e .
-(env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd -
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span> <span class="o">[</span>tweet_parser<span class="o">]</span>$ pip install -e .
+<span class="o">(</span>env<span class="o">)</span> <span class="o">[</span>tweet_parser<span class="o">]</span>$ <span class="nb">cd</span> test/<span class="p">;</span> python test_tweet_parser.py<span class="p">;</span> <span class="nb">cd</span> -
 </pre></div>
 </div>
 <p>Furthermore, if contributing a new accessor or getter method for payload
 elements, verify the code works as you intended by running the
 <code class="docutils literal"><span class="pre">parse_tweets.py</span></code> script with your new field, as shown below. Check
 that both input types produce the intended output.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>(env) [tweet_parser]$ pip install -e .
-(env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c &lt;your new field&gt;
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span> <span class="o">[</span>tweet_parser<span class="o">]</span>$ pip install -e .
+<span class="o">(</span>env<span class="o">)</span> <span class="o">[</span>tweet_parser<span class="o">]</span>$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c &lt;your new field&gt;
 </pre></div>
 </div>
-<p>And lastly, if you’ve added new docstrings and doctests, from the
+<p>And lastly, if you&#8217;ve added new docstrings and doctests, from the
 <code class="docutils literal"><span class="pre">docs</span></code> directory, run <code class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></code> (to check docstring formatting)
 and <code class="docutils literal"><span class="pre">make</span> <span class="pre">doctest</span></code> to run the doctests.</p>
 <div class="toctree-wrapper compound">
@@ -212,63 +317,21 @@ and <code class="docutils literal"><span class="pre">make</span> <span class="pr
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">Tweet Parser</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tweet Parser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tweet_parser.html">tweet_parser package</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="tweet_parser.html" title="next chapter">tweet_parser package</a></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2017, Twitter DDIS.
       
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
       
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
   </body>
 </html>

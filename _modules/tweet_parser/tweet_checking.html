@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tweet_parser.tweet_checking &#8212; Tweet Parser 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tweet_parser.html">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for tweet_parser.tweet_checking</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Validation and checking methods for Tweets.</span>
+
+<span class="sd">Methods here are primarily used by other methods within this module but can be</span>
+<span class="sd">used for other validation code as well.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_parser_errors</span> <span class="k">import</span> <span class="n">NotATweetError</span><span class="p">,</span> <span class="n">UnexpectedFormatError</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_keys</span> <span class="k">import</span> <span class="n">original_format_minimum_set_keys</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_keys</span> <span class="k">import</span> <span class="n">activity_streams_minimum_set_keys</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_keys</span> <span class="k">import</span> <span class="n">original_format_superset_keys</span><span class="p">,</span> <span class="n">activity_streams_superset_keys</span>
+
+
+<div class="viewcode-block" id="is_original_format"><a class="viewcode-back" href="../../tweet_parser.html#tweet_parser.tweet_checking.is_original_format">[docs]</a><span class="k">def</span> <span class="nf">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple checker to flag the format of a tweet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): tweet in qustion</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Bool</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import tweet_parser.tweet_checking as tc</span>
+<span class="sd">        &gt;&gt;&gt; tweet = {&quot;created_at&quot;: 124125125125,</span>
+<span class="sd">        ...          &quot;text&quot;: &quot;just setting up my twttr&quot;,</span>
+<span class="sd">        ...          &quot;nested_field&quot;: {&quot;nested_1&quot;: &quot;field&quot;, &quot;nested_2&quot;: &quot;field2&quot;}}</span>
+<span class="sd">        &gt;&gt;&gt; tc.is_original_format(tweet)</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># deleted due to excess checking; it&#39;s a key lookup and does not need any</span>
+    <span class="c1"># operational optimization</span>
+    <span class="k">if</span> <span class="s2">&quot;created_at&quot;</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+        <span class="n">original_format</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="s2">&quot;postedTime&quot;</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+        <span class="n">original_format</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotATweetError</span><span class="p">(</span><span class="s2">&quot;This dict has neither &#39;created_at&#39; or &#39;postedTime&#39; as keys&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">original_format</span></div>
+
+
+<div class="viewcode-block" id="get_all_keys"><a class="viewcode-back" href="../../tweet_parser.html#tweet_parser.tweet_checking.get_all_keys">[docs]</a><span class="k">def</span> <span class="nf">get_all_keys</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">parent_key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes a tweet object and recursively returns a list of all keys contained</span>
+<span class="sd">    in this level and all nexstted levels of the tweet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): the tweet dict</span>
+<span class="sd">        parent_key (str): key from which this process will start, e.g., you can</span>
+<span class="sd">                          get keys only under some key that is not the top-level key.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list of all keys in nested dicts.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import tweet_parser.tweet_checking as tc</span>
+<span class="sd">        &gt;&gt;&gt; tweet = {&quot;created_at&quot;: 124125125125, &quot;text&quot;: &quot;just setting up my twttr&quot;,</span>
+<span class="sd">        ...          &quot;nested_field&quot;: {&quot;nested_1&quot;: &quot;field&quot;, &quot;nested_2&quot;: &quot;field2&quot;}}</span>
+<span class="sd">        &gt;&gt;&gt; tc.get_all_keys(tweet)</span>
+<span class="sd">        [&#39;created_at&#39;, &#39;text&#39;, &#39;nested_field nested_1&#39;, &#39;nested_field nested_2&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tweet</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">new_key</span> <span class="o">=</span> <span class="n">parent_key</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_all_keys</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">parent_key</span><span class="o">=</span><span class="n">new_key</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_key</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">items</span></div>
+
+
+<div class="viewcode-block" id="key_validation_check"><a class="viewcode-back" href="../../tweet_parser.html#tweet_parser.tweet_checking.key_validation_check">[docs]</a><span class="k">def</span> <span class="nf">key_validation_check</span><span class="p">(</span><span class="n">tweet_keys_list</span><span class="p">,</span> <span class="n">superset_keys</span><span class="p">,</span> <span class="n">minset_keys</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validates the keys present in a Tweet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet_keys_list (list): the keys present in a tweet</span>
+<span class="sd">        superset_keys (set): the set of all possible keys for a tweet</span>
+<span class="sd">        minset_keys (set): the set of minimal keys expected in a tweet.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        0 if no errors</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        UnexpectedFormatError on any mismatch of keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check for keys that must be present</span>
+    <span class="n">tweet_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tweet_keys_list</span><span class="p">)</span>
+    <span class="n">minset_overlap</span> <span class="o">=</span> <span class="n">tweet_keys</span> <span class="o">&amp;</span> <span class="n">minset_keys</span>
+    <span class="k">if</span> <span class="n">minset_overlap</span> <span class="o">!=</span> <span class="n">minset_keys</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UnexpectedFormatError</span><span class="p">(</span><span class="s2">&quot;keys (</span><span class="si">{}</span><span class="s2">) missing from Tweet (Public API data is not supported)&quot;</span>
+                                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">minset_keys</span> <span class="o">-</span> <span class="n">tweet_keys</span><span class="p">))</span>
+    <span class="c1"># check for keys that could be present</span>
+    <span class="n">unexpected_keys</span> <span class="o">=</span> <span class="n">tweet_keys</span> <span class="o">-</span> <span class="n">superset_keys</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unexpected_keys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UnexpectedFormatError</span><span class="p">(</span><span class="s2">&quot;Unexpected keys (</span><span class="si">{}</span><span class="s2">) are in this Tweet&quot;</span>
+                                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unexpected_keys</span><span class="p">))</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_check_original_format_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">validation_checking</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotATweetError</span><span class="p">(</span><span class="s2">&quot;This dict has no &#39;</span><span class="si">{}</span><span class="s2">&#39; key&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+    <span class="c1"># check for changing keys</span>
+    <span class="k">if</span> <span class="n">validation_checking</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">key_validation_check</span><span class="p">(</span><span class="n">get_all_keys</span><span class="p">(</span><span class="n">tweet</span><span class="p">),</span>
+                                 <span class="n">original_format_superset_keys</span><span class="p">,</span>
+                                 <span class="n">original_format_minimum_set_keys</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_check_activity_streams_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">validation_checking</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotATweetError</span><span class="p">(</span><span class="s2">&quot;This dict has no &#39;</span><span class="si">{}</span><span class="s2">&#39; key&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+    <span class="c1"># check for changing keys</span>
+    <span class="k">if</span> <span class="n">validation_checking</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">key_validation_check</span><span class="p">(</span><span class="n">get_all_keys</span><span class="p">(</span><span class="n">tweet</span><span class="p">),</span>
+                                 <span class="n">activity_streams_superset_keys</span><span class="p">,</span>
+                                 <span class="n">activity_streams_minimum_set_keys</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="check_tweet"><a class="viewcode-back" href="../../tweet_parser.html#tweet_parser.tweet_checking.check_tweet">[docs]</a><span class="k">def</span> <span class="nf">check_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">validation_checking</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ensures a tweet is valid and determines the type of format for the tweet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (dict/Tweet): the tweet payload</span>
+<span class="sd">        validation_checking (bool): check for valid key structure in a tweet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="s2">&quot;id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotATweetError</span><span class="p">(</span><span class="s2">&quot;This text has no &#39;id&#39; key&quot;</span><span class="p">)</span>
+
+    <span class="n">original_format</span> <span class="o">=</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">original_format</span><span class="p">:</span>
+        <span class="n">_check_original_format_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">validation_checking</span><span class="o">=</span><span class="n">validation_checking</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_check_activity_streams_tweet</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">validation_checking</span><span class="o">=</span><span class="n">validation_checking</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">original_format</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

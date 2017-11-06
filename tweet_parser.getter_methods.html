@@ -1,13 +1,15 @@
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>tweet_parser.getter_methods package &#8212; Tweet Parser 1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -21,41 +23,219 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="tweet_parser package" href="tweet_parser.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
-  
+  <body role="document">
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
             
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Tweet Parser</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tweet_parser.html">tweet_parser package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">tweet_parser.getter_methods package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.gnip_fields">tweet_parser.getter_methods.gnip_fields module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_counts">tweet_parser.getter_methods.tweet_counts module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_date">tweet_parser.getter_methods.tweet_date module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_embeds">tweet_parser.getter_methods.tweet_embeds module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_entities">tweet_parser.getter_methods.tweet_entities module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_generator">tweet_parser.getter_methods.tweet_generator module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_geo">tweet_parser.getter_methods.tweet_geo module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_links">tweet_parser.getter_methods.tweet_links module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_reply">tweet_parser.getter_methods.tweet_reply module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_text">tweet_parser.getter_methods.tweet_text module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods.tweet_user">tweet_parser.getter_methods.tweet_user module</a></li>
+<li><a class="reference internal" href="#module-tweet_parser.getter_methods">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="tweet_parser.html" title="Previous Chapter: tweet_parser package"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; tweet_parser package</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
   <div class="section" id="tweet-parser-getter-methods-package">
 <h1>tweet_parser.getter_methods package<a class="headerlink" href="#tweet-parser-getter-methods-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="module-tweet_parser.getter_methods.gnip_fields">
+<span id="tweet-parser-getter-methods-gnip-fields-module"></span><h2>tweet_parser.getter_methods.gnip_fields module<a class="headerlink" href="#module-tweet_parser.getter_methods.gnip_fields" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.gnip_fields.get_matching_rules">
+<code class="descclassname">tweet_parser.getter_methods.gnip_fields.</code><code class="descname">get_matching_rules</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/gnip_fields.html#get_matching_rules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.gnip_fields.get_matching_rules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the matching rules for a tweet with a gnip field enrichment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; the tweet</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">potential <code class="docutils literal"><span class="pre">[{&quot;tag&quot;:</span> <span class="pre">&quot;user_tag&quot;,</span> <span class="pre">&quot;value&quot;:</span> <span class="pre">&quot;rule_value&quot;}]</span></code>
+pairs from standard rulesets or None if no rules or no
+matching_rules field is found.<p>More information on this value at:
+<a class="reference external" href="http://support.gnip.com/enrichments/matching_rules.html">http://support.gnip.com/enrichments/matching_rules.html</a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_counts">
+<span id="tweet-parser-getter-methods-tweet-counts-module"></span><h2>tweet_parser.getter_methods.tweet_counts module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_counts" title="Permalink to this headline">¶</a></h2>
+<p>Tweet counts and related attributes</p>
+<p>This module holds attributes related to basic counts on tweets, such as
+retweets, favs, and quotes. It is unlikely to be extended.</p>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_counts.get_favorite_count">
+<code class="descclassname">tweet_parser.getter_methods.tweet_counts.</code><code class="descname">get_favorite_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_counts.html#get_favorite_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_counts.get_favorite_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the favorite count for this tweet.</p>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_counts</span> <span class="k">import</span> <span class="n">get_retweet_count</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2017-21-23T15:21:21.000Z&#39;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s1">&#39;id_str&#39;</span><span class="p">:</span> <span class="s1">&#39;2382763597&#39;</span>
+<span class="gp">... </span>         <span class="s1">&#39;favorite_count&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_counts.get_quote_count">
+<code class="descclassname">tweet_parser.getter_methods.tweet_counts.</code><code class="descname">get_quote_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_counts.html#get_quote_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_counts.get_quote_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the quote count for this tweet.</p>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_counts</span> <span class="k">import</span> <span class="n">get_retweet_count</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2017-21-23T15:21:21.000Z&#39;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s1">&#39;id_str&#39;</span><span class="p">:</span> <span class="s1">&#39;2382763597&#39;</span>
+<span class="gp">... </span>         <span class="s1">&#39;quote_count&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_counts.get_retweet_count">
+<code class="descclassname">tweet_parser.getter_methods.tweet_counts.</code><code class="descname">get_retweet_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_counts.html#get_retweet_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_counts.get_retweet_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the retweet count for this tweet.</p>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_counts</span> <span class="k">import</span> <span class="n">get_retweet_count</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweet</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="s1">&#39;2017-21-23T15:21:21.000Z&#39;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s1">&#39;id_str&#39;</span><span class="p">:</span> <span class="s1">&#39;2382763597&#39;</span>
+<span class="gp">... </span>         <span class="s1">&#39;retweet_count&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="module-tweet_parser.getter_methods.tweet_date">
 <span id="tweet-parser-getter-methods-tweet-date-module"></span><h2>tweet_parser.getter_methods.tweet_date module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_date" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_date.snowflake2utc">
-<code class="descclassname">tweet_parser.getter_methods.tweet_date.</code><code class="descname">snowflake2utc</code><span class="sig-paren">(</span><em>sf</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_date.snowflake2utc" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_date.</code><code class="descname">snowflake2utc</code><span class="sig-paren">(</span><em>sf</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_date.html#snowflake2utc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_date.snowflake2utc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Twitter snowflake ID to a Unix timestamp
 (seconds since Jan 1 1970 00:00:00)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sf</strong> (<em>str</em>) – Twitter snowflake ID as a string</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sf</strong> (<em>str</em>) &#8211; Twitter snowflake ID as a string</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">seconds since Jan 1 1970 00:00:00</td>
 </tr>
@@ -70,13 +250,13 @@
 <span id="tweet-parser-getter-methods-tweet-embeds-module"></span><h2>tweet_parser.getter_methods.tweet_embeds module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_embeds" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_embeds.get_embedded_tweet">
-<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_embedded_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_embedded_tweet" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_embedded_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_embeds.html#get_embedded_tweet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_embedded_tweet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the retweeted Tweet OR the quoted Tweet and return it as a dictionary</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (not simply a dict)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (not simply a dict)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a dictionary representing the quote Tweet or the Retweet</td>
 </tr>
@@ -88,19 +268,19 @@
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_embeds.get_quoted_tweet">
-<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_quoted_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_quoted_tweet" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_quoted_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_embeds.html#get_quoted_tweet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_quoted_tweet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the quoted Tweet and return it as a dictionary
 If the Tweet is not a quote Tweet, return None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or a dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or a dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dictionary representing the quoted status
 or None if there is no quoted status.<ul class="simple">
-<li>For original format, this is the value of “quoted_status”</li>
-<li>For activity streams, this is the value of “twitter_quoted_status”</li>
+<li>For original format, this is the value of &#8220;quoted_status&#8221;</li>
+<li>For activity streams, this is the value of &#8220;twitter_quoted_status&#8221;</li>
 </ul>
 </td>
 </tr>
@@ -112,19 +292,19 @@ or None if there is no quoted status.<ul class="simple">
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_embeds.get_retweeted_tweet">
-<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_retweeted_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_retweeted_tweet" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_embeds.</code><code class="descname">get_retweeted_tweet</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_embeds.html#get_retweeted_tweet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_embeds.get_retweeted_tweet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the retweeted Tweet and return it as a dictionary
 If the Tweet is not a Retweet, return None</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or a dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or a dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dictionary representing the retweeted status
 or None if there is no quoted status.<ul class="simple">
-<li>For original format, this is the value of “retweeted_status”</li>
-<li>For activity streams, If the Tweet is a Retweet this is the value of the key “object”</li>
+<li>For original format, this is the value of &#8220;retweeted_status&#8221;</li>
+<li>For activity streams, If the Tweet is a Retweet this is the value of the key &#8220;object&#8221;</li>
 </ul>
 </td>
 </tr>
@@ -139,20 +319,13 @@ or None if there is no quoted status.<ul class="simple">
 <span id="tweet-parser-getter-methods-tweet-entities-module"></span><h2>tweet_parser.getter_methods.tweet_entities module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_entities" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_entities.get_entities">
-<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_entities</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_entities" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_entities</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_entities.html#get_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function to simply grabbing the entities.</p>
-<p>Caveat: In the case of Retweets, a Retweet is stored as
-“RT &#64;someone: Some awesome status”. In the case where pre-appending
-the string “RT &#64;someone:” causes the Tweet to exceed 140 characters,
-entites (hashtags, mentions, urls) beyond the 140 character mark are
-excluded from the Retweet’s entities. This seems like counterintuitive
-behavior, so we ensure here that the entities of a Retweet are a
-superset of the entities of the Retweeted status.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – Tweet in question</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; Tweet in question</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary of potential entities.</td>
 </tr>
@@ -180,7 +353,7 @@ superset of the entities of the Retweeted status.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_entities.get_hashtags">
-<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_hashtags</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_hashtags" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_hashtags</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_entities.html#get_hashtags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_hashtags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of hashtags in the Tweet
 Note that in the case of a quote-tweet, this does not return the
 hashtags in the quoted status.</p>
@@ -188,7 +361,7 @@ hashtags in the quoted status.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of all of the hashtags in the Tweet</td>
 </tr>
@@ -205,7 +378,6 @@ hashtags in the quoted status.</p>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;verb&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;twitter_entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;hashtags&quot;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">... </span>                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;1hashtag&quot;</span><span class="p">},</span>
 <span class="gp">... </span>                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;moreHashtags&quot;</span><span class="p">}]}}</span>
@@ -217,9 +389,9 @@ hashtags in the quoted status.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_entities.get_media_entities">
-<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_media_entities</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_media_entities" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_media_entities</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_entities.html#get_media_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_media_entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grabs all the media entities from a tweet, which are contained in the
-“extended_entities” or “twitter_extended_entities” field depending on the
+&#8220;extended_entities&#8221; or &#8220;twitter_extended_entities&#8221; field depending on the
 tweet format. Note that this is not the same as the first media entity from
 the basic <cite>entities</cite> key; this is required to get <em>all</em> of the potential
 media contained within a tweet. This is useful as an entry point for other
@@ -228,9 +400,9 @@ functions or for any custom parsing that needs to be done.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – the tweet in question</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; the tweet in question</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of dicts containing each media’s metadata in the
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of dicts containing each media&#8217;s metadata in the
 tweet.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list or None</td>
@@ -280,13 +452,13 @@ tweet.</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_entities.get_media_urls">
-<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_media_urls</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_media_urls" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_media_urls</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_entities.html#get_media_urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_media_urls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the https links to each media entity in the tweet.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – tweet</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; tweet</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of urls. Will be an empty list if there are no urls present.</td>
 </tr>
@@ -337,7 +509,7 @@ tweet.</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_entities.get_user_mentions">
-<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_user_mentions</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_user_mentions" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_entities.</code><code class="descname">get_user_mentions</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_entities.html#get_user_mentions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_entities.get_user_mentions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the &#64;-mentions in the Tweet as dictionaries.
 Note that in the case of a quote-tweet, this does not return the users
 mentioned in the quoted status. The recommended way to get that list would
@@ -348,10 +520,10 @@ does not include the user who authored the original (quoted) Tweet.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">1 item per &#64; mention. Note that the fields here
-aren’t enforced by the parser, they are simply the fields as they
+aren&#8217;t enforced by the parser, they are simply the fields as they
 appear in a Tweet data payload.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list (list of dicts)</td>
@@ -361,23 +533,76 @@ appear in a Tweet data payload.</td>
 <p class="rubric">Example</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_entities</span> <span class="k">import</span> <span class="n">get_user_mentions</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">original</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;RT @notFromShrek: Stuff! Words! ...&quot;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;user_mentions&quot;</span><span class="p">:</span> <span class="p">[{</span>
-<span class="gp">... </span>                             <span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="c1">#characters where the @ mention appears</span>
+<span class="gp">... </span>                             <span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">26</span><span class="p">],</span> <span class="c1">#characters where the @ mention appears</span>
 <span class="gp">... </span>                             <span class="s2">&quot;id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span><span class="p">,</span> <span class="c1">#id of @ mentioned user as a string</span>
-<span class="gp">... </span>                             <span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span><span class="p">,</span> <span class="c1">#screen_name of @d user</span>
+<span class="gp">... </span>                             <span class="s2">&quot;screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span><span class="p">,</span> <span class="c1">#screen_name of @ mentioned user</span>
 <span class="gp">... </span>                             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fiona&quot;</span><span class="p">,</span> <span class="c1">#display name of @ mentioned user</span>
 <span class="gp">... </span>                             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2382763597</span> <span class="c1">#id of @ mentioned user as an int</span>
 <span class="gp">... </span>                           <span class="p">}]</span>
-<span class="gp">... </span>                         <span class="p">},</span>
-<span class="gp">... </span>            <span class="s2">&quot;retweeted_status&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">... </span>                <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:01:19 +0000 2017&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Stuff! Words! #Tweeting!&quot;</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;user_mentions&quot;</span><span class="p">:</span> <span class="p">[]}</span>
-<span class="gp">... </span>                <span class="p">}</span>
+<span class="gp">... </span>                         <span class="p">}</span>
 <span class="gp">... </span>            <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_user_mentions</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
-<span class="go">[{&#39;indices&#39;: [2, 12], &#39;id_str&#39;: &#39;2382763597&#39;, &#39;screen_name&#39;: &#39;notFromShrek&#39;, &#39;name&#39;: &#39;Fiona&#39;, &#39;id&#39;: 2382763597}]</span>
+<span class="go">[{&#39;indices&#39;: [14, 26], &#39;id_str&#39;: &#39;2382763597&#39;, &#39;screen_name&#39;: &#39;notFromShrek&#39;, &#39;name&#39;: &#39;Fiona&#39;, &#39;id&#39;: 2382763597}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_generator">
+<span id="tweet-parser-getter-methods-tweet-generator-module"></span><h2>tweet_parser.getter_methods.tweet_generator module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_generator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser">
+<em class="property">class </em><code class="descclassname">tweet_parser.getter_methods.tweet_generator.</code><code class="descname">GeneratorHTMLParser</code><span class="sig-paren">(</span><em>*</em>, <em>convert_charrefs=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_generator.html#GeneratorHTMLParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">html.parser.HTMLParser</span></code></p>
+<p>HTML parser class to handle HTML tags in the original format source field</p>
+<dl class="method">
+<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_data">
+<code class="descname">handle_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_generator.html#GeneratorHTMLParser.handle_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_starttag">
+<code class="descname">handle_starttag</code><span class="sig-paren">(</span><em>tag</em>, <em>attrs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_generator.html#GeneratorHTMLParser.handle_starttag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_starttag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_generator.get_generator">
+<code class="descclassname">tweet_parser.getter_methods.tweet_generator.</code><code class="descname">get_generator</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_generator.html#get_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.get_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about the application that generated the Tweet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">keys are &#8216;link&#8217; and &#8216;name&#8217;, the web link and the name
+of the application</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_generator</span> <span class="k">import</span> <span class="n">get_generator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s1">&#39;&lt;a href=&quot;http://twitter.com&quot; rel=&quot;nofollow&quot;&gt;Twitter Web Client&lt;/a&gt;&#39;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;generator&quot;</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Twitter Web Client&quot;</span><span class="p">}</span>
+<span class="gp">... </span>            <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -387,17 +612,17 @@ appear in a Tweet data payload.</td>
 <span id="tweet-parser-getter-methods-tweet-geo-module"></span><h2>tweet_parser.getter_methods.tweet_geo module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_geo" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_geo.get_geo_coordinates">
-<code class="descclassname">tweet_parser.getter_methods.tweet_geo.</code><code class="descname">get_geo_coordinates</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_geo.get_geo_coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the user’s geo coordinates, if they are included in the payload
+<code class="descclassname">tweet_parser.getter_methods.tweet_geo.</code><code class="descname">get_geo_coordinates</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_geo.html#get_geo_coordinates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_geo.get_geo_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user&#8217;s geo coordinates, if they are included in the payload
 (otherwise return None)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
-<dt>dictionary with the keys “latitude” and “longitude”</dt>
+<dt>dictionary with the keys &#8220;latitude&#8221; and &#8220;longitude&#8221;</dt>
 <dd>or, if unavaiable, None</dd>
 </dl>
 </td>
@@ -421,14 +646,14 @@ appear in a Tweet data payload.</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_geo.get_profile_location">
-<code class="descclassname">tweet_parser.getter_methods.tweet_geo.</code><code class="descname">get_profile_location</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_geo.get_profile_location" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get user’s derived location data from the profile location enrichment
+<code class="descclassname">tweet_parser.getter_methods.tweet_geo.</code><code class="descname">get_profile_location</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_geo.html#get_profile_location"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_geo.get_profile_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get user&#8217;s derived location data from the profile location enrichment
 If unavailable, returns None.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">more information on the profile locations enrichment here:
 <a class="reference external" href="http://support.gnip.com/enrichments/profile_geo.html">http://support.gnip.com/enrichments/profile_geo.html</a></td>
@@ -451,8 +676,8 @@ If unavailable, returns None.</p>
 </div>
 <dl class="docutils">
 <dt>Caveats:</dt>
-<dd>This only returns the first element of the ‘locations’ list.
-I’m honestly not sure what circumstances would result in a list that
+<dd>This only returns the first element of the &#8216;locations&#8217; list.
+I&#8217;m honestly not sure what circumstances would result in a list that
 is more than one element long.</dd>
 </dl>
 </dd></dl>
@@ -462,10 +687,10 @@ is more than one element long.</dd>
 <span id="tweet-parser-getter-methods-tweet-links-module"></span><h2>tweet_parser.getter_methods.tweet_links module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_links" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_links.get_most_unrolled_urls">
-<code class="descclassname">tweet_parser.getter_methods.tweet_links.</code><code class="descname">get_most_unrolled_urls</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_links.get_most_unrolled_urls" title="Permalink to this definition">¶</a></dt>
-<dd><p>For each url included in the Tweet “urls”, get the most unrolled
+<code class="descclassname">tweet_parser.getter_methods.tweet_links.</code><code class="descname">get_most_unrolled_urls</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_links.html#get_most_unrolled_urls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_links.get_most_unrolled_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>For each url included in the Tweet &#8220;urls&#8221;, get the most unrolled
 version available. Only return 1 url string per url in tweet.tweet_links
-In order of preference for “most unrolled”
+In order of preference for &#8220;most unrolled&#8221;
 (keys from the dict at tweet.tweet_links):</p>
 <ol class="arabic simple">
 <li><cite>unwound</cite>/<cite>url</cite></li>
@@ -476,7 +701,7 @@ In order of preference for “most unrolled”
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object or dict</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object or dict</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of the most unrolled url available</td>
 </tr>
@@ -488,8 +713,8 @@ In order of preference for “most unrolled”
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_links.get_tweet_links">
-<code class="descclassname">tweet_parser.getter_methods.tweet_links.</code><code class="descname">get_tweet_links</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_links.get_tweet_links" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the links that are included in the Tweet as “urls”
+<code class="descclassname">tweet_parser.getter_methods.tweet_links.</code><code class="descname">get_tweet_links</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_links.html#get_tweet_links"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_links.get_tweet_links" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the links that are included in the Tweet as &#8220;urls&#8221;
 (if there are no links in the Tweet, this returns an empty list)
 This includes links that are included in quoted or retweeted Tweets
 Returns unrolled or expanded_url information if it is available</p>
@@ -497,7 +722,7 @@ Returns unrolled or expanded_url information if it is available</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (must be a Tweet obj, not a dict)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (must be a Tweet obj, not a dict)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A list of dictionaries containing information
 about urls. Each dictionary entity can have these keys; without
@@ -535,18 +760,130 @@ fields will be missing.<p>More information about the Twitter url enrichments at:
 </dd></dl>
 
 </div>
+<div class="section" id="module-tweet_parser.getter_methods.tweet_reply">
+<span id="tweet-parser-getter-methods-tweet-reply-module"></span><h2>tweet_parser.getter_methods.tweet_reply module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_reply" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name">
+<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_screen_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_reply.html#get_in_reply_to_screen_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the screen name of the user whose Tweet is being replied to, None
+if this Tweet is not a reply</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the screen name of the user whose Tweet is being replied to
+(None if not a reply)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_screen_name</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">&#39;notFromShrek&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;inReplyTo&quot;</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;</span><span class="p">}</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_screen_name</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">&#39;notFromShrek&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_status_id">
+<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_status_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_reply.html#get_in_reply_to_status_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_status_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the tweet id of the Tweet being replied to, None
+if this Tweet is not a reply</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the tweet id of the Tweet being replied to
+(None if not a reply)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_status_id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;863566329168711681&quot;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_status_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">&#39;863566329168711681&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;inReplyTo&quot;</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;</span><span class="p">}</span>
+<span class="gp">... </span>        <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_status_id</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
+<span class="go">&#39;863566329168711681&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_user_id">
+<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_user_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_reply.html#get_in_reply_to_user_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user id of the uesr whose Tweet is being replied to, and None
+if this Tweet is not a reply.</p>
+<p>Note that this is unavailable in activity-streams format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the user id of the user whose Tweet is being replied to, None
+(if not a reply), or for activity-streams raise a NotAvailableError</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_user_id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span>
+<span class="gp">... </span>           <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_user_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
+<span class="go">&#39;2382763597&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="module-tweet_parser.getter_methods.tweet_text">
 <span id="tweet-parser-getter-methods-tweet-text-module"></span><h2>tweet_parser.getter_methods.tweet_text module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_text" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.get_all_text">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_all_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_all_text" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_all_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#get_all_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_all_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all of the text of the tweet. This includes &#64; mentions, long links,
 quote-tweet contents (separated by a newline), RT contents &amp; poll options</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (must be a Tweet object)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (must be a Tweet object)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">text from tweet.user_entered_text, tweet.quote_or_rt_text and
 tweet.poll_options (if in original format), separated by newlines</td>
@@ -559,14 +896,14 @@ tweet.poll_options (if in original format), separated by newlines</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.get_full_text">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_full_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_full_text" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_full_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#get_full_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_full_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the full text of a tweet dict.
 Includes &#64;-mention replies and long links.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the untruncated text of a Tweet
 (finds extended text if available)</td>
@@ -622,13 +959,13 @@ Includes &#64;-mention replies and long links.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.get_lang">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_lang</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_lang" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_lang</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#get_lang"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_lang" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the language that the Tweet is written in.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">2-letter BCP 47 language code (or None if undefined)</td>
 </tr>
@@ -654,15 +991,15 @@ Includes &#64;-mention replies and long links.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.get_poll_options">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_poll_options</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_poll_options" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_poll_options</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#get_poll_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_poll_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the text in the options of a poll as a list
 - If there is no poll in the Tweet, return an empty list
-- If the Tweet is in activity-streams format, raise ‘NotAvailableError’</p>
+- If the Tweet is in activity-streams format, raise &#8216;NotAvailableError&#8217;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of strings, or, in the case where there is no poll,
 an empty list</td>
@@ -698,7 +1035,7 @@ an empty list</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.get_quote_or_rt_text">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_quote_or_rt_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_quote_or_rt_text" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_quote_or_rt_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#get_quote_or_rt_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_quote_or_rt_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the quoted or retweeted text in a Tweet
 (this is not the text entered by the posting user)
 - tweet: empty string (there is no quoted or retweeted text)
@@ -708,7 +1045,7 @@ an empty list</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">text of the retweeted-tweet or the quoted-tweet
 (empty string if this is an original Tweet)</td>
@@ -739,17 +1076,17 @@ an empty list</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.get_text">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the contents of “text” (original format)
-or “body” (activity streams format)</p>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_text</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#get_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the contents of &#8220;text&#8221; (original format)
+or &#8220;body&#8221; (activity streams format)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the contents of “text” key (original format)
-or “body” key (activity streams format)</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the contents of &#8220;text&#8221; key (original format)
+or &#8220;body&#8221; key (activity streams format)</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
@@ -774,18 +1111,18 @@ or “body” key (activity streams format)</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.get_tweet_type">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_tweet_type</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_tweet_type" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">get_tweet_type</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#get_tweet_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.get_tweet_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the type of Tweet this is (3 options: tweet, quote, and retweet)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) – A Tweet object or dictionary</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a><em> or </em><em>dict</em>) &#8211; A Tweet object or dictionary</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(one of 3 strings)
-“tweet”: an original Tweet
-“retweet”: a native retweet (created with the retweet button)
-“quote”: a native quote tweet (etweet button + adding quote text)</td>
+&#8220;tweet&#8221;: an original Tweet
+&#8220;retweet&#8221;: a native retweet (created with the retweet button)
+&#8220;quote&#8221;: a native quote tweet (etweet button + adding quote text)</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
@@ -795,20 +1132,20 @@ or “body” key (activity streams format)</td>
 <dt>Caveats:</dt>
 <dd>When a quote-tweet (tweet A) is quote-tweeted (tweet B),
 the innermost quoted tweet (A) in the payload (for B)
-no longer has the key “quoted_status” or “twitter_quoted_status”,
-and that tweet (A) would be labeled as a “tweet” (not a “quote”).</dd>
+no longer has the key &#8220;quoted_status&#8221; or &#8220;twitter_quoted_status&#8221;,
+and that tweet (A) would be labeled as a &#8220;tweet&#8221; (not a &#8220;quote&#8221;).</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_text.remove_links">
-<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">remove_links</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.remove_links" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_text.</code><code class="descname">remove_links</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_text.html#remove_links"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_text.remove_links" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function to remove the links from the input text</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> (<em>str</em>) – A string</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> (<em>str</em>) &#8211; A string</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the same text, but with any substring that matches the regex
 for a link removed and replaced with a space</td>
@@ -831,13 +1168,13 @@ for a link removed and replaced with a space</td>
 <span id="tweet-parser-getter-methods-tweet-user-module"></span><h2>tweet_parser.getter_methods.tweet_user module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_user" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_bio">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_bio</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_bio" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_bio</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_bio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_bio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the bio text of the user who posted the Tweet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the bio text of the user who posted the Tweet
 In a payload the abscence of a bio seems to be represented by an
@@ -872,13 +1209,13 @@ string if no bio is available).</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_follower_count">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_follower_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_follower_count" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_follower_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_follower_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_follower_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the number of followers that the user has</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the number of followers that the user has</td>
 </tr>
@@ -910,13 +1247,13 @@ string if no bio is available).</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_following_count">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_following_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_following_count" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_following_count</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_following_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_following_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the number of accounts that the user is following</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the number of accounts that the user is following</td>
 </tr>
@@ -948,15 +1285,15 @@ string if no bio is available).</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_klout_id">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_id" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_klout_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the Klout ID of the user (str) (if it exists)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the user’s Klout ID (if it exists), else return None</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the user&#8217;s Klout ID (if it exists), else return None</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
@@ -988,15 +1325,15 @@ string if no bio is available).</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_klout_profile">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_profile</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_profile" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_profile</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_klout_profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the Klout profile URL of the user (str) (if it exists)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the user’s Klout profile URL (if it exists), else return None</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the user&#8217;s Klout profile URL (if it exists), else return None</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
@@ -1030,13 +1367,13 @@ string if no bio is available).</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_klout_score">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_score</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_score" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_score</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_klout_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the Klout score (int) (if it exists) of the user who posted the Tweet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
 <dt>the Klout score (if it exists) of the user who posted the Tweet</dt>
@@ -1070,23 +1407,23 @@ string if no bio is available).</td>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_klout_topics">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_topics</code><span class="sig-paren">(</span><em>tweet</em>, <em>topic_type='influence'</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_topics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the user’s chosen Klout topics (a list of dicts), if it exists.
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_klout_topics</code><span class="sig-paren">(</span><em>tweet</em>, <em>topic_type='influence'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_klout_topics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_klout_topics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user&#8217;s chosen Klout topics (a list of dicts), if it exists.
 Regardless of format or topic type, topic dicts will have the same keys:
-“url”, “id”, “name”, “score”</p>
+&#8220;url&#8221;, &#8220;id&#8221;, &#8220;name&#8221;, &#8220;score&#8221;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object</li>
-<li><strong>topic_type</strong> (<em>str</em>) – Which type of Klout topic to return.
-Options are limited to ‘influence’ and ‘interest’</li>
+<li><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object</li>
+<li><strong>topic_type</strong> (<em>str</em>) &#8211; Which type of Klout topic to return.
+Options are limited to &#8216;influence&#8217; and &#8216;interest&#8217;</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of dicts representing Klout topics, or if Klout topics         do not exist in the Tweet payload, return None. The list is sorted by
-the “score” value.</p>
+the &#8220;score&#8221; value.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
@@ -1117,13 +1454,13 @@ the “score” value.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_name">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_name" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the display name of the user who posted the Tweet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the &#64; handle of the user who posted the Tweet</td>
 </tr>
@@ -1155,13 +1492,13 @@ the “score” value.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_screen_name">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_screen_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_screen_name" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_screen_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_screen_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_screen_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the screen name (&#64; handle) of the user who posted the Tweet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the &#64; handle of the user who posted the Tweet</td>
 </tr>
@@ -1193,13 +1530,13 @@ the “score” value.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_user_id">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_user_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_user_id" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_user_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_user_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_user_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the Twitter ID of the user who posted the Tweet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the Twitter ID of the user who posted the Tweet</td>
 </tr>
@@ -1231,16 +1568,16 @@ the “score” value.</p>
 
 <dl class="function">
 <dt id="tweet_parser.getter_methods.tweet_user.get_utc_offset">
-<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_utc_offset</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_utc_offset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the utc offset (if it’s available) of the user who posted the Tweet</p>
+<code class="descclassname">tweet_parser.getter_methods.tweet_user.</code><code class="descname">get_utc_offset</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tweet_parser/getter_methods/tweet_user.html#get_utc_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tweet_parser.getter_methods.tweet_user.get_utc_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the utc offset (if it&#8217;s available) of the user who posted the Tweet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) &#8211; A Tweet object (or a dictionary)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a signed integer indicating the number of seconds offset of the
-user’s home timezone from UTC time</td>
+user&#8217;s home timezone from UTC time</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
 </tr>
@@ -1269,280 +1606,27 @@ user’s home timezone from UTC time</td>
 </dd></dl>
 
 </div>
-<div class="section" id="module-tweet_parser.getter_methods.gnip_fields">
-<span id="tweet-parser-getter-methods-gnip-fields-module"></span><h2>tweet_parser.getter_methods.gnip_fields module<a class="headerlink" href="#module-tweet_parser.getter_methods.gnip_fields" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="tweet_parser.getter_methods.gnip_fields.get_matching_rules">
-<code class="descclassname">tweet_parser.getter_methods.gnip_fields.</code><code class="descname">get_matching_rules</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.gnip_fields.get_matching_rules" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves the matching rules for a tweet with a gnip field enrichment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – the tweet</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">potential <code class="docutils literal"><span class="pre">[{&quot;tag&quot;:</span> <span class="pre">&quot;user_tag&quot;,</span> <span class="pre">&quot;value&quot;:</span> <span class="pre">&quot;rule_value&quot;}]</span></code>
-pairs from standard rulesets or None if no rules or no
-matching_rules field is found.<p>More information on this value at:
-<a class="reference external" href="http://support.gnip.com/enrichments/matching_rules.html">http://support.gnip.com/enrichments/matching_rules.html</a></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-<div class="section" id="module-tweet_parser.getter_methods.tweet_generator">
-<span id="tweet-parser-getter-methods-tweet-generator-module"></span><h2>tweet_parser.getter_methods.tweet_generator module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_generator" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser">
-<em class="property">class </em><code class="descclassname">tweet_parser.getter_methods.tweet_generator.</code><code class="descname">GeneratorHTMLParser</code><span class="sig-paren">(</span><em>*</em>, <em>convert_charrefs=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">html.parser.HTMLParser</span></code></p>
-<p>HTML parser class to handle HTML tags in the original format source field</p>
-<dl class="method">
-<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_data">
-<code class="descname">handle_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_starttag">
-<code class="descname">handle_starttag</code><span class="sig-paren">(</span><em>tag</em>, <em>attrs</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.GeneratorHTMLParser.handle_starttag" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="tweet_parser.getter_methods.tweet_generator.get_generator">
-<code class="descclassname">tweet_parser.getter_methods.tweet_generator.</code><code class="descname">get_generator</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_generator.get_generator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get information about the application that generated the Tweet</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">keys are ‘link’ and ‘name’, the web link and the name
-of the application</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_generator</span> <span class="k">import</span> <span class="n">get_generator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s1">&#39;&lt;a href=&quot;http://twitter.com&quot; rel=&quot;nofollow&quot;&gt;Twitter Web Client&lt;/a&gt;&#39;</span>
-<span class="gp">... </span>           <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;generator&quot;</span><span class="p">:</span>
-<span class="gp">... </span>             <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com&quot;</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Twitter Web Client&quot;</span><span class="p">}</span>
-<span class="gp">... </span>            <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_generator</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">{&#39;link&#39;: &#39;http://twitter.com&#39;, &#39;name&#39;: &#39;Twitter Web Client&#39;}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="module-tweet_parser.getter_methods.tweet_reply">
-<span id="tweet-parser-getter-methods-tweet-reply-module"></span><h2>tweet_parser.getter_methods.tweet_reply module<a class="headerlink" href="#module-tweet_parser.getter_methods.tweet_reply" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name">
-<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_screen_name</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the screen name of the user whose Tweet is being replied to, None
-if this Tweet is not a reply</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the screen name of the user whose Tweet is being replied to
-(None if not a reply)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_screen_name&quot;</span><span class="p">:</span> <span class="s2">&quot;notFromShrek&quot;</span>
-<span class="gp">... </span>           <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_screen_name</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&#39;notFromShrek&#39;</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;inReplyTo&quot;</span><span class="p">:</span>
-<span class="gp">... </span>           <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;</span><span class="p">}</span>
-<span class="gp">... </span>        <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_screen_name</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&#39;notFromShrek&#39;</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_status_id">
-<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_status_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_status_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the tweet id of the Tweet being replied to, None
-if this Tweet is not a reply</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the tweet id of the Tweet being replied to
-(None if not a reply)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_status_id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;863566329168711681&quot;</span>
-<span class="gp">... </span>           <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_status_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&#39;863566329168711681&#39;</span>
-</pre></div>
-</div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_streams_format_dict</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;postedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-05-24T20:17:19.000Z&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;inReplyTo&quot;</span><span class="p">:</span>
-<span class="gp">... </span>           <span class="p">{</span><span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;</span><span class="p">}</span>
-<span class="gp">... </span>        <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_status_id</span><span class="p">(</span><span class="n">activity_streams_format_dict</span><span class="p">)</span>
-<span class="go">&#39;863566329168711681&#39;</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="tweet_parser.getter_methods.tweet_reply.get_in_reply_to_user_id">
-<code class="descclassname">tweet_parser.getter_methods.tweet_reply.</code><code class="descname">get_in_reply_to_user_id</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="headerlink" href="#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_user_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the user id of the uesr whose Tweet is being replied to, and None
-if this Tweet is not a reply.</p>
-<p>Note that this is unavailable in activity-streams format</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tweet</strong> (<a class="reference internal" href="tweet_parser.html#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet"><em>Tweet</em></a>) – A Tweet object (or a dictionary)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the user id of the user whose Tweet is being replied to, None
-(if not a reply), or for activity-streams raise a NotAvailableError</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tweet_parser.getter_methods.tweet_reply</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">original_format_dict</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;Wed May 24 20:17:19 +0000 2017&quot;</span><span class="p">,</span>
-<span class="gp">... </span>            <span class="s2">&quot;in_reply_to_user_id_str&quot;</span><span class="p">:</span> <span class="s2">&quot;2382763597&quot;</span>
-<span class="gp">... </span>           <span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_in_reply_to_user_id</span><span class="p">(</span><span class="n">original_format_dict</span><span class="p">)</span>
-<span class="go">&#39;2382763597&#39;</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
 <div class="section" id="module-tweet_parser.getter_methods">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tweet_parser.getter_methods" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Tweet Parser</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Tweet Parser</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="tweet_parser.html">tweet_parser package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="tweet_parser.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">tweet_parser.getter_methods package</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tweet_parser.html#module-tweet_parser">Module contents</a></li>
-</ul>
-</li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="tweet_parser.html">tweet_parser package</a><ul>
-      <li>Previous: <a href="tweet_parser.html" title="previous chapter">tweet_parser package</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2017, Twitter DDIS.
       
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
       
-      |
-      <a href="_sources/tweet_parser.getter_methods.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
   </body>
 </html>

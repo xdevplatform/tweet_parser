@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tweet_parser.getter_methods.tweet_text &#8212; Tweet Parser 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tweet_parser.html">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for tweet_parser.getter_methods.tweet_text</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tweet_parser.tweet_checking</span> <span class="k">import</span> <span class="n">is_original_format</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_parser_errors</span> <span class="k">import</span> <span class="n">NotAvailableError</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<div class="viewcode-block" id="get_full_text"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.get_full_text">[docs]</a><span class="k">def</span> <span class="nf">get_full_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the full text of a tweet dict.</span>
+<span class="sd">    Includes @-mention replies and long links.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the untruncated text of a Tweet</span>
+<span class="sd">        (finds extended text if available)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_text import get_full_text</span>
+<span class="sd">        &gt;&gt;&gt; # getting the text of a Tweet that is not truncated</span>
+<span class="sd">        &gt;&gt;&gt; original_untruncated = {</span>
+<span class="sd">        ...                 &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...                 &quot;truncated&quot;: False,</span>
+<span class="sd">        ...                 &quot;text&quot;: &quot;some tweet text&quot;</span>
+<span class="sd">        ...                }</span>
+<span class="sd">        &gt;&gt;&gt; get_full_text(original_untruncated)</span>
+<span class="sd">        &#39;some tweet text&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_untruncated = {&quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...                         &quot;body&quot;: &quot;some tweet text&quot;</span>
+<span class="sd">        ...                        }</span>
+<span class="sd">        &gt;&gt;&gt; get_full_text(activity_untruncated)</span>
+<span class="sd">        &#39;some tweet text&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; # getting the text of a truncated Tweet (has over 140 chars)</span>
+<span class="sd">        &gt;&gt;&gt; original_truncated = {</span>
+<span class="sd">        ...               &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...               &quot;text&quot;: &quot;some tweet text, lorem ip...&quot;,</span>
+<span class="sd">        ...               &quot;truncated&quot;: True,</span>
+<span class="sd">        ...               &quot;extended_tweet&quot;:</span>
+<span class="sd">        ...                 {&quot;full_text&quot;:</span>
+<span class="sd">        ...                   &quot;some tweet text, lorem ipsum dolor sit amet&quot;}</span>
+<span class="sd">        ...               }</span>
+<span class="sd">        &gt;&gt;&gt; get_full_text(original_truncated)</span>
+<span class="sd">        &#39;some tweet text, lorem ipsum dolor sit amet&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_truncated = {</span>
+<span class="sd">        ...               &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...               &quot;body&quot;: &quot;some tweet text, lorem ip...&quot;,</span>
+<span class="sd">        ...               &quot;long_object&quot;:</span>
+<span class="sd">        ...                 {&quot;body&quot;:</span>
+<span class="sd">        ...                   &quot;some tweet text, lorem ipsum dolor sit amet&quot;}</span>
+<span class="sd">        ...              }</span>
+<span class="sd">        &gt;&gt;&gt; get_full_text(activity_truncated)</span>
+<span class="sd">        &#39;some tweet text, lorem ipsum dolor sit amet&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;truncated&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;extended_tweet&quot;</span><span class="p">][</span><span class="s2">&quot;full_text&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;long_object&quot;</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;long_object&quot;</span><span class="p">][</span><span class="s2">&quot;body&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_text"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.get_text">[docs]</a><span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the contents of &quot;text&quot; (original format)</span>
+<span class="sd">    or &quot;body&quot; (activity streams format)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the contents of &quot;text&quot; key (original format)</span>
+<span class="sd">        or &quot;body&quot; key (activity streams format)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_text import get_text</span>
+<span class="sd">        &gt;&gt;&gt; original = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;text&quot;: &quot;some tweet text&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; get_text(original)</span>
+<span class="sd">        &#39;some tweet text&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity = {&quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;body&quot;: &quot;some tweet text&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; get_text(activity)</span>
+<span class="sd">        &#39;some tweet text&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_tweet_type"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.get_tweet_type">[docs]</a><span class="k">def</span> <span class="nf">get_tweet_type</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the type of Tweet this is (3 options: tweet, quote, and retweet)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: (one of 3 strings)</span>
+<span class="sd">        &quot;tweet&quot;: an original Tweet</span>
+<span class="sd">        &quot;retweet&quot;: a native retweet (created with the retweet button)</span>
+<span class="sd">        &quot;quote&quot;: a native quote tweet (etweet button + adding quote text)</span>
+
+<span class="sd">    Caveats:</span>
+<span class="sd">        When a quote-tweet (tweet A) is quote-tweeted (tweet B),</span>
+<span class="sd">        the innermost quoted tweet (A) in the payload (for B)</span>
+<span class="sd">        no longer has the key &quot;quoted_status&quot; or &quot;twitter_quoted_status&quot;,</span>
+<span class="sd">        and that tweet (A) would be labeled as a &quot;tweet&quot; (not a &quot;quote&quot;).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;retweeted_status&quot;</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;retweet&quot;</span>
+        <span class="k">elif</span> <span class="s2">&quot;quoted_status&quot;</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;quote&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;tweet&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;verb&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;share&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;retweet&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;twitter_quoted_status&quot;</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;quote&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;tweet&quot;</span></div>
+
+
+<div class="viewcode-block" id="get_lang"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.get_lang">[docs]</a><span class="k">def</span> <span class="nf">get_lang</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the language that the Tweet is written in.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: 2-letter BCP 47 language code (or None if undefined)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_text import get_lang</span>
+<span class="sd">        &gt;&gt;&gt; original = {&quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;lang&quot;: &quot;en&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; get_lang(original)</span>
+<span class="sd">        &#39;en&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity = {&quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;twitter_lang&quot;: &quot;en&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; get_lang(activity)</span>
+<span class="sd">        &#39;en&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="n">lang_field</span> <span class="o">=</span> <span class="s2">&quot;lang&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lang_field</span> <span class="o">=</span> <span class="s2">&quot;twitter_lang&quot;</span>
+    <span class="k">if</span> <span class="n">tweet</span><span class="p">[</span><span class="n">lang_field</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tweet</span><span class="p">[</span><span class="n">lang_field</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;und&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="n">lang_field</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_poll_options"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.get_poll_options">[docs]</a><span class="k">def</span> <span class="nf">get_poll_options</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the text in the options of a poll as a list</span>
+<span class="sd">    - If there is no poll in the Tweet, return an empty list</span>
+<span class="sd">    - If the Tweet is in activity-streams format, raise &#39;NotAvailableError&#39;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: list of strings, or, in the case where there is no poll,</span>
+<span class="sd">        an empty list</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotAvailableError for activity-streams format</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_text import get_poll_options</span>
+<span class="sd">        &gt;&gt;&gt; original = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;entities&quot;: {&quot;polls&quot;: [{&quot;options&quot;: [{&quot;text&quot;:&quot;a&quot;},</span>
+<span class="sd">        ...                                                 {&quot;text&quot;:&quot;b&quot;},</span>
+<span class="sd">        ...                                                 {&quot;text&quot;:&quot;c&quot;}]</span>
+<span class="sd">        ...                             }]},</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_poll_options(original)</span>
+<span class="sd">        [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+
+<span class="sd">        &gt;&gt;&gt; activity = {&quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;body&quot;: &quot;some tweet text&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; get_poll_options(activity)</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">        NotAvailableError: Gnip activity-streams format does not return poll options</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">poll_options_text</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">][</span><span class="s2">&quot;polls&quot;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]:</span>
+                    <span class="n">poll_options_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">poll_options_text</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotAvailableError</span><span class="p">(</span><span class="s2">&quot;Gnip activity-streams format does not&quot;</span> <span class="o">+</span>
+                                <span class="s2">&quot; return poll options&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_quote_or_rt_text"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.get_quote_or_rt_text">[docs]</a><span class="k">def</span> <span class="nf">get_quote_or_rt_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the quoted or retweeted text in a Tweet</span>
+<span class="sd">    (this is not the text entered by the posting user)</span>
+<span class="sd">    - tweet: empty string (there is no quoted or retweeted text)</span>
+<span class="sd">    - quote: only the text of the quoted Tweet</span>
+<span class="sd">    - retweet: the text of the retweet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: text of the retweeted-tweet or the quoted-tweet</span>
+<span class="sd">        (empty string if this is an original Tweet)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_text import get_quote_or_rt_text</span>
+<span class="sd">        &gt;&gt;&gt; # a quote tweet</span>
+<span class="sd">        &gt;&gt;&gt; quote = {&quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...          &quot;text&quot;: &quot;adding my own commentary&quot;,</span>
+<span class="sd">        ...          &quot;truncated&quot;: False,</span>
+<span class="sd">        ...          &quot;quoted_status&quot;: {</span>
+<span class="sd">        ...                 &quot;created_at&quot;: &quot;Mon May 01 05:00:05 +0000 2017&quot;,</span>
+<span class="sd">        ...                 &quot;truncated&quot;: False,</span>
+<span class="sd">        ...                 &quot;text&quot;: &quot;an interesting Tweet&quot;</span>
+<span class="sd">        ...                }</span>
+<span class="sd">        ...         }</span>
+
+<span class="sd">        &gt;&gt;&gt; get_quote_or_rt_text(quote)</span>
+<span class="sd">        &#39;an interesting Tweet&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tweet_type</span> <span class="o">=</span> <span class="n">get_tweet_type</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tweet_type</span> <span class="o">==</span> <span class="s2">&quot;tweet&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">tweet_type</span> <span class="o">==</span> <span class="s2">&quot;quote&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">get_full_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;quoted_status&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">get_full_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;twitter_quoted_status&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">tweet_type</span> <span class="o">==</span> <span class="s2">&quot;retweet&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">get_full_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;retweeted_status&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">get_full_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="get_all_text"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.get_all_text">[docs]</a><span class="k">def</span> <span class="nf">get_all_text</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all of the text of the tweet. This includes @ mentions, long links,</span>
+<span class="sd">    quote-tweet contents (separated by a newline), RT contents &amp; poll options</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (must be a Tweet object)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: text from tweet.user_entered_text, tweet.quote_or_rt_text and</span>
+<span class="sd">        tweet.poll_options (if in original format), separated by newlines</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="n">tweet</span><span class="o">.</span><span class="n">user_entered_text</span><span class="p">,</span>
+                                       <span class="n">tweet</span><span class="o">.</span><span class="n">quote_or_rt_text</span><span class="p">,</span>
+                                       <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">poll_options</span><span class="p">)]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="n">tweet</span><span class="o">.</span><span class="n">user_entered_text</span><span class="p">,</span>
+                                       <span class="n">tweet</span><span class="o">.</span><span class="n">quote_or_rt_text</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="remove_links"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_text.remove_links">[docs]</a><span class="k">def</span> <span class="nf">remove_links</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to remove the links from the input text</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text (str): A string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the same text, but with any substring that matches the regex</span>
+<span class="sd">        for a link removed and replaced with a space</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_text import remove_links</span>
+<span class="sd">        &gt;&gt;&gt; text = &quot;lorem ipsum dolor https://twitter.com/RobotPrincessFi&quot;</span>
+<span class="sd">        &gt;&gt;&gt; remove_links(text)</span>
+<span class="sd">        &#39;lorem ipsum dolor  &#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tco_link_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;https?://t.co/[A-z0-9].*&quot;</span><span class="p">)</span>
+    <span class="n">generic_link_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(https?://)?(\w*[.]\w+)+([/?=&amp;]+\w+)*&quot;</span><span class="p">)</span>
+    <span class="n">remove_tco</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">tco_link_regex</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">remove_generic</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">generic_link_regex</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">remove_tco</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">remove_generic</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

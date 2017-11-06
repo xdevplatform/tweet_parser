@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tweet_parser.getter_methods.tweet_reply &#8212; Tweet Parser 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tweet_parser.html">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for tweet_parser.getter_methods.tweet_reply</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tweet_parser.tweet_checking</span> <span class="k">import</span> <span class="n">is_original_format</span>
+<span class="kn">from</span> <span class="nn">tweet_parser.tweet_parser_errors</span> <span class="k">import</span> <span class="n">NotAvailableError</span>
+
+
+<div class="viewcode-block" id="get_in_reply_to_screen_name"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_screen_name">[docs]</a><span class="k">def</span> <span class="nf">get_in_reply_to_screen_name</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the screen name of the user whose Tweet is being replied to, None</span>
+<span class="sd">    if this Tweet is not a reply</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the screen name of the user whose Tweet is being replied to</span>
+<span class="sd">        (None if not a reply)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_reply import *</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;in_reply_to_screen_name&quot;: &quot;notFromShrek&quot;</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_in_reply_to_screen_name(original_format_dict)</span>
+<span class="sd">        &#39;notFromShrek&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...         &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...         &quot;inReplyTo&quot;:</span>
+<span class="sd">        ...            {&quot;link&quot;: &quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;}</span>
+<span class="sd">        ...         }</span>
+<span class="sd">        &gt;&gt;&gt; get_in_reply_to_screen_name(activity_streams_format_dict)</span>
+<span class="sd">        &#39;notFromShrek&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;in_reply_to_screen_name&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inReplyTo&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;inReplyTo&quot;</span><span class="p">][</span><span class="s2">&quot;link&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_in_reply_to_user_id"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_user_id">[docs]</a><span class="k">def</span> <span class="nf">get_in_reply_to_user_id</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the user id of the uesr whose Tweet is being replied to, and None</span>
+<span class="sd">    if this Tweet is not a reply. \n</span>
+<span class="sd">    Note that this is unavailable in activity-streams format</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the user id of the user whose Tweet is being replied to, None</span>
+<span class="sd">        (if not a reply), or for activity-streams raise a NotAvailableError</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_reply import *</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;in_reply_to_user_id_str&quot;: &quot;2382763597&quot;</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_in_reply_to_user_id(original_format_dict)</span>
+<span class="sd">        &#39;2382763597&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;in_reply_to_user_id_str&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotAvailableError</span><span class="p">(</span><span class="s2">&quot;Gnip activity-streams format does not&quot;</span> <span class="o">+</span>
+                                <span class="s2">&quot; return the replied to user&#39;s id&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_in_reply_to_status_id"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_reply.get_in_reply_to_status_id">[docs]</a><span class="k">def</span> <span class="nf">get_in_reply_to_status_id</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the tweet id of the Tweet being replied to, None</span>
+<span class="sd">    if this Tweet is not a reply</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the tweet id of the Tweet being replied to</span>
+<span class="sd">        (None if not a reply)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_reply import *</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;in_reply_to_status_id_str&quot;: &quot;863566329168711681&quot;</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_in_reply_to_status_id(original_format_dict)</span>
+<span class="sd">        &#39;863566329168711681&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...         &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...         &quot;inReplyTo&quot;:</span>
+<span class="sd">        ...            {&quot;link&quot;: &quot;http://twitter.com/notFromShrek/statuses/863566329168711681&quot;}</span>
+<span class="sd">        ...         }</span>
+<span class="sd">        &gt;&gt;&gt; get_in_reply_to_status_id(activity_streams_format_dict)</span>
+<span class="sd">        &#39;863566329168711681&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;in_reply_to_status_id_str&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inReplyTo&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;inReplyTo&quot;</span><span class="p">][</span><span class="s2">&quot;link&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

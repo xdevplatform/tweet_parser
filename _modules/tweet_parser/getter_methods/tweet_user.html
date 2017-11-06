@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tweet_parser.getter_methods.tweet_user &#8212; Tweet Parser 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tweet_parser.html">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for tweet_parser.getter_methods.tweet_user</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tweet_parser.tweet_checking</span> <span class="k">import</span> <span class="n">is_original_format</span>
+
+
+<div class="viewcode-block" id="get_user_id"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_user_id">[docs]</a><span class="k">def</span> <span class="nf">get_user_id</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the Twitter ID of the user who posted the Tweet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the Twitter ID of the user who posted the Tweet</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_user_id</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;id_str&quot;: &quot;815279070241955840&quot;}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_user_id(original_format_dict)</span>
+<span class="sd">        &#39;815279070241955840&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;actor&quot;:</span>
+<span class="sd">        ...              {&quot;id&quot;: &quot;id:twitter.com:815279070241955840&quot;}</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_user_id(activity_streams_format_dict)</span>
+<span class="sd">        &#39;815279070241955840&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">][</span><span class="s2">&quot;id_str&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_screen_name"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_screen_name">[docs]</a><span class="k">def</span> <span class="nf">get_screen_name</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the screen name (@ handle) of the user who posted the Tweet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the @ handle of the user who posted the Tweet</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_screen_name</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;screen_name&quot;: &quot;RobotPrincessFi&quot;}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_screen_name(original_format_dict)</span>
+<span class="sd">        &#39;RobotPrincessFi&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;actor&quot;:</span>
+<span class="sd">        ...              {&quot;preferredUsername&quot;: &quot;RobotPrincessFi&quot;}</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_screen_name(activity_streams_format_dict)</span>
+<span class="sd">        &#39;RobotPrincessFi&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">][</span><span class="s2">&quot;screen_name&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="s2">&quot;preferredUsername&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_name"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_name">[docs]</a><span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the display name of the user who posted the Tweet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the @ handle of the user who posted the Tweet</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_name</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;name&quot;: &quot;jk no&quot;}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_name(original_format_dict)</span>
+<span class="sd">        &#39;jk no&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;actor&quot;:</span>
+<span class="sd">        ...              {&quot;displayName&quot;: &quot;jk no&quot;}</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_name(activity_streams_format_dict)</span>
+<span class="sd">        &#39;jk no&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="s2">&quot;displayName&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_bio"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_bio">[docs]</a><span class="k">def</span> <span class="nf">get_bio</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the bio text of the user who posted the Tweet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the bio text of the user who posted the Tweet</span>
+<span class="sd">        In a payload the abscence of a bio seems to be represented by an</span>
+<span class="sd">        empty string or a None, this getter always returns a string (so, empty</span>
+<span class="sd">        string if no bio is available).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_bio</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;description&quot;: &quot;Niche millenial content aggregator&quot;}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_bio(original_format_dict)</span>
+<span class="sd">        &#39;Niche millenial content aggregator&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;actor&quot;:</span>
+<span class="sd">        ...              {&quot;summary&quot;: &quot;Niche millenial content aggregator&quot;}</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_bio(activity_streams_format_dict)</span>
+<span class="sd">        &#39;Niche millenial content aggregator&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_utc_offset"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_utc_offset">[docs]</a><span class="k">def</span> <span class="nf">get_utc_offset</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the utc offset (if it&#39;s available) of the user who posted the Tweet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: a signed integer indicating the number of seconds offset of the</span>
+<span class="sd">        user&#39;s home timezone from UTC time</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_utc_offset</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;utc_offset&quot;: -21600}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_utc_offset(original_format_dict)</span>
+<span class="sd">        -21600</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;actor&quot;:</span>
+<span class="sd">        ...              {&quot;utcOffset&quot;: &quot;-21600&quot;}</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_utc_offset(activity_streams_format_dict)</span>
+<span class="sd">        -21600</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">][</span><span class="s2">&quot;utc_offset&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="s2">&quot;utcOffset&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="s2">&quot;utcOffset&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_follower_count"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_follower_count">[docs]</a><span class="k">def</span> <span class="nf">get_follower_count</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the number of followers that the user has</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: the number of followers that the user has</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_follower_count</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;followers_count&quot;: 2}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_follower_count(original_format_dict)</span>
+<span class="sd">        2</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;actor&quot;:</span>
+<span class="sd">        ...              {&quot;followersCount&quot;: 2}</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_follower_count(activity_streams_format_dict)</span>
+<span class="sd">        2    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">][</span><span class="s2">&quot;followers_count&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="s2">&quot;followersCount&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_following_count"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_following_count">[docs]</a><span class="k">def</span> <span class="nf">get_following_count</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the number of accounts that the user is following</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: the number of accounts that the user is following</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_following_count</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;friends_count&quot;: 2}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_following_count(original_format_dict)</span>
+<span class="sd">        2</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;actor&quot;:</span>
+<span class="sd">        ...              {&quot;friendsCount&quot;: 2}</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_following_count(activity_streams_format_dict)</span>
+<span class="sd">        2    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">][</span><span class="s2">&quot;friends_count&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;actor&quot;</span><span class="p">][</span><span class="s2">&quot;friendsCount&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_klout_score"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_klout_score">[docs]</a><span class="k">def</span> <span class="nf">get_klout_score</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the Klout score (int) (if it exists) of the user who posted the Tweet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: the Klout score (if it exists) of the user who posted the Tweet</span>
+<span class="sd">            else return None</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_klout_score</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ...             &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;user&quot;:</span>
+<span class="sd">        ...              {&quot;derived&quot;: {&quot;klout&quot;: {&quot;score&quot;: 12345}}}</span>
+<span class="sd">        ...            }</span>
+<span class="sd">        &gt;&gt;&gt; get_klout_score(original_format_dict)</span>
+<span class="sd">        12345</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ...             &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;gnip&quot;:{&quot;klout_score&quot;: 12345}}</span>
+<span class="sd">        &gt;&gt;&gt; get_klout_score(activity_streams_format_dict)</span>
+<span class="sd">        12345</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;derived&#39;</span><span class="p">][</span><span class="s1">&#39;klout&#39;</span><span class="p">][</span><span class="s1">&#39;score&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;gnip&#39;</span><span class="p">][</span><span class="s1">&#39;klout_score&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">score</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_klout_profile"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_klout_profile">[docs]</a><span class="k">def</span> <span class="nf">get_klout_profile</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the Klout profile URL of the user (str) (if it exists)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the user&#39;s Klout profile URL (if it exists), else return None</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_klout_profile</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ... &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ... &quot;user&quot;:</span>
+<span class="sd">        ...     {&quot;derived&quot;: {&quot;klout&quot;:</span>
+<span class="sd">        ...         {&quot;profile_url&quot;:</span>
+<span class="sd">        ...             &quot;http://klout.com/topic/id/10000000000000016635&quot;}}}</span>
+<span class="sd">        ... }</span>
+<span class="sd">        &gt;&gt;&gt; get_klout_profile(original_format_dict)</span>
+<span class="sd">        &#39;http://klout.com/topic/id/10000000000000016635&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ... &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ... &quot;gnip&quot;:</span>
+<span class="sd">        ...     {&quot;klout_profile&quot;: {</span>
+<span class="sd">        ...         &quot;link&quot;: &quot;http://klout.com/topic/id/10000000000000016635&quot;}</span>
+<span class="sd">        ...     }</span>
+<span class="sd">        ... }</span>
+<span class="sd">        &gt;&gt;&gt; get_klout_profile(activity_streams_format_dict)</span>
+<span class="sd">        &#39;http://klout.com/topic/id/10000000000000016635&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+            <span class="n">profile</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;derived&#39;</span><span class="p">][</span><span class="s1">&#39;klout&#39;</span><span class="p">][</span><span class="s1">&#39;profile_url&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">profile</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;gnip&#39;</span><span class="p">][</span><span class="s1">&#39;klout_profile&#39;</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">profile</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_klout_id"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_klout_id">[docs]</a><span class="k">def</span> <span class="nf">get_klout_id</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the Klout ID of the user (str) (if it exists)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object (or a dictionary)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: the user&#39;s Klout ID (if it exists), else return None</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_user import get_klout_id</span>
+<span class="sd">        &gt;&gt;&gt; original_format_dict = {</span>
+<span class="sd">        ... &quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...     &quot;user&quot;:</span>
+<span class="sd">        ...         {&quot;derived&quot;: {&quot;klout&quot;:</span>
+<span class="sd">        ...             {&quot;user_id&quot;:&quot;1234567890&quot;}}}</span>
+<span class="sd">        ...     }</span>
+<span class="sd">        &gt;&gt;&gt; get_klout_id(original_format_dict)</span>
+<span class="sd">        &#39;1234567890&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; activity_streams_format_dict = {</span>
+<span class="sd">        ... &quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ... &quot;gnip&quot;:</span>
+<span class="sd">        ...     {&quot;klout_profile&quot;: {</span>
+<span class="sd">        ...         &quot;klout_user_id&quot;: &quot;1234567890&quot;}</span>
+<span class="sd">        ...     }}</span>
+<span class="sd">        &gt;&gt;&gt; get_klout_id(activity_streams_format_dict)</span>
+<span class="sd">        &#39;1234567890&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+            <span class="n">klout_id</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;derived&#39;</span><span class="p">][</span><span class="s1">&#39;klout&#39;</span><span class="p">][</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">klout_id</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;gnip&#39;</span><span class="p">][</span><span class="s1">&#39;klout_profile&#39;</span><span class="p">][</span><span class="s1">&#39;klout_user_id&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">klout_id</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_klout_topics"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_user.get_klout_topics">[docs]</a><span class="k">def</span> <span class="nf">get_klout_topics</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">topic_type</span><span class="o">=</span><span class="s1">&#39;influence&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the user&#39;s chosen Klout topics (a list of dicts), if it exists.</span>
+<span class="sd">    Regardless of format or topic type, topic dicts will have the same keys:</span>
+<span class="sd">    &quot;url&quot;, &quot;id&quot;, &quot;name&quot;, &quot;score&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet): A Tweet object</span>
+<span class="sd">        topic_type (str): Which type of Klout topic to return.</span>
+<span class="sd">                          Options are limited to &#39;influence&#39; and &#39;interest&#39;</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of dicts representing Klout topics, or if Klout topics \</span>
+<span class="sd">        do not exist in the Tweet payload, return None. The list is sorted by</span>
+<span class="sd">        the &quot;score&quot; value.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; result = [{</span>
+<span class="sd">        ...     # the user&#39;s score for that topic</span>
+<span class="sd">        ...     &quot;score&quot;: 0.54,</span>
+<span class="sd">        ...     # the Klout topic ID</span>
+<span class="sd">        ...     &quot;id&quot;: &quot;10000000000000019376&quot;,</span>
+<span class="sd">        ...     # the Klout topic URL</span>
+<span class="sd">        ...     &quot;url&quot;: &quot;http://klout.com/topic/id/10000000000000019376&quot;,</span>
+<span class="sd">        ...     # the Klout topic name</span>
+<span class="sd">        ...     &quot;name&quot;: &quot;Emoji&quot;</span>
+<span class="sd">        ... },</span>
+<span class="sd">        ... {</span>
+<span class="sd">        ... &quot;score&quot;: 0.43,</span>
+<span class="sd">        ... &quot;id&quot;: &quot;9159&quot;,</span>
+<span class="sd">        ... &quot;url&quot;: &quot;http://klout.com/topic/id/9159&quot;,</span>
+<span class="sd">        ... &quot;name&quot;: &quot;Vegetables&quot;</span>
+<span class="sd">        ... }]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># check that the dict paths exist</span>
+        <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;derived&#39;</span><span class="p">][</span><span class="s1">&#39;klout&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_topics&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">topic_type</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s1">&#39;gnip&#39;</span><span class="p">][</span><span class="s1">&#39;klout_profile&#39;</span><span class="p">][</span><span class="s1">&#39;topics&#39;</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="c1"># since we have topics, collect the right pieces</span>
+    <span class="n">topics_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">:</span>
+            <span class="c1"># note: this is the same as the current structure of OF</span>
+            <span class="c1"># payloads, but is written out for consistency w/ AS payloads</span>
+            <span class="n">this_topic</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
+                              <span class="nb">id</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                              <span class="n">name</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                              <span class="n">score</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">])</span>
+            <span class="n">topics_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_topic</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">relevant_topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">topics</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;topic_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">topic_type</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">relevant_topics</span><span class="p">:</span>
+            <span class="n">this_topic</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;link&#39;</span><span class="p">],</span>
+                              <span class="nb">id</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                              <span class="n">name</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;displayName&#39;</span><span class="p">],</span>
+                              <span class="n">score</span><span class="o">=</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">])</span>
+            <span class="n">topics_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_topic</span><span class="p">)</span>
+    <span class="n">sorted_topics_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">topics_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">sorted_topics_list</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

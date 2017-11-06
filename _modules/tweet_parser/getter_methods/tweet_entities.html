@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tweet_parser.getter_methods.tweet_entities &#8212; Tweet Parser 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html">
+          Tweet Parser</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="https://github.com/tw-ddis/tweet_parser">Github</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Tweet Parser <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Tweet Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tweet_parser.html">tweet_parser package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.lazy_property">tweet_parser.lazy_property module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet">tweet_parser.tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_checking">tweet_parser.tweet_checking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_keys">tweet_parser.tweet_keys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser.tweet_parser_errors">tweet_parser.tweet_parser_errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tweet_parser.html#module-tweet_parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for tweet_parser.getter_methods.tweet_entities</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tweet_parser.tweet_checking</span> <span class="k">import</span> <span class="n">is_original_format</span>
+
+
+<div class="viewcode-block" id="get_entities"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_entities.get_entities">[docs]</a><span class="k">def</span> <span class="nf">get_entities</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to simply grabbing the entities.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): Tweet in question</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: dictionary of potential entities.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_entities import get_entities</span>
+<span class="sd">        &gt;&gt;&gt; original = {&quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;entities&quot;: {&quot;user_mentions&quot;: [{</span>
+<span class="sd">        ...                              &quot;indices&quot;: [14,26], #characters where the @ mention appears</span>
+<span class="sd">        ...                              &quot;id_str&quot;: &quot;2382763597&quot;, #id of @ mentioned user as a string</span>
+<span class="sd">        ...                              &quot;screen_name&quot;: &quot;notFromShrek&quot;, #screen_name of @ mentioned user</span>
+<span class="sd">        ...                              &quot;name&quot;: &quot;Fiona&quot;, #display name of @ mentioned user</span>
+<span class="sd">        ...                              &quot;id&quot;: 2382763597 #id of @ mentioned user as an int</span>
+<span class="sd">        ...                            }]</span>
+<span class="sd">        ...                          }</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_entities(original)</span>
+<span class="sd">        {&#39;user_mentions&#39;: [{&#39;indices&#39;: [14, 26], &#39;id_str&#39;: &#39;2382763597&#39;, &#39;screen_name&#39;: &#39;notFromShrek&#39;, &#39;name&#39;: &#39;Fiona&#39;, &#39;id&#39;: 2382763597}]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="n">entity_key</span> <span class="o">=</span> <span class="s2">&quot;entities&quot;</span> <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;twitter_entities&quot;</span>
+    <span class="k">return</span> <span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entity_key</span><span class="p">,</span> <span class="p">[])</span></div>
+
+
+<div class="viewcode-block" id="get_media_entities"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_entities.get_media_entities">[docs]</a><span class="k">def</span> <span class="nf">get_media_entities</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Grabs all the media entities from a tweet, which are contained in the</span>
+<span class="sd">    &quot;extended_entities&quot; or &quot;twitter_extended_entities&quot; field depending on the</span>
+<span class="sd">    tweet format. Note that this is not the same as the first media entity from</span>
+<span class="sd">    the basic `entities` key; this is required to get *all* of the potential</span>
+<span class="sd">    media contained within a tweet. This is useful as an entry point for other</span>
+<span class="sd">    functions or for any custom parsing that needs to be done.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): the tweet in question</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list or None: the list of dicts containing each media&#39;s metadata in the</span>
+<span class="sd">        tweet.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_entities import get_media_entities</span>
+<span class="sd">        &gt;&gt;&gt; tweet = {&#39;created_at&#39;: &#39;2017-21-23T15:21:21.000Z&#39;,</span>
+<span class="sd">        ...          &#39;entities&#39;: {&#39;user_mentions&#39;: [{&#39;id&#39;: 2382763597,</span>
+<span class="sd">        ...          &#39;id_str&#39;: &#39;2382763597&#39;,</span>
+<span class="sd">        ...          &#39;indices&#39;: [14, 26],</span>
+<span class="sd">        ...          &#39;name&#39;: &#39;Fiona&#39;,</span>
+<span class="sd">        ...          &#39;screen_name&#39;: &#39;notFromShrek&#39;}]},</span>
+<span class="sd">        ...          &#39;extended_entities&#39;: {&#39;media&#39;: [{&#39;display_url&#39;: &#39;pic.twitter.com/something&#39;,</span>
+<span class="sd">        ...          &#39;expanded_url&#39;: &#39;https://twitter.com/something&#39;,</span>
+<span class="sd">        ...          &#39;id&#39;: 4242,</span>
+<span class="sd">        ...          &#39;id_str&#39;: &#39;4242&#39;,</span>
+<span class="sd">        ...          &#39;indices&#39;: [88, 111],</span>
+<span class="sd">        ...          &#39;media_url&#39;: &#39;http://pbs.twimg.com/media/something.jpg&#39;,</span>
+<span class="sd">        ...          &#39;media_url_https&#39;: &#39;https://pbs.twimg.com/media/something.jpg&#39;,</span>
+<span class="sd">        ...          &#39;sizes&#39;: {&#39;large&#39;: {&#39;h&#39;: 1065, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1600},</span>
+<span class="sd">        ...          &#39;medium&#39;: {&#39;h&#39;: 799, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1200},</span>
+<span class="sd">        ...          &#39;small&#39;: {&#39;h&#39;: 453, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 680},</span>
+<span class="sd">        ...          &#39;thumb&#39;: {&#39;h&#39;: 150, &#39;resize&#39;: &#39;crop&#39;, &#39;w&#39;: 150}},</span>
+<span class="sd">        ...          &#39;type&#39;: &#39;photo&#39;,</span>
+<span class="sd">        ...          &#39;url&#39;: &#39;https://t.co/something&#39;},</span>
+<span class="sd">        ...          {&#39;display_url&#39;: &#39;pic.twitter.com/something_else&#39;,</span>
+<span class="sd">        ...          &#39;expanded_url&#39;: &#39;https://twitter.com/user/status/something/photo/1&#39;,</span>
+<span class="sd">        ...          &#39;id&#39;: 4243,</span>
+<span class="sd">        ...          &#39;id_str&#39;: &#39;4243&#39;,</span>
+<span class="sd">        ...          &#39;indices&#39;: [88, 111],</span>
+<span class="sd">        ...          &#39;media_url&#39;: &#39;http://pbs.twimg.com/media/something_else.jpg&#39;,</span>
+<span class="sd">        ...          &#39;media_url_https&#39;: &#39;https://pbs.twimg.com/media/something_else.jpg&#39;,</span>
+<span class="sd">        ...          &#39;sizes&#39;: {&#39;large&#39;: {&#39;h&#39;: 1065, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1600},</span>
+<span class="sd">        ...          &#39;medium&#39;: {&#39;h&#39;: 799, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1200},</span>
+<span class="sd">        ...          &#39;small&#39;: {&#39;h&#39;: 453, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 680},</span>
+<span class="sd">        ...          &#39;thumb&#39;: {&#39;h&#39;: 150, &#39;resize&#39;: &#39;crop&#39;, &#39;w&#39;: 150}},</span>
+<span class="sd">        ...          &#39;type&#39;: &#39;photo&#39;,</span>
+<span class="sd">        ...          &#39;url&#39;: &#39;https://t.co/something_else&#39;}]}</span>
+<span class="sd">        ...         }</span>
+<span class="sd">        &gt;&gt;&gt; get_media_entities(tweet)</span>
+<span class="sd">        [{&#39;display_url&#39;: &#39;pic.twitter.com/something&#39;, &#39;expanded_url&#39;: &#39;https://twitter.com/something&#39;, &#39;id&#39;: 4242, &#39;id_str&#39;: &#39;4242&#39;, &#39;indices&#39;: [88, 111], &#39;media_url&#39;: &#39;http://pbs.twimg.com/media/something.jpg&#39;, &#39;media_url_https&#39;: &#39;https://pbs.twimg.com/media/something.jpg&#39;, &#39;sizes&#39;: {&#39;large&#39;: {&#39;h&#39;: 1065, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1600}, &#39;medium&#39;: {&#39;h&#39;: 799, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1200}, &#39;small&#39;: {&#39;h&#39;: 453, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 680}, &#39;thumb&#39;: {&#39;h&#39;: 150, &#39;resize&#39;: &#39;crop&#39;, &#39;w&#39;: 150}}, &#39;type&#39;: &#39;photo&#39;, &#39;url&#39;: &#39;https://t.co/something&#39;}, {&#39;display_url&#39;: &#39;pic.twitter.com/something_else&#39;, &#39;expanded_url&#39;: &#39;https://twitter.com/user/status/something/photo/1&#39;, &#39;id&#39;: 4243, &#39;id_str&#39;: &#39;4243&#39;, &#39;indices&#39;: [88, 111], &#39;media_url&#39;: &#39;http://pbs.twimg.com/media/something_else.jpg&#39;, &#39;media_url_https&#39;: &#39;https://pbs.twimg.com/media/something_else.jpg&#39;, &#39;sizes&#39;: {&#39;large&#39;: {&#39;h&#39;: 1065, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1600}, &#39;medium&#39;: {&#39;h&#39;: 799, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1200}, &#39;small&#39;: {&#39;h&#39;: 453, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 680}, &#39;thumb&#39;: {&#39;h&#39;: 150, &#39;resize&#39;: &#39;crop&#39;, &#39;w&#39;: 150}}, &#39;type&#39;: &#39;photo&#39;, &#39;url&#39;: &#39;https://t.co/something_else&#39;}]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ext_ents_key</span> <span class="o">=</span> <span class="s2">&quot;extended_entities&quot;</span> <span class="k">if</span> <span class="n">is_original_format</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;twitter_extended_entities&quot;</span>
+    <span class="n">ext_ents</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ext_ents_key</span><span class="p">)</span>
+    <span class="n">media</span> <span class="o">=</span> <span class="n">ext_ents</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;media&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">ext_ents</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">media</span></div>
+
+
+<div class="viewcode-block" id="get_media_urls"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_entities.get_media_urls">[docs]</a><span class="k">def</span> <span class="nf">get_media_urls</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets the https links to each media entity in the tweet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): tweet</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: list of urls. Will be an empty list if there are no urls present.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_entities import get_media_urls</span>
+<span class="sd">        &gt;&gt;&gt; tweet = {&#39;created_at&#39;: &#39;2017-21-23T15:21:21.000Z&#39;,</span>
+<span class="sd">        ...          &#39;entities&#39;: {&#39;user_mentions&#39;: [{&#39;id&#39;: 2382763597,</span>
+<span class="sd">        ...          &#39;id_str&#39;: &#39;2382763597&#39;,</span>
+<span class="sd">        ...          &#39;indices&#39;: [14, 26],</span>
+<span class="sd">        ...          &#39;name&#39;: &#39;Fiona&#39;,</span>
+<span class="sd">        ...          &#39;screen_name&#39;: &#39;notFromShrek&#39;}]},</span>
+<span class="sd">        ...          &#39;extended_entities&#39;: {&#39;media&#39;: [{&#39;display_url&#39;: &#39;pic.twitter.com/something&#39;,</span>
+<span class="sd">        ...          &#39;expanded_url&#39;: &#39;https://twitter.com/something&#39;,</span>
+<span class="sd">        ...          &#39;id&#39;: 4242,</span>
+<span class="sd">        ...          &#39;id_str&#39;: &#39;4242&#39;,</span>
+<span class="sd">        ...          &#39;indices&#39;: [88, 111],</span>
+<span class="sd">        ...          &#39;media_url&#39;: &#39;http://pbs.twimg.com/media/something.jpg&#39;,</span>
+<span class="sd">        ...          &#39;media_url_https&#39;: &#39;https://pbs.twimg.com/media/something.jpg&#39;,</span>
+<span class="sd">        ...          &#39;sizes&#39;: {&#39;large&#39;: {&#39;h&#39;: 1065, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1600},</span>
+<span class="sd">        ...          &#39;medium&#39;: {&#39;h&#39;: 799, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1200},</span>
+<span class="sd">        ...          &#39;small&#39;: {&#39;h&#39;: 453, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 680},</span>
+<span class="sd">        ...          &#39;thumb&#39;: {&#39;h&#39;: 150, &#39;resize&#39;: &#39;crop&#39;, &#39;w&#39;: 150}},</span>
+<span class="sd">        ...          &#39;type&#39;: &#39;photo&#39;,</span>
+<span class="sd">        ...          &#39;url&#39;: &#39;https://t.co/something&#39;},</span>
+<span class="sd">        ...          {&#39;display_url&#39;: &#39;pic.twitter.com/something_else&#39;,</span>
+<span class="sd">        ...          &#39;expanded_url&#39;: &#39;https://twitter.com/user/status/something/photo/1&#39;,</span>
+<span class="sd">        ...          &#39;id&#39;: 4243,</span>
+<span class="sd">        ...          &#39;id_str&#39;: &#39;4243&#39;,</span>
+<span class="sd">        ...          &#39;indices&#39;: [88, 111],</span>
+<span class="sd">        ...          &#39;media_url&#39;: &#39;http://pbs.twimg.com/media/something_else.jpg&#39;,</span>
+<span class="sd">        ...          &#39;media_url_https&#39;: &#39;https://pbs.twimg.com/media/something_else.jpg&#39;,</span>
+<span class="sd">        ...          &#39;sizes&#39;: {&#39;large&#39;: {&#39;h&#39;: 1065, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1600},</span>
+<span class="sd">        ...          &#39;medium&#39;: {&#39;h&#39;: 799, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 1200},</span>
+<span class="sd">        ...          &#39;small&#39;: {&#39;h&#39;: 453, &#39;resize&#39;: &#39;fit&#39;, &#39;w&#39;: 680},</span>
+<span class="sd">        ...          &#39;thumb&#39;: {&#39;h&#39;: 150, &#39;resize&#39;: &#39;crop&#39;, &#39;w&#39;: 150}},</span>
+<span class="sd">        ...          &#39;type&#39;: &#39;photo&#39;,</span>
+<span class="sd">        ...          &#39;url&#39;: &#39;https://t.co/something_else&#39;}]}</span>
+<span class="sd">        ...         }</span>
+<span class="sd">        &gt;&gt;&gt; get_media_urls(tweet)</span>
+<span class="sd">        [&#39;https://pbs.twimg.com/media/something.jpg&#39;, &#39;https://pbs.twimg.com/media/something_else.jpg&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">media</span> <span class="o">=</span> <span class="n">get_media_entities</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;media_url_https&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">media</span><span class="p">]</span> <span class="k">if</span> <span class="n">media</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">urls</span></div>
+
+
+
+<div class="viewcode-block" id="get_user_mentions"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_entities.get_user_mentions">[docs]</a><span class="k">def</span> <span class="nf">get_user_mentions</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the @-mentions in the Tweet as dictionaries.</span>
+<span class="sd">    Note that in the case of a quote-tweet, this does not return the users</span>
+<span class="sd">    mentioned in the quoted status. The recommended way to get that list would</span>
+<span class="sd">    be to use get_user_mentions on the quoted status.</span>
+<span class="sd">    Also note that in the caes of a quote-tweet, the list of @-mentioned users</span>
+<span class="sd">    does not include the user who authored the original (quoted) Tweet.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list (list of dicts): 1 item per @ mention. Note that the fields here</span>
+<span class="sd">        aren&#39;t enforced by the parser, they are simply the fields as they</span>
+<span class="sd">        appear in a Tweet data payload.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_entities import get_user_mentions</span>
+<span class="sd">        &gt;&gt;&gt; original = {&quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...             &quot;entities&quot;: {&quot;user_mentions&quot;: [{</span>
+<span class="sd">        ...                              &quot;indices&quot;: [14,26], #characters where the @ mention appears</span>
+<span class="sd">        ...                              &quot;id_str&quot;: &quot;2382763597&quot;, #id of @ mentioned user as a string</span>
+<span class="sd">        ...                              &quot;screen_name&quot;: &quot;notFromShrek&quot;, #screen_name of @ mentioned user</span>
+<span class="sd">        ...                              &quot;name&quot;: &quot;Fiona&quot;, #display name of @ mentioned user</span>
+<span class="sd">        ...                              &quot;id&quot;: 2382763597 #id of @ mentioned user as an int</span>
+<span class="sd">        ...                            }]</span>
+<span class="sd">        ...                          }</span>
+<span class="sd">        ...             }</span>
+<span class="sd">        &gt;&gt;&gt; get_user_mentions(original)</span>
+<span class="sd">        [{&#39;indices&#39;: [14, 26], &#39;id_str&#39;: &#39;2382763597&#39;, &#39;screen_name&#39;: &#39;notFromShrek&#39;, &#39;name&#39;: &#39;Fiona&#39;, &#39;id&#39;: 2382763597}]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="n">get_entities</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="n">user_mentions</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_mentions&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">entities</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">user_mentions</span> <span class="k">if</span> <span class="n">user_mentions</span> <span class="k">else</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="get_hashtags"><a class="viewcode-back" href="../../../tweet_parser.getter_methods.html#tweet_parser.getter_methods.tweet_entities.get_hashtags">[docs]</a><span class="k">def</span> <span class="nf">get_hashtags</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get a list of hashtags in the Tweet</span>
+<span class="sd">    Note that in the case of a quote-tweet, this does not return the</span>
+<span class="sd">    hashtags in the quoted status.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tweet (Tweet or dict): A Tweet object or dictionary</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list (a list of strings): list of all of the hashtags in the Tweet</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from tweet_parser.getter_methods.tweet_entities import get_hashtags</span>
+<span class="sd">        &gt;&gt;&gt; original = {&quot;created_at&quot;: &quot;Wed May 24 20:17:19 +0000 2017&quot;,</span>
+<span class="sd">        ...            &quot;entities&quot;: {&quot;hashtags&quot;: [{&quot;text&quot;:&quot;1hashtag&quot;}]}}</span>
+<span class="sd">        &gt;&gt;&gt; get_hashtags(original)</span>
+<span class="sd">        [&#39;1hashtag&#39;]</span>
+
+<span class="sd">        &gt;&gt;&gt; activity = {&quot;postedTime&quot;: &quot;2017-05-24T20:17:19.000Z&quot;,</span>
+<span class="sd">        ...             &quot;twitter_entities&quot;: {&quot;hashtags&quot;: [</span>
+<span class="sd">        ...                     {&quot;text&quot;:&quot;1hashtag&quot;},</span>
+<span class="sd">        ...                     {&quot;text&quot;: &quot;moreHashtags&quot;}]}}</span>
+<span class="sd">        &gt;&gt;&gt; get_hashtags(activity)</span>
+<span class="sd">        [&#39;1hashtag&#39;, &#39;moreHashtags&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="n">get_entities</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="n">hashtags</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hashtags&quot;</span><span class="p">)</span>
+    <span class="n">hashtags</span> <span class="o">=</span> <span class="p">[</span><span class="n">tag</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">hashtags</span><span class="p">]</span> <span class="k">if</span> <span class="n">hashtags</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">hashtags</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Twitter DDIS.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
