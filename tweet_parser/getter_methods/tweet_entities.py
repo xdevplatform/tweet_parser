@@ -1,9 +1,17 @@
 from tweet_parser.tweet_checking import is_original_format
-
+from tweet_parser.getter_methods.tweet_embeds import get_retweeted_tweet
+from tweet_parser.getter_methods.tweet_text import get_tweet_type
 
 def get_entities(tweet):
     """
-    Helper function to simply grabbing the entities.
+    Helper function to simply grabbing the entities. \n
+    Caveat: In the case of Retweets, a Retweet is stored as
+    "RT @someone: Some awesome status". In the case where pre-appending
+    the string "RT @someone:" causes the Tweet to exceed 140 characters,
+    entites (hashtags, mentions, urls) beyond the 140 character mark are
+    excluded from the Retweet's entities. This seems like counterintuitive
+    behavior, so we ensure here that the entities of a Retweet are a
+    superset of the entities of the Retweeted status.
 
     Args:
         tweet (Tweet or dict): Tweet in question
@@ -28,7 +36,18 @@ def get_entities(tweet):
         """
 
     entity_key = "entities" if is_original_format(tweet) else "twitter_entities"
-    return tweet.get(entity_key, [])
+    if get_tweet_type(tweet) == "retweet":
+        retweet_entities = tweet.get(entity_key, [])
+        all_entities = get_retweeted_tweet(tweet).get(entity_key,[]).copy()
+        # the only thing that the Retweet will have that the Retweeted Tweet
+        # won't have is the @-mention of the RTd user at the front ("RT @someone:")
+        # I'm going to add that in, so the the Retweet's entities are a superset
+        # of the RTd Tweet's entites
+        all_entities["user_mentions"] = ([retweet_entities["user_mentions"][0]] +
+            all_entities["user_mentions"])
+        return all_entities
+    else:
+        return tweet.get(entity_key, [])
 
 
 def get_media_entities(tweet):
@@ -167,17 +186,23 @@ def get_user_mentions(tweet):
     Example:
         >>> from tweet_parser.getter_methods.tweet_entities import get_user_mentions
         >>> original = {"created_at": "Wed May 24 20:17:19 +0000 2017",
+        ...             "text": "RT @notFromShrek: Stuff! Words! ...",
         ...             "entities": {"user_mentions": [{
-        ...                              "indices": [14,26], #characters where the @ mention appears
+        ...                              "indices": [2,12], #characters where the @ mention appears
         ...                              "id_str": "2382763597", #id of @ mentioned user as a string
-        ...                              "screen_name": "notFromShrek", #screen_name of @ mentioned user
+        ...                              "screen_name": "notFromShrek", #screen_name of @d user
         ...                              "name": "Fiona", #display name of @ mentioned user
         ...                              "id": 2382763597 #id of @ mentioned user as an int
         ...                            }]
-        ...                          }
+        ...                          },
+        ...             "retweeted_status": {
+        ...                 "created_at": "Wed May 24 20:01:19 +0000 2017",
+        ...                 "text": "Stuff! Words! #Tweeting!",
+        ...                 "entities": {"user_mentions": []}
+        ...                 }
         ...             }
         >>> get_user_mentions(original)
-        [{'indices': [14, 26], 'id_str': '2382763597', 'screen_name': 'notFromShrek', 'name': 'Fiona', 'id': 2382763597}]
+        [{'indices': [2, 12], 'id_str': '2382763597', 'screen_name': 'notFromShrek', 'name': 'Fiona', 'id': 2382763597}]
     """
     entities = get_entities(tweet)
     user_mentions = entities.get("user_mentions") if entities else None
@@ -204,6 +229,7 @@ def get_hashtags(tweet):
         ['1hashtag']
 
         >>> activity = {"postedTime": "2017-05-24T20:17:19.000Z",
+        ...             "verb": "post",
         ...             "twitter_entities": {"hashtags": [
         ...                     {"text":"1hashtag"},
         ...                     {"text": "moreHashtags"}]}}

@@ -1,6 +1,9 @@
 from tweet_parser.tweet_checking import is_original_format
-from html.parser import HTMLParser
-
+import sys
+if sys.version_info[0] == 3:
+    from html.parser import HTMLParser
+elif sys.version_info[0] == 2:
+    from HTMLParser import HTMLParser
 
 class GeneratorHTMLParser(HTMLParser):
     """
@@ -45,7 +48,10 @@ def get_generator(tweet):
         {'link': 'http://twitter.com', 'name': 'Twitter Web Client'}
     """
     if is_original_format(tweet):
-        parser = GeneratorHTMLParser(convert_charrefs=True)
+        if sys.version_info[0] == 3 and sys.version_info[1] >= 4:
+            parser = GeneratorHTMLParser(convert_charrefs=True)
+        else:
+            parser = GeneratorHTMLParser()
         parser.feed(tweet["source"])
         return {"link": parser.generator_link,
                 "name": parser.generator_name}
