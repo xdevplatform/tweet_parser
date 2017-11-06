@@ -3,7 +3,7 @@ import datetime
 from tweet_parser.lazy_property import lazy_property
 from tweet_parser.tweet_parser_errors import NotATweetError
 from tweet_parser import tweet_checking
-from tweet_parser.getter_methods import tweet_date, tweet_user
+from tweet_parser.getter_methods import tweet_date, tweet_user, tweet_counts
 from tweet_parser.getter_methods import tweet_text, tweet_geo, tweet_links
 from tweet_parser.getter_methods import tweet_entities, tweet_embeds
 from tweet_parser.getter_methods import gnip_fields, tweet_generator, tweet_reply
@@ -633,3 +633,30 @@ class Tweet(dict):
             str: value returned by calling `tweet_reply.get_in_reply_to_status_id` on `self`
         """
         return tweet_reply.get_in_reply_to_status_id(self)
+
+    @lazy_property
+    def favorite_count(self):
+        """
+        The number of favorites that this tweet has received *at the time of
+        retrieval*. If a tweet is obtained from a live stream, this will likely
+        be 0.
+        """
+        return tweet_counts.get_favorite_count(self)
+
+    @lazy_property
+    def quote_count(self):
+        """
+        The number of tweets that this tweet has been quoted in *at the time of
+        retrieval*. If a tweet is obtained from a live stream, this will likely
+        be 0.
+        """
+        return tweet_counts.get_quote_count(self)
+
+    @lazy_property
+    def retweet_count(self):
+        """
+        The number of times this tweet has been retweeted *at the time of
+        retrieval*. If a tweet is obtained from a live stream, this will likely
+        be 0.
+        """
+        return tweet_counts.get_retweet_count(self)

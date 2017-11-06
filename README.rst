@@ -17,9 +17,10 @@ Status:
 
 This package can be installed by cloning the repo and using
 ``pip install -e .``, or by using ``pip install tweet_parser``.
+
 As of version 1.0.5, the package works with Python 2 and 3, and the 
 API should be relatively stable. Recommended to use the more recent release. 
-Current release is 1.11.1.
+Current release is 1.13.0
 
 Currently, this parser does not explicitly support Public API Twitter
 data.
@@ -31,7 +32,7 @@ This package is intended to be used as a Python module inside your other
 Tweet-related code. An example Python program (after pip installing the
 package) would be:
 
-::
+.. code:: python
 
     from tweet_parser.tweet import Tweet
     from tweet_parser.tweet_parser_errors import NotATweetError
@@ -48,7 +49,7 @@ package) would be:
 
 I've also added simple command-line utility:
 
-::
+.. code:: bash
 
     python tools/parse_tweets.py -f"gnip_tweet_data.json" -c"created_at_string,all_text"
 
@@ -147,7 +148,7 @@ Test your new feature by reinstalling the library in your virtual
 environment and running the test script as shown below. Fix any issues
 until all tests pass.
 
-::
+.. code-block:: bash
 
     (env) [tweet_parser]$ pip install -e .
     (env) [tweet_parser]$ cd test/; python test_tweet_parser.py; cd -
@@ -157,7 +158,7 @@ elements, verify the code works as you intended by running the
 ``parse_tweets.py`` script with your new field, as shown below. Check
 that both input types produce the intended output.
 
-::
+.. code-block:: bash
 
     (env) [tweet_parser]$ pip install -e .
     (env) [tweet_parser]$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c <your new field>
