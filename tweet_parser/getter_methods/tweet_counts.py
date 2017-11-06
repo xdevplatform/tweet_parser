@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""Tweet counts and related attributes
+
+This module holds attributes related to basic counts on tweets, such as
+retweets, favs, and quotes. It is unlikely to be extended.
+"""
+
 from tweet_parser.tweet_checking import is_original_format
 
 def get_retweet_count(tweet):
@@ -42,5 +49,5 @@ def get_quote_count(tweet):
     if is_original_format(tweet):
         return tweet.get("quote_count", 0)
     else:
-        print("quote conunts are only available in original format")
+        print("quote counts are only available in original format")
         raise KeyError
