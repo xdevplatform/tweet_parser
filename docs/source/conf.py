@@ -24,6 +24,8 @@ sys.path.insert(0, os.path.abspath('../'))
 sys.path.insert(0, os.path.abspath('.'))
 
 
+import sphinx_bootstrap_theme
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -35,8 +37,13 @@ sys.path.insert(0, os.path.abspath('.'))
 # ones.
 extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.doctest',
-    'sphinx.ext.napoleon',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.coverage',
+    'sphinx.ext.viewcode',
+    'sphinxcontrib.napoleon',
     'sphinx.ext.githubpages']
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -103,19 +110,74 @@ todo_include_todos = False
 html_static_path = []
 
 
-html_theme = 'alabaster'
+# html_theme = 'alabaster'
 # html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
-html_sidebars = {
-            '**': [
-                    'about.html',
-                    'navigation.html',
-                    'relations.html',
-                    'searchbox.html',
-#                    'donate.html',
-                  ]
-            }
-html_theme_options = {'page_width':'1140px',
-                      'sidebar_width':'280px'}
+html_theme = 'bootstrap'
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+
+html_theme_options = {
+    # Navigation bar title. (Default: ``project`` value)
+    'navbar_title': "Tweet Parser",
+
+    # Tab name for entire site. (Default: "Site")
+    'navbar_site_name': "Tweet Parser",
+
+    # A list of tuples containing pages or urls to link to.
+    # Valid tuples should be in the following forms:
+    #    (name, page)                 # a link to a page
+    #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
+    #    (name, "http://example.com", True) # arbitrary absolute url
+    # Note the "1" or "True" value above as the third argument to indicate
+    # an arbitrary url.
+    'navbar_links': [
+        ("Github", "https://github.com/tw-ddis/tweet_parser", True),
+    ],
+
+    # Render the next and previous page links in navbar. (Default: true)
+    'navbar_sidebarrel': True,
+
+    # Render the current pages TOC in the navbar. (Default: true)
+    'navbar_pagenav': True,
+
+    # Tab name for the current pages TOC. (Default: "Page")
+    'navbar_pagenav_name': "Page",
+
+    # Global TOC depth for "site" navbar tab. (Default: 1)
+    # Switching to -1 shows all levels.
+    'globaltoc_depth': 2,
+
+    # Include hidden TOCs in Site navbar?
+    #
+    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
+    # non-hidden ``toctree`` directives in the same page, or else the build
+    # will break.
+    #
+    # Values: "true" (default) or "false"
+    'globaltoc_includehidden': "true",
+
+    # HTML navbar class (Default: "navbar") to attach to <div> element.
+    # For black navbar, do "navbar navbar-inverse"
+    'navbar_class': "navbar navbar-inverse",
+
+    # Fix navigation bar to top of page?
+    # Values: "true" (default) or "false"
+    'navbar_fixed_top': "true",
+
+    # Location of link to source.
+    # Options are "nav" (default), "footer" or anything else to exclude.
+    'source_link_position': None,
+
+    # Bootswatch (http://bootswatch.com/) theme.
+    #
+    # Options are nothing (default) or the name of a valid theme
+    # such as "cosmo" or "sandstone".
+    'bootswatch_theme': "cosmo",
+
+    # Choose Bootstrap version.
+    # Values: "3" (default) or "2" (in quotes)
+    'bootstrap_version': "3",
+}
+
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
@@ -171,6 +233,3 @@ texinfo_documents = [
      author, 'TweetParser', 'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-
