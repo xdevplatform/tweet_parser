@@ -19,17 +19,22 @@ fi
 pwd
 echo "removing current files"
 rm -rf *.egg-info
-git pull origin gh-pages
-rm -r *.html *.js
-touch .nojekyll
-git checkout $BRANCH_NAME docs tweet_parser README.rst
 
+git pull origin gh-pages
+# clean old doc build
+rm -r *.html *.js _sources/ _static/
+
+# ensure .nojekyll is here
+touch .nojekyll
+
+# grab the correct stuff from the build branch
+git checkout $BRANCH_NAME docs tweet_parser README.rst
 
 mv docs/* .
 cp README.rst source/README.rst
 make html
 mv -fv build/html/* ./
-rm -r tweet_parser docs build Makefile source __pycache__/ _sources/ _static/
+rm -r tweet_parser docs build Makefile source __pycache__/ 
 echo "--------------------------------------------------------------------"
 echo " docs built; please review these changes and then run the following:"
 echo "--------------------------------------------------------------------"
