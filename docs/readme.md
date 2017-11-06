@@ -3,14 +3,14 @@ We are using Sphinx with Google-style docstrings to build our documentation. It'
 
 ### Setup
 
-We obviously require sphinx for this, but (Pandoc)[https://pandoc.org/] is a requirement for the conversion script - it changes the base project readme file (tweet_parser/README.md) to a sphinx-compatible Restructured Text file.
+We obviously require sphinx for this, but (shinx_bootstrap)[https://github.com/ryan-roemer/sphinx-bootstrap-theme] is required for building the docs in Bootstrap.
 
 on osx:
 
 ```.bash
-brew install pandoc
 pip install sphinx
 pip install recommonmark
+pip install spinx-bootstrap-theme
 ```
 
 ### Build
