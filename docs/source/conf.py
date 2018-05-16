@@ -130,7 +130,7 @@ html_theme_options = {
     # Note the "1" or "True" value above as the third argument to indicate
     # an arbitrary url.
     'navbar_links': [
-        ("Github", "https://github.com/tw-ddis/tweet_parser", True),
+        ("Github", "https://github.com/twitterdev/tweet_parser", True),
     ],
 
     # Render the next and previous page links in navbar. (Default: true)
