@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2018 Twitter, Inc.
+# Licensed under the MIT License
+# https://opensource.org/licenses/MIT
 """Validation and checking methods for Tweets.
 
 Methods here are primarily used by other methods within this module but can be
