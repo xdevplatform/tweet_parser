@@ -20,7 +20,7 @@ This package can be installed by cloning the repo and using
 
 As of version 1.0.5, the package works with Python 2 and 3, and the 
 API should be relatively stable. Recommended to use the more recent release. 
-Current release is 1.13.0
+Current release is 1.13.1
 
 Currently, this parser does not explicitly support Public API Twitter
 data.
