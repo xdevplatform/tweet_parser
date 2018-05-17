@@ -144,45 +144,6 @@ def get_bio(tweet):
         return tweet["actor"].get("summary", "")
 
 
-def get_utc_offset(tweet):
-    """
-    Get the utc offset (if it's available) of the user who posted the Tweet
-
-    Args:
-        tweet (Tweet): A Tweet object (or a dictionary)
-
-    Returns:
-        int: a signed integer indicating the number of seconds offset of the
-        user's home timezone from UTC time
-
-    Example:
-        >>> from tweet_parser.getter_methods.tweet_user import get_utc_offset
-        >>> original_format_dict = {
-        ...             "created_at": "Wed May 24 20:17:19 +0000 2017",
-        ...             "user":
-        ...              {"utc_offset": -21600}
-        ...            }
-        >>> get_utc_offset(original_format_dict)
-        -21600
-
-        >>> activity_streams_format_dict = {
-        ...             "postedTime": "2017-05-24T20:17:19.000Z",
-        ...             "actor":
-        ...              {"utcOffset": "-21600"}
-        ...             }
-        >>> get_utc_offset(activity_streams_format_dict)
-        -21600
-    """
-
-    if is_original_format(tweet):
-        return tweet["user"]["utc_offset"]
-    else:
-        if tweet["actor"]["utcOffset"] is not None:
-            return int(tweet["actor"]["utcOffset"])
-        else:
-            return None
-
-
 def get_follower_count(tweet):
     """
     Get the number of followers that the user has
