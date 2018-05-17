@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Copyright 2018 Twitter, Inc.
+# Licensed under the MIT License
+# https://opensource.org/licenses/MIT
 import datetime
 
 from tweet_parser.lazy_property import lazy_property

@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Copyright 2018 Twitter, Inc.
+# Licensed under the MIT License
+# https://opensource.org/licenses/MIT
 """Module to define a lazy property decorator that allows
 attributes to be generated dynamically and cached after creation.
 Original idea found via

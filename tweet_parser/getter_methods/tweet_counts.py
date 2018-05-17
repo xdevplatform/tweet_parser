@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2018 Twitter, Inc.
+# Licensed under the MIT License
+# https://opensource.org/licenses/MIT
 """Tweet counts and related attributes
 
 This module holds attributes related to basic counts on tweets, such as

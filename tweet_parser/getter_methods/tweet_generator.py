@@ -1,3 +1,6 @@
+# Copyright 2018 Twitter, Inc.
+# Licensed under the MIT License
+# https://opensource.org/licenses/MIT
 from tweet_parser.tweet_checking import is_original_format
 import sys
 if sys.version_info[0] == 3:
