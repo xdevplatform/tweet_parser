@@ -60,7 +60,7 @@ class TestTweetMethods(unittest.TestCase):
                     if attr == "text":
                         orig = orig[0:100]
                         acti = acti[0:100]
-                    if attr not in ["poll_options","in_reply_to_user_id"]:  # will raise an error in activity streams
+                    if attr not in ["poll_options","in_reply_to_user_id","quote_count"]:  # will raise an error in activity streams
                         self.assertEqual(orig, acti)
 
     def test_bad_payloads(self):
