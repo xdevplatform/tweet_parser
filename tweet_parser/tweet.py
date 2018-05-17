@@ -175,20 +175,6 @@ class Tweet(dict):
         return tweet_user.get_bio(self)
 
     @lazy_property
-    def utc_offset(self):
-        """
-        The utc offset (if it's available) of the timezone of the user who
-        posted the Tweet
-
-        Returns:
-            str: a signed integer indicating the number of seconds offset of the
-            user's home timezone from UTC time.
-            value returned by calling `tweet_user.get_utc_offset` on `self`
-
-        """
-        return tweet_user.get_utc_offset(self)
-
-    @lazy_property
     def follower_count(self):
         """
         The number of followers that the author of the Tweet has
@@ -640,6 +626,9 @@ class Tweet(dict):
         The number of favorites that this tweet has received *at the time of
         retrieval*. If a tweet is obtained from a live stream, this will likely
         be 0.
+
+        Returns:
+            int: value returned by calling `tweet_counts.get_favorite_count` on `self`
         """
         return tweet_counts.get_favorite_count(self)
 
@@ -649,6 +638,11 @@ class Tweet(dict):
         The number of tweets that this tweet has been quoted in *at the time of
         retrieval*. If a tweet is obtained from a live stream, this will likely
         be 0.
+        This raises a NotAvailableError for activity-streams format
+        
+        Returns:
+            int: value returned by calling `tweet_counts.get_quote_count` on `self` 
+            or raises NotAvailableError
         """
         return tweet_counts.get_quote_count(self)
 
@@ -658,5 +652,8 @@ class Tweet(dict):
         The number of times this tweet has been retweeted *at the time of
         retrieval*. If a tweet is obtained from a live stream, this will likely
         be 0.
+        
+        Returns:
+            int: value returned by calling `tweet_counts.get_retweet_count` on `self` 
         """
         return tweet_counts.get_retweet_count(self)
