@@ -203,6 +203,7 @@ class Tweet(dict):
     @lazy_property
     def klout_score(self):
         """
+        (DEPRECATED): 
         The Klout score (int) (if it exists) of the user who posted the Tweet
 
         Returns:
@@ -214,6 +215,7 @@ class Tweet(dict):
     @lazy_property
     def klout_profile(self):
         """
+        (DEPRECATED): 
         The Klout profile URL of the user (`str`) (if it exists)
 
         Returns:
@@ -225,6 +227,7 @@ class Tweet(dict):
     @lazy_property
     def klout_id(self):
         """
+        (DEPRECATED): 
         The Klout ID of the user (`str`) (if it exists)
 
         Returns:
@@ -236,6 +239,7 @@ class Tweet(dict):
     @lazy_property
     def klout_influence_topics(self):
         """
+        (DEPRECATED): 
         Get the user's Klout influence topics (a list of dicts), if it exists.
         Topic dicts will have these keys: `url`, `id`, `name`, `score`
 
@@ -249,6 +253,7 @@ class Tweet(dict):
     @lazy_property
     def klout_interest_topics(self):
         """
+        (DEPRECATED): 
         Get the user's Klout interest topics (a list of dicts), if it exists.
         Topic dicts will have these keys: `url`, `id`, `name`, `score`
 

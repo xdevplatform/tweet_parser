@@ -4,6 +4,7 @@
 # https://opensource.org/licenses/MIT
 
 from tweet_parser.tweet_checking import is_original_format
+from tweet_parser.deprecator import deprecated
 
 def get_user_id(tweet):
     """
@@ -215,6 +216,8 @@ def get_following_count(tweet):
     else:
         return tweet["actor"]["friendsCount"]
 
+
+@deprecated("See: https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout")
 def get_klout_score(tweet):
     """
     Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
@@ -255,6 +258,7 @@ def get_klout_score(tweet):
         return None
 
 
+@deprecated("See: https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout")
 def get_klout_profile(tweet):
     """
     Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
@@ -300,6 +304,7 @@ def get_klout_profile(tweet):
         return None
 
 
+@deprecated("See: https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout")
 def get_klout_id(tweet):
     """
     Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
@@ -343,6 +348,7 @@ def get_klout_id(tweet):
         return None
 
 
+@deprecated("See: https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout")
 def get_klout_topics(tweet, topic_type='influence'):
     """
     Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
