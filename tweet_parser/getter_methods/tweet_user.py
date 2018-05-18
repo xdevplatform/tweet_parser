@@ -1,5 +1,9 @@
-from tweet_parser.tweet_checking import is_original_format
+# -*- coding: utf-8 -*-
+# Copyright 2018 Twitter, Inc.
+# Licensed under the MIT License
+# https://opensource.org/licenses/MIT
 
+from tweet_parser.tweet_checking import is_original_format
 
 def get_user_id(tweet):
     """
@@ -211,9 +215,11 @@ def get_following_count(tweet):
     else:
         return tweet["actor"]["friendsCount"]
 
-
 def get_klout_score(tweet):
     """
+    Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
+    See https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout \n
+
     Get the Klout score (int) (if it exists) of the user who posted the Tweet
 
     Args:
@@ -239,7 +245,6 @@ def get_klout_score(tweet):
         >>> get_klout_score(activity_streams_format_dict)
         12345
     """
-
     try:
         if is_original_format(tweet):
             score = tweet['user']['derived']['klout']['score']
@@ -252,6 +257,9 @@ def get_klout_score(tweet):
 
 def get_klout_profile(tweet):
     """
+    Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
+    See https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout \n
+    
     Get the Klout profile URL of the user (str) (if it exists)
 
     Args:
@@ -282,7 +290,6 @@ def get_klout_profile(tweet):
         >>> get_klout_profile(activity_streams_format_dict)
         'http://klout.com/topic/id/10000000000000016635'
     """
-
     try:
         if is_original_format(tweet):
             profile = tweet['user']['derived']['klout']['profile_url']
@@ -295,6 +302,9 @@ def get_klout_profile(tweet):
 
 def get_klout_id(tweet):
     """
+    Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
+    See https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout \n
+    
     Get the Klout ID of the user (str) (if it exists)
 
     Args:
@@ -323,7 +333,6 @@ def get_klout_id(tweet):
         >>> get_klout_id(activity_streams_format_dict)
         '1234567890'
     """
-
     try:
         if is_original_format(tweet):
             klout_id = tweet['user']['derived']['klout']['user_id']
@@ -336,6 +345,9 @@ def get_klout_id(tweet):
 
 def get_klout_topics(tweet, topic_type='influence'):
     """
+    Warning: Klout is deprecated and is being removed from Tweet payloads May 2018. \n
+    See https://developer.twitter.com/en/docs/tweets/enrichments/overview/klout \n
+    
     Get the user's chosen Klout topics (a list of dicts), if it exists.
     Regardless of format or topic type, topic dicts will have the same keys:
     "url", "id", "name", "score"
