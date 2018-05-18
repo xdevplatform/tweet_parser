@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+# Copyright 2018 Twitter, Inc.
+# Licensed under the MIT License
+# https://opensource.org/licenses/MIT
+
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
 
 from tweet_parser.tweet import Tweet
 from tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError
