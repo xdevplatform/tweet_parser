@@ -5,10 +5,11 @@
 import unittest
 import fileinput
 import json
+import warnings
 from tweet_parser.tweet import Tweet
 from tweet_parser import tweet_checking
 from tweet_parser.tweet_parser_errors import NotATweetError, NotAvailableError, UnexpectedFormatError
-
+from tweet_parser.deprecator import FieldDeprecationWarning
 
 def make_a_string(data):
     if type(data) == str:
@@ -115,4 +116,6 @@ class TestTweetMethods(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    #with warnings.catch_warnings():
+    #    warnings.simplefilter("ignore", FieldDeprecationWarning)
     unittest.main()
