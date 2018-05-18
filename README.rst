@@ -158,6 +158,8 @@ elements, verify the code works as you intended by running the
 ``parse_tweets.py`` script with your new field, as shown below. Check
 that both input types produce the intended output.
 
+Note that FieldDeprecationWarnings will appear while testing for certain getters, this is expected behavior.
+
 .. code-block:: bash
 
     (env) [tweet_parser]$ pip install -e .
