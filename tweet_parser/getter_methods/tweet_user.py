@@ -144,9 +144,13 @@ def get_bio(tweet):
     """
 
     if is_original_format(tweet):
-        return tweet["user"].get("description", "")
+        bio_or_none = tweet["user"].get("description", "")
     else:
-        return tweet["actor"].get("summary", "")
+        bio_or_none = tweet["actor"].get("summary", "")
+    if bio_or_none is None:
+        return ""
+    else:
+        return bio_or_none
 
 
 def get_follower_count(tweet):

@@ -129,13 +129,13 @@ class Tweet(dict):
     def created_at_string(self):
         """
         Time that a Tweet was posted as a string with the format
-        YYYY-MM-ddTHH:MM:SS.000Z
+        YYYY-mm-ddTHH:MM:SS.000Z
 
         Returns:
             str: the value of `tweet.created_at_seconds`
-            converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)
+            converted into a string (YYYY-mm-ddTHH:MM:SS.000Z)
         """
-        return self.created_at_datetime.strftime("%Y-%M-%dT%H:%M:%S.000Z")
+        return self.created_at_datetime.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
     @lazy_property
     def user_id(self):

@@ -3,14 +3,15 @@ We are using Sphinx with Google-style docstrings to build our documentation. It'
 
 ### Setup
 
-We obviously require sphinx for this, but (shinx_bootstrap)[https://github.com/ryan-roemer/sphinx-bootstrap-theme] is required for building the docs in Bootstrap.
+We obviously require sphinx for this, but (sphinx_bootstrap)[https://github.com/ryan-roemer/sphinx-bootstrap-theme] is required for building the docs in Bootstrap.
 
 on osx:
 
 ```.bash
 pip install sphinx
 pip install recommonmark
-pip install spinx-bootstrap-theme
+pip install sphinx-bootstrap-theme
+pip install sphinxcontrib-napoleon
 ```
 
 ### Build
