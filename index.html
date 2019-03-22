@@ -7,10 +7,11 @@
     <title>Tweet Parser &#8212; Tweet Parser 1 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
@@ -148,7 +149,7 @@ activity-streams and original formats.</p>
 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code>, or by using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tweet_parser</span></code>.</p>
 <p>As of version 1.0.5, the package works with Python 2 and 3, and the
 API should be relatively stable. Recommended to use the more recent release.
-Current release is 1.13.1</p>
+Current release is 1.13.2</p>
 <p>Currently, this parser does not explicitly support Public API Twitter
 data.</p>
 </div>
@@ -264,6 +265,7 @@ until all tests pass.</p>
 elements, verify the code works as you intended by running the
 <code class="docutils literal notranslate"><span class="pre">parse_tweets.py</span></code> script with your new field, as shown below. Check
 that both input types produce the intended output.</p>
+<p>Note that FieldDeprecationWarnings will appear while testing for certain getters, this is expected behavior.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span> <span class="o">[</span>tweet_parser<span class="o">]</span>$ pip install -e .
 <span class="o">(</span>env<span class="o">)</span> <span class="o">[</span>tweet_parser<span class="o">]</span>$ python tools/parse_tweets.py -f test/tweet_payload_examples/activity_streams_examples.json -c &lt;your new field&gt;
 </pre></div>
@@ -316,7 +318,7 @@ and <code class="docutils literal notranslate"><span class="pre">make</span> <sp
     </p>
     <p>
         &copy; Copyright 2017, Twitter DDIS.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

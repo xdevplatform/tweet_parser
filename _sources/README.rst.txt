@@ -20,7 +20,7 @@ This package can be installed by cloning the repo and using
 
 As of version 1.0.5, the package works with Python 2 and 3, and the 
 API should be relatively stable. Recommended to use the more recent release. 
-Current release is 1.13.1
+Current release is 1.13.2
 
 Currently, this parser does not explicitly support Public API Twitter
 data.
@@ -157,6 +157,8 @@ Furthermore, if contributing a new accessor or getter method for payload
 elements, verify the code works as you intended by running the
 ``parse_tweets.py`` script with your new field, as shown below. Check
 that both input types produce the intended output.
+
+Note that FieldDeprecationWarnings will appear while testing for certain getters, this is expected behavior.
 
 .. code-block:: bash
 

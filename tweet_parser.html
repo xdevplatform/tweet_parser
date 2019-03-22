@@ -7,10 +7,11 @@
     <title>tweet_parser package &#8212; Tweet Parser 1 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
@@ -210,7 +211,7 @@ get various data values from the Tweet.</p>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotATweetError</span></code> – the Tweet dict is malformed,         see <cite>tweet_checking.check_tweet</cite> for details</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#tweet_parser.tweet_parser_errors.NotATweetError" title="tweet_parser.tweet_parser_errors.NotATweetError"><strong>NotATweetError</strong></a> – the Tweet dict is malformed,         see <cite>tweet_checking.check_tweet</cite> for details</p>
 </td>
 </tr>
 </tbody>
@@ -310,13 +311,13 @@ into a timestamp using <cite>tweet_date.snowflake2utc</cite>)</td>
 <dt id="tweet_parser.tweet.Tweet.created_at_string">
 <code class="descname">created_at_string</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.created_at_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Time that a Tweet was posted as a string with the format
-YYYY-MM-ddTHH:MM:SS.000Z</p>
+YYYY-mm-ddTHH:MM:SS.000Z</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the value of <cite>tweet.created_at_seconds</cite>
-converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)</td>
+converted into a string (YYYY-mm-ddTHH:MM:SS.000Z)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
@@ -337,7 +338,7 @@ converted into a string (YYYY-MM-ddTHH:MM:SS.000Z)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a> (or None, if the Tweet is neither a quote tweet or a Retweet)</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotATweetError</span></code> – if embedded tweet is malformed</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet_parser_errors.NotATweetError" title="tweet_parser.tweet_parser_errors.NotATweetError"><strong>NotATweetError</strong></a> – if embedded tweet is malformed</td>
 </tr>
 </tbody>
 </table>
@@ -557,7 +558,8 @@ This raises a NotAvailableError for activity-streams format</p>
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_id">
 <code class="descname">klout_id</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_id" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>(DEPRECATED)</em> – The Klout ID of the user (<cite>str</cite>) (if it exists)</p>
+<dd><p>(DEPRECATED):
+The Klout ID of the user (<cite>str</cite>) (if it exists)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -574,7 +576,8 @@ This raises a NotAvailableError for activity-streams format</p>
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_influence_topics">
 <code class="descname">klout_influence_topics</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_influence_topics" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>(DEPRECATED)</em> – Get the user’s Klout influence topics (a list of dicts), if it exists.
+<dd><p>(DEPRECATED):
+Get the user’s Klout influence topics (a list of dicts), if it exists.
 Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name</cite>, <cite>score</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -593,7 +596,8 @@ Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name<
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_interest_topics">
 <code class="descname">klout_interest_topics</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_interest_topics" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>(DEPRECATED)</em> – Get the user’s Klout interest topics (a list of dicts), if it exists.
+<dd><p>(DEPRECATED):
+Get the user’s Klout interest topics (a list of dicts), if it exists.
 Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name</cite>, <cite>score</cite></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -612,7 +616,8 @@ Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name<
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_profile">
 <code class="descname">klout_profile</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_profile" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>(DEPRECATED)</em> – The Klout profile URL of the user (<cite>str</cite>) (if it exists)</p>
+<dd><p>(DEPRECATED):
+The Klout profile URL of the user (<cite>str</cite>) (if it exists)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -629,7 +634,8 @@ Topic dicts will have these keys: <cite>url</cite>, <cite>id</cite>, <cite>name<
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.klout_score">
 <code class="descname">klout_score</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.klout_score" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>(DEPRECATED)</em> – The Klout score (int) (if it exists) of the user who posted the Tweet</p>
+<dd><p>(DEPRECATED):
+The Klout score (int) (if it exists) of the user who posted the Tweet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -824,7 +830,7 @@ raise a “NotATweetError”</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotATweetError</span></code> – if quoted tweet is malformed</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet_parser_errors.NotATweetError" title="tweet_parser.tweet_parser_errors.NotATweetError"><strong>NotATweetError</strong></a> – if quoted tweet is malformed</td>
 </tr>
 </tbody>
 </table>
@@ -864,7 +870,7 @@ raise a <cite>NotATweetError</cite></p>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet.Tweet" title="tweet_parser.tweet.Tweet">Tweet</a></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotATweetError</span></code> – if retweeted tweet is malformed</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#tweet_parser.tweet_parser_errors.NotATweetError" title="tweet_parser.tweet_parser_errors.NotATweetError"><strong>NotATweetError</strong></a> – if retweeted tweet is malformed</td>
 </tr>
 </tbody>
 </table>
@@ -950,7 +956,7 @@ fields will be missing.
 <dl class="attribute">
 <dt id="tweet_parser.tweet.Tweet.tweet_type">
 <code class="descname">tweet_type</code><a class="headerlink" href="#tweet_parser.tweet.Tweet.tweet_type" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>The type of Tweet this is (3 options</em> – tweet, quote, and retweet)</p>
+<dd><p>tweet, quote, and retweet)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -959,6 +965,8 @@ fields will be missing.
 value returned by calling <cite>tweet_text.get_tweet_type</cite> on <cite>self</cite></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">The type of Tweet this is (3 options</td>
 </tr>
 </tbody>
 </table>
@@ -1140,7 +1148,7 @@ get keys only under some key that is not the top-level key.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">0 if no errors</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">UnexpectedFormatError on any mismatch of keys.</p>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>UnexpectedFormatError on any mismatch of keys.</strong> – </p>
 </td>
 </tr>
 </tbody>
@@ -1190,7 +1198,7 @@ get keys only under some key that is not the top-level key.</li>
     </p>
     <p>
         &copy; Copyright 2017, Twitter DDIS.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>
